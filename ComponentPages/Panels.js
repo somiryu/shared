@@ -5,7 +5,7 @@ import PanelWithTwoButtonsImaged from "../Panels/PanelWithTwoButtonsImaged";
 import ImagedPanel from "../Panels/ImagedPanel";
 import PanelWithTwoImagedLabel from '../Panels/PanelWithTwoImagedLabel';
 import ButtonGeneral from '../ExampleImages/Buttons/botonGeneral.png';
-import Hoja from '../ExampleImages/Generales/hoja.png';
+import Hoja from '../ExampleImages/Containers/hoja.png';
 import PanelWithButtonClose from '../Panels/PanelWithButtonClose';
 import ButtonCerrar from '../ExampleImages/Buttons/cerrarVentana.png';
 import PanelWithOptions from "../Panels/PanelwithOptions";

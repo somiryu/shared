@@ -10,7 +10,7 @@ import TwoButtonsWithAnimated from "../Buttons/TwoButtonsWithAnimated";
 import ButtonWithText from "../Buttons/ButtonWithText";
 import Flecha from "../ExampleImages/Buttons/flecha.png";
 import TwoButtonsWithSeparator from "../Buttons/TwoButtonsWithSeparator";
-import Separator from "../ExampleImages/Generales/separador.png";
+import Separator from "../ExampleImages/Generic/separador.png";
 import MultipleButtons from "../Buttons/MultipleButtons";
 import ButtonMultiStateWithButtonSeparator from "../Buttons/ButtonMultiStateWithButtonSeparator";
 export default (props) => {

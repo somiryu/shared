@@ -35,12 +35,11 @@ import sq80 from "./ExampleImages/square-80.png"
 import AvatarContainer from "./ExampleImages/avcont.png"
 import Avatar from "./ExampleImages/avatar.png"
 
-import Colaborador from "./ExampleImages/Generales/tituloColaborador.png"
-import starGray from "./ExampleImages/Mapa/estrellaGris.png"
-import starGold from "./ExampleImages/Mapa/estrellaDoradaTemplos.png"
-import temploInnos from "./ExampleImages/Mapa/temploInnos.png"
-import Dios from "./ExampleImages/Generales/dios.png"
-import CaraInnos from "./ExampleImages/Innos/caraInnos.png"
+import Colaborador from "./ExampleImages/Hubs/tituloColaborador.png"
+import starGray from "./ExampleImages/Buttons/estrellaGris.png"
+import starGold from "./ExampleImages/Buttons/estrellaDoradaTemplos.png"
+import Dios from "./ExampleImages/Hubs/dios.png"
+import CaraInnos from "./ExampleImages/Generic/caraInnos.png"
 import Images from "./ComponentPages/Images";
 
 const images = {
@@ -55,7 +54,6 @@ const images = {
 	AvatarContainer,
 	Dios,
 	CaraInnos,
-	temploInnos:temploInnos, 
 	starGray:starGray, 
 	starGold:starGold,
 }

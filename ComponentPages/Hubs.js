@@ -5,7 +5,7 @@ import MaskedAvatar from "../Hubs/MaskedAvatar"
 import CurrencyList from "../Hubs/CurrencyList";
 import MaskedAvatarWithTitle from "../Hubs/MaskedAvatarWithTitle";
 import Objetive from "../Hubs/Objetive";
-import Separator from "../ExampleImages/Generales/separador.png";
+import Separator from "../ExampleImages/Generic/separador.png";
 import MaskedAvatarTitleWithButtonMultiState from "../Hubs/MaskedAvatarTitleWithButtonMultiState";
 import ControllerCheckboxes from "../Controllers/CheckboxesController";
 import ControllerList from "../Controllers/ListController";

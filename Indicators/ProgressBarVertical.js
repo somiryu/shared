@@ -6,7 +6,7 @@
 
 
 import React, { useState, useEffect } from 'react'
-import BarraTiempoVertical from '../ExampleImages/Logrus/barraTiempoVertical.png'
+import BarraTiempoVertical from '../ExampleImages/Indicators/barraTiempoVertical.png'
 export default function ProgressBarVertical(props) {
     const [percentage, setPercentage] = useState(100)
     useEffect(() => {     
@@ -40,14 +40,5 @@ export default function ProgressBarVertical(props) {
                 </div>
             </div>
         </div>
-        // <div className={props.debug ? 'testBox ProgressBar' : 'ProgressBar'} style={{ display: 'inline-block', position: 'relative' }}>
-        //     <img src={props.image ? props.image : BarraTiempoVertical} alt="Progress Bar" style={{width:'100%'}}></img>
-        //     <div className={props.debug ? 'testBox' : ''} style={styleBar}>
-        //         <div className={props.debug ? 'testBox' : ''} style={{width:'100%', height:'100%',backgroundColor: props.backgroundColor || '#fff', borderRadius: props.borderRadius || '5px'}}>
-        //             <div className={props.debug ? 'testBox' : ''} style={styleProgress}>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
     )
 }
