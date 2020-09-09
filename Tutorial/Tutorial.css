@@ -1,0 +1,47 @@
+.tutorial{
+	border: 1px solid white;
+	background-color: #404040;
+	margin:5px;
+	padding: 20px;
+	/* position:relative; */
+	color:white;
+}
+
+.tutorialContent{
+	display:flex;
+}
+.tutorial .character img{
+	width:100px;
+}
+
+.tutorialText{
+	margin-left: 30px;
+	width:100%;
+}
+.tutorial .arrow{
+	position:absolute;
+}
+.tutorial .cta{
+	margin: 5px auto 0;
+	text-align: center;
+	width: 50%
+}
+.tutorial .cta-buttons{
+	margin: 15px auto 0;
+	text-align: center;
+	width: 50%
+}
+.Button{margin:10px;}
+#labelBtn{
+	font-size: 1rem;
+}
+.span-btn{
+	color: white;
+	font-weight: 600;
+	font-style: underline;
+	border: 1px solid white;
+	padding: 5px;
+	border-radius: 10px;
+	cursor: pointer;
+	min-width: 80px;
+}
