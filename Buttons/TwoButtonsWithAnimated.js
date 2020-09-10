@@ -25,15 +25,15 @@ function TwoButtonsWithAnimated(props) {
 					style={{ ...props.style, cursor: "pointer", display: "inline-block" }}
 					onClick={clickHandler}
 				>
-					<img alt="boton" src={props.image} style={{ width: "7vw", transform: `scale(${scale})` }} />
+					<img alt="boton" src={props.image} style={{ width: "100%", transform: `scale(${scale})` }} />
 				</div>
 			</div>
-			<div style={{position:'absolute', top:'28%'}}>
+			<div style={{position:'absolute', top:'40%'}}>
 				<div id={props.id2}
 					style={{ ...props.style, cursor: "pointer", display: "inline-block" }}
 					onClick={clickHandler}
 				>
-					<img alt="boton" src={props.image} style={{ width: "7vw", transform: `scale(${scale})` }} />
+					<img alt="boton" src={props.image} style={{ width: "100%", transform: `scale(${scale})` }} />
 				</div>
 			</div>
 		</div>

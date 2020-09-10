@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ButtonImage from "../Buttons/ButtonImage";
 import ButtonMultiState from "../Buttons/ButtonMultiState";
 import ButtonImageWithLabel from "../Buttons/ButtonImageWithLabel";
-import ButtonMultiStateWithNumber from "../Buttons/ButtonMultiStateWithNumber";
+import ButtonMultiStateWithText from "../Buttons/ButtonMultiStateWithText";
 import ImageTest from "../ExampleImages/Buttons/boton.png";
 import ButtonON from "../ExampleImages/Buttons/innos1BtnActive.png";
 import ButtonOFF from "../ExampleImages/Buttons/innos1BtnLock.png";
@@ -11,8 +11,6 @@ import ButtonWithText from "../Buttons/ButtonWithText";
 import Flecha from "../ExampleImages/Buttons/flecha.png";
 import TwoButtonsWithSeparator from "../Buttons/TwoButtonsWithSeparator";
 import Separator from "../ExampleImages/Generic/separador.png";
-import MultipleButtons from "../Buttons/MultipleButtons";
-import ButtonMultiStateWithButtonSeparator from "../Buttons/ButtonMultiStateWithButtonSeparator";
 export default (props) => {
 	const [state1, setState1] = useState("off");
 
@@ -59,9 +57,9 @@ export default (props) => {
 				/>
 			</div>
 			<div className="testBox">
-				<h3>ButtonMultiStateWithNumber</h3>
-				<ButtonMultiStateWithNumber
-					id="btn2"
+				<h3>ButtonMultiStateWithText</h3>
+				<ButtonMultiStateWithText
+					id="btn3"
 					state={state1}
 					scale={1.2} //1.1
 					images={{ off: ButtonOFF, on: ButtonON }}
@@ -69,11 +67,12 @@ export default (props) => {
 						off: () => { setState1("on") },
 						on: () => { setState1("off") },
 					}}
-					stylesNumber={{ off: { color: '#763320' }, on: { color: '#393834' } }}
+					stylesText={{ off: { color: '#763320' }, on: { color: '#393834' } }}
 					styles={{}}
+					text={<h1>2</h1>}
 				/>
 			</div>
-			<div style={{ width: '100px', height: '200px' }}>
+			<div style={{ width: '50px', height: '200px' }}>
 				<h3>TwoButtonsWithAnimated</h3>
 				<TwoButtonsWithAnimated
 					id="btn6"
@@ -93,7 +92,7 @@ export default (props) => {
 					listener={(id) => { console.log("clicked", id) }}
 					scale={1.1} //1.1
 					style={{ margin: 10 }} // {}
-					text={'Amet sunt laboris ad labore proident '}
+					text={<label style={{color:'#fff'}}>Amet sunt laboris ad labore proident </label>}
 					positionText={{ }}
 				/>
 			</div>
@@ -124,66 +123,6 @@ export default (props) => {
 					}
 				>
 				</TwoButtonsWithSeparator>
-			</div>
-			<div style={{ width: '260px', height: '200px' }}>
-				<h3>MultipleButtons</h3>
-				<MultipleButtons
-					buttons={[{
-						id: 'btn1',
-						images: { off: props.images.sq80, on: props.images.circ80 },
-						stylesNumber: { off: { color: '#763320' }, on: { color: '#393834' } },
-						state: 'off',
-						text: 'Hola'
-					},
-					{
-						id: 'btn2',
-						images: { off: props.images.sq80, on: props.images.circ80 },
-						stylesNumber: { off: { color: '#763320' }, on: { color: '#393834' } },
-						state: 'on',
-						text: 'Hola2'
-					}
-					]}
-					direction={'horizontal'}
-				>
-				</MultipleButtons>
-			</div>
-			<div style={{ width: '260px', height: '200px' }}>
-				<h3>ButtonMultiStateWithButtonSeparator</h3>
-				<ButtonMultiStateWithButtonSeparator
-					ButtonMultiState={{
-						id: 'btn1',
-						images: { off: props.images.sq80, on: props.images.circ80 },
-						stylesNumber: { off: { color: '#763320' }, on: { color: '#393834' } },
-						state: 'off',
-						number: 'M',
-						styles: {},
-						listeners:{ on: () => console.log('off'), off: ( ) => console.log('on')}
-					}}
-					direction={'horizontal'}
-					currencyLeft={
-						{
-							id: "curLeft",
-							image: props.images.circ80,
-							quantity: 1,
-							position:'center',
-							duration:1000,
-							childStyle:{ color: "var(--red)" }
-
-						}
-					}
-					separator={Separator}
-					currencyRight={
-						{
-							id: "curRight",
-							image: props.images.circ80,
-							quantity: 7,
-							position:'center',
-							duration:1000,
-							childStyle:{ color: "var(--red)" }
-						}
-					}
-				>
-				</ButtonMultiStateWithButtonSeparator>
 			</div>
 		</div>
 	)

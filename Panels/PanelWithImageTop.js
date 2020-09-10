@@ -2,14 +2,14 @@
 //imageTop
 //positionTopImage(-10%)
 //heightImage(-20%)
-//widthImageTop = (default "100%")
+//widthImageTop = (default "15%")
 import React from "react";
 import ImagedPanel from './ImagedPanel'
 
 export default (props) => {
     ///let displaySub = (props.subtitle ? 'inline-block' : 'none');
     let positionTopImage = props.positionTopImage || '-10%';
-    let widthImageTop = props.widthImageTop || "100%"
+    let widthImageTop = props.widthImageTop || "15%"
     return (
         <div id={props.id + "_panel"} className="PanelImageTopWithButton" style={{...props.style}}>
             <ImagedPanel {...props}>

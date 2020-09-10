@@ -4,6 +4,9 @@ import GrayscaleIndicator from "../Indicators/GrayscaleIndicator";
 import CurrencyHorizontal from "../Indicators/CurrencyHorizontal";
 import ProgressBar from "../Indicators/ProgressBar";
 import ProgressBarVertical from "../Indicators/ProgressBarVertical";
+import Bar from "../ExampleImages/Indicators/barraTiempo.png";
+import BarVertical from "../ExampleImages/Indicators/barraTiempoVertical.png";
+
 export default (props) => {
 	const [indicator, setIndicator] = useState(false)
 	const [qty, setQty] = useState(30)
@@ -44,7 +47,7 @@ export default (props) => {
 			<div className="testBox" style={{ width: "100px" }}>
 				<h4 style={{marginBottom: '20px'}}>CurrencyHorizontal</h4>
 				<CurrencyHorizontal
-					id="testCur"
+					id="test"
 					quantity={qty}
 					image={props.images.sq40}
 					duration={1000} //2000
@@ -55,16 +58,20 @@ export default (props) => {
 					position='right'
 				/>
 			</div>
-			<div className="testBox">
+			<div className="testBox" style={{width:'40%', height:'100px'}}>
 				<h4>ProgressBar</h4>
 				<ProgressBar
 					percentage={porcentaje}
+					image={Bar}
+					padding={'3%'}
 				/>
 			</div>
 			<div className="testBox">
 				<h4>ProgressBarVertical</h4>
 				<ProgressBarVertical
 					percentage={porcentaje}
+					image={BarVertical}
+					padding={'3% 22% 3% 28%'}
 				/>
 			</div>
 		</div>

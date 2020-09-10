@@ -49,7 +49,7 @@ export default (props) => {
 					id="btn3"
 					image={ImageTest}
 					listener={props.listener}
-					label={props.labelButton}
+					label={props.label}
 					debug={props.debug}
 				>
 				</ButtonImageWithLabel>

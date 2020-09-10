@@ -5,7 +5,7 @@
 //direction = vertical || horizontal (horizontal)
 import React from 'react'
 import PanelWithImageTop from './PanelWithImageTop';
-import ButtonMultiStateWithNumber from '../Buttons/ButtonMultiStateWithNumber'
+import ButtonMultiStateWithText from '../Buttons/ButtonMultiStateWithText'
 
 export default function PanelImageTopWithButtonsMultiState(props) {
     let buttons = props.buttons;
@@ -18,7 +18,7 @@ export default function PanelImageTopWithButtonsMultiState(props) {
                 {
                     buttons.map(
                         (button) => (
-                            <ButtonMultiStateWithNumber
+                            <ButtonMultiStateWithText
                                 {...props}
                             />
                         )

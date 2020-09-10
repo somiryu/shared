@@ -1,20 +1,20 @@
 import React, { useState } from "react";
+
 //Hubs
 import GrayscaleWithTwoOpacities from "../Hubs/GrayscaleWithTwoOpacities"
 import MaskedAvatar from "../Hubs/MaskedAvatar"
 import CurrencyList from "../Hubs/CurrencyList";
 import MaskedAvatarWithTitle from "../Hubs/MaskedAvatarWithTitle";
-import Objetive from "../Hubs/Objetive";
-import Separator from "../ExampleImages/Generic/separador.png";
-import MaskedAvatarTitleWithButtonMultiState from "../Hubs/MaskedAvatarTitleWithButtonMultiState";
 import ControllerCheckboxes from "../Controllers/CheckboxesController";
 import ControllerList from "../Controllers/ListController";
 import BarProgressController from "../Hubs/BarProgressController";
+import TituloColaborador from "../ExampleImages/Hubs/tituloColaborador.png"
 
 export default (props) => {
 	const [state1, setState1] = useState(false)
 	const [state2, setState2] = useState(false)
 	const [state3, setState3] = useState(false)
+	const [choose, setChoose] = useState('')
 
 	return (
 		<div className="Hubs">
@@ -63,92 +63,23 @@ export default (props) => {
 					maskBorder={100}
 					imageTitle={props.images.Colaborador}
 					textAlign={"center"}
-					imageLabel={props.images.rec200}
+					imageLabel={TituloColaborador}
 					debug={true}
-					label="Compra de días"
+					label={<label style={{color:'#fff'}}>Text dummy</label>}
 					pointer={true}
 					listener={() => console.log('Clicked MarkedAvatar')}
 				>
 				</MaskedAvatarWithTitle>
 			</div>
-			<div className="testBox" style={{ height: '250px' }}>
-				<h4>MaskedAvatarTitleWithButtonMultiState</h4>
-				<MaskedAvatarTitleWithButtonMultiState
-					id="colaborador1"
-					avatar={props.images.Avatar}
-					containerImage={props.images.AvatarContainer}
-					padding={12}
-					paddingLabel={5}
-					maskBorder={100}
-					imageTitle={props.images.Colaborador}
-					textAlign={"center"}
-					imageLabel={props.images.rec200}
-					debug={true}
-					label="Compra de días"
-					idBtn="btn2"
-					state={'on'}
-					scale={1.2} //1.1
-					images={{ off: props.images.sq80, on: props.images.circ80, nata: props.images.circ40 }}
-					listeners={{
-						off: () => { setState1("on") },
-						on: () => { setState1("off") },
-					}}
-					styles={{ off: { filter: "grayscale(100%)" } }}
-					listener={() => console.log('Clicked MarkedAvatar')}
-				>
-				</MaskedAvatarTitleWithButtonMultiState>
-			</div>
-			<div className="testBox" style={{ height: '250px' }}>
-				<h4>Objetive</h4>
-				<Objetive
-					id="btn2"
-					state={'on'}
-					scale={1.2} //1.1
-					images={{ off: props.images.sq80, on: props.images.circ80, nata: props.images.circ40 }}
-					listeners={{
-						off: () => { setState1("on") },
-						on: () => { setState1("off") },
-					}}
-					styles={{ off: { filter: "grayscale(100%)" } }}
-					currencyLeft={
-						{
-							id: "curLeft",
-							image: props.images.circ80,
-							quantity: 3,
-							position: 'center',
-							duration: 1000,
-							childStyle: { color: "var(--red)" }
-
-						}
-					}
-					separator={Separator}
-					currencyRight={
-						{
-							id: "curRight",
-							image: props.images.circ80,
-							quantity: 3,
-							position: 'center',
-							duration: 1000,
-							childStyle: { color: "var(--red)" }
-						}
-					}
-					image={props.images.sq40}
-					label={'Hola'}
-					imageLabel={props.images.rec200}
-					debug={true}
-					textAlign="center" //center
-					padding={0}
-				>
-				</Objetive>
-			</div>
-			<div className="testBox" style={{ height: '250px' }}>
-				<h4>ControllerCheckboxes</h4>
+			<div className="testBox" style={{ width:'30%', height: '250px' }}>
+				<h4>ControllerCheckboxes - Choose: {choose || 'no one'}</h4>
 				<ControllerCheckboxes
 					options={[
-						{ id: 'opt1', description: '123', images: { check: props.images.circ40, uncheck: props.images.rec40 }, state: 'uncheck' },
-						{ id: 'opt2', description: '456', images: { check: props.images.circ40, uncheck: props.images.rec40 }, state: 'uncheck' },
-						{ id: 'opt3', description: '567', images: { check: props.images.circ40, uncheck: props.images.rec40 }, state: 'uncheck' }
+						{ id: 'opt1', description: <p>123</p>, images: { check: props.images.circ40, uncheck: props.images.rec40 }, state: 'uncheck' },
+						{ id: 'opt2', description: <p>456</p>, images: { check: props.images.circ40, uncheck: props.images.rec40 }, state: 'uncheck' },
+						{ id: 'opt3', description: <p>567</p>, images: { check: props.images.circ40, uncheck: props.images.rec40 }, state: 'uncheck' }
 					]}
+					listener={(d) => {setChoose(JSON.stringify(d)) }}
 					shuffle={true}
 					debug={true}
 				>

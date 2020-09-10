@@ -5,7 +5,7 @@
 //alignVertical = "space-evenly"
 
 import React from 'react'
-import ButtonMultiStateWithNumber from './ButtonMultiStateWithNumber';
+import ButtonMultiStateWithText from './ButtonMultiStateWithText';
 import {shuffle} from "../Utils/libs"
 
 export default function MultipleButtons(props) {
@@ -17,19 +17,19 @@ export default function MultipleButtons(props) {
             {
                 buttons.map(
                     (button) => (
-                        <ButtonMultiStateWithNumber
+                        <ButtonMultiStateWithText
                             className={button.className}
                             key={button.id}    
                             images={button.images}
                             id={button.id}
                             listeners={button.listeners}
-                            stylesNumber={button.stylesNumber}
+                            stylesText={button.stylesText}
                             state={button.state}
                             number={button.text}
                             styles={{}}
                             idButton={props.idButton}
                         >
-                        </ButtonMultiStateWithNumber>
+                        </ButtonMultiStateWithText>
                     )
                 )
             }

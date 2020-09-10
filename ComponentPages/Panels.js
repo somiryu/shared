@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PanelWithButtonCenter from "../Panels/PanelWithButtonCenter";
 import PanelWithButtonCenterImaged from "../Panels/PanelWithButtonCenterImaged";
 import PanelWithTwoButtonsImaged from "../Panels/PanelWithTwoButtonsImaged";
 import ImagedPanel from "../Panels/ImagedPanel";
@@ -16,7 +15,6 @@ import PanelImageTopWithButton from "../Panels/PanelImageTopWithButton";
 import PanelWithCurrencyHorizontal from "../Panels/PanelWithCurrencyHorizontal";
 import PanelWithButtonsText from "../Panels/PanelWithButtonsText";
 import mpl from "../ExampleImages/Containers/mpl.png";
-import PanelImageTopWithMultipleButtons from "../Panels/PanelImageTopWithMultipleButtons";
 import PanelWithDecorations from "../Panels/PanelWithDecorations";
 
 export default (props) => {
@@ -42,13 +40,7 @@ export default (props) => {
 					<div style={{ color: "white" }}> Children Optional Children Optional Children Optional Children Optional Children Optional Children Optional Children Optional Children Optional </div>
 				</ImagedPanel>
 			</div>
-			<div className="testBox">
-				<h3>PanelWithButtonCenter</h3>
-				<PanelWithButtonCenter id="pwbc2" debug={debug} listener={() => { }}>
-					<h3>Has Children</h3>
-				</PanelWithButtonCenter>
-			</div>
-			<div className="testBox">
+			<div className="testBox" style={{width:'40%'}}>
 				<h3>PanelWithButtonCenterImaged</h3>
 				<PanelWithButtonCenterImaged
 					id="pwbc2"
@@ -60,6 +52,7 @@ export default (props) => {
 					textWidth={70} //80
 					textHeight={45} //70
 					width="100%" //100% (maxWidth)
+					label={<label >Siguiente</label>}
 				>
 					<h1 style={{ textAlign: "center", color: "white" }}>HOLA!</h1>
 				</PanelWithButtonCenterImaged>
@@ -191,7 +184,7 @@ export default (props) => {
 			<div>
 				<h3>PanelImageTopWithButton</h3>
 				<PanelImageTopWithButton
-					id="tiP1"
+					id="tiP2"
 					image={props.images.rec600}
 					debug={debug} //testBox appears
 					padding="5%" //5%
@@ -205,7 +198,7 @@ export default (props) => {
 			<div>
 				<h3>PanelWithCurrencyHorizontal</h3>
 				<PanelWithCurrencyHorizontal
-					id="tiP1"
+					id="tiP3"
 					image={props.images.rec600}
 					debug={debug} //testBox appears
 					padding="5%" //5%
@@ -221,28 +214,13 @@ export default (props) => {
 			<div>
 				<h3>PanelWithButtonsText</h3>
 				<PanelWithButtonsText
-					id="tiP1"
+					id="tiP4"
 					image={props.images.rec600}
 					debug={debug} //testBox appears
 					margin="8%"
 					buttons={objectButtons}
 				>
 				</PanelWithButtonsText>
-			</div>
-			<div>
-				<h3>PanelsWithOptions</h3>
-				<PanelImageTopWithMultipleButtons
-					id="tiP1"
-					image={props.images.rec600}
-					imageTop={props.images.rec80}
-					positionTopImage={'-5%'}
-					debug={debug} //testBox appears
-					padding="5%" //5%
-					buttons={[{id: 'btn1', images: { off: props.images.circ80, on: props.images.circ80 }, text:'F', stylesNumber:{ off: { color: '#763320' }, on: { color: '#393834' } }}, {id: 'btn2', images: { off: props.images.circ80, on: props.images.circ80 },text:'M', stylesNumber:{ off: { color: '#763320' }, on: { color: '#393834' } } }]}
-					heightImage="15%"
-					direction="vertical"
-				>
-				</PanelImageTopWithMultipleButtons>
 			</div>
 			<div>
 				<h3>PanelWithDecorations</h3>
