@@ -1,12 +1,13 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './App.css';
 import Components from '../src/shared/Components'
+import Screen from './views/Screen'
 
 function App() {
+  const [screen, setScreen] = useState("form")
   return (
-    <Components>
-
-    </Components>
+    <Screen></Screen>
+    //<Components></Components>
   );
 }
 
