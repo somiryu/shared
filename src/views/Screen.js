@@ -5,6 +5,9 @@ import ImageTest from "../shared/ExampleImages/Buttons/boton.png";
 import SimpleForm from "../shared/Forms/SimpleForm"
 import LegendScreen from "../views/LegendScreen"
 import MapScreen from "../views/MapScreen"
+import ProfileScreen from "../views/ProfileScreen"
+import SedeScreen from "../views/SedeScreen"
+import RolProfileScreen from "../views/RolProfileScreen"
 
 export default (props) =>{
 	const [compType, setCompType] = useState("Forms");
@@ -14,7 +17,10 @@ export default (props) =>{
 			<h3>{compType}</h3>
 			<But text="Forms" listener={setCompType}/>
             <But text="Legend" listener={setCompType}/> 
-			<But text="Map" listener={setCompType}/> 
+			<But text="Map" listener={setCompType}/>
+			<But text="Profile" listener={setCompType}/>
+			<But text="Sede" listener={setCompType}/>
+			<But text="RolProfile" listener={setCompType}/>     
 			<hr/>
 			{compType === "Forms" &&
 				<SimpleForm 
@@ -41,6 +47,15 @@ export default (props) =>{
 			}
 			{compType === "Map" &&
 				<MapScreen />
+			}
+			{compType === "Profile" &&
+				<ProfileScreen />
+			}
+			{compType === "Sede" &&
+				<SedeScreen />
+			}
+			{compType === "RolProfile" &&
+				<RolProfileScreen />
 			}
 		</div>
 	)

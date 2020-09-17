@@ -3,12 +3,14 @@ import ButtonImageWithLabel from  '../shared/Buttons/ButtonImageWithLabel'
 import ImageTest from "../shared/ExampleImages/Buttons/boton.png";
 import Bar from "../shared/ExampleImages/Indicators/barraTiempo.png";
 import circ40 from "../shared/ExampleImages/Circ-40.png"
+import circ20 from "../shared/ExampleImages/Circ-20.png"
 import Map from "../shared/ExampleImages/map.png"
 import ImagePanel from "../shared/Panels/ImagedPanel"
 import Absolute from "../shared/Containers/Absolute"
 import Flex from "../shared/Containers/Flex"
 import ProgressBar from "../shared/Indicators/ProgressBar";
 import ButtonImage from "../shared/Buttons/ButtonImage"
+import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
 
 function MapScreen(props) {
     return (
@@ -18,6 +20,16 @@ function MapScreen(props) {
                 padding="0%"
                 children={<div style={{width:"100%",height:"100%"}}>
                     <Header></Header>
+                    <Absolute 
+                        id="satotomasl"
+                        style={{width:"40px",height:"40px",top:"20%",left:"80%"}}
+                        children={<img src={circ40}></img>}
+                    ></Absolute>
+                    <Absolute 
+                        id="satotomasl2"
+                        style={{width:"40px",height:"40px",top:"40%",left:"80%"}}
+                        children={<img src={circ40}></img>}
+                    ></Absolute>   
                     <Portal top="50%" left="50%"></Portal>
                     <Portal top="20%" left="40%"></Portal>
                 </div>}
@@ -29,6 +41,10 @@ function MapScreen(props) {
 
 
 function Portal(props){
+    const [hoursf, setHoursF] = useState(1)
+    const [minutesf, setMinutesF] = useState(30)
+    const [secondsf, setSecondsF] = useState(45)
+    
     let stylePortal = {
         position: 'relative',
         height: "60px",
@@ -45,8 +61,8 @@ function Portal(props){
             </Absolute>
             <Absolute style={{width:"30px",height:"30px",borderRadius:"50%",backgroundColor:"green"}}>
             </Absolute>
-            <Absolute style={{top:"90%",borderRadius:"10px",border:"1px solid",textAlign:"center"}}>
-                <h6 style={{margin:"0px"}}>00:00:00</h6> 
+            <Absolute style={{top:"90%",borderRadius:"10px",border:"1px solid",textAlign:"center",color: "black"}}>
+                <h6 style={{margin:"0px"}}>{"00:00:00"}</h6> 
             </Absolute>  
         </div>
 	)
@@ -69,7 +85,12 @@ function Header(props){
                             styleContainer={{width:"100px",border:"1px solid black",borderRadius:"10px",height:"10px"}}
                     >
                     </ProgressBar>
-                    <h6 style={{margin:"0 auto"}}><spam>llave </spam>X 1.2</h6>
+                    <CurrencyHorizontal
+                        quantity={30}
+                        image={circ20}
+                        displayX={true}
+                        id="counterbar"
+                    ></CurrencyHorizontal>
                 </Flex>
                 <img src={ImageTest} width="40px" height="40px"></img>
                 <h3 style={{margin:"auto 0"}}>20 X 1.2</h3>
