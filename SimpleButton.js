@@ -21,17 +21,18 @@ function SimpleButton(props){
 	 		setClicked(true)
 		 	if(props.disable){return false}
 		 	var scale = props.scale || 1.05
-		   console.log("clicked", props.id)
-		   window.anime({
-		      targets: "#"+props.id,
-		      scale: scale, duration: 200,
-		      direction: "alternate",
-		      easing: "linear",
-		      complete: function(anim){
-		      	setClicked(false)
-		      	setTimeout(()=>props.listener && props.listener(props.id), 100)
-		      }
-		   })
+		   	console.log("clicked", props.id)
+		//    window.anime({
+		//       targets: "#"+props.id,
+		//       scale: scale, duration: 200,
+		//       direction: "alternate",
+		//       easing: "linear",
+		//       complete: function(anim){
+		//       	setClicked(false)
+		//       	setTimeout(()=>props.listener && props.listener(props.id), 100)
+		//       }
+		//    })
+			props.listener()
 		}
 	}
    let color = props.color || "purple"

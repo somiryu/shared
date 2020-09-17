@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ButtonImage from "../Buttons/ButtonImage";
+import SimpleButton  from "../SimpleButton"
 import ButtonMultiState from "../Buttons/ButtonMultiState";
 import ButtonImageWithLabel from "../Buttons/ButtonImageWithLabel";
 import ButtonMultiStateWithText from "../Buttons/ButtonMultiStateWithText";
@@ -11,6 +12,7 @@ import ButtonWithText from "../Buttons/ButtonWithText";
 import Flecha from "../ExampleImages/Buttons/flecha.png";
 import TwoButtonsWithSeparator from "../Buttons/TwoButtonsWithSeparator";
 import Separator from "../ExampleImages/Generic/separador.png";
+
 export default (props) => {
 	const [state1, setState1] = useState("off");
 
@@ -82,6 +84,20 @@ export default (props) => {
 					scale={1.1} //1.1
 					style={{}} // {}
 
+				/>
+			</div>
+			<div style={{ width: '150px', height: '200px' }}>
+				<h3>ButtonForForms</h3>
+				<SimpleButton
+					id="formbutton"
+					listener={() => { console.log("clicked Buttons Animated") }}
+					scale={1.1} //1.1
+					style={{}} // {}
+					label={"iambutton"}
+					color="purple"
+					labelColor={"black"}
+					bgColor options
+					fill={false}
 				/>
 			</div>
 			<div>

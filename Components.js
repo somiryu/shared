@@ -5,6 +5,8 @@ import Hubs from "./ComponentPages/Hubs"
 import Indicators from "./ComponentPages/Indicators"
 import Buttons from "./ComponentPages/Buttons"
 import Labels from "./ComponentPages/Labels"
+import SimpleForm from "./Forms/SimpleForm"
+import ImageTest from "./ExampleImages/Buttons/boton.png";
 
 //import "ComponentName" from "./{Capeta/}Component"
 import Loading from "./Loading";
@@ -72,6 +74,7 @@ export default (props) =>{
 			<But text="Hubs" listener={setCompType}/>   
 			<But text="Labels" listener={setCompType}/>
 			<But text="Images" listener={setCompType}/>
+			<But text="Forms" listener={setCompType}/>
 			<hr/>
 			{compType === "Textos" &&
 				<div>
@@ -113,6 +116,20 @@ export default (props) =>{
 			}
 			{compType === "Images" &&
 				<Images images={images}/>
+			}
+			{compType === "Forms" &&
+				<SimpleForm 
+					title={<h3 style={{textAlign:"center"}}>Hola soy un titulo</h3>} 
+					stylesInput={{borderRadius:"50px",border:"1px solid black"}}		
+					inputs={
+						[{id:"name", type:"text", placeholder:"Nombre", name:"name"},
+						{id:"email", type:"text", placeholder:"Correo", name:"email"},]
+					} 
+					button={{id:"button",label:<label>Ingresar</label>, image:ImageTest,}}
+					idForm={"formstart"}
+					styles={{width:"40%",height:"300px",padding:"10px",border:"1px solid black"}}
+
+				/>
 			}
 		</div>
 	)
