@@ -13,12 +13,12 @@ function SimpleForm(props) {
     return (
         <div>
             <form id={props.idForm || "form"} >
-                <div style={{display:"flex", justifyContent:"space-around",flexDirection:"column", ...props.styles}}>
+                <div style={{display:"flex", justifyContent:"space-around",flexDirection:"column",padding:"0 20%", ...props.styles}}>
                     {props.title || "Titulo Formulario"}
                     {props.inputs.map(e => 
                         <input onChange={(evn)=> {formAux[e.name] = evn.target.value}} style={{...props.stylesInput}} id={e.id} type={e.type} placeholder={e.placeholder} name={e.name}/>
                     )}
-                    <div style={{display:"flex", margin:"0 auto",width:props.widthButton || "25%"}}>
+                    <div style={{display:"flex", margin:"0 auto",width:props.widthButton || "25%",justifyContent:"center"}}>
                         <ButtonImageWithLabel
                             id={props.button.id}
                             image={props.button.image}

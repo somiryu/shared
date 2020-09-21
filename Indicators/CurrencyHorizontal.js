@@ -17,7 +17,7 @@ function CurrencyHorizontal(props) {
   } : {};
   return (
     <div className={props.debug ? "testBox CurrencyHorizontal" : "CurrencyHorizontal"} style={{
-      display: "flex", position: 'relative', height: '100%', width: '100%', flexDirection: "row", textAlign: "center", alignItems: "center", justifyContent: "center"
+      display: "flex", position: 'relative', height: '100%', width: '100%', flexDirection: "row", textAlign: "center", alignItems: "center", justifyContent: (props.justify || "center")
     }}>
       <div className={props.debug ? "testBox img" : "img"} style={{ display: "inline-block", width: props.imageWidth }}>
         <img alt="curIcon" src={props.image} style={{ maxWidth: "100%" }} />
