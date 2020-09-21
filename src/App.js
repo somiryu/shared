@@ -15,50 +15,47 @@ import QuestionScreen from "./views/QuestionScreen"
 import FeedBackScreen from "./views/FeedBackScreen"
 import QuestionBarScreen from "./views/QuestionBarScreen"
 import QuestionWithTitleScreen from "./views/QuestionWithTitleScreen"
-
+import PlayArea from "./shared/PlayArea"
 function App() {
-  const [screen, setScreen] = useState("form")
+  const [layout, setLayout] = useState("Componentes")
+  const [sabios, setSabios] = useState({})
+  const [secondaryBg, setSecondaryBg] = useState(true)
+  let addClass;
+  if (layout === "Mapa" || layout === "EndGame" || layout === "BeginGame") addClass = "SkyBackground";
+  if (layout === "GameLayout" || layout === "Book") addClass = "PurpleBackground";
+  if (layout === "Sabios") addClass = "SabioBackground";
+  if (layout === "GameLayout" && secondaryBg) addClass = "PurpleBackground";
+  const bgClass = "App " + addClass;
   return (
-    //<Screen></Screen>
-    //<Components></Components>
-    <BrowserRouter>
-      <Header/>
-      <Switch>
-        {/* <Route path="/">
-          <StartScreen></StartScreen>
-        </Route> */}
-        {/* <Route path="/">
-          <LegendScreen></LegendScreen>
-        </Route> */}
-        {/* <Route path="/">
-          <MapScreen></MapScreen>
-        </Route> */}
-        {/* <Route path="/">
-          <ProfileScreen></ProfileScreen>
-        </Route> */}
-        {/* <Route path="/">
-          <SedeScreen></SedeScreen>
-        </Route>  */}
-        <Route path="/">
-          <RolProfileScreen></RolProfileScreen>
-        </Route>  
-        {/* <Route path="/">
-          <QuestionScreen></QuestionScreen>
-        </Route>  */}
-        {/* <Route path="/">
-          <FeedBackScreen></FeedBackScreen>
-        </Route>  */}
-        {/* <Route path="/">
-          <QuestionBarScreen></QuestionBarScreen>
-        </Route>  */}
-        {/* <Route path="/">
-          <QuestionWithTitleScreen></QuestionWithTitleScreen>
-        </Route>  */}
-      </Switch>
-    </BrowserRouter>
-    // {/* <Route path="/admin">
-    //   <SimpleForm/>
-    // </Route> */}
+    <div className={bgClass} style={{ overflow: "hidden" }}>
+      {layout === "Componentes" &&
+          <Components>
+          </Components>
+        }
+       <PlayArea width={layout === 'BeginGame' ? 1400 : 1000}>
+       
+        {layout === "Register" &&
+          <StartScreen>
+          </StartScreen>
+        }
+        {layout === "Legend" &&
+          <LegendScreen>
+          </LegendScreen>
+        }
+         {layout === "Mapa" &&
+          <MapScreen>
+          </MapScreen>
+        }
+        {layout === "Header" &&
+          <Header>
+          </Header>
+        }
+        {layout === "Header" &&
+          <Header>
+          </Header>
+        }
+      </PlayArea>
+    </div>
   );
 }
 
