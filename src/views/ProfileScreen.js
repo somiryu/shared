@@ -10,15 +10,14 @@ import ProgressBar from "../shared/Indicators/ProgressBar";
 import ButtonImage from "../shared/Buttons/ButtonImage"
 import MaskedAvatar from "../shared/Hubs/MaskedAvatar"
 import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
-import ChipController from "./layout/ChipContoller"
+import ChipController from "../shared/Controllers/ChipContoller"
 import CaraInnos from "../shared/ExampleImages/Generic/caraInnos.png"
 import Dios from "../shared/ExampleImages/Hubs/dios.png"
 
 function ProfileScreen(props) {
     const [state1, setState1] = useState("off");
     return (
-        <div style={{display:"flex", flexDirection:"column", position:"relative", top:"10%"}}>
-            <Header></Header>
+        <div style={{display:"flex", flexDirection:"column", position:"relative", top:"10%", marginTop:"15%"}}>
             <ChipController
                 chips={[{id:"Perfil",label:"Perfil"},{id:"Regional",label:"Regional"},{id:"Cofradia",label:"Cofradia"}]}
             ></ChipController>
@@ -44,11 +43,12 @@ function ProfileScreen(props) {
                             image={circ20}
                             displayX={true}
                             id="counterbar1"
+                            justify="end"
                         ></CurrencyHorizontal>
                     </Flex>
                 </Flex>
             </Flex>
-            <Flex align="center">
+            <Flex align="center" justify="space-evenly">
                 <ButtonMultiState
                     id="btn2"
                     state={state1}
@@ -61,9 +61,9 @@ function ProfileScreen(props) {
                     styles={{ off: { filter: "grayscale(100%)" } }}
                 >
                 </ButtonMultiState>
-                <h3 style={{marginLeft:"20%"}}>Lorem Ipsum</h3>
+                <h3>Lorem Ipsum</h3>
             </Flex>
-            <Flex align="center">
+            <Flex align="center" justify="space-evenly">
                 <ButtonMultiState
                     id="btn2"
                     state={state1}
@@ -76,9 +76,9 @@ function ProfileScreen(props) {
                     styles={{ off: { filter: "grayscale(100%)" } }}
                 >
                 </ButtonMultiState>
-                <h3 style={{marginLeft:"20%"}}>Lorem Ipsum</h3>
+                <h3>Lorem Ipsum</h3>
             </Flex>
-            <Flex align="center">
+            <Flex align="center" justify="space-evenly">
                 <ButtonMultiState
                     id="btn2"
                     state={state1}
@@ -91,7 +91,7 @@ function ProfileScreen(props) {
                     styles={{ off: { filter: "grayscale(100%)" } }}
                 >
                 </ButtonMultiState>
-                <h3 style={{marginLeft:"20%"}}>Lorem Ipsum</h3>
+                <h3>Lorem Ipsum</h3>
             </Flex>
         </div>
     )

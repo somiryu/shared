@@ -27,68 +27,39 @@ function ProfileScreen(props) {
     }
     return (
         <Flex align="center" direction="column" style={{marginTop:"10%",marginLeft:"10%",marginRight:"10%"}}>
-            {/* <Header></Header> */}
-            <Flex align="center" style={{margin:"30px", width:"100%"}} justify="space-around">
-                <Flex
-                    direction="column"
-                    align="center"
+            <PanelCloseTitleAndSubtitle
+                id="pwbc6"
+                image={rec600}
+                imageRight={circ200}
+                imageClose={""}
+                buttons={[{ id: 'btn1', image: circ80, label: <h1>Hola</h1> }, { id: 'btn2', image:circ80, label: <h1>Hola2</h1> }, { id: 'btn3', image: circ80, label: <h1>Hola3</h1> }]}
+                onClick={(id) => handleClick(id)}
+                showSubtitle={true}
+                title={'Feedback'}
+                subtitle={'Lorem Ipsum is simply dummy text of the '}
+                debug={true}
+                listenerClose={() => console.log('Closed')}
+                children = {
+                    <CurrencyHorizontal
+                        quantity={30}
+                        image={circ20}
+                        displayX={true}
+                        id="counterfeed"
+                    ></CurrencyHorizontal>
+                }
+            >
+            </PanelCloseTitleAndSubtitle>
+            <div style={{marginTop:"10%"}}>
+                <ButtonImageWithLabel
+                    id={"inicio"}
+                    image={ImageTest}
+                    label={"Inicio"}
+                    listener={() =>{
+                        console.log("boton siguiente")
+                    }}
                 >
-                    <h4 style={{margin:"1px 20px"}}>{props.title || "Profesora"}</h4>
-                    <MaskedAvatar
-                        id="colaborador1"
-                        avatar={CaraInnos}
-                        containerImage={Dios}
-                        padding={12}
-                        listener={() => console.log('Clicked MarkedAvatar')}
-                        maskBorder={100}
-                        style={{margin:"10px"}}
-                    />
-                    </Flex>
-                <Flex
-                    direction="column"
-                    align="center"
-                    style={{width:"60%"}}
-                >
-                    <p>{props.descriptionRol || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."}</p>
-                    <ButtonImageWithLabel
-                            id={"siguiente"}
-                            image={ImageTest}
-                            label={"Siguiente >"}
-                            listener={() =>{
-                                console.log("boton siguiente")
-                            }}
-                        >
-                    </ButtonImageWithLabel>
-                    
-                </Flex>
-            </Flex>
-            <Flex align="center" style={{margin:"30px"}}>
-                <PanelCloseTitleAndSubtitle
-					id="pwbc6"
-					image={rec600}
-					imageRight={circ200}
-					imageClose={""}
-					buttons={[{ id: 'btn1', image: circ80, label: <h1>Hola</h1> }, { id: 'btn2', image:circ80, label: <h1>Hola2</h1> }, { id: 'btn3', image: circ80, label: <h1>Hola3</h1> }]}
-					onClick={(id) => handleClick(id)}
-					showSubtitle={true}
-					title={''}
-					subtitle={'Seleccion multiple'}
-					debug={true}
-                    listenerClose={() => console.log('Closed')}
-                    children = {
-                        <ButtonImageWithLabel
-                            id={"inicio"}
-                            image={ImageTest}
-                            label={"Inicio"}
-                            listener={() =>{
-                                console.log("boton siguiente")
-                            }}
-                        >
-                        </ButtonImageWithLabel>
-                    }
-				>
-				</PanelCloseTitleAndSubtitle>
-            </Flex>
+                </ButtonImageWithLabel>
+            </div>
         </Flex>
     )
 }

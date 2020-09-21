@@ -11,39 +11,79 @@ import Flex from "../shared/Containers/Flex"
 import ProgressBar from "../shared/Indicators/ProgressBar";
 import ButtonImage from "../shared/Buttons/ButtonImage"
 import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
+import TableGame from "./layout/TableGame"
 
 function MapScreen(props) {
+    const [screen, setScreen] = useState(window.screen.width)
+    const [portalInferior, setPortalInferior] = useState(false)
+    console.log(screen)
+    const handlePortal = () => {
+        if(portalInferior===false){
+            setPortalInferior(true)
+        }
+        else{
+            setPortalInferior(false)
+        }
+    }
+
     return (
         <div>
-            <ImagePanel
-                image={Map}
-                padding="0%"
-                children={<div style={{width:"100%",height:"100%"}}>
-                    <Header></Header>
-                    <Absolute 
-                        id="satotomasl"
-                        style={{width:"40px",height:"40px",top:"20%",left:"80%"}}
-                        children={<img src={circ40}></img>}
-                    ></Absolute>
-                    <Absolute 
-                        id="satotomasl2"
-                        style={{width:"40px",height:"40px",top:"40%",left:"80%"}}
-                        children={<img src={circ40}></img>}
-                    ></Absolute>   
-                    <Portal top="50%" left="50%"></Portal>
-                    <Portal top="20%" left="40%"></Portal>
-                </div>}
-            >
-            </ImagePanel>
-        </div>
+            <div style={{display:"flex",justifyContent:"center", alignItems:"center"}}>
+                { screen>800 &&
+                    <React.Fragment>
+                        <Absolute 
+                            id="satotomasl"
+                            style={{width:"40px",height:"40px",top:"2%",left:"85%"}}
+                            children={<img src={circ40}></img>}
+                        ></Absolute>
+                        <Absolute 
+                            id="satotomasl2"
+                            style={{width:"40px",height:"40px",top:"2%",left:"90%"}}
+                            children={<img src={circ40}></img>}
+                        ></Absolute>
+                    </React.Fragment>
+                }
+                <ImagePanel
+                    style={screen<800 && {marginTop:"15%"}}
+                    image={Map}
+                    padding="0%"
+                    children={<div style={{width:"100%",height:"100%"}}>
+                        { screen<800 &&
+                            <React.Fragment>
+                                <Absolute 
+                                    id="satotomasl"
+                                    style={{width:"40px",height:"40px",top:"20%",left:"80%"}}
+                                    children={<img src={circ40}></img>}
+                                ></Absolute>
+                                <Absolute 
+                                    id="satotomasl2"
+                                    style={{width:"40px",height:"40px",top:"40%",left:"80%"}}
+                                    children={<img src={circ40}></img>}
+                                ></Absolute>
+                            </React.Fragment>
+                        }
+                        <Portal top="50%" left="50%" listener={handlePortal}></Portal>
+                        <Portal top="20%" left="40%" listener={handlePortal}></Portal>
+                    </div>}
+                >
+                </ImagePanel>
+                { screen>800 &&
+                    <div>
+                        <TableGame></TableGame>
+                    </div>
+                }
+            </div>
+            { (screen<800 && portalInferior==true)&&
+                <div>
+                    <TableGame></TableGame>
+                </div>
+            }
+        </div>        
     )
 }
 
 
 function Portal(props){
-    const [hoursf, setHoursF] = useState(1)
-    const [minutesf, setMinutesF] = useState(30)
-    const [secondsf, setSecondsF] = useState(45)
     
     let stylePortal = {
         position: 'relative',
@@ -54,7 +94,7 @@ function Portal(props){
         right: props.right || 0
     }
 	return(
-        <div style={{...stylePortal}}>
+        <div style={{...stylePortal}} onClick={props.listener}>
             <Absolute style={{width:"40px",height:"40px",borderRadius:"50%",backgroundColor:"pink",top:"10px"}}>
             </Absolute>
             <Absolute style={{width:"20px",height:"20px",borderRadius:"50%",backgroundColor:"blue", left:"65%",top: "2px"}}>
@@ -70,7 +110,7 @@ function Portal(props){
 
 function Header(props){
 	return(
-        <Absolute style={{width:"100%",height:"auto",backgroundColor:"rgba(5,5,5,0.3)"}}>
+        <Absolute style={{maxWidth:"500px",height:"auto",backgroundColor:"rgba(5,5,5,0.3)"}}>
             <Flex justify="space-around" align="center">
                 <Flex 
                     direction="column" 
