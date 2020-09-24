@@ -1,9 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Squada+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@600&display=swap");
+
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Source Serif Pro', serif, 'Squada One', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -34,6 +35,24 @@ a{text-decoration: none}
 }
 h1,h2,h3,h4,h5,h6{
     margin: 0;
+    color: #EAAB1C;
+    font-family: 'Source Serif Pro', serif;
+}
+p{
+    font-family:'Squada One', cursive;
+    color:#FFFAF0;
+}
+
+span{
+    margin: 0;
+    color: #EAAB1C;
+    font-family: 'Source Serif Pro', serif;
+}
+label{
+    margin: 0;
+    color: black;
+    font-family: 'Source Serif Pro', serif;
+    font-size: 28px
 }
 body {
     font-size: 100%;
@@ -42,21 +61,29 @@ body {
     --purple-transparent: rgba(58, 19, 62, 0.5);
     --pink: #FF0059;
     --pink-transparent: rgba(255,0,89, 0.5);
-    --yellow: #FFC600;
+    --yellow: #EAAB1C;
+    --yellow-ligth:#F2C75C;
     --dark-yellow: #EDB800;
     --orange: #ef7b32;
     --grey: #5a5a5a;
     --light-grey:#CBBECB;
     --mid-grey:#888888;
-    --dark-grey:#585858;
+    --dark-grey:#190F0B;
+    --middle-grey:#42210B;
+    --ligth-grey:#603813;
+    --dark-ocher:#744A1C;
+    --mid-ocher:#AB8745;
+    --ligth-ocher:#D1AB69;
     --green:#62BB46;
-    --blue:#4AC7EE;
+    --blue:#2C2C44;
+    --dark-blue:#1C1323;
+    --white:#FFFAF0;
     color:var(--dark-grey);
 }
 
-h1 {font-size: 3.5em;max-width: 98%}
-h2 {font-size: 2.5em}
-h3 {font-size: 1.3em}
+h1 {font-size: 28px}
+h2 {font-size: 24px}
+h3 {font-size: 21px}
 h4 {
     font-size: 1.2em;
     text-align: center;

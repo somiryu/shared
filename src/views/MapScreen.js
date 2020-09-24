@@ -4,7 +4,7 @@ import ImageTest from "../shared/ExampleImages/Buttons/boton.png";
 import Bar from "../shared/ExampleImages/Indicators/barraTiempo.png";
 import circ40 from "../shared/ExampleImages/Circ-40.png"
 import circ20 from "../shared/ExampleImages/Circ-20.png"
-import Map from "../shared/ExampleImages/map.png"
+import Mapa from "../images/general/mapa.png"
 import ImagePanel from "../shared/Panels/ImagedPanel"
 import Absolute from "../shared/Containers/Absolute"
 import Flex from "../shared/Containers/Flex"
@@ -12,6 +12,8 @@ import ProgressBar from "../shared/Indicators/ProgressBar";
 import ButtonImage from "../shared/Buttons/ButtonImage"
 import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
 import TableGame from "./layout/TableGame"
+import logomapa from "../images/logos/logoaniosmapa.png"
+import logoacreditacion from "../images/logos/logoacreditacionmapa.png"
 
 function MapScreen(props) {
     const [screen, setScreen] = useState(window.screen.width)
@@ -33,32 +35,32 @@ function MapScreen(props) {
                     <React.Fragment>
                         <Absolute 
                             id="satotomasl"
-                            style={{width:"40px",height:"40px",top:"2%",left:"85%"}}
-                            children={<img src={circ40}></img>}
+                            style={{width:"40px",height:"40px",top:"2%",left:"83%"}}
+                            children={<img src={logomapa}></img>}
                         ></Absolute>
                         <Absolute 
                             id="satotomasl2"
                             style={{width:"40px",height:"40px",top:"2%",left:"90%"}}
-                            children={<img src={circ40}></img>}
+                            children={<img src={logoacreditacion}></img>}
                         ></Absolute>
                     </React.Fragment>
                 }
                 <ImagePanel
                     style={screen<800 && {marginTop:"15%"}}
-                    image={Map}
+                    image={Mapa}
                     padding="0%"
                     children={<div style={{width:"100%",height:"100%"}}>
                         { screen<800 &&
                             <React.Fragment>
                                 <Absolute 
                                     id="satotomasl"
-                                    style={{width:"40px",height:"40px",top:"20%",left:"80%"}}
-                                    children={<img src={circ40}></img>}
+                                    style={{width:"48px",height:"48px",top:"20%",left:"75%"}}
+                                    children={<img src={logomapa}></img>}
                                 ></Absolute>
                                 <Absolute 
                                     id="satotomasl2"
-                                    style={{width:"40px",height:"40px",top:"40%",left:"80%"}}
-                                    children={<img src={circ40}></img>}
+                                    style={{width:"48px",height:"48px",top:"40%",left:"80%"}}
+                                    children={<img src={logoacreditacion}></img>}
                                 ></Absolute>
                             </React.Fragment>
                         }

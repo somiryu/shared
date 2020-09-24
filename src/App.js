@@ -15,9 +15,10 @@ import QuestionScreen from "./views/QuestionScreen"
 import FeedBackScreen from "./views/FeedBackScreen"
 import QuestionBarScreen from "./views/QuestionBarScreen"
 import QuestionWithTitleScreen from "./views/QuestionWithTitleScreen"
+import fondo from "./images/general/fondopatron.png"
 import PlayArea from "./shared/PlayArea"
 function App() {
-  const [layout, setLayout] = useState("Componentes")
+  const [layout, setLayout] = useState("Mapa")
   const [sabios, setSabios] = useState({})
   const [secondaryBg, setSecondaryBg] = useState(true)
   let addClass;
@@ -27,12 +28,15 @@ function App() {
   if (layout === "GameLayout" && secondaryBg) addClass = "PurpleBackground";
   const bgClass = "App " + addClass;
   return (
-    <div className={bgClass} style={{ overflow: "hidden" }}>
-      {layout === "Componentes" &&
+    <div className={bgClass, "general"}  style={{ overflow: "hidden", backgroundImage:fondo}} >
+        {layout === "Componentes" && 
           <Components>
           </Components>
         }
        <PlayArea width={layout === 'BeginGame' ? 1400 : 1000}>
+        {(layout !== "Register" && layout !== "Legend") &&
+          <Header></Header>
+        }
        
         {layout === "Register" &&
           <StartScreen>
@@ -46,9 +50,9 @@ function App() {
           <MapScreen>
           </MapScreen>
         }
-        {layout === "Header" &&
-          <Header>
-          </Header>
+        {layout === "Profile" &&
+          <ProfileScreen>
+          </ProfileScreen>
         }
         {layout === "Header" &&
           <Header>

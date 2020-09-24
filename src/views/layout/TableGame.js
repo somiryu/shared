@@ -10,69 +10,100 @@ import ProgressBar from "../../shared/Indicators/ProgressBar";
 import ButtonImage from "../../shared/Buttons/ButtonImage"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
 import ButtonMultiState from  '../../shared/Buttons/ButtonMultiState'
+import ImagePanel from "../../shared/Panels/ImagedPanel"
+import gameZone from "../../images/general/contajuego.png"
+import copa from "../../images/Iconos/incopa.png"
+import villavicencio from "../../images/Iconos/inescudovilla.png"
+
 
 function TableGame(props){
     const [state1, setState1] = useState("off");
 	return(
-        <Flex direction="column" align="center" style={{backgroundColor:"rgba(5,5,5,0.3)",borderRadius:"20px",minWidth:"270px"}}>
-            <Flex style={{margin:"0px 10px"}}align="center">{props.title || "NOMBRE SEDE"} - {props.city || "CIUDAD"}</Flex>
-            <Flex align="center"><img src={circ20} ></img></Flex>
-            <Flex style={{justifyContent:"space-around",width:"100%"}} align="center">
-                <div ><img src={circ20} ></img>{props.city || "Ciudad"}</div>
-                <div><img src={circ20} ></img>20 x 1.2</div>
-                <div >
-                    <CurrencyHorizontal
-                        quantity={30}
-                        image={circ20}
-                        //displayX={true}
-                        id="counterCup"
-                    ></CurrencyHorizontal>
-                </div>
-            </Flex>
-            <Flex  style={{justifyContent:"space-around",width:"100%"}} align="center">
-                <div style={{display: "flex",justifyContent:"center",alignItems:"center"}}>
-                    <div>
+        <ImagePanel
+            image={gameZone}
+            padding="0%">
+            <Flex direction="column" align="center" style={{backgroundColor:"rgba(5,5,5,0.3)",borderRadius:"20px",width:"100%",padding: "10px",height:"100%"}}>
+                <Flex align={"center"}>
+                    <Flex align="center" style={{}}>
+                        <img src={villavicencio} ></img>
+                    </Flex>
+                    <Flex style={{margin:"10px 10px"}}align="center">
+                        <h5>{props.title || "NOMBRE SEDE"} - {props.city || "CIUDAD"}</h5>
+                    </Flex>
+                </Flex>
+                <Flex style={{justifyContent:"space-around",width:"100%"}} align="center">
+                    <Flex direction={"column"} align={"center"}>
+                        <Flex>
+                            <img src={villavicencio} ></img>
+                        </Flex>
+                        <Flex>
+                            <h5>{props.city || "Ciudad"}</h5>
+                        </Flex>
+                    </Flex>
+                    <Flex direction={"column"} align={"center"}>
+                        <Flex>
+                            <img src={circ20} ></img>
+                        </Flex>
+                        <Flex>
+                            <h5>20 x 1.2</h5>
+                        </Flex>
+                    </Flex>
+                    <Flex>
+                        <CurrencyHorizontal
+                            quantity={30}
+                            image={copa}
+                            //displayX={true}
+                            id="counterCup"
+                            direction ="column"
+                            fontSize = "1em"
+                        ></CurrencyHorizontal>
+                    </Flex>
+                </Flex>
+                <Flex  style={{justifyContent:"space-around",width:"100%"}} align="center">
+                    <Flex>
+                        <CurrencyHorizontal
+                            quantity={30}
+                            image={circ20}
+                            displayX={true}
+                            id="counterNumber"
+                            direction ="column"
+                            fontSize = "1em"
+                        >
+                        </CurrencyHorizontal>
+                    </Flex>
+                    <Flex direction={"column"} align={"center"} >
+                        <Flex>
+                            <ButtonMultiState
+                                id="btn2"
+                                state={state1}
+                                scale={1.2} //1.1
+                                images={{ off:sq80, on:circ80, nata:circ40 }}
+                                listeners={{
+                                    off: () => { setState1("on") },
+                                    on: () => { setState1("nata") },
+                                }}
+                                styles={{ off: { filter: "grayscale(100%)" } }}
+                            >
+                            </ButtonMultiState>
+                        </Flex>
+                        <div>
+                            <h5>{props.count||"00:00:00"}</h5>
+                        </div>
+                    </Flex>
+                    <div >
                         <CurrencyHorizontal
                             quantity={30}
                             image={circ20}
                             //displayX={true}
-                            id="counterNumber"
-                        >
-                        </CurrencyHorizontal>
+                            id="counterArrows"
+                            direction ="column"
+                            fontSize = "1em"
+                        ></CurrencyHorizontal>
                     </div>
-                    <div >
-                        {"/"+(props.total || "200")}
-                    </div>
-                </div>
-                <div >
-                    <CurrencyHorizontal
-                        quantity={30}
-                        image={circ20}
-                        //displayX={true}
-                        id="counterArrows"
-                    ></CurrencyHorizontal>
-                </div>
+                </Flex>
+                
             </Flex>
-            <Flex align="center" style={{justifyContent:"space-evenly", width:"100%"}} >
-                <div>
-                    <h5>{props.count||"00:00:00"}</h5>
-                </div>
-                <div>
-                    <ButtonMultiState
-                        id="btn2"
-                        state={state1}
-                        scale={1.2} //1.1
-                        images={{ off:sq80, on:circ80, nata:circ40 }}
-                        listeners={{
-                            off: () => { setState1("on") },
-                            on: () => { setState1("nata") },
-                        }}
-                        styles={{ off: { filter: "grayscale(100%)" } }}
-                    >
-                    </ButtonMultiState>
-                </div>
-            </Flex>
-        </Flex>
+        </ImagePanel>
 	)
 }
 

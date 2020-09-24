@@ -13,12 +13,16 @@ import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
 import ChipController from "../shared/Controllers/ChipContoller"
 import CaraInnos from "../shared/ExampleImages/Generic/caraInnos.png"
 import Dios from "../shared/ExampleImages/Hubs/dios.png"
+import button from "../images/buttons/btnprincipal.png"
+import buttonDeactivate from "../images/buttons/btnprincipalactivo.png"
 
 function ProfileScreen(props) {
     const [state1, setState1] = useState("off");
     return (
-        <div style={{display:"flex", flexDirection:"column", position:"relative", top:"10%", marginTop:"15%"}}>
+        <div style={{display:"flex", flexDirection:"column", position:"relative", top:"10%", marginTop:"1%"}}>
             <ChipController
+                imageChip={button}
+                imageChipDeactivate ={buttonDeactivate}
                 chips={[{id:"Perfil",label:"Perfil"},{id:"Regional",label:"Regional"},{id:"Cofradia",label:"Cofradia"}]}
             ></ChipController>
             <Flex

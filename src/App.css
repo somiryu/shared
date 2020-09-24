@@ -24,6 +24,18 @@
   color: white;
 }
 
+.general{
+  background-image: url("./images/general/fondopatron.png"),radial-gradient(ellipse at center, rgba(44,44,68,1) 0%, rgba(28,19,35,1) 100%);
+  /* background-color: rgba(44,44,68,1); 
+  background: -moz-radial-gradient(center, ellipse cover, rgba(44,44,68,1) 0%, rgba(28,19,35,1) 100%); 
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(44,44,68,1)), color-stop(100%, rgba(28,19,35,1))); 
+  background: -webkit-radial-gradient(center, ellipse cover, rgba(44,44,68,1) 0%, rgba(28,19,35,1) 100%); 
+  background: -o-radial-gradient(center, ellipse cover, rgba(44,44,68,1) 0%, rgba(28,19,35,1) 100%); 
+  background: -ms-radial-gradient(center, ellipse cover, rgba(44,44,68,1) 0%, rgba(28,19,35,1) 100%); 
+  background: radial-gradient(ellipse at center, rgba(44,44,68,1) 0%, rgba(28,19,35,1) 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c2c44', endColorstr='#1c1323', GradientType=1 );  */
+}
+
 .App-link {
   color: #61dafb;
 }
