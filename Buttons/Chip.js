@@ -10,6 +10,8 @@ function Chip(props){
         if(props.listener){
             props.listener([e,active])
         }
+        console.log(props.imageselect)
+        console.log(props.imagenoselect)
 	}
    let color = props.color || "purple"
    if(color === "var(--purple)") color = "purple";
@@ -28,9 +30,13 @@ function Chip(props){
     	<div 
     		id={props.id}
 			onClick={clickHandler}
-			className={"simple-btn btn-"+color + (props.active ? " btn-fill" : " btn-outline")}
-			style={{minWidth:"80px",...style}}
+            style={{cursor:"pointer", display:"flex", alignItems:"flex-start", position:"relative", width:'100%',backgroundImage:props.imageselect,...style}}
 		>
+            {/* { props.active ? 
+                <img src={props.imageselect}></img>
+                :
+                <img src={props.imagenoselect}></img>
+            } */}
 			{props.label}
 		</div>
     )

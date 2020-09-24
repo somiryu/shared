@@ -27,13 +27,15 @@ function ChipController(props){
     }
     console.log("----Chips")
  	return( 
-    	<div style={{display:"flex",justifyContent:"space-around",margin:"5%",...props.chipControllerStyle}}>
+    	<div style={{display:"flex",justifyContent:"space-around",margin:"2%",...props.chipControllerStyle}}>
             {props.chips.map(e=>
                 <Chip
                     id={e.id}
                     label={e.label}
                     listener={listener}
                     active={estado[e.id]}
+                    imageselect={props.imageChip}
+                    imagenoselect={props.imageChipDeactivate}
                 ></Chip>
             )}
 		</div>

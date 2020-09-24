@@ -15,17 +15,20 @@ function CurrencyHorizontal(props) {
     right: 0,
     bottom: 0
   } : {};
+  
   return (
     <div className={props.debug ? "testBox CurrencyHorizontal" : "CurrencyHorizontal"} style={{
-      display: "flex", position: 'relative', height: '100%', width: '100%', flexDirection: "row", textAlign: "center", alignItems: "center", justifyContent: (props.justify || "center")
+      display: "flex", position: 'relative', height: '100%', width: '100%',flexDirection:(props.direction || "row"), textAlign: "center", alignItems: "center", justifyContent: (props.justify || "center")
     }}>
       <div className={props.debug ? "testBox img" : "img"} style={{ display: "inline-block", width: props.imageWidth }}>
         <img alt="curIcon" src={props.image} style={{ maxWidth: "100%" }} />
       </div>
-      {props.displayX && <div style={{ ...props.childStyle, ...props.styleX }}>x</div>}
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-        <div className={props.debug ? "testBox qty font2" : "qty font2"} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: props.fontSize || "2em", fontFamily: props.fontFamily || "Bubblegum Sans", ...ubication  }}>
-          <AnimatedScore id={props.id} className={props.classNameSpan} to={props.quantity} childStyle={props.childStyle || {}} duration={props.duration || 2000} />
+      <div style={{display:"flex"}}>
+        {props.displayX && <div style={{ ...props.childStyle, ...props.styleX }}>x</div>}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <div className={props.debug ? "testBox qty font2" : "qty font2"} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: props.fontSize || "2em", fontFamily: props.fontFamily || "Bubblegum Sans", ...ubication  }}>
+            <AnimatedScore id={props.id} className={props.classNameSpan} to={props.quantity} childStyle={props.childStyle || {}} duration={props.duration || 2000} />
+          </div>
         </div>
       </div>
     </div>

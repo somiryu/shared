@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import ButtonImageWithLabel from  '../Buttons/ButtonImageWithLabel'
 import ImageTest from "../ExampleImages/Buttons/boton.png";
+
+
 let formAux ={}
 function SimpleForm(props) {
     useEffect(() => {
@@ -13,12 +15,19 @@ function SimpleForm(props) {
     return (
         <div>
             <form id={props.idForm || "form"} >
-                <div style={{display:"flex", justifyContent:"space-around",flexDirection:"column",padding:"0 20%", ...props.styles}}>
-                    {props.title || "Titulo Formulario"}
+                <div style={{display:"flex", justifyContent:"space-evenly",flexDirection:"column",padding:"0 20%", ...props.styles}}>
+                    {props.title && 
+                        props.title
+                    }
+                    {props.ImageTitle &&
+                       <div>
+                           <img src={props.ImageTitle}></img>
+                       </div> 
+                    }
                     {props.inputs.map(e => 
                         <input onChange={(evn)=> {formAux[e.name] = evn.target.value}} style={{...props.stylesInput}} id={e.id} type={e.type} placeholder={e.placeholder} name={e.name}/>
                     )}
-                    <div style={{display:"flex", margin:"0 auto",width:props.widthButton || "25%",justifyContent:"center"}}>
+                    <div style={{display:"flex", margin:"0 auto",width:props.widthButton || "auto",justifyContent:"center"}}>
                         <ButtonImageWithLabel
                             id={props.button.id}
                             image={props.button.image}
