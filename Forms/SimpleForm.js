@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import ButtonImageWithLabel from  '../Buttons/ButtonImageWithLabel'
-import ImageTest from "../ExampleImages/Buttons/boton.png";
 
 
 let formAux ={}
@@ -8,10 +7,10 @@ function SimpleForm(props) {
     useEffect(() => {
         console.log("se disparo use effect")
         props.inputs.map(e=>{
-            formAux[e.name]=""
+            return formAux[e.name]=""
         }) 
         console.log(formAux)
-    }, [])
+    }, [props.inputs])
     return (
         <div>
             <form id={props.idForm || "form"} >
@@ -21,7 +20,7 @@ function SimpleForm(props) {
                     }
                     {props.ImageTitle &&
                        <div>
-                           <img src={props.ImageTitle}></img>
+                           <img alt={"title"} src={props.ImageTitle} style={{width:"100%",padding:"5px"}}></img>
                        </div> 
                     }
                     {props.inputs.map(e => 

@@ -14,7 +14,7 @@ export default (props) => {
 						boxSizing: "border-box",
 						height:"100%",
 					}} className={props.debug ? "testBox" : ""}>
-						<div style={{overflow:props.overflow || "none", height:"100%"}} className={props.debug ? "testBox" : ""}>
+						<div style={{overflow:props.overflow || "none", height:"100%",...props.contentPrincipal}} className={props.debug ? "testBox" : ""}>
 							{props.children}
 						</div>
 				</div>

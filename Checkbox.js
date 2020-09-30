@@ -24,7 +24,7 @@ export default function Checkbox(props) {
             className={props.debug ? 'testBox' : ''} 
             style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center', width:'100%'}}>
             <div className={props.debug ? 'testBox' : ''} style={{ width: props.sizeIcon || '15%', textAlign:'center', cursor:'pointer' }}>
-                <img src={image} alt='Check' style={{width:'60%'}}></img>
+                <img src={image} alt='Check' style={{width:'30%'}}></img>
             </div>
             <div className={props.debug ? 'testBox' : ''} style={{ width: props.sizeText || '85%', display: 'flex', alignItems: 'center'}}>
                 {props.paragraph}

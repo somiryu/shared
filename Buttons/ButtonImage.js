@@ -22,7 +22,7 @@ function Button(props){
     		onClick={clickHandler}
     	>	
 			<div style={{cursor:"pointer", display:"flex", alignItems:"flex-start", position:"relative", width:'100%'}}>
-				<img alt="boton" src={props.image} style={{width:"100%"}}/>
+				<img alt="boton" src={props.image} style={{width:"100%",...props.styleImage}}/>
 				{props.children}
 			</div>
       </div>

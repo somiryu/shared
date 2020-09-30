@@ -20,7 +20,7 @@ function SimpleButton(props){
 	 	if(!clicked){
 	 		setClicked(true)
 		 	if(props.disable){return false}
-		 	var scale = props.scale || 1.05
+		 	//var scale = props.scale || 1.05
 		   	console.log("clicked", props.id)
 		//    window.anime({
 		//       targets: "#"+props.id,

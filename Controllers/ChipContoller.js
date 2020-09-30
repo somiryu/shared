@@ -7,15 +7,15 @@ function ChipController(props){
     const [estado, setEstado] = useState({})
     useEffect(() => {
         props.chips.map(e=>{
-            aux[e.id]=false
+            return aux[e.id]=false
         })
         setEstado(aux)
-    }, [])
+    }, [props.chips])
 	const listener = (state) => {
         console.log("click")
         console.log(state[0].target.id)
         props.chips.map(e=>{
-            aux[e.id]=false
+            return aux[e.id]=false
         })
         console.log(aux)
         aux[state[0].target.id]=true
@@ -36,6 +36,7 @@ function ChipController(props){
                     active={estado[e.id]}
                     imageselect={props.imageChip}
                     imagenoselect={props.imageChipDeactivate}
+                    style ={{width: "224px",height: "78px",color: "black",fontSize: "28px",fontFamily: 'Squada One', paddingBottom:"10px"}}
                 ></Chip>
             )}
 		</div>

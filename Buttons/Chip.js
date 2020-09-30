@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import "../../shared/SimpleButton.css"
 
 function Chip(props){
-    const [active, setActive] = useState(props.active)
+    const [active] = useState(props.active)
     console.log("Boton")
     console.log(props)
     console.log(props.active)
@@ -30,13 +30,8 @@ function Chip(props){
     	<div 
     		id={props.id}
 			onClick={clickHandler}
-            style={{cursor:"pointer", display:"flex", alignItems:"flex-start", position:"relative", width:'100%',backgroundImage:props.imageselect,...style}}
+            style={{cursor:"pointer", display:"flex", alignItems: props.align || "center", justifyContent: props.justify || "center", position:"relative",backgroundImage: props.active ? "url("+props.imageselect+")": "url("+props.imagenoselect+")",...props.style}}
 		>
-            {/* { props.active ? 
-                <img src={props.imageselect}></img>
-                :
-                <img src={props.imagenoselect}></img>
-            } */}
 			{props.label}
 		</div>
     )
