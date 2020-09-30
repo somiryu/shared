@@ -1,107 +1,52 @@
-import React, {useState} from 'react'
-import ButtonMultiState from  '../shared/Buttons/ButtonMultiState'
-import ImageTest from "../shared/ExampleImages/Buttons/boton.png";
-import circ40 from "../shared/ExampleImages/Circ-40.png"
-import circ20 from "../shared/ExampleImages/Circ-20.png"
-import circ80 from "../shared/ExampleImages/Circ-80.png"
-import rec600 from "../shared/ExampleImages/rec-600.png"
-import circ200 from "../shared/ExampleImages/Circ-200.png"
-import ButtonCerrar from '../shared/ExampleImages/Buttons/cerrarVentana.png';
+import React from 'react'
 import Flex from "../shared/Containers/Flex"
-import ProgressBar from "../shared/Indicators/ProgressBar";
-import ButtonImage from "../shared/Buttons/ButtonImage"
 import ButtonImageWithLabel from "../shared/Buttons/ButtonImageWithLabel"
-import MaskedAvatar from "../shared/Hubs/MaskedAvatar"
 import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
-import ChipController from "../shared/Controllers/ChipContoller"
-import CaraInnos from "../shared/ExampleImages/Generic/caraInnos.png"
-import Dios from "../shared/ExampleImages/Hubs/dios.png"
-import PanelCloseTitleAndSubtitle from "../shared/Panels/PanelCloseTitleAndSubtitle"
+import ImagePanel from "../shared/Panels/ImagedPanel"
+import ContentSede from "../images/general/contasedejuego.png"
+import key from "../images/header/llaveheader.png"
+import ButtonImage from "../images/buttons/btnprincipal.png"
 
 
 
 function ProfileScreen(props) {
-    const [state1, setState1] = useState("off");
-    const handleClick=(i)=> {
-        console.log('Click ON =>', i);
-    }
     return (
-        <Flex align="center" direction="column" style={{marginTop:"10%",marginLeft:"10%",marginRight:"10%"}}>
-            <PanelCloseTitleAndSubtitle
-                id="pwbc6"
-                image={rec600}
-                imageRight={circ200}
-                imageClose={""}
-                buttons={[{ id: 'btn1', image: circ80, label: <h1>Hola</h1> }, { id: 'btn2', image:circ80, label: <h1>Hola2</h1> }, { id: 'btn3', image: circ80, label: <h1>Hola3</h1> }]}
-                onClick={(id) => handleClick(id)}
-                showSubtitle={true}
-                title={'Feedback'}
-                subtitle={'Lorem Ipsum is simply dummy text of the '}
-                debug={true}
-                listenerClose={() => console.log('Closed')}
-                children = {
-                    <CurrencyHorizontal
-                        quantity={30}
-                        image={circ20}
-                        displayX={true}
-                        id="counterfeed"
-                    ></CurrencyHorizontal>
-                }
-            >
-            </PanelCloseTitleAndSubtitle>
-            <div style={{marginTop:"10%"}}>
-                <ButtonImageWithLabel
-                    id={"inicio"}
-                    image={ImageTest}
-                    label={"Inicio"}
-                    listener={() =>{
-                        console.log("boton siguiente")
-                    }}
+        <Flex align="center" direction="column" style={{marginTop:"0%",marginLeft:"10%",marginRight:"10%"}}>
+            <Flex style={{width:"50%"}} align={"center"} direction={"column"}>
+                <ImagePanel
+                    image={ContentSede}
+                    padding={"6% 20%"}
+                    style={{width:"400px",}}
                 >
-                </ButtonImageWithLabel>
-            </div>
+                    <Flex style={{}} align={"center"} direction={"column"}>
+                        <h2>{props.title || "Titulo"}</h2>
+                        <p style={{ height:"100px",overflowX:"auto",color:"#F2C75C",paddingTop:"10px"}}>{props.legend || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."}</p>
+                        <div>
+                            <CurrencyHorizontal
+                                quantity={30}
+                                image={key}
+                                displayX={true}
+                                styleX={{padding: "5px",fontSize:"30px"}}
+                                styleImage={{transform: "rotate(330deg)"}}
+                                id="counterfeed"
+                            ></CurrencyHorizontal>
+                        </div>
+                        <div style={{display:"flex",justifyContent:"center", margin:"0 auto",width:props.widthButton || "100%"}}>
+                            <ButtonImageWithLabel
+                                id={props.buttonId || "firstbutton"}
+                                image={props.buttonImage || ButtonImage}
+                                label={props.buttonLabel || <label style={{fontWeight:"700",fontSize:"17px",height:"30px"}}>VOLVER</label>}
+                                listener={props.listener || console.log("hola soy un boton sin listener")}
+                            >
+                            </ButtonImageWithLabel>
+                        </div>
+                    </Flex>
+                </ImagePanel>
+            </Flex>
         </Flex>
     )
 }
 
 
-
-function Header(props){
-	return(
-        <div style={{width:"100%",height:"auto",backgroundColor:"rgba(5,5,5,0.3)"}}>
-            <Flex justify="space-around" align="center">
-                <Flex 
-                    direction="column" 
-                    margin="5%"
-                    style={{width:"auto",margin:"10px 30px"}}
-                >
-                    <h6 style={{margin:"0 auto"}}>Titulo titulo</h6>
-                    <ProgressBar
-                            percentage="30"
-                            // image={Bar}
-                            padding={'3%'}
-                            styleContainer={{width:"100px",border:"1px solid black",borderRadius:"10px",height:"10px"}}
-                    >
-                    </ProgressBar>
-                    <CurrencyHorizontal
-                        quantity={30}
-                        image={circ20}
-                        displayX={true}
-                        id="counterbar"
-                    ></CurrencyHorizontal>
-                </Flex>
-                <img src={ImageTest} width="40px" height="40px"></img>
-                <h3 style={{margin:"auto 0"}}>20 X 1.2</h3>
-                <ButtonImage
-					id="btn1"
-					image={circ40}
-					listener={(id) => { console.log("clicked", id) }}
-					scale={1.1} //1.1
-					style={{ margin: 10 }} // {}
-				/>
-            </Flex>
-        </div>
-	)
-}
 
 export default ProfileScreen;

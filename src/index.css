@@ -36,10 +36,10 @@ a{text-decoration: none}
 h1,h2,h3,h4,h5,h6{
     margin: 0;
     color: #EAAB1C;
-    font-family: 'Source Serif Pro', serif;
+    font-family:'Squada One', cursive;
 }
 p{
-    font-family:'Squada One', cursive;
+    font-family: 'Source Serif Pro', serif;
     color:#FFFAF0;
 }
 
@@ -53,6 +53,12 @@ label{
     color: black;
     font-family: 'Source Serif Pro', serif;
     font-size: 28px
+}
+
+input::placeholder {
+    color: #AB8745;
+    font-size: 1.2em;
+    font-family: 'Source Serif Pro', serif;
 }
 body {
     font-size: 100%;

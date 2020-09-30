@@ -1,11 +1,9 @@
 import React,{useState} from 'react';
-import {BrowserRouter ,Redirect, Route, Switch } from "react-router-dom";
+// import {BrowserRouter ,Redirect, Route, Switch } from "react-router-dom";
 import './App.css';
 import Header from '../src/views/layout/Header'
 import Components from '../src/shared/Components'
-import Screen from './views/Screen'
 import StartScreen from "./views/StartScreen"
-import ImageTest from "../src/shared/ExampleImages/Buttons/boton.png";
 import LegendScreen from "./views/LegendScreen"
 import MapScreen from "./views/MapScreen"
 import ProfileScreen from "./views/ProfileScreen"
@@ -13,14 +11,13 @@ import SedeScreen from "./views/SedeScreen"
 import RolProfileScreen from "./views/RolProfileScreen"
 import QuestionScreen from "./views/QuestionScreen"
 import FeedBackScreen from "./views/FeedBackScreen"
-import QuestionBarScreen from "./views/QuestionBarScreen"
-import QuestionWithTitleScreen from "./views/QuestionWithTitleScreen"
+// import QuestionBarScreen from "./views/QuestionBarScreen"
+// import QuestionWithTitleScreen from "./views/QuestionWithTitleScreen"
 import fondo from "./images/general/fondopatron.png"
 import PlayArea from "./shared/PlayArea"
 function App() {
-  const [layout, setLayout] = useState("Mapa")
-  const [sabios, setSabios] = useState({})
-  const [secondaryBg, setSecondaryBg] = useState(true)
+  const [layout] = useState("Mapa")
+  const [secondaryBg] = useState(true)
   let addClass;
   if (layout === "Mapa" || layout === "EndGame" || layout === "BeginGame") addClass = "SkyBackground";
   if (layout === "GameLayout" || layout === "Book") addClass = "PurpleBackground";
@@ -28,7 +25,7 @@ function App() {
   if (layout === "GameLayout" && secondaryBg) addClass = "PurpleBackground";
   const bgClass = "App " + addClass;
   return (
-    <div className={bgClass, "general"}  style={{ overflow: "hidden", backgroundImage:fondo}} >
+    <div className={bgClass+` general`}  style={{ overflow: "hidden", backgroundImage:fondo}}>
         {layout === "Componentes" && 
           <Components>
           </Components>
@@ -54,9 +51,21 @@ function App() {
           <ProfileScreen>
           </ProfileScreen>
         }
-        {layout === "Header" &&
-          <Header>
-          </Header>
+        {layout === "Sede" &&
+          <SedeScreen>
+          </SedeScreen>
+        }
+        {layout === "Rol" &&
+          <RolProfileScreen>
+          </RolProfileScreen>
+        }
+        {layout === "Question" &&
+          <QuestionScreen>
+          </QuestionScreen>
+        }
+        {layout === "Feedback" &&
+          <FeedBackScreen>
+          </FeedBackScreen>
         }
       </PlayArea>
     </div>

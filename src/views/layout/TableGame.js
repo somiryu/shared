@@ -1,19 +1,16 @@
 import React,{useState} from "react";
-import ImageTest from "../../shared/ExampleImages/Buttons/boton.png";
-import circ80 from "../../shared/ExampleImages/Circ-80.png"
-import circ40 from "../../shared/ExampleImages/Circ-40.png"
 import circ20 from "../../shared/ExampleImages/Circ-20.png"
-import sq80 from "../../shared/ExampleImages/Circ-20.png"
-import Absolute from "../../shared/Containers/Absolute"
 import Flex from "../../shared/Containers/Flex"
-import ProgressBar from "../../shared/Indicators/ProgressBar";
-import ButtonImage from "../../shared/Buttons/ButtonImage"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
 import ButtonMultiState from  '../../shared/Buttons/ButtonMultiState'
 import ImagePanel from "../../shared/Panels/ImagedPanel"
 import gameZone from "../../images/general/contajuego.png"
 import copa from "../../images/Iconos/incopa.png"
 import villavicencio from "../../images/Iconos/inescudovilla.png"
+import incerebrodificil from "../../images/Iconos/incerebrodificil.png" 
+import key from "../../images/header/llaveheader.png" 
+import timer from "../../images/Iconos/inretry.png" 
+import door from "../../images/Iconos/inpuerta.png" 
 
 
 function TableGame(props){
@@ -25,7 +22,7 @@ function TableGame(props){
             <Flex direction="column" align="center" style={{backgroundColor:"rgba(5,5,5,0.3)",borderRadius:"20px",width:"100%",padding: "10px",height:"100%"}}>
                 <Flex align={"center"}>
                     <Flex align="center" style={{}}>
-                        <img src={villavicencio} ></img>
+                        <img alt="cerebro"src={incerebrodificil} ></img>
                     </Flex>
                     <Flex style={{margin:"10px 10px"}}align="center">
                         <h5>{props.title || "NOMBRE SEDE"} - {props.city || "CIUDAD"}</h5>
@@ -34,7 +31,7 @@ function TableGame(props){
                 <Flex style={{justifyContent:"space-around",width:"100%"}} align="center">
                     <Flex direction={"column"} align={"center"}>
                         <Flex>
-                            <img src={villavicencio} ></img>
+                            <img alt="shell" src={villavicencio} ></img>
                         </Flex>
                         <Flex>
                             <h5>{props.city || "Ciudad"}</h5>
@@ -42,7 +39,7 @@ function TableGame(props){
                     </Flex>
                     <Flex direction={"column"} align={"center"}>
                         <Flex>
-                            <img src={circ20} ></img>
+                            <img alt="placelogo" src={circ20} ></img>
                         </Flex>
                         <Flex>
                             <h5>20 x 1.2</h5>
@@ -63,7 +60,7 @@ function TableGame(props){
                     <Flex>
                         <CurrencyHorizontal
                             quantity={30}
-                            image={circ20}
+                            image={key}
                             displayX={true}
                             id="counterNumber"
                             direction ="column"
@@ -77,10 +74,10 @@ function TableGame(props){
                                 id="btn2"
                                 state={state1}
                                 scale={1.2} //1.1
-                                images={{ off:sq80, on:circ80, nata:circ40 }}
+                                images={{ off:door, on:door }}
                                 listeners={{
                                     off: () => { setState1("on") },
-                                    on: () => { setState1("nata") },
+                                    on: () => { setState1("off") },
                                 }}
                                 styles={{ off: { filter: "grayscale(100%)" } }}
                             >
@@ -93,7 +90,7 @@ function TableGame(props){
                     <div >
                         <CurrencyHorizontal
                             quantity={30}
-                            image={circ20}
+                            image={timer}
                             //displayX={true}
                             id="counterArrows"
                             direction ="column"
