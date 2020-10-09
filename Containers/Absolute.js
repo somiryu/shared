@@ -4,7 +4,6 @@
 //style = {textAlign: 'center', ...}
 //children (optional)
 import React from 'react'
-import '../../views/layouts/Mapa.css';
 export default function Absolute(props) {
     let styleAbs = {
         position: 'absolute',
