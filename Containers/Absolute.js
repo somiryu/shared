@@ -4,7 +4,7 @@
 //style = {textAlign: 'center', ...}
 //children (optional)
 import React from 'react'
-
+import '../../views/layouts/Mapa.css';
 export default function Absolute(props) {
     let styleAbs = {
         position: 'absolute',
@@ -13,7 +13,7 @@ export default function Absolute(props) {
         right: props.right || 0
     }
     return (
-        <div style={{...styleAbs, ...props.style}}>
+        <div id={props.id} className={window.DEBUG ? 'testBox' : ''} style={{...styleAbs, ...props.style}} onClick={props.listener ? () => props.listener(props.id) : () => {} }>
             {props.children}
         </div>
     )
