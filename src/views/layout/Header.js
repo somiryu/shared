@@ -1,5 +1,4 @@
 import React from "react";
-import circ40 from "../../shared/ExampleImages/Circ-40.png"
 import circ20 from "../../shared/ExampleImages/Circ-20.png"
 import Flex from "../../shared/Containers/Flex"
 import ProgressBar from "../../shared/Indicators/ProgressBar";
@@ -9,6 +8,7 @@ import ImagedPanel from "../../shared/Panels/ImagedPanel";
 import header629 from "../../images/header/contaheader.png"
 import Bar from "../../images/header/barraheader.png"
 import key from "../../images/header/llaveheader.png"
+import btnlideres from "../../images/buttons/btnlideres.png"
 import "./header.css"
 
 function Header(props) {
@@ -17,7 +17,7 @@ function Header(props) {
             <ImagedPanel
                 id="tiP1"
                 image={header629}
-                debug={true} //testBox appears
+                debug={false} //testBox appears
                 padding="5%" //5%
             >
                 <Flex
@@ -85,7 +85,7 @@ function Header(props) {
                     >
                         <ButtonImage
                             id="btn1"
-                            image={circ40}
+                            image={btnlideres}
                             listener={(id) => { console.log("clicked", id) }}
                             scale={1.1} //1.1
                             style={{ margin: 10 }} // {}
