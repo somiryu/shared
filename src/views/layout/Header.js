@@ -13,7 +13,7 @@ import "./header.css"
 
 function Header(props) {
     return (
-        <Flex  style={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", zIndex: "999",marginTop:"-30px"}}>
+        <Flex  className="header" style={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", zIndex: "999"}}>
             <ImagedPanel
                 id="tiP1"
                 image={header629}
@@ -21,32 +21,33 @@ function Header(props) {
                 padding="5%" //5%
             >
                 <Flex
-                    style={{ width: '100%',marginTop: "2%" }}
+                    style={{ width: '100%',height: '100%',marginTop: "2%" }}
                     align='center'
                     justify='center'  
                 >
                     <Flex
-                        className="de"
+                        className=""
                         direction="column"
                         margin="5%"
                         align='center'
                         justify='center'
-                        style={{ width: "45%" }}
+                        style={{ width: "40%",height: '100%' }}
                     >
-                        <div>
-                            <h3 style={{ textAlign:'center', padding:'5px 0px' }}>Titulo titulo</h3>
+                        <div className="source">
+                            <h3 style={{ textAlign:'center', padding:'5px 0px' }}>{props.titleBar ? props.titleBar:"Nivel 1" }</h3>
                         </div>
                         <div>
                             <ProgressBar
                                 percentage="30"
                                 image={Bar}
                                 padding={'3%'}
-                                styleContainer={{ width: "100px", height: "15px" }}
+                                styleContainer={{ width: "100%", height: "80%" }}
                             >
                             </ProgressBar>
                         </div>
                         <div>
                             <CurrencyHorizontal
+                                className="source"
                                 quantity={30}
                                 image={key}
                                 displayX={true}
@@ -56,32 +57,35 @@ function Header(props) {
                         </div>
                     </Flex>
                     <Flex
-                        className="de"
+                        className=""
                         margin="5%"
                         justify='center'
                         align='center'
-                        style={{ width: "35%" }}
+                        style={{ width: "30%",height: '100%' }}
                     >
                         <Flex>
                             <CurrencyHorizontal
+                                className="source"
                                 quantity={30}
                                 image={circ20}
-                                displayX={true}
+                                displayX={false}
                                 id="middleContent"
                             ></CurrencyHorizontal>
                         </Flex>
 
-                        <Flex>
-                            <h3>x 1.2</h3>
+                        <Flex
+                            className="source"
+                        >
+                            <h3 style={{fontSize: "29px"}}>X{props.multiplicator ? props.multiplicator : "1.2"}</h3>
                         </Flex>
                     </Flex>
                     <Flex
-                        className="de"
+                        className=""
                         direction="column"
                         margin="5%"
                         align='center'
                         justify='center'
-                        style={{  width: "auto" }}
+                        style={{  width: "30%",height: '100%' }}
                     >
                         <ButtonImage
                             id="btn1"

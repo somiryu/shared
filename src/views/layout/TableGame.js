@@ -4,23 +4,26 @@ import Flex from "../../shared/Containers/Flex"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
 import ButtonMultiState from  '../../shared/Buttons/ButtonMultiState'
 import ImagePanel from "../../shared/Panels/ImagedPanel"
-import gameZone from "../../images/general/contajuego.png"
+//import gameZone from "../../images/general/contajuego.png"
 import copa from "../../images/Iconos/incopa.png"
 import villavicencio from "../../images/Iconos/inescudovilla.png"
 import incerebrodificil from "../../images/Iconos/incerebrodificil.png" 
 import key from "../../images/header/llaveheader.png" 
 import timer from "../../images/Iconos/inretry.png" 
-import door from "../../images/Iconos/inpuerta.png" 
+import door from "../../images/Iconos/inpuerta.png"
+import containformacion from "../../images/general/containformacion.png"
 
 
 function TableGame(props){
     const [state1, setState1] = useState("off");
 	return(
         <ImagePanel
-            image={gameZone}
-            padding="0%">
+            image={containformacion}
+            padding="0%"
+            style={{width:"280px",height:"290px"}}
+            >
             <Flex direction="column" align="center" style={{backgroundColor:"rgba(5,5,5,0.3)",borderRadius:"20px",width:"100%",padding: "10px",height:"100%"}}>
-                <Flex align={"center"}>
+                <Flex align={"center"} style={{position:"relative",top:"-15px",width:"100%"}}>
                     <Flex align="center" style={{}}>
                         <img alt="cerebro"src={incerebrodificil} ></img>
                     </Flex>
@@ -28,15 +31,15 @@ function TableGame(props){
                         <h5>{props.title || "NOMBRE SEDE"} - {props.city || "CIUDAD"}</h5>
                     </Flex>
                 </Flex>
-                <Flex style={{justifyContent:"space-around",width:"100%"}} align="center">
-                    <Flex direction={"column"} align={"center"}>
-                        <Flex>
-                            <img alt="shell" src={villavicencio} ></img>
-                        </Flex>
-                        <Flex>
-                            <h5>{props.city || "Ciudad"}</h5>
-                        </Flex>
+                <Flex direction={"column"} align={"center"} style={{position:"relative",top:"-8px",width:"100%"}}>
+                    <Flex>
+                        <img alt="shell" src={villavicencio} ></img>
                     </Flex>
+                    <Flex style={{marginBottom:"4px"}}>
+                        <h5>{props.city || "Ciudad"}</h5>
+                    </Flex>
+                </Flex>
+                <Flex style={{justifyContent:"space-around",width:"100%",position:"relative",top:"16px"}} align="center">
                     <Flex direction={"column"} align={"center"}>
                         <Flex>
                             <img alt="placelogo" src={circ20} ></img>
@@ -48,25 +51,26 @@ function TableGame(props){
                     <Flex>
                         <CurrencyHorizontal
                             quantity={30}
+                            image={key}
+                            displayX={true}
+                            styleImage={{transform: "rotate(330deg)"}}
+                            id="counterNumber"
+                            direction ="column"
+                            fontSize = "1em"
+                        >
+                        </CurrencyHorizontal>
+                    </Flex>
+                </Flex>
+                <Flex  style={{justifyContent:"space-around",width:"100%",position:"relative",top:"25px"}} align="center">
+                    <Flex>
+                        <CurrencyHorizontal
+                            quantity={30}
                             image={copa}
                             //displayX={true}
                             id="counterCup"
                             direction ="column"
                             fontSize = "1em"
                         ></CurrencyHorizontal>
-                    </Flex>
-                </Flex>
-                <Flex  style={{justifyContent:"space-around",width:"100%"}} align="center">
-                    <Flex>
-                        <CurrencyHorizontal
-                            quantity={30}
-                            image={key}
-                            displayX={true}
-                            id="counterNumber"
-                            direction ="column"
-                            fontSize = "1em"
-                        >
-                        </CurrencyHorizontal>
                     </Flex>
                     <Flex direction={"column"} align={"center"} >
                         <Flex>
@@ -93,6 +97,7 @@ function TableGame(props){
                             image={timer}
                             //displayX={true}
                             id="counterArrows"
+                            styleImage={{width: "28px"}}
                             direction ="column"
                             fontSize = "1em"
                         ></CurrencyHorizontal>

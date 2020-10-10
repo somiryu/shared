@@ -66,7 +66,7 @@ function SedeScreen(props) {
                     label={<label style={{color:'#fff'}}>Profesora</label>}
                     pointer={true}
                     listener={() => console.log('Clicked MarkedAvatar')}
-                    leftLabel={"48%"}
+                    leftLabel={"-1%"}
                     topLabel={"75%"}
                     >
                     </MaskedAvatarWithTitle>
@@ -102,7 +102,7 @@ function SedeScreen(props) {
                         label={<label style={{color:'#fff'}}>Secretaria</label>}
                         pointer={true}
                         listener={() => console.log('Clicked MarkedAvatar')}
-                        leftLabel={"48%"}
+                        leftLabel={"-1%"}
                         topLabel={"75%"}
                         >
                     </MaskedAvatarWithTitle>
@@ -138,7 +138,7 @@ function SedeScreen(props) {
                     label={<label style={{color:'#fff'}}>Fraile</label>}
                     pointer={true}
                     listener={() => console.log('Clicked MarkedAvatar')}
-                    leftLabel={"48%"}
+                    leftLabel={"-1%"}
                     topLabel={"75%"}
                     >
                     </MaskedAvatarWithTitle>
@@ -174,7 +174,7 @@ function SedeScreen(props) {
                         label={<label style={{color:'#fff'}}>Estudiante</label>}
                         pointer={true}
                         listener={() => console.log('Clicked MarkedAvatar')}
-                        leftLabel={"48%"}
+                        leftLabel={"-1%"}
                         topLabel={"75%"}
                         >
                     </MaskedAvatarWithTitle>
