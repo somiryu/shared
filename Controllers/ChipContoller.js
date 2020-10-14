@@ -36,7 +36,8 @@ function ChipController(props){
                     active={estado[e.id]}
                     imageselect={props.imageChip}
                     imagenoselect={props.imageChipDeactivate}
-                    style ={{width: "224px",height: "78px",color: "black",fontSize: "28px",fontFamily: 'Squada One', paddingBottom:"10px"}}
+                    style ={{width: "224px",height: "78px",color: "black",fontSize: "28px",fontFamily: 'Squada One', paddingBottom:"10px",...props.styleChips}}
+                    styleActivate={{...props.styleActivate}}
                 ></Chip>
             )}
 		</div>
