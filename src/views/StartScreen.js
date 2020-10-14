@@ -25,7 +25,10 @@ function StartScreen(props) {
                     button={{id:"button",label:<label style={{fontWeight:"700",fontSize:"21px",height:"30px"}}>INGRESAR</label>, image:button,}}
                     idForm={"formstart"}
                     styles={{width:"auto",minHeight:"450px",padding:"10px",alignItems:"center"}}
-                    listener={(dic)=>{console.log(dic)}}
+                    listener={(dic)=>{
+                        console.log(dic);
+                        props.listener(1);
+                    }}
                 />
             </Flex>
         </div>

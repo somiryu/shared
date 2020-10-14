@@ -7,6 +7,8 @@ import logomapa from "../images/logos/logoaniosmapa.png"
 import logoacreditacion from "../images/logos/logoacreditacionmapa.png"
 import inportalvillamapa from "../images/Iconos/inportalvillamapa.png"
 import inescudovilla from "../images/Iconos/inescudovilla.png"
+import contatiempoactivo from "../images/buttons/contatiempoactivo.png"
+import userEvent from '@testing-library/user-event'
 
 function MapScreen(props) {
     const [screen] = useState(window.screen.width)
@@ -64,7 +66,7 @@ function MapScreen(props) {
                 </ImagePanel>
                 { screen>800 &&
                     <div>
-                        <TableGame></TableGame>
+                        <TableGame listener={props.listener}></TableGame>
                     </div>
                 }
             </div>
@@ -73,6 +75,7 @@ function MapScreen(props) {
                     <TableGame></TableGame>
                 </div>
             }
+            {/* <Timer seconds={59}/>  */}
         </div>        
     )
 }
@@ -89,7 +92,7 @@ function Portal(props){
         right: props.right || 0
     }
 	return(
-        <div style={{...stylePortal}} onClick={props.listener}>
+        <div style={{...stylePortal}} onClick={props.handlePortal}>
             <Absolute style={{width:"40px",height:"40px",borderRadius:"50%",backgroundColor:"pink",top:"10px"}}>
             </Absolute>
             <Absolute style={{width:"20px",height:"20px",borderRadius:"50%",backgroundColor:"", left: "60%",top: "60%"}}>
@@ -98,12 +101,40 @@ function Portal(props){
             <Absolute style={{width:"20px",height:"20px",borderRadius:"50%",backgroundColor:"",top: "60%",right:"80%", left:"auto"}}>
                 <img alt="portal2" src={props.portal}></img>
             </Absolute>
-            <Absolute style={{top:"90%",right: "15%",borderRadius:"10px",border:"1px solid",textAlign:"center",color: "black"}}>
+            <Absolute style={{top:"90%",right: "15%",borderRadius:"10px",border:"1px solid",textAlign:"center",color: "black",backgroundImage:"url("+contatiempoactivo+")"}}>
                 <h6 style={{margin:"0px"}}>{"00:00:00"}</h6> 
-            </Absolute>  
+            </Absolute> 
         </div>
 	)
 }
+
+var time = {
+    segundos:0,
+    minutos:0,
+    horas:0
+}
+
+function Timer(props){
+    const [seconds, setSeconds] = useState(props.seconds || 0)
+    const [minutes, setMinutes] = useState(props.minutes || 0)
+    const [hours, setHours] = useState(props.hours || 0)
+    while(seconds > 0 ){
+        if(seconds !== 0){
+            console.log("entre al if")
+            let i = seconds;
+            while( i > 1){
+                console.log(i);
+                i=i-1;
+                setTimeout(console.log("un segundo"),1000);
+            }      
+        }     
+    }
+    
+    return(<h1>{seconds}</h1>)
+    
+}
+
+
 
 
 export default MapScreen;

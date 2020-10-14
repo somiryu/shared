@@ -17,9 +17,12 @@ import ButtonImage from "./shared/Buttons/ButtonImage"
 import fondo from "./images/general/fondopatron.png"
 import PlayArea from "./shared/PlayArea"
 function App() {
-  const [layout,setLayout] = useState("Mapa")
+  const [layout,setLayout] = useState("Profile")
   const [secondaryBg] = useState(true)
   let pages =["Register","Legend","Mapa","Profile","Sede","Rol","Question","Feedback"]
+  const listener = (indice) =>{
+    setLayout(pages[indice])
+  }
   let addClass;
   if (layout === "Mapa" || layout === "EndGame" || layout === "BeginGame") addClass = "SkyBackground";
   if (layout === "GameLayout" || layout === "Book") addClass = "PurpleBackground";
@@ -55,35 +58,40 @@ function App() {
         }
        
         {layout === "Register" &&
-          <StartScreen>
+          <StartScreen
+            listener = {listener}
+          >
+
           </StartScreen>
         }
         {layout === "Legend" &&
-          <LegendScreen>
+          <LegendScreen
+            listener = {listener}
+          >
           </LegendScreen>
         }
          {layout === "Mapa" &&
-          <MapScreen>
+          <MapScreen listener = {listener}>
           </MapScreen>
         }
         {layout === "Profile" &&
-          <ProfileScreen>
+          <ProfileScreen listener = {listener}>
           </ProfileScreen>
         }
         {layout === "Sede" &&
-          <SedeScreen>
+          <SedeScreen listener = {listener}>
           </SedeScreen>
         }
         {layout === "Rol" &&
-          <RolProfileScreen>
+          <RolProfileScreen listener = {listener}>
           </RolProfileScreen>
         }
         {layout === "Question" &&
-          <QuestionScreen>
+          <QuestionScreen listener = {listener}>
           </QuestionScreen>
         }
         {layout === "Feedback" &&
-          <FeedBackScreen>
+          <FeedBackScreen listener = {listener}>
           </FeedBackScreen>
         }
       </PlayArea>

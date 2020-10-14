@@ -9,8 +9,8 @@ import MaskedAvatar from "../shared/Hubs/MaskedAvatar"
 import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
 import ChipController from "../shared/Controllers/ChipContoller"
 import CaraInnos from "../shared/ExampleImages/Generic/caraInnos.png"
-import button from "../images/buttons/btnprincipal.png"
-import buttonDeactivate from "../images/buttons/btnprincipalactivo.png"
+import buttonDeactivate from "../images/buttons/btnprincipal.png"
+import button from "../images/buttons/btnprincipalactivo.png"
 import contaavatar from "../images/general/contaavatar.png"
 import contaperfil from "../images/general/contaperfil.png"
 import ImagePanel from "../shared/Panels/ImagedPanel"
@@ -23,6 +23,8 @@ function ProfileScreen(props) {
                 imageChip={button}
                 imageChipDeactivate ={buttonDeactivate}
                 chips={[{id:"Perfil",label:"Perfil"},{id:"Regional",label:"Regional"},{id:"Cofradia",label:"Cofradia"}]}
+                styleChips={{fontFamily:'Source Serif Pro'}}
+                styleActivate={{color:"#EAAB1C"}}
             ></ChipController>
             <ImagePanel
                 image={contaperfil}

@@ -23,12 +23,12 @@ function TableGame(props){
             style={{width:"280px",height:"290px"}}
             >
             <Flex direction="column" align="center" style={{backgroundColor:"rgba(5,5,5,0.3)",borderRadius:"20px",width:"100%",padding: "10px",height:"100%"}}>
-                <Flex align={"center"} style={{position:"relative",top:"-15px",width:"100%"}}>
+                <Flex align={"center"} style={{position:"relative",top:"-22px",width:"100%"}}>
                     <Flex align="center" style={{}}>
                         <img alt="cerebro"src={incerebrodificil} ></img>
                     </Flex>
                     <Flex style={{margin:"10px 10px"}}align="center">
-                        <h5>{props.title || "NOMBRE SEDE"} - {props.city || "CIUDAD"}</h5>
+                        <h5 style={{fontFamily:'Source Serif Pro'}}>{props.title || "NOMBRE SEDE"} - {props.city || "CIUDAD"}</h5>
                     </Flex>
                 </Flex>
                 <Flex direction={"column"} align={"center"} style={{position:"relative",top:"-8px",width:"100%"}}>
@@ -36,7 +36,7 @@ function TableGame(props){
                         <img alt="shell" src={villavicencio} ></img>
                     </Flex>
                     <Flex style={{marginBottom:"4px"}}>
-                        <h5>{props.city || "Ciudad"}</h5>
+                        <h5 style={{fontFamily:'Source Serif Pro'}}>{props.city || "Ciudad"}</h5>
                     </Flex>
                 </Flex>
                 <Flex style={{justifyContent:"space-around",width:"100%",position:"relative",top:"16px"}} align="center">
@@ -45,7 +45,7 @@ function TableGame(props){
                             <img alt="placelogo" src={circ20} ></img>
                         </Flex>
                         <Flex>
-                            <h5>20 x 1.2</h5>
+                            <h5 style={{fontFamily:'Source Serif Pro'}}>20 x 1.2</h5>
                         </Flex>
                     </Flex>
                     <Flex>
@@ -80,15 +80,15 @@ function TableGame(props){
                                 scale={1.2} //1.1
                                 images={{ off:door, on:door }}
                                 listeners={{
-                                    off: () => { setState1("on") },
-                                    on: () => { setState1("off") },
+                                    off: () => { setState1("on"); props.listener(3);},
+                                    on: () => { setState1("off")},
                                 }}
                                 styles={{ off: { filter: "grayscale(100%)" } }}
                             >
                             </ButtonMultiState>
                         </Flex>
                         <div>
-                            <h5>{props.count||"00:00:00"}</h5>
+                            <h5 style={{fontFamily:'Source Serif Pro'}}>{props.count||"00:00:00"}</h5>
                         </div>
                     </Flex>
                     <div >

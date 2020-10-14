@@ -16,15 +16,18 @@ function LegendScreen(props) {
                     props.title
                 }
                 <div>
-                    <img alt={"logo"} src={imageTitle} style={{width:"100%",padding:"5px"}}></img>
+                    <img alt={"logo"} src={imageTitle} style={{width:"100%",padding:"10px"}}></img>
                 </div> 
-                {props.legend || <p style={{textAlign:"center",padding:"5px"}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>}
+                {props.legend || <p style={{textAlign:"center",padding:"25px"}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>}
                 <div style={{display:"flex",justifyContent:"center", margin:"0 auto",width:props.widthButton || "auto p"}}>
                     <ButtonImageWithLabel
                         id={props.buttonId || "firstbutton"}
                         image={props.buttonImage || button}
-                        label={props.buttonLabel || <label style={{fontWeight:"900"}}>INGRESAR</label>}
-                        listener={props.listener || console.log("hola soy un boton sin listener")}
+                        label={props.buttonLabel || <label style={{fontWeight:"900",fontSize: "25px"}}>INGRESAR</label>}
+                        listener={() =>{
+                            props.listener(2)
+                        }}
+                        
                     >
                     </ButtonImageWithLabel>
                 </div>
