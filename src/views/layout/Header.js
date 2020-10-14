@@ -51,9 +51,11 @@ function Header(props) {
                                 quantity={30}
                                 image={key}
                                 displayX={true}
-                                styleX={{fontSize: "30px", padding:"0 5px"}}
+                                styleX={{fontSize: "23px", padding:"0 5px"}}
+                                childStyle={{fontSize: "23px"}}
                                 id="counterbar"
                                 idX="xcounterbar"
+                                styleBox={{display:"flex"}}
                             ></CurrencyHorizontal>
                         </Flex>
                     </Flex>
@@ -71,13 +73,15 @@ function Header(props) {
                                 image={circ20}
                                 displayX={false}
                                 id="middleContent"
+                                childStyle={{fontSize: "23px"}}
+                                styleBox={{display:"flex"}}
                             ></CurrencyHorizontal>
                         </Flex>
 
                         <Flex
                             className="source"
                         >
-                            <h3 style={{fontSize: "29px"}}>X{props.multiplicator ? props.multiplicator : "1.2"}</h3>
+                            <h3 style={{fontSize: "23px"}}>X{props.multiplicator ? props.multiplicator : "1.2"}</h3>
                         </Flex>
                     </Flex>
                     <Flex
