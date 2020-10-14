@@ -30,8 +30,9 @@ function Chip(props){
     	<div 
     		id={props.id}
 			onClick={clickHandler}
-            style={{cursor:"pointer", display:"flex", alignItems: props.align || "center", justifyContent: props.justify || "center", position:"relative",backgroundImage: props.active ? "url("+props.imageselect+")": "url("+props.imagenoselect+")",...props.style}}
+            style={{cursor:"pointer", display:"flex", alignItems: props.align || "center", justifyContent: props.justify || "center", position:"relative",...props.style}}
 		>
+            <img style={{position:"absolute",width:'100%'}} src={props.active ? props.imageselect: props.imagenoselect} alt='background' ></img>
 			{props.label}
 		</div>
     )
