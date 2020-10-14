@@ -11,13 +11,14 @@ import SedeScreen from "./views/SedeScreen"
 import RolProfileScreen from "./views/RolProfileScreen"
 import QuestionScreen from "./views/QuestionScreen"
 import FeedBackScreen from "./views/FeedBackScreen"
-import ButtonImage from "./shared/Buttons/ButtonImage"
+// import ButtonImage from "./shared/Buttons/ButtonImage"¡
 // import QuestionBarScreen from "./views/QuestionBarScreen"
 // import QuestionWithTitleScreen from "./views/QuestionWithTitleScreen"
 import fondo from "./images/general/fondopatron.png"
 import PlayArea from "./shared/PlayArea"
+window.DEBUG = true;
 function App() {
-  const [layout,setLayout] = useState("Profile")
+  const [layout,setLayout] = useState("Feedback")
   const [secondaryBg] = useState(true)
   let pages =["Register","Legend","Mapa","Profile","Sede","Rol","Question","Feedback"]
   const listener = (indice) =>{
