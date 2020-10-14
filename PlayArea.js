@@ -12,7 +12,7 @@ export default (props) =>{
 		margin: "auto",
 		padding: (props.padding || 0) + "%",
 		maxWidth: "100%", 
-		minHeight: "100vh"
+		minHeight: "110vh"
 	}
 		
 
