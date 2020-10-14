@@ -33,10 +33,10 @@ function Header(props) {
                         justify='center'
                         style={{ width: "40%",height: '100%' }}
                     >
-                        <div className="source">
+                        <Flex className="source" style={{height:'33%'}}>
                             <h3 style={{ textAlign:'center', padding:'5px 0px' }}>{props.titleBar ? props.titleBar:"Nivel 1" }</h3>
-                        </div>
-                        <div>
+                        </Flex>
+                        <Flex style={{height:'33%'}}>
                             <ProgressBar
                                 percentage="30"
                                 image={Bar}
@@ -44,17 +44,18 @@ function Header(props) {
                                 styleContainer={{ width: "100%", height: "80%" }}
                             >
                             </ProgressBar>
-                        </div>
-                        <div>
+                        </Flex>
+                        <Flex style={{height:'33%', width:'50%'}}>
                             <CurrencyHorizontal
                                 className="source"
                                 quantity={30}
                                 image={key}
                                 displayX={true}
-                                styleX={{fontSize: "30px", padding:"5px"}}
+                                styleX={{fontSize: "30px", padding:"0 5px"}}
                                 id="counterbar"
+                                idX="xcounterbar"
                             ></CurrencyHorizontal>
-                        </div>
+                        </Flex>
                     </Flex>
                     <Flex
                         className=""

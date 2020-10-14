@@ -56,7 +56,7 @@ function SedeScreen(props) {
                     id="colaborador2"
                     avatar={Avatar}
                     containerImage={contapersonajes}
-                    padding={12}
+                    padding={'20%'}
                     paddingLabel={5}
                     maskBorder={100}
                     imageTitle={Colaborador}
@@ -92,7 +92,7 @@ function SedeScreen(props) {
                         id="colaborador3"
                         avatar={Avatar}
                         containerImage={contapersonajes}
-                        padding={12}
+                        padding={20}
                         paddingLabel={5}
                         maskBorder={100}
                         imageTitle={Colaborador}

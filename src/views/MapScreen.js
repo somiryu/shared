@@ -8,7 +8,6 @@ import logoacreditacion from "../images/logos/logoacreditacionmapa.png"
 import inportalvillamapa from "../images/Iconos/inportalvillamapa.png"
 import inescudovilla from "../images/Iconos/inescudovilla.png"
 import contatiempoactivo from "../images/buttons/contatiempoactivo.png"
-import userEvent from '@testing-library/user-event'
 
 function MapScreen(props) {
     const [screen] = useState(window.screen.width)
@@ -108,31 +107,31 @@ function Portal(props){
 	)
 }
 
-var time = {
-    segundos:0,
-    minutos:0,
-    horas:0
-}
+// var time = {
+//     segundos:0,
+//     minutos:0,
+//     horas:0
+// }
 
-function Timer(props){
-    const [seconds, setSeconds] = useState(props.seconds || 0)
-    const [minutes, setMinutes] = useState(props.minutes || 0)
-    const [hours, setHours] = useState(props.hours || 0)
-    while(seconds > 0 ){
-        if(seconds !== 0){
-            console.log("entre al if")
-            let i = seconds;
-            while( i > 1){
-                console.log(i);
-                i=i-1;
-                setTimeout(console.log("un segundo"),1000);
-            }      
-        }     
-    }
+// function Timer(props){
+//     const [seconds, setSeconds] = useState(props.seconds || 0)
+//     const [minutes, setMinutes] = useState(props.minutes || 0)
+//     const [hours, setHours] = useState(props.hours || 0)
+//     while(seconds > 0 ){
+//         if(seconds !== 0){
+//             console.log("entre al if")
+//             let i = seconds;
+//             while( i > 1){
+//                 console.log(i);
+//                 i=i-1;
+//                 setTimeout(console.log("un segundo"),1000);
+//             }      
+//         }     
+//     }
     
-    return(<h1>{seconds}</h1>)
+//     return(<h1>{seconds}</h1>)
     
-}
+// }
 
 
 
