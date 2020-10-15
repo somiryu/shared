@@ -1,0 +1,10 @@
+.lbItem{
+	display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap
+}
+.lbItem .lb_player{flex: 1;margin: 10px;}
+.lbItem .lb_points{flex: 1;margin: 10px;}
+.lbItem .lb_position{margin: 15px;}
+.lbItem .lb_position img{display:block;margin:auto;}
+@media (max-width: 380px){
+	.lbItem .lb_position{width:100%;}
+}
