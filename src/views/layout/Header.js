@@ -31,16 +31,16 @@ function Header(props) {
                         margin="5%"
                         align='center'
                         justify='center'
-                        style={{ width: "40%",height: '100%' }}
+                        style={{ width: "40%",height: '80%' }}
                     >
                         <Flex className="source" style={{height:'33%'}}>
-                            <h3 style={{ textAlign:'center', padding:'5px 0px' }}>{props.titleBar ? props.titleBar:"Nivel 1" }</h3>
+                            <h3 style={{ textAlign:'center', padding:'5px 0px', color:'var(--yellow-ligth)' }}>{props.titleBar ? props.titleBar:"Nivel 1" }</h3>
                         </Flex>
                         <Flex style={{height:'33%'}}>
                             <ProgressBar
                                 percentage="30"
                                 image={Bar}
-                                padding={'3%'}
+                                padding='2% 10% 4%'
                                 styleContainer={{ width: "100%", height: "80%" }}
                             >
                             </ProgressBar>
@@ -51,8 +51,8 @@ function Header(props) {
                                 quantity={30}
                                 image={key}
                                 displayX={true}
-                                styleX={{fontSize: "23px", padding:"0 5px"}}
-                                childStyle={{fontSize: "23px"}}
+                                styleX={{padding:"0 5px", color:'var(--yellow-ligth)'}}
+                                childStyle={{color:'var(--yellow-ligth)'}}
                                 id="counterbar"
                                 idX="xcounterbar"
                                 styleBox={{display:"flex"}}
@@ -73,15 +73,15 @@ function Header(props) {
                                 image={circ20}
                                 displayX={false}
                                 id="middleContent"
-                                childStyle={{fontSize: "23px"}}
+                                childStyle={{ color:'var(--yellow-ligth)'}}
                                 styleBox={{display:"flex"}}
+                                idX="xmiddleContent"
                             ></CurrencyHorizontal>
                         </Flex>
-
                         <Flex
                             className="source"
                         >
-                            <h3 style={{fontSize: "23px"}}>X{props.multiplicator ? props.multiplicator : "1.2"}</h3>
+                            <p style={{color:'var(--yellow-ligth)'}}> &nbsp; X &nbsp; {props.multiplicator ? props.multiplicator : "1.2"}</p>
                         </Flex>
                     </Flex>
                     <Flex

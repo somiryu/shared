@@ -33,6 +33,7 @@ a{text-decoration: none}
 .de{
     border: 2px red dashed;
 }
+
 h1,h2,h3,h4,h5,h6{
     margin: 0;
     color: #EAAB1C;
@@ -635,11 +636,277 @@ input{
     position: relative;
     cursor: pointer;
 }
+h1 {
+	font-size: 2em;
+	font-family: "Source Serif Pro";
+	margin: 0;
+}
+h2 {
+	font-size: 1.5em;
+	font-family: "Source Serif Pro";
+	margin: 0;
+}
+h3 {
+	font-size: 1.5em;
+	font-family: "Bubblegum Sans";
+	margin: 0;
+}
+h4 {
+	font-size: 1.3em;
+	font-family: "Bubblegum Sans";
+	margin: 0;
+}
+
+label {
+	font-size: 1.3em;
+	font-family: "Bubblegum Sans";
+	margin: 0;
+}
+
+.p1 {
+	font-size: 0.8em;
+	font-family: "ABeeZee";
+	margin: 0;
+}
+.label1 {
+	font-size: 0.8em;
+	font-family: "Bubblegum Sans";
+	margin: 0;
+}
+.label2 {
+	font-size: 1.2em;
+	font-family: "Bubblegum Sans";
+	margin: 0;
+}
+.h2-xs {
+	font-size: 1em;
+}
+.h2-sm {
+	font-size: 1.1em;
+}
+.p-xs {
+	font-size: 0.8em;
+}
+.p-sm {
+	font-size: 0.8rem;
+}
+.h1-bg {
+	font-size: 2.5rem;
+}
+p {
+    font-size: 1em;
+    margin: 0;
+}
+.label-bg {
+	font-size: 1em;
+}
+.paper-options {
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: 100;
+}
+.span-curr {
+	margin-bottom: 5%;
+}
+.span-curr span {
+	font-size: 1.5rem;
+}
+.lbl-xs {
+	font-size: .8rem;
+}
+.h4-sm {
+	font-size: 1.2rem;
+}
+.h1-xss{
+	font-size: 1rem;
+	
+}
+.h1-xbg {
+	font-size: 3.5rem;
+	font-weight: 100;
+}
+.h1-time {
+	font-size: 4rem;
+	margin-top: 10%;
+	color: var(--brown);
+	font-weight: 100;
+}
+#counterbar{
+    display: flex;
+}
+#counterbar span{
+    font-size: 1.5rem;
+}
+#middleContent {
+    display: flex;
+}
+#middleContent span{
+    font-size: 1.5rem;
+}
+#xcounterbar{
+    font-size: 1.5rem;
+}
+#xmiddleContent{
+    font-size: 1.5rem;
+}
+#DescriptionRoles{
+    margin:5% 0;
+}
+/* SCROLLBAR */
+    .scrollbar{
+        overflow-y: scroll;
+        scrollbar-color: #3A133E rgba(255, 255, 255, .5);;
+        scrollbar-width: thin;
+    }
+    .scrollbar::-webkit-scrollbar {
+        width: 4px; /* Tamaño del scroll en vertical */
+    }
+    .scrollbar::-webkit-scrollbar-thumb {
+        background: #3A133E;
+        border-radius: 4px;
+        height: 4px;
+    }
+    .scrollbar::-webkit-scrollbar-track-piece:start {
+        background: rgba(255, 255, 255, .5);
+        border-radius: 50px;
+        width: 4px;
+    }
+
+    .scrollbar::-webkit-scrollbar-track-piece:end {
+        background: rgba(255, 255, 255, .5);
+        border-radius: 50px;
+        width: 4px;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #b3b3b3;
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    }
+    .scrollbar::-webkit-scrollbar-thumb:active {
+        background-color: #999999;
+    }
+/* SCROLLBAR */
 @media (max-width: 700px){
+    #FeedbackScreenContainer{
+        width: 140% !important;
+    }
+    #QuestionScreen{
+        height: auto !important;
+    }
+    #ProfileScreenContainer{
+        flex-direction: column-reverse !important;
+        height: auto !important;
+    }
+    #ProfileScreenContainer > div{
+        width:90% !important;
+    }
+    #DescriptionRoles{
+        width:80% !important;
+    }
+    #counterbar{
+        display: flex;
+    }
     #counterbar span{
+        font-size: 1rem;
+    }
+    #middleContent {
+        display: flex;
+    }
+    #middleContent span{
         font-size: 1rem;
     }
     #xcounterbar{
         font-size: 1rem;
+    }
+    #xmiddleContent{
+        font-size: 1rem;
+    }
+    .h2-bg {
+		font-size: 0.8rem;
+	}
+	h1 {
+		font-size: 1.3em;
+	}
+	.lbl-md {
+		font-size: 0.7rem;
+	}
+	h2 {
+		font-size: 1.1em;
+	}
+	h3 {
+		font-size: 1em;
+	}
+	h4 {
+		font-size: 1em;
+	}
+	p {
+		font-size: 1em;
+	}
+	label {
+		font-size: 0.65em;
+	}
+	.p1 {
+		font-size: 0.7em;
+	}
+	.label1 {
+		font-size: 0.7em;
+	}
+	.label2 {
+		font-size: 0.6em;
+	}
+	.h1-small {
+		font-size: 1.1rem;
+	}
+	.h2-xs {
+		font-size: 0.5em;
+	}
+	.h3-xs {
+		font-size: 0.7em;
+	}
+	.h4-sm {
+		font-size: 0.8rem;
+	}
+	.label-bg {
+		font-size: 1em;
+	}
+	.h1-number {
+		font-size: 1rem;
+	}
+	.p-xs {
+		font-size: 7px;
+	}
+	.h2-sm {
+		font-size: .8em;
+	}
+	.p-sm {
+		font-size: 0.6rem;
+	}
+	.lbl-sm {
+		font-size: 0.6rem;
+		font-weight: 700;
+	}
+	.paper-options {
+		font-size: 0.9rem;
+	}
+	.span-curr {
+		margin-bottom: 40%;
+	}
+	.span-curr span {
+		font-size: 0.6rem;
+	}
+	.lbl-xs {
+		font-size: 0.4rem;
+	}
+	.h1-xbg {
+		font-size: 2.3rem;
+	}
+	#Scene_History {
+		transform: scale(1);
+	}
+	.p-history {
+		font-size: 5px;
+    }
+    #SedeScreenContainer{
+        flex-direction: column !important;
     }
 }

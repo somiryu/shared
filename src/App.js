@@ -16,9 +16,9 @@ import FeedBackScreen from "./views/FeedBackScreen"
 // import QuestionWithTitleScreen from "./views/QuestionWithTitleScreen"
 import fondo from "./images/general/fondopatron.png"
 import PlayArea from "./shared/PlayArea"
-window.DEBUG = true;
+window.DEBUG = false;
 function App() {
-  const [layout,setLayout] = useState("Profile")
+  const [layout,setLayout] = useState("Question")
   const [secondaryBg] = useState(true)
   let pages =["Register","Legend","Mapa","Profile","Sede","Rol","Question","Feedback"]
   const listener = (indice) =>{
