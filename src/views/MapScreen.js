@@ -8,6 +8,9 @@ import logoacreditacion from "../images/logos/logoacreditacionmapa.png"
 import inportalvillamapa from "../images/Iconos/inportalvillamapa.png"
 import inescudovilla from "../images/Iconos/inescudovilla.png"
 import contatiempoactivo from "../images/buttons/contatiempoactivo.png"
+// import contatiempoactivo from "../images/Graficos/contatiempoactivo.png"
+// import contatiempoactivo from "../images/Graficos/contatiempoactivo.png"
+// import contatiempoactivo from "../images/Graficos/contatiempoactivo.png"
 
 function MapScreen(props) {
     const [screen] = useState(window.screen.width)
@@ -93,6 +96,7 @@ function Portal(props){
 	return(
         <div style={{...stylePortal}} onClick={props.handlePortal}>
             <Absolute style={{width:"40px",height:"40px",borderRadius:"50%",backgroundColor:"pink",top:"10px"}}>
+                {props.imageSede?<img src={props.imageSede}></img>:""}
             </Absolute>
             <Absolute style={{width:"20px",height:"20px",borderRadius:"50%",backgroundColor:"", left: "60%",top: "60%"}}>
                 <img alt="portal1" src={props.escudo} width="20px" height="20px"></img>
