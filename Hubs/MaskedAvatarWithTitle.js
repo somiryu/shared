@@ -10,7 +10,7 @@ import ImageLabel from "../Labels/ImagedLabel";
 
 export default (props) => {
     return (
-        <div className={props.debug ? 'MaskedAvatarWithTitle testBox': 'MaskedAvatarWithTitle'} style={{ maxWidth: "100%",display:"inline-block", ...props.style}}>
+        <div className={window.DEBUG ? 'MaskedAvatarWithTitle testBox': 'MaskedAvatarWithTitle'} style={{ maxWidth: "100%",display:"inline-block", ...props.style}}>
             <MaskedAvatar
                 {...props}
             >

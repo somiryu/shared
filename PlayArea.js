@@ -2,6 +2,7 @@
 //padding=IfNeedsSeparation
 
 import React from "react";
+import "./PlayArea.css"
 //import "PlayArea.css"
 
 export default (props) =>{
@@ -17,7 +18,7 @@ export default (props) =>{
 		
 
 	return(
-		<div className={props.debug ? "PlayArea testBox" : "PlayArea"} style={style}>
+		<div className={window.DEBUG ? "PlayArea playAreaTest" : "PlayArea"} style={style}>
 			{props.children}
 		</div>
 	)

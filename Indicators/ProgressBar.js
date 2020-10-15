@@ -19,13 +19,15 @@ export default function ProgressBar(props) {
         width: '100%',
         padding: props.padding || '0 0 0 0',
         boxSizing: 'border-box',
-        zIndex:'1'
+        zIndex:'1',
+        
     }
     const styleProgress = {
         height: '100%',
         width: `${percentage}%`,
         backgroundColor: props.barColor || '#327B79',
         borderRadius: props.borderRadius || '5px',
+        ...props.styleProgress
     }
     return (
         <div style={{ display: 'inline-block', position:'relative', ...props.styleContainer}}>

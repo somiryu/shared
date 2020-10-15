@@ -25,8 +25,8 @@ function ButtonMultiStateWithText(props) {
             <div id={props.idButton} className={props.debug ? 'testBox ButtonMultiStateWithText' : 'ButtonMultiStateWithText'}
                 style={styleText}>
                 <div className={props.debug ? 'testBox' : ''}
-                    style={{ height: '100%', display: 'flex', alignItems: ' center', justifyContent: 'center',...props.stylesText[current] }}>
-                    {props.text || 1}
+                    style={{ height: '100%', display: 'flex', alignItems: ' center', justifyContent: 'center', ...props.stylesText[current]}}>
+                    {React.cloneElement(props.text, {style: {...props.stylesText[current]}})}
                 </div>
             </div>
         </ButtonMultiState>
