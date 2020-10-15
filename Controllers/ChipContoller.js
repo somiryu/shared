@@ -11,21 +11,20 @@ function ChipController(props){
         })
         setEstado(aux)
     }, [props.chips])
+
 	const listener = (state) => {
-        console.log("click")
-        console.log(state[0].target.id)
+        console.log("click aqui vamos",state[0].target.id)
         props.chips.map(e=>{
             return aux[e.id]=false
         })
-        console.log(aux)
-        aux[state[0].target.id]=true
-        let auxn = {
-            ...aux
-        }
+        //console.log(aux)
+        let auxnn = (aux[state[0].target.id]=true)
+        console.log("AQUIIIIIII",aux[state[0].target.id],aux,auxnn)
+        let auxn = {...aux}
+        //console.log(auxn)
         setEstado(auxn)
-        console.log(estado)
     }
-    console.log("----Chips")
+    console.log("----Chips",aux)
  	return( 
     	<div style={{display:"flex",justifyContent:"space-around",margin:"2%",...props.chipControllerStyle}}>
             {props.chips.map(e=>

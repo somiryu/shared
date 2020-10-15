@@ -47,7 +47,7 @@ class AnimatedScore extends Component {
 
 	render(){
 		return( 
-			<div className={this.props.className ? `AnimatedScore ${this.props.className}`: ""} id={this.props.id}>
+			<div style={{...this.props.styleBox}} className={this.props.className ? `AnimatedScore ${this.props.className}`: ""} id={this.props.id}>
 			 	<span style={this.props.childStyle || {position:"relative"}}></span>
 				{this.props.children}
 			</div>

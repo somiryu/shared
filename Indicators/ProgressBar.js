@@ -30,7 +30,7 @@ export default function ProgressBar(props) {
         ...props.styleProgress
     }
     return (
-        <div style={{ display: 'inline-block', position:'relative', ...props.styleContainer}}>
+        <div style={{ display: 'inline-block', position:'relative', ...props.styleContainer,...props.border}}>
             <div className={props.debug ? 'testBox ProgressBar' : 'ProgressBar'} style={{ display: 'inline-block', position: 'relative', zIndex: '2' }}>
                 <img src={props.image ? props.image : ''} alt="Progress Bar" style={{ width: '100%', display: props.image ? 'block' : 'none' }}></img>
             </div>
