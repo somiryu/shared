@@ -30,7 +30,8 @@ function Chip(props){
  	return( 
     	<div 
     		id={props.id}
-			onClick={clickHandler}
+            onClick={clickHandler}
+            onClick={props.handle}
             style={{cursor:"pointer", display:"flex", alignItems: props.align || "center", justifyContent: props.justify || "center", position:"relative",...props.style}}
 		>
             <img style={{position:"absolute",width:'100%'}} src={image} alt='background' ></img>

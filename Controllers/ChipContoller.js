@@ -32,6 +32,7 @@ function ChipController(props){
                     id={e.id}
                     label={e.label}
                     listener={listener}
+                    handle = {e.listener}
                     active={estado[e.id]}
                     imageselect={props.imageChip}
                     imagenoselect={props.imageChipDeactivate}
