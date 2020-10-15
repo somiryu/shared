@@ -828,7 +828,6 @@ p {
     #xcounterbar{
         font-size: 1rem;
     }
-<<<<<<< HEAD
     #xmiddleContent{
         font-size: 1rem;
     }
@@ -920,10 +919,8 @@ p {
     #SedeScreenContainer{
         flex-direction: column !important;
     }
-=======
     #contprofile{width:80%; height:100%}
 
     #infoprofile{height:10%}
     #contOptions{width:100%;height:80%;}
->>>>>>> e96a86accb39a59fba445db2d9eaf08c3c9d54ff
 }
