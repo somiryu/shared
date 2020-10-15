@@ -10,16 +10,19 @@ import ContentSede from "../images/general/contasedejuego.png"
 import contapersonajes from "../images/general/contapersonajes.png"
 import portalVillavicencio from "../images/Portales/inportalvilla.png"
 import ButtonMultiStateWithText from '../shared/Buttons/ButtonMultiStateWithText';
+import estudiante from '../images/Graficos/estudiante.png'
+import profesora from '../images/Graficos/profesora.png'
+import secretaria from '../images/Graficos/secretaria.png'
 const Roles = [
     {
-        text: 'Profesora',
-        image: Avatar,
+        text: 'profesora',
+        image: profesora,
         schedule1: '7 - 9 pm',
         schedule2: '8 - 9 pm'
     },
     {
         text: 'Secretaria',
-        image: Avatar,
+        image: secretaria,
         schedule1: '7 - 9 pm',
         schedule2: '8 - 9 pm'
     },
@@ -31,7 +34,7 @@ const Roles = [
     },
     {
         text: 'Estudiante',
-        image: Avatar,
+        image: estudiante,
         schedule1: '7 - 9 pm',
         schedule2: '8 - 9 pm'
     }
@@ -64,7 +67,7 @@ function SedeScreen(props) {
                         <Flex direction="column" align="center" style={{ margin: "20px", width: "160px" }}>
                             <MaskedAvatarWithTitle
                                 id="colaborador2"
-                                avatar={Avatar}
+                                avatar={estudiante}
                                 containerImage={contapersonajes}
                                 padding={'20%'}
                                 paddingLabel={5}

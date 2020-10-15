@@ -6,9 +6,9 @@ import contapersonajes from "../images/general/contapersonajes.png"
 import contajuego from "../images/general/contajuego.png"
 import ImageTest from "../images/buttons/btnprincipal.png"
 import ImagePanel from "../shared/Panels/ImagedPanel"
-import Avatar from "../shared/ExampleImages/avatar.png"
 import imagedefault from "../images/general/imagedefault.png"
 import imageArrow from "../images/buttons/btnsiguienteflechas.png"
+import estudiante from '../images/Graficos/estudiante.png'
 
 function ProfileScreen(props) {
     return (
@@ -48,7 +48,7 @@ function ProfileScreen(props) {
                     >
                         <MaskedAvatarWithTitle
                             id="colaborador2"
-                            avatar={Avatar}
+                            avatar={estudiante}
                             containerImage={contapersonajes}
                             padding='20%'
                             paddingLabel='5'

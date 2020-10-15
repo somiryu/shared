@@ -4,7 +4,6 @@ import Flex from "../shared/Containers/Flex"
 import MaskedAvatar from "../shared/Hubs/MaskedAvatar"
 import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
 import ChipController from "../shared/Controllers/ChipContoller"
-import CaraInnos from "../shared/ExampleImages/Generic/caraInnos.png"
 import buttonDeactivate from "../images/buttons/btnprincipal.png"
 import button from "../images/buttons/btnprincipalactivo.png"
 import contaavatar from "../images/general/contaavatar.png"
@@ -16,6 +15,7 @@ import inmas from "../images/Iconos/inmas@2x.png"
 import inpapiro from "../images/Iconos/inpapiro@2x.png"
 import SedesTable from "./layout/SedesTable"
 import CofradiaTable from "./layout/CofradiaTable"
+import estudiante from '../images/Graficos/estudiante.png'
 
 function ProfileScreen(props) {
     const [regional, setRegional] = useState(false)
@@ -76,9 +76,9 @@ function ProfileScreen(props) {
                         >   
                             <MaskedAvatar
                                 id="colaborador1"
-                                avatar={CaraInnos}
+                                avatar={estudiante}
                                 containerImage={contaavatar}
-                                padding={12}
+                                padding={11}
                                 listener={() => console.log('Clicked MarkedAvatar')}
                                 maskBorder={100}
                             />
