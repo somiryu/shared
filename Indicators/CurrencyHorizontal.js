@@ -24,7 +24,7 @@ function CurrencyHorizontal(props) {
         <img alt="curIcon" src={props.image} style={{ maxWidth: "100%" }} />
       </div>
       <div style={{display:"flex",justifyContent: "center",alignItems: "center"}}>
-        {props.displayX && <div style={{ ...props.childStyle, ...props.styleX }}><span>x</span></div>}
+        {props.displayX && <div style={{ ...props.childStyle, ...props.styleX }}><span id={props.idX}>x</span></div>}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
           <div className={props.debug ? "testBox qty font2" : "qty font2"} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: props.fontSize || "2em", fontFamily: props.fontFamily || "Bubblegum Sans", ...ubication  }}>
             <AnimatedScore id={props.id} className={props.classNameSpan} to={props.quantity} childStyle={props.childStyle || {}} duration={props.duration || 2000} />
