@@ -6,6 +6,7 @@
 //style
 import React, { useState, useEffect } from 'react'
 import Flex from '../Containers/Flex'
+import Absolute from '../Containers/Absolute'
 
 export default function ImageMultiStateAndIcon(props) {
     const [current, setCurrent] = useState('off');
@@ -21,7 +22,7 @@ export default function ImageMultiStateAndIcon(props) {
     return (
         <div key={props.id} id={props.id} style={{ display: 'inline-block', position: 'relative', height: '100%', ...props.style }}>
             <img src={props.images[current]} alt={'MultiState'} width='100%' />
-
+            {props.text ? (<Absolute {...props}><h4>{props.text}</h4></Absolute>):<div/>}
             {props.icon ? (<Flex {...props} style={{ ...positionIcon }}><img src={props.icon} alt={'Icon'} style={{width: '60%'}}></img>
             </Flex>) : <div></div>}
         </div>
