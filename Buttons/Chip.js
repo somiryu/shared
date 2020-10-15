@@ -2,16 +2,17 @@ import React, {useState} from 'react'
 import "../../shared/SimpleButton.css"
 
 function Chip(props){
-    const [active] = useState(props.active)
-    console.log("Boton")
-    console.log(props)
-    console.log(props.active)
+    const [active,setActive] = useState(props.active)
+    const [image] = useState(props.active === true?props.imageselect:props.imagenoselect)
+    // console.log("Boton")
+    // console.log(props)
+    // console.log(props.active)
 	const clickHandler = (e) => {
         if(props.listener){
             props.listener([e,active])
+            setActive(!props.active)
         }
-        console.log(props.imageselect)
-        console.log(props.imagenoselect)
+        console.log(props.id,props.active)
 	}
    let color = props.color || "purple"
    if(color === "var(--purple)") color = "purple";
@@ -32,7 +33,7 @@ function Chip(props){
 			onClick={clickHandler}
             style={{cursor:"pointer", display:"flex", alignItems: props.align || "center", justifyContent: props.justify || "center", position:"relative",...props.style}}
 		>
-            <img style={{position:"absolute",width:'100%'}} src={props.active ? props.imageselect: props.imagenoselect} alt='background' ></img>
+            <img style={{position:"absolute",width:'100%'}} src={image} alt='background' ></img>
 			{props.label}
 		</div>
     )
