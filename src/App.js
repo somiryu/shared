@@ -18,7 +18,7 @@ import fondo from "./images/general/fondopatron.png"
 import PlayArea from "./shared/PlayArea"
 window.DEBUG = true;
 function App() {
-  const [layout,setLayout] = useState("Profile")
+  const [layout,setLayout] = useState("Mapa")
   const [secondaryBg] = useState(true)
   let pages =["Register","Legend","Mapa","Profile","Sede","Rol","Question","Feedback"]
   const listener = (indice) =>{
