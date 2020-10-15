@@ -78,7 +78,7 @@ function Header(props) {
                                     avatar={sedeprincipalbogota}
                                     styleImage={{borderRadius:"50%"}}
                                     containerImage={contasedeheader}
-                                    padding={12}
+                                    padding={8}
                                     listener={() => console.log('Clicked MarkedAvatar')}
                                     maskBorder={100}
                                 />}

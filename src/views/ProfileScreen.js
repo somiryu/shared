@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import circ20 from "../shared/ExampleImages/Circ-20.png"
 import Flex from "../shared/Containers/Flex"
 import MaskedAvatar from "../shared/Hubs/MaskedAvatar"
@@ -14,22 +14,53 @@ import btnsedesmarcomapa from "../images/buttons/btnsedesmarcomapa@2x.png"
 import sedeprincipalbogota from "../images/Graficos/sedeprincipalbogota@2x.png"
 import inmas from "../images/Iconos/inmas@2x.png"
 import inpapiro from "../images/Iconos/inpapiro@2x.png"
+import SedesTable from "./layout/SedesTable"
+import CofradiaTable from "./layout/CofradiaTable"
 
 function ProfileScreen(props) {
+    const [regional, setRegional] = useState(false)
+    const [cofradia, setCofradia] = useState(false)
+    const [perfil, setPerfil] = useState(true)
+
+    const listenerRegional = () =>{
+        if(regional){
+            setRegional(false)
+            setCofradia(false)
+            setPerfil(true)
+        }else{
+            setRegional(true)
+            setCofradia(false)
+            setPerfil(false)
+        }
+    }
+    const listenerCofradia = () =>{
+        if(cofradia){
+            setRegional(false)
+            setCofradia(false)
+            setPerfil(true)
+        }else{
+            setRegional(false)
+            setCofradia(true)
+            setPerfil(false)
+        }
+    }
+
+
     return (
         <div style={{ display: "flex", flexDirection: "column", position: "relative", top: "10%", marginTop: "1%", alignItems: "center", width:'100%' }}>
             <Flex style={{ width: '70%' }}>
                 <ChipController
                     imageChip={button}
                     imageChipDeactivate={buttonDeactivate}
-                    chips={[{ id: "Perfil", label: <label className="label1" id="Perfil" style={{zIndex: "999"}}>Perfil</label> }, { id: "Regional", label: <label className="label1" id="Regional" style={{zIndex: "999"}}>Regional</label> }, { id: "Cofradia", label: <label className="label1" id={"Cofradia"} style={{zIndex: "999"}}>Cofradia</label> }]}
+                    chips={[{ id: "Perfil",  label: <label className="label1" id="Perfil" style={{zIndex: "999"}}>Perfil</label> }, { id: "Regional",listener:listenerRegional,label: <label className="label1" id="Regional" style={{zIndex: "999"}}>Regional</label> }, { id: "Cofradia",listener:listenerCofradia,label: <label className="label1" id={"Cofradia"} style={{zIndex: "999"}}>Cofradia</label> }]}
                     styleChips={{ fontFamily: 'Source Serif Pro' }}
                     styleActivate={{ color: "#EAAB1C" }}
                     chipControllerStyle={{ width: '100%' }}
                 >
                 </ChipController>
             </Flex>
-            <Flex id="contprofile">
+            <Flex id="contprofile" direction="column">
+                {perfil &&
                 <ImagePanel
                     image={contaperfil}
                     padding={"0%"}
@@ -104,7 +135,7 @@ function ProfileScreen(props) {
                                             avatar={inpapiro}
                                             containerImage={btnsedesmarcomapa}
                                             padding={12}
-                                            listener={() => console.log('Clicked MarkedAvatar')}
+                                            listener={() => props.listener(4)}
                                             maskBorder={100}
                                     />
                                 </Flex>
@@ -112,7 +143,17 @@ function ProfileScreen(props) {
                             </Flex>
                         </Flex>
                     </Flex>
-                </ImagePanel>
+                </ImagePanel>}
+                {regional &&
+                <SedesTable
+                    sedes={[{name:"Bogota",points:100,image:sedeprincipalbogota}]}
+                ></SedesTable>
+                }
+                {cofradia &&
+                <CofradiaTable
+                    cofradias={[{sede:"Bogota",points:100,image:sedeprincipalbogota,name:"Lorem ipsum"}]}>
+                </CofradiaTable>
+                }
             </Flex>
 
         </div>

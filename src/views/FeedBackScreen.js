@@ -41,7 +41,9 @@ function FeedbackScreen(props) {
                                 id={props.buttonId || "firstbutton"}
                                 image={props.buttonImage || ButtonImage}
                                 label={props.buttonLabel || <label style={{ fontWeight: "700", fontSize: "17px", height: "30px" }}>VOLVER</label>}
-                                listener={props.listener || console.log("hola soy un boton sin listener")}
+                                listener={() => {
+                                    props.listener(0)
+                                }}
                             >
                             </ButtonImageWithLabel>
                         </Flex>

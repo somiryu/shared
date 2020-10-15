@@ -23,7 +23,7 @@ function TableGame(props){
             style={{width:"280px",height:"290px"}}
             >
             <Flex direction="column" align="center" style={{backgroundColor:"rgba(5,5,5,0.3)",borderRadius:"20px",width:"100%",padding: "10px",height:"100%"}}>
-                <Flex align={"center"} style={{position:"relative",top:"-7px",width:"100%"}}>
+                <Flex align={"center"} style={{position:"relative",top:"-20px",width:"100%"}}>
                     <Flex align="center" style={{}}>
                         <img alt="cerebro"src={incerebrodificil} ></img>
                     </Flex>

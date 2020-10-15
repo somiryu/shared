@@ -1,7 +1,6 @@
 import React from 'react'
 import Flex from "../shared/Containers/Flex"
 import MaskedAvatarWithTitle from "../shared/Hubs/MaskedAvatarWithTitle";
-import Chip from "../shared/Buttons/Chip"
 import Avatar from "../shared/ExampleImages/avatar.png"
 import Colaborador from "../shared/ExampleImages/Hubs/tituloColaborador.png"
 import contatiempo from "../images/buttons/contatiempo.png"
@@ -75,7 +74,7 @@ function SedeScreen(props) {
                                 debug={true}
                                 label={<label style={{ color: '#fff' }}>{rol.text}</label>}
                                 pointer={true}
-                                listener={() => console.log('Clicked MarkedAvatar')}
+                                listener={() => props.listener(5)}
                                 leftLabel={"-1%"}
                                 topLabel={"75%"}
                             >

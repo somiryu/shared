@@ -38,7 +38,9 @@ function QuestionScreen(props) {
                     id={props.buttonId || "firstbutton"}
                     image={props.buttonImage || ButtonImage}
                     label={props.buttonLabel || <label className='label-bg' style={{ fontWeight: "700" }}>CONTINUAR</label>}
-                    listener={props.listener || console.log("hola soy un boton sin listener")}
+                    listener={() => {
+                        props.listener(7)
+                    }}
                 >
                 </ButtonImageWithLabel>
             </div>

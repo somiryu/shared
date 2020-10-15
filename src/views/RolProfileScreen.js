@@ -29,7 +29,7 @@ function ProfileScreen(props) {
                                     image={ImageTest}
                                     label={"Inicio"}
                                     listener={() => {
-                                        console.log("boton siguiente")
+                                        props.listener(6)
                                     }}
                                 >
                                 </ButtonImageWithLabel>
