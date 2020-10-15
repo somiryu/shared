@@ -1,5 +1,4 @@
 import React from "react";
-import circ20 from "../../shared/ExampleImages/Circ-20.png"
 import Flex from "../../shared/Containers/Flex"
 import ProgressBar from "../../shared/Indicators/ProgressBar";
 import ButtonImage from "../../shared/Buttons/ButtonImage"
@@ -9,7 +8,11 @@ import header629 from "../../images/header/contaheader.png"
 import Bar from "../../images/header/barraheader.png"
 import key from "../../images/header/llaveheader.png"
 import btnlideres from "../../images/buttons/btnlideres.png"
+import sedeprincipalbogota from "../../images/Graficos/sedeprincipalbogota.png"
+import contasedeheader from "../../images/buttons/contasedeheader.png"
+import MaskedAvatar from "../../shared/Hubs/MaskedAvatar"
 import "./header.css"
+
 
 function Header(props) {
     return (
@@ -70,7 +73,16 @@ function Header(props) {
                             <CurrencyHorizontal
                                 className="source"
                                 quantity={30}
-                                image={circ20}
+                                image={<MaskedAvatar
+                                    id="sedeHeader"
+                                    avatar={sedeprincipalbogota}
+                                    styleImage={{borderRadius:"50%"}}
+                                    containerImage={contasedeheader}
+                                    padding={12}
+                                    listener={() => console.log('Clicked MarkedAvatar')}
+                                    maskBorder={100}
+                                />}
+                                imageHtml={true}
                                 displayX={false}
                                 id="middleContent"
                                 childStyle={{ color:'var(--yellow-ligth)'}}

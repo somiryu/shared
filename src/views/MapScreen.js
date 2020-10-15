@@ -8,6 +8,9 @@ import logoacreditacion from "../images/logos/logoacreditacionmapa.png"
 import inportalvillamapa from "../images/Iconos/inportalvillamapa.png"
 import inescudovilla from "../images/Iconos/inescudovilla.png"
 import contatiempoactivo from "../images/buttons/contatiempoactivo.png"
+import sedeprincipalbogota from "../images/Graficos/sedeprincipalbogota.png"
+import MaskedAvatar from '../shared/Hubs/MaskedAvatar'
+import btnsedesmarcomapa from "../images/buttons/btnsedesmarcomapa.png"
 
 function MapScreen(props) {
     const [screen] = useState(window.screen.width)
@@ -58,7 +61,7 @@ function MapScreen(props) {
                                 ></Absolute>
                             </React.Fragment>
                         }
-                        <Portal top="50%" left="50%" listener={handlePortal} portal={inportalvillamapa} escudo={inescudovilla}></Portal>
+                        <Portal top="50%" left="50%" imageSede={sedeprincipalbogota} listener={handlePortal} portal={inportalvillamapa} escudo={inescudovilla}></Portal>
                         <Portal top="20%" left="40%" listener={handlePortal} portal={inportalvillamapa} escudo={inescudovilla}></Portal>
                     </div>}
                 >
@@ -92,7 +95,16 @@ function Portal(props){
     }
 	return(
         <div style={{...stylePortal}} onClick={props.handlePortal}>
-            <Absolute style={{width:"40px",height:"40px",borderRadius:"50%",backgroundColor:"pink",top:"10px"}}>
+            <Absolute style={{width:"40px",height:"40px",borderRadius:"50%",backgroundColor:"black",top:"10px"}}>
+                <MaskedAvatar
+                    id="colaborador1"
+                    avatar={sedeprincipalbogota}
+                    styleImage={{borderRadius:"50%"}}
+                    containerImage={btnsedesmarcomapa}
+                    padding={0}
+                    listener={() => console.log('Clicked MarkedAvatar')}
+                    maskBorder={100}
+                />
             </Absolute>
             <Absolute style={{width:"20px",height:"20px",borderRadius:"50%",backgroundColor:"", left: "60%",top: "60%"}}>
                 <img alt="portal1" src={props.escudo} width="20px" height="20px"></img>
