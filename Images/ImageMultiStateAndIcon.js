@@ -22,8 +22,11 @@ export default function ImageMultiStateAndIcon(props) {
     return (
         <div key={props.id} id={props.id} style={{ display: 'inline-block', position: 'relative', height: '100%', ...props.style }}>
             <img src={props.images[current]} alt={'MultiState'} width='100%' />
-            {props.text ? (<Absolute {...props}><h4>{props.text}</h4></Absolute>):<div/>}
-            {props.icon ? (<Flex {...props} style={{ ...positionIcon }}><img src={props.icon} alt={'Icon'} style={{width: '60%'}}></img>
+            {props.text ? (<Absolute {...props} style={{ width: '100%', height: '100%' }}>
+                <Flex align='center' justify='center' style={{width:'100%', height:'100%'}}>
+                    {props.text}
+                </Flex></Absolute>) : <div />}
+            {props.icon ? (<Flex {...props} style={{ ...positionIcon }}><img src={props.icon} alt={'Icon'} style={{ width: '60%' }}></img>
             </Flex>) : <div></div>}
         </div>
     )
