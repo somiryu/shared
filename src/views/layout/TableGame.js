@@ -3,7 +3,8 @@ import circ20 from "../../shared/ExampleImages/Circ-20.png"
 import Flex from "../../shared/Containers/Flex"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
 import ButtonMultiState from  '../../shared/Buttons/ButtonMultiState'
-import ImagePanel from "../../shared/Panels/ImagedPanel"
+//import ImagePanel from "../../shared/Panels/ImagedPanel"
+import PanelWithButtonClose from "../../shared/Panels/PanelWithButtonClose"
 //import gameZone from "../../images/general/contajuego.png"
 import copa from "../../images/Iconos/incopa.png"
 import villavicencio from "../../images/Iconos/inescudovilla.png"
@@ -17,11 +18,13 @@ import containformacion from "../../images/general/containformacion.png"
 function TableGame(props){
     const [state1, setState1] = useState("off");
 	return(
-        <ImagePanel
+        <PanelWithButtonClose
             image={containformacion}
             padding="0%"
             style={{width:"280px",height:"290px"}}
+            {...props}
             >
+            
             <Flex direction="column" align="center" style={{backgroundColor:"rgba(5,5,5,0.3)",borderRadius:"20px",width:"100%",padding: "10px",height:"100%"}}>
                 <Flex align={"center"} style={{position:"relative",top:"-20px",width:"100%"}}>
                     <Flex align="center" style={{}}>
@@ -105,7 +108,7 @@ function TableGame(props){
                 </Flex>
                 
             </Flex>
-        </ImagePanel>
+        </PanelWithButtonClose>
 	)
 }
 

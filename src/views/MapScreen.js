@@ -11,12 +11,14 @@ import contatiempoactivo from "../images/buttons/contatiempoactivo.png"
 import sedeprincipalbogota from "../images/Graficos/sedeprincipalbogota.png"
 import MaskedAvatar from '../shared/Hubs/MaskedAvatar'
 import btnsedesmarcomapa from "../images/buttons/btnsedesmarcomapa.png"
+import circ40 from "../shared/ExampleImages/Circ-40.png"
 
 function MapScreen(props) {
     const [screen] = useState(window.screen.width)
     const [portalInferior, setPortalInferior] = useState(false)
     console.log(screen)
     const handlePortal = () => {
+        console.log("estoy entrando")
         if(portalInferior===false){
             setPortalInferior(true)
         }
@@ -68,14 +70,14 @@ function MapScreen(props) {
                 </ImagePanel>
                 { screen>800 &&
                     <div>
-                        <TableGame listener={props.listener}></TableGame>
+                        <TableGame listener={props.listener} ></TableGame>
                     </div>
                 }
             </div>
             { (screen<800 && portalInferior===true)&&
-                <div>
-                    <TableGame></TableGame>
-                </div>
+                <Absolute style={{top:"30%",left:"0%"}}>
+                    <TableGame listener={props.listener} imageClose={circ40} listenerClose={()=>{console.log("hello");setPortalInferior(false);}}></TableGame>
+                </Absolute>
             }
             {/* <Timer seconds={59}/>  */}
         </div>        
@@ -94,7 +96,7 @@ function Portal(props){
         right: props.right || 0
     }
 	return(
-        <div style={{...stylePortal}} onClick={props.handlePortal}>
+        <div style={{...stylePortal}} onClick={props.listener}>
             <Absolute style={{width:"40px",height:"40px",borderRadius:"50%",backgroundColor:"black",top:"10px"}}>
                 <MaskedAvatar
                     id="colaborador1"

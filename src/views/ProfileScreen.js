@@ -45,6 +45,18 @@ function ProfileScreen(props) {
         }
     }
 
+    const listenerPerfil = () =>{
+        if(cofradia){
+            setRegional(false)
+            setCofradia(false)
+            setPerfil(true)
+        }else{
+            setRegional(false)
+            setCofradia(false)
+            setPerfil(true)
+        }
+    }
+
 
     return (
         <div style={{ display: "flex", flexDirection: "column", position: "relative", top: "10%", marginTop: "1%", alignItems: "center", width:'100%' }}>
@@ -52,7 +64,7 @@ function ProfileScreen(props) {
                 <ChipController
                     imageChip={button}
                     imageChipDeactivate={buttonDeactivate}
-                    chips={[{ id: "Perfil",  label: <label className="label1" id="Perfil" style={{zIndex: "999"}}>Perfil</label> }, { id: "Regional",listener:listenerRegional,label: <label className="label1" id="Regional" style={{zIndex: "999"}}>Regional</label> }, { id: "Cofradia",listener:listenerCofradia,label: <label className="label1" id={"Cofradia"} style={{zIndex: "999"}}>Cofradia</label> }]}
+                    chips={[{ id: "Perfil",listener:listenerPerfil,label: <label className="label1" id="Perfil" style={{zIndex: "999"}}>Perfil</label> }, { id: "Regional",listener:listenerRegional,label: <label className="label1" id="Regional" style={{zIndex: "999"}}>Regional</label> }, { id: "Cofradia",listener:listenerCofradia,label: <label className="label1" id={"Cofradia"} style={{zIndex: "999"}}>Cofradia</label> }]}
                     styleChips={{ fontFamily: 'Source Serif Pro' }}
                     styleActivate={{ color: "#EAAB1C" }}
                     chipControllerStyle={{ width: '100%' }}
@@ -67,9 +79,9 @@ function ProfileScreen(props) {
                     style={{ width: "100%" }}
                 >
                     <Flex
+                        id="marginInfo"
                         direction="column"
                         align="center"
-                        style={{ padding: "30px", height: "100%" }}
                     >
                         <Flex
                             id="infoprofile"

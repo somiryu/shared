@@ -70,7 +70,7 @@ function ProfileScreen(props) {
                         <Flex id='DescriptionRoles' style={{width:'90%'}}>
                             <p>{props.descriptionRol || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."}</p>
                         </Flex>
-                        <Flex style={{ width: "100%", textAlign: "right" }}>
+                        <Flex style={{ width: "100%", textAlign: "right" }} justify={"flex-end"}>
                             <ButtonImageWithLabel
                                 id={"siguiente"}
                                 image={imageArrow}

@@ -67,7 +67,7 @@ function SedeScreen(props) {
                         <Flex direction="column" align="center" style={{ margin: "20px", width: "160px" }}>
                             <MaskedAvatarWithTitle
                                 id="colaborador2"
-                                avatar={estudiante}
+                                avatar={rol.image || estudiante}
                                 containerImage={contapersonajes}
                                 padding={'20%'}
                                 paddingLabel={5}
