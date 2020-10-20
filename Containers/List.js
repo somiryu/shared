@@ -13,7 +13,7 @@ export default function List(props) {
     return (
         <Flex {...props}>
             {
-                list.map((e, i) => <Flex key={i} style={props.styleItems}>{e}</Flex>)
+                list.map((e, i) => <Flex className={props.classNameChild} key={i} style={props.styleItems}>{e}</Flex>)
             }
         </Flex>
     )

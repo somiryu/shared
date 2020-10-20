@@ -1,11 +1,20 @@
-// height, interval
+// id, height, interval, numberShow
 import React, { useEffect } from "react"
 import "./Carrousel.css"
 function Carrousel(props) {
 	useEffect(() => {
-		var slides = document.querySelectorAll('.Banner .slide');
-		var currentSlide = 0
-		var slideInterval = setInterval(nextSlide, props.interval || 400000);
+		setTimeout(() => {
+			let slides = document.querySelectorAll(`#${props.id}.Banner .slide`);
+			if(slides.length > 0){
+				slides[0].className = 'slide showing' 
+			}
+			console.log(slides)
+		}, 20);
+	}, [])
+	useEffect(() => {
+		let slides = document.querySelectorAll('.Banner .slide');
+		let currentSlide = 0
+		let slideInterval = setInterval(nextSlide, props.interval || 40000000);
 
 		function nextSlide() {
 			slides[currentSlide].className = 'slide';
@@ -18,19 +27,21 @@ function Carrousel(props) {
 	})
 
 	const next = () => {
-		
-		var slides = document.querySelectorAll('.Banner .slide');
+		let slides = document.querySelectorAll(`#${props.id}.Banner .slide`);
+		let index = 0;
+		console.log('props.children', props.children)
 		console.log(slides)
-		if (slides[0].className === 'slide') {
-			slides[0].className = 'slide showing';
-		} else {
-			console.log("proximo slide")
-			slides[1].className = 'slide showing';
-			slides[0].className = 'slide';
-		}
+		slides.forEach((slide, current) => {
+			console.log('className ==> ', slide.className)
+			if(slide.className === 'slide showing') {
+				index = slides[current+1] ? current+1 : 0;
+				slides[current].className = 'slide'
+			}
+		})
+		slides[index].className = 'slide showing'
 	}
 	return (
-		<div className="Banner flex" style={{
+		<div id={props.id} className="Banner flex" style={{
 			display: 'flex',
 			position: 'relative',
 			flexDirection:'row',
