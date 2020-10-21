@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 
-//horas {00}
-//minutos {00}
-//segundos {00}
+//horas {0}
+//minutos {0}
+//segundos {0}
 //iniciar {bolean} //iniciar {true} detener {false} reiniciar {false} //inicia o reanuda
 //detener {bolean} //iniciar {false} detener {true} reiniciar {false}
 //reiniciar {bolean} //iniciar {false} detener {false} reiniciar {true} //luego iniciar
