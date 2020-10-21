@@ -17,7 +17,7 @@ function CofradiaTable(props){
                         style={{ width: "100%" }}
                     >
                         <Flex
-                            style={{width: "100%",position: "relative",top: "35px"}}
+                            style={{width: "100%",position: "relative",padding:"5%"}}
                         >
                             <Flex style={{width: "30%"}}>
                                 <MaskedAvatar

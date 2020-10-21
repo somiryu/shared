@@ -7,6 +7,8 @@ import MaskedAvatar from "../../shared/Hubs/MaskedAvatar"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
 import copa from "../../images/Iconos/incopa.png"
 import hut from "../../images/Iconos/insombrero.png"
+import Leaderboard from "../../shared/Leaderboard"
+
 function SedesTable(props){
 	return(
         <Flex
@@ -21,8 +23,7 @@ function SedesTable(props){
                         style={{ width: "100%" }}
                     >
                         <Flex
-                            
-                            style={{width: "100%",position: "relative",top: "35px"}}
+                            style={{width: "100%",position: "relative",padding:"5%"}}
                         >
                             <Flex
                                  style={{width: "20%"}}
@@ -90,6 +91,8 @@ function SedesTable(props){
                 )
             })
             }
+            <Leaderboard>
+            </Leaderboard>
         </Flex>
 	)
 }

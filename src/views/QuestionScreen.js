@@ -33,7 +33,7 @@ function QuestionScreen(props) {
                 </CheckBoxesController>
             </Flex>
 
-            <div style={{ display: "flex", justifyContent: "center", margin: "0 auto", width: props.widthButton || "60%" }}>
+            <div style={{ display: "flex", justifyContent: "center", margin: "0 auto", width: props.widthButton || "60%",marginBottom:"100px"}}>
                 <ButtonImageWithLabel
                     id={props.buttonId || "firstbutton"}
                     image={props.buttonImage || ButtonImage}

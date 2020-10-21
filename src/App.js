@@ -16,9 +16,10 @@ import FeedBackScreen from "./views/FeedBackScreen"
 // import QuestionWithTitleScreen from "./views/QuestionWithTitleScreen"
 import fondo from "./images/general/fondopatron.png"
 import PlayArea from "./shared/PlayArea"
+import footer from './images/Graficos/footer.png'
 window.DEBUG = false;
 function App() {
-  const [layout,setLayout] = useState("Mapa")
+  const [layout,setLayout] = useState("Profile")
   const [secondaryBg] = useState(true)
   let pages =["Register","Legend","Mapa","Profile","Sede","Rol","Question","Feedback"]
   const listener = (indice) =>{
@@ -96,6 +97,10 @@ function App() {
           </FeedBackScreen>
         }
       </PlayArea>
+      <div style={{position:"fixed",top:"86%"}}>
+        <img src={footer} alt="footer">
+        </img>
+      </div>
     </div>
   );
 }

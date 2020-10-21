@@ -11,7 +11,8 @@ import contatiempoactivo from "../images/buttons/contatiempoactivo.png"
 import sedeprincipalbogota from "../images/Graficos/sedeprincipalbogota.png"
 import MaskedAvatar from '../shared/Hubs/MaskedAvatar'
 import btnsedesmarcomapa from "../images/buttons/btnsedesmarcomapa.png"
-import circ40 from "../shared/ExampleImages/Circ-40.png"
+import ButtonImage from "../shared/Buttons/ButtonImage";
+import btnatras from "../images/buttons/btnatras.png";
 
 function MapScreen(props) {
     const [screen] = useState(window.screen.width)
@@ -29,7 +30,7 @@ function MapScreen(props) {
 
     return (
         <div>
-            <div style={{display:"flex",justifyContent:"center", alignItems:"center"}}>
+            <div style={{display:"flex",justifyContent:"center", alignItems:"center"}} onClick={screen<800? handlePortal:""}>
                 { screen>800 &&
                     <React.Fragment>
                         <Absolute 
@@ -48,7 +49,8 @@ function MapScreen(props) {
                     style={screen<800 && {marginTop:"15%"}}
                     image={Mapa}
                     padding="0%"
-                    children={<div style={{width:"100%",height:"100%"}}>
+                    children={<div style={{width:"100%",height:"100%"}}
+                    >
                         { screen<800 &&
                             <React.Fragment>
                                 <Absolute 
@@ -73,10 +75,17 @@ function MapScreen(props) {
                         <TableGame listener={props.listener} ></TableGame>
                     </div>
                 }
+                {screen<800 &&
+                <Absolute style={{top:"80%",right:"80%"}}>
+                    <ButtonImage image={btnatras} listener={handlePortal}  styleImage={{ transform: "rotate(90deg)" }}>
+
+                    </ButtonImage>
+                </Absolute>
+                }
             </div>
             { (screen<800 && portalInferior===true)&&
-                <Absolute style={{top:"30%",left:"0%"}}>
-                    <TableGame listener={props.listener} imageClose={circ40} listenerClose={()=>{console.log("hello");setPortalInferior(false);}}></TableGame>
+                <Absolute style={{top:"40%",left:"0%"}}>
+                    <TableGame listener={props.listener} ></TableGame>
                 </Absolute>
             }
             {/* <Timer seconds={59}/>  */}

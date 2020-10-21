@@ -85,6 +85,7 @@ function ProfileScreen(props) {
                     >
                         <Flex
                             id="infoprofile"
+                            style={{ height: "25%" }}
                         >   
                             <MaskedAvatar
                                 id="colaborador1"
@@ -112,6 +113,7 @@ function ProfileScreen(props) {
                             direction="column"
                             align="center"
                             justify="space-around"
+                            style={{ height: "75%" }}
                         >
                             <Flex align="center" justify="space-evenly" style={{  width: "100%", height: "33%"}}>
                                 <Flex style={{width:"30%"}}>
