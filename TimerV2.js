@@ -56,12 +56,10 @@ class TimerGameboard extends Component{
           } 
       }
       startTimer() {
-      
         if(this.state.pause===true){
             this.setState({pause:false});
-        }
-        
-        if (this.timer == 0 && this.state.seconds > 0 && this.state.pause===false ) {
+        } 
+        if (this.timer === 0 && this.state.seconds > 0 && this.state.pause===false ) {
           this.timer = setInterval(this.countDown, 1000);
         }
       }
@@ -85,7 +83,7 @@ class TimerGameboard extends Component{
             seconds: seconds,
         });
         }
-        if (seconds == 0) { 
+        if (seconds === 0) { 
           clearInterval(this.timer);
         }
       }
