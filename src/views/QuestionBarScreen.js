@@ -3,15 +3,6 @@ import ImageTest from "../shared/ExampleImages/Buttons/boton.png";
 import circ40 from "../shared/ExampleImages/Circ-40.png"
 import circ20 from "../shared/ExampleImages/Circ-20.png"
 import Flex from "../shared/Containers/Flex"
-import ProgressBar from "../shared/Indicators/ProgressBar";
-import ButtonImage from "../shared/Buttons/ButtonImage"
-import MaskedAvatarWithTitle from "../shared/Hubs/MaskedAvatarWithTitle";
-import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
-import Chip from "../shared/Buttons/Chip"
-import AvatarContainer from "../shared/ExampleImages/avcont.png"
-import Avatar from "../shared/ExampleImages/avatar.png"
-import Colaborador from "../shared/ExampleImages/Hubs/tituloColaborador.png"
-import TituloColaborador from "../shared/ExampleImages/Hubs/tituloColaborador.png"
 import ButtonImageWithLabel from  '../shared/Buttons/ButtonImageWithLabel'
 import CheckBoxesController from  '../shared/Controllers/CheckboxesController'
 
