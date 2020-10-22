@@ -13,6 +13,7 @@ import MaskedAvatar from '../shared/Hubs/MaskedAvatar'
 import btnsedesmarcomapa from "../images/buttons/btnsedesmarcomapa.png"
 import ButtonImage from "../shared/Buttons/ButtonImage";
 import btnatras from "../images/buttons/btnatras.png";
+import Timer from "../shared/TimerV2"
 
 function MapScreen(props) {
     const [screen] = useState(window.screen.width)
@@ -124,6 +125,14 @@ function Portal(props){
                 <img alt="portal2" src={props.portal}></img>
             </Absolute>
             <Absolute style={{top:"90%",right: "15%",borderRadius:"10px",border:"1px solid",textAlign:"center",color: "black",backgroundImage:"url("+contatiempoactivo+")"}}>
+                <Timer
+                    horas={1}
+                    minutos={30}
+                    segundos={30}
+                    iniciar={true} 
+                    detener={false} 
+                    reiniciar={false} //inicia o reanuda
+                ></Timer>
                 <h6 style={{margin:"0px"}}>{"00:00:00"}</h6> 
             </Absolute> 
         </div>

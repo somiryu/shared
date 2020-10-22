@@ -149,7 +149,7 @@ function ProfileScreen(props) {
                                             avatar={inpapiro}
                                             containerImage={btnsedesmarcomapa}
                                             padding={12}
-                                            listener={() => props.listener(4)}
+                                            listener={() => props.listener(5)}
                                             maskBorder={100}
                                     />
                                 </Flex>

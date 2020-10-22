@@ -39,7 +39,7 @@ function QuestionScreen(props) {
                     image={props.buttonImage || ButtonImage}
                     label={props.buttonLabel || <label className='label-bg' style={{ fontWeight: "700" }}>CONTINUAR</label>}
                     listener={() => {
-                        props.listener(7)
+                        props.listener(8)
                     }}
                 >
                 </ButtonImageWithLabel>

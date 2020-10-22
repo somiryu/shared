@@ -17,11 +17,12 @@ import FeedBackScreen from "./views/FeedBackScreen"
 import fondo from "./images/general/fondopatron.png"
 import PlayArea from "./shared/PlayArea"
 import footer from './images/Graficos/footer.png'
+import ChooseScreen from "./views/ChooseScreen"
 window.DEBUG = false;
 function App() {
-  const [layout,setLayout] = useState("Profile")
+  const [layout,setLayout] = useState("Choose")
   const [secondaryBg] = useState(true)
-  let pages =["Register","Legend","Mapa","Profile","Sede","Rol","Question","Feedback"]
+  let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback"]
   const listener = (indice) =>{
     setLayout(pages[indice])
   }
@@ -55,7 +56,7 @@ function App() {
           </Components>
         }
        <PlayArea width={layout === 'BeginGame' ? 1400 : 1000}>
-        {(layout !== "Register" && layout !== "Legend") &&
+        {(layout !== "Register" && layout !== "Legend" && layout !== "Choose") &&
           <Header></Header>
         }
        
@@ -96,6 +97,11 @@ function App() {
           <FeedBackScreen listener = {listener}>
           </FeedBackScreen>
         }
+        {layout === "Choose" &&
+          <ChooseScreen listener = {listener}>
+          </ChooseScreen>
+        }
+        
       </PlayArea>
       <div style={{position:"fixed",top:"86%"}}>
         <img src={footer} alt="footer">

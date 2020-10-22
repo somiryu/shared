@@ -77,7 +77,7 @@ function SedeScreen(props) {
                                 debug={true}
                                 label={<label style={{ color: '#fff' }}>{rol.text}</label>}
                                 pointer={true}
-                                listener={() => props.listener(5)}
+                                listener={() => props.listener(6)}
                                 leftLabel={"-1%"}
                                 topLabel={"75%"}
                             >

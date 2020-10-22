@@ -83,7 +83,7 @@ function TableGame(props){
                                 scale={1.2} //1.1
                                 images={{ off:door, on:door }}
                                 listeners={{
-                                    off: () => { setState1("on"); props.listener(3);},
+                                    off: () => { setState1("on"); props.listener(4);},
                                     on: () => { setState1("off")},
                                 }}
                                 styles={{ off: { filter: "grayscale(100%)" } }}
