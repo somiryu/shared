@@ -6,8 +6,8 @@ import ImagePanel from "../shared/Panels/ImagedPanel"
 import ButtonImage from "../images/buttons/btnprincipal.png"
 import MaskedAvatar from "../shared/Hubs/MaskedAvatar"
 import contaavatar from "../images/general/contaavatar.png"
-import masculino from '../images/Graficos/estudiante.png'
-import femenino from '../images/Graficos/secretaria.png'
+import masculino from '../images/Graficos/personajehombre.png'
+import femenino from '../images/Graficos/personajemujer.png'
 
 
 function ChooseScreen(props) {
