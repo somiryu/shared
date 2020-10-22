@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import Mapa from "../images/general/mapa.png"
 import ImagePanel from "../shared/Panels/ImagedPanel"
 import Absolute from "../shared/Containers/Absolute"
@@ -14,6 +14,7 @@ import btnsedesmarcomapa from "../images/buttons/btnsedesmarcomapa.png"
 import ButtonImage from "../shared/Buttons/ButtonImage";
 import btnatras from "../images/buttons/btnatras.png";
 import Timer from "../shared/TimerV2"
+import Flex from '../shared/Containers/Flex'
 
 function MapScreen(props) {
     const [screen] = useState(window.screen.width)
@@ -21,47 +22,47 @@ function MapScreen(props) {
     console.log(screen)
     const handlePortal = () => {
         console.log("estoy entrando")
-        if(portalInferior===false){
+        if (portalInferior === false) {
             setPortalInferior(true)
         }
-        else{
+        else {
             setPortalInferior(false)
         }
     }
 
     return (
         <div>
-            <div style={{display:"flex",justifyContent:"center", alignItems:"center"}} onClick={screen<800? handlePortal:""}>
-                { screen>800 &&
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }} onClick={screen < 800 ? handlePortal : ""}>
+                {screen > 800 &&
                     <React.Fragment>
-                        <Absolute 
+                        <Absolute
                             id="satotomasl"
-                            style={{width:"40px",height:"40px",top:"5%",left:"83%"}}
-                            children={<img alt="mapalogo"  src={logomapa}></img>}
+                            style={{ width: "40px", height: "40px", top: "5%", left: "83%" }}
+                            children={<img alt="mapalogo" src={logomapa}></img>}
                         ></Absolute>
-                        <Absolute 
+                        <Absolute
                             id="satotomasl2"
-                            style={{width:"40px",height:"40px",top:"5%",left:"90%"}}
-                            children={<img alt="acreditacion"  src={logoacreditacion}></img>}
+                            style={{ width: "40px", height: "40px", top: "5%", left: "90%" }}
+                            children={<img alt="acreditacion" src={logoacreditacion}></img>}
                         ></Absolute>
                     </React.Fragment>
                 }
                 <ImagePanel
-                    style={screen<800 && {marginTop:"15%"}}
+                    style={screen < 800 && { marginTop: "15%" }}
                     image={Mapa}
                     padding="0%"
-                    children={<div style={{width:"100%",height:"100%"}}
+                    children={<div style={{ width: "100%", height: "100%" }}
                     >
-                        { screen<800 &&
+                        {screen < 800 &&
                             <React.Fragment>
-                                <Absolute 
+                                <Absolute
                                     id="satotomasl"
-                                    style={{width:"48px",height:"48px",top:"20%",left:"75%"}}
-                                    children={<img alt="logomapa2"  src={logomapa}></img>}
+                                    style={{ width: "48px", height: "48px", top: "20%", left: "75%" }}
+                                    children={<img alt="logomapa2" src={logomapa}></img>}
                                 ></Absolute>
-                                <Absolute 
+                                <Absolute
                                     id="satotomasl2"
-                                    style={{width:"48px",height:"48px",top:"40%",left:"80%"}}
+                                    style={{ width: "48px", height: "48px", top: "40%", left: "80%" }}
                                     children={<img alt="acreditacion2" src={logoacreditacion}></img>}
                                 ></Absolute>
                             </React.Fragment>
@@ -71,72 +72,83 @@ function MapScreen(props) {
                     </div>}
                 >
                 </ImagePanel>
-                { screen>800 &&
+                {screen > 800 &&
                     <div>
                         <TableGame listener={props.listener} ></TableGame>
                     </div>
                 }
-                {screen<800 &&
-                <Absolute style={{top:"80%",right:"80%"}}>
-                    <ButtonImage image={btnatras} listener={handlePortal}  styleImage={{ transform: "rotate(90deg)" }}>
+                {screen < 800 &&
+                    <Absolute style={{ top: "80%", right: "80%" }}>
+                        <ButtonImage image={btnatras} listener={handlePortal} styleImage={{ transform: "rotate(90deg)" }}>
 
-                    </ButtonImage>
-                </Absolute>
+                        </ButtonImage>
+                    </Absolute>
                 }
             </div>
-            { (screen<800 && portalInferior===true)&&
-                <Absolute style={{top:"40%",left:"0%"}}>
+            { (screen < 800 && portalInferior === true) &&
+                <Absolute style={{ top: "40%", left: "0%" }}>
                     <TableGame listener={props.listener} ></TableGame>
                 </Absolute>
             }
             {/* <Timer seconds={59}/>  */}
-        </div>        
+        </div>
     )
 }
 
 
-function Portal(props){
-    
+function Portal(props) {
+    const [startTimer, setstartTimer] = useState(false)
+    useEffect(() => {
+        setTimeout(() => {
+            setstartTimer(true)
+        }, 100);
+    }, [])
     let stylePortal = {
         position: 'relative',
         height: "60px",
         width: "50px",
-        top: props.top || 0,
+        top: props.top || 0,
         left: props.left || 0,
         right: props.right || 0
     }
-	return(
-        <div style={{...stylePortal}} onClick={props.listener}>
-            <Absolute style={{width:"40px",height:"40px",borderRadius:"50%",backgroundColor:"black",top:"10px"}}>
+    return (
+        <div style={{ ...stylePortal }} onClick={props.listener}>
+            <Absolute style={{ width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "black", top: "10px" }}>
                 <MaskedAvatar
                     id="colaborador1"
                     avatar={sedeprincipalbogota}
-                    styleImage={{borderRadius:"50%"}}
+                    styleImage={{ borderRadius: "50%" }}
                     containerImage={btnsedesmarcomapa}
                     padding={0}
                     listener={() => console.log('Clicked MarkedAvatar')}
                     maskBorder={100}
                 />
             </Absolute>
-            <Absolute style={{width:"20px",height:"20px",borderRadius:"50%",backgroundColor:"", left: "60%",top: "60%"}}>
+            <Absolute style={{ width: "20px", height: "20px", borderRadius: "50%", backgroundColor: "", left: "60%", top: "60%" }}>
                 <img alt="portal1" src={props.escudo} width="20px" height="20px"></img>
             </Absolute>
-            <Absolute style={{width:"20px",height:"20px",borderRadius:"50%",backgroundColor:"",top: "60%",right:"80%", left:"auto"}}>
+            <Absolute style={{ width: "20px", height: "20px", borderRadius: "50%", backgroundColor: "", top: "60%", right: "80%", left: "auto" }}>
                 <img alt="portal2" src={props.portal}></img>
             </Absolute>
-            <Absolute style={{top:"90%",right: "15%",borderRadius:"10px",border:"1px solid",textAlign:"center",color: "black",backgroundImage:"url("+contatiempoactivo+")"}}>
-                <Timer
-                    horas={1}
-                    minutos={30}
-                    segundos={30}
-                    iniciar={true} 
-                    detener={false} 
-                    reiniciar={false} //inicia o reanuda
-                ></Timer>
-                <h6 style={{margin:"0px"}}>{"00:00:00"}</h6> 
-            </Absolute> 
+            <Absolute style={{ top: "90%", right: "15%", borderRadius: "10px", border: "1px solid", textAlign: "center", color: "black" }}>
+                <Flex style={{ position: 'relative', width: '100%', height: '100%' }} >
+                    <img src={contatiempoactivo} style={{ width: '200%', height: '100%' }}></img>
+                    <Absolute top='20%'>
+                        <Timer
+                            horas={0}
+                            minutos={30}
+                            segundos={30}
+                            iniciar={startTimer}
+                            detener={false}
+                            reiniciar={false} //inicia o reanuda
+                            styleTimer={{fontSize:'.6rem'}}
+                        ></Timer>
+                    </Absolute>
+                </Flex>
+                {/* <h6 style={{margin:"0px"}}>{"00:00:00"}</h6>  */}
+            </Absolute>
         </div>
-	)
+    )
 }
 
 // var time = {
@@ -160,9 +172,9 @@ function Portal(props){
 //             }      
 //         }     
 //     }
-    
+
 //     return(<h1>{seconds}</h1>)
-    
+
 // }
 
 

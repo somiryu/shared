@@ -4,7 +4,6 @@ import Flex from "../../shared/Containers/Flex"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
 import ButtonMultiState from  '../../shared/Buttons/ButtonMultiState'
 //import ImagePanel from "../../shared/Panels/ImagedPanel"
-import PanelWithButtonClose from "../../shared/Panels/PanelWithButtonClose"
 //import gameZone from "../../images/general/contajuego.png"
 import copa from "../../images/Iconos/incopa.png"
 import villavicencio from "../../images/Iconos/inescudovilla.png"
@@ -13,20 +12,20 @@ import key from "../../images/header/llaveheader.png"
 import timer from "../../images/Iconos/inretry.png" 
 import door from "../../images/Iconos/inpuerta.png"
 import containformacion from "../../images/general/containformacion.png"
+import ImagedPanel from "../../shared/Panels/ImagedPanel";
 
 
 function TableGame(props){
     const [state1, setState1] = useState("off");
 	return(
-        <PanelWithButtonClose
+        <ImagedPanel
             image={containformacion}
             padding="0%"
             style={{width:"280px",height:"290px"}}
             {...props}
             >
-            
             <Flex direction="column" align="center" style={{backgroundColor:"rgba(5,5,5,0.3)",borderRadius:"20px",width:"100%",padding: "10px",height:"100%"}}>
-                <Flex align={"center"} style={{position:"relative",top:"-20px",width:"100%"}}>
+                <Flex align={"center"} style={{width:"100%", height:'20%'}}>
                     <Flex align="center" style={{}}>
                         <img alt="cerebro"src={incerebrodificil} ></img>
                     </Flex>
@@ -34,37 +33,38 @@ function TableGame(props){
                         <h5 style={{fontFamily:'Source Serif Pro'}}>{props.title || "NOMBRE SEDE"} - {props.city || "CIUDAD"}</h5>
                     </Flex>
                 </Flex>
-                <Flex direction={"column"} align={"center"} style={{position:"relative",top:"-8px",width:"100%"}}>
-                    <Flex>
+                <Flex direction={"column"} align={"center"} style={{width:"100%", height:'27.5%'}}>
+                    <Flex style={{width:"100%", height:'70%'}}>
                         <img alt="shell" src={villavicencio} ></img>
                     </Flex>
-                    <Flex style={{marginBottom:"4px"}}>
+                    <Flex align='center' style={{ width:"100%", height:'30%'}}>
                         <h5 style={{fontFamily:'Source Serif Pro'}}>{props.city || "Ciudad"}</h5>
                     </Flex>
                 </Flex>
-                <Flex style={{justifyContent:"space-around",width:"100%",position:"relative",top:"16px"}} align="center">
-                    <Flex direction={"column"} align={"center"}>
-                        <Flex>
+                <Flex style={{justifyContent:"space-around",width:"100%", height:'27%'}} align="center">
+                    <Flex direction={"column"} align={"center"} style={{width:'100%', height:'100%'}}>
+                        <Flex align='center' style={{width:"100%", height:'70%'}}>
                             <img alt="placelogo" src={circ20} ></img>
                         </Flex>
-                        <Flex>
+                        <Flex align='center' style={{width:"100%", height:'30%'}}>
                             <h5 style={{fontFamily:'Source Serif Pro'}}>20 x 1.2</h5>
                         </Flex>
                     </Flex>
-                    <Flex>
+                    <Flex style={{width:'100%', height:'100%'}}>
                         <CurrencyHorizontal
                             quantity={30}
                             image={key}
                             displayX={true}
-                            styleImage={{transform: "rotate(330deg)"}}
+                            styleImage={{transform: "rotate(330deg)",height:'70%', display:'flex', alignItems:'center'}}
                             id="counterNumber"
                             direction ="column"
                             fontSize = "1em"
+                            styleQuantiy={{height:'30%'}}
                         >
                         </CurrencyHorizontal>
                     </Flex>
                 </Flex>
-                <Flex  style={{justifyContent:"space-around",width:"100%",position:"relative",top:"25px"}} align="center">
+                <Flex  style={{justifyContent:"space-around",width:"100%", height:'28%'}} align="center">
                     <Flex>
                         <CurrencyHorizontal
                             quantity={30}
@@ -108,7 +108,7 @@ function TableGame(props){
                 </Flex>
                 
             </Flex>
-        </PanelWithButtonClose>
+        </ImagedPanel>
 	)
 }
 

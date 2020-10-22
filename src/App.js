@@ -20,7 +20,7 @@ import footer from './images/Graficos/footer.png'
 import ChooseScreen from "./views/ChooseScreen"
 window.DEBUG = false;
 function App() {
-  const [layout,setLayout] = useState("Choose")
+  const [layout,setLayout] = useState("Mapa")
   const [secondaryBg] = useState(true)
   let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback"]
   const listener = (indice) =>{
