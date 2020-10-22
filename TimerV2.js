@@ -7,7 +7,7 @@ import React,{Component} from 'react';
 //detener {bolean} //iniciar {false} detener {true} reiniciar {false}
 //reiniciar {bolean} //iniciar {false} detener {false} reiniciar {true} //luego iniciar
 //style
-
+//styleTimer
 class TimerGameboard extends Component{
     constructor(props) {
         super(props);
@@ -98,7 +98,7 @@ class TimerGameboard extends Component{
                 <button onClick={this.resetTimer}>reset</button>
                 */ 
               } 
-            <b>{this.state.time.h}:{this.state.time.m}:{this.state.time.s}</b>
+            <p style={{...this.props.styleTimer}}>{this.state.time.h}:{this.state.time.m}:{this.state.time.s}</p>
           </div>
         );
       }

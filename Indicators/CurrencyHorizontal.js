@@ -2,7 +2,8 @@
 //id, quantity, duration(2000), image, fontSize(1.1em), fontFamily(inherit), childStyle, styleX, 
 //displayX => muestra x antes de el numero (ej: x3)
 //imageWidth
-//position = default(right) || center 
+//position = default(right) || center
+//props.styleQuantity
 import React from 'react'
 import AnimatedScore from "../Animations/AnimatedScore"
 
@@ -23,7 +24,7 @@ function CurrencyHorizontal(props) {
       <div className={props.debug ? "testBox img" : "img"} style={{ display: "inline-block", width: props.imageWidth,...props.styleImage }}>
         {props.imageHtml?props.image:<img alt="curIcon" src={props.image} style={{ maxWidth: "100%" }} />}
       </div>
-      <div style={{display:"flex",justifyContent: "center",alignItems: "center"}}>
+      <div style={{display:"flex",justifyContent: "center",alignItems: "center",...props.styleQuantity}}>
         {props.displayX && <div style={{ ...props.childStyle, ...props.styleX }}><span id={props.idX}>x</span></div>}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
           <div className={props.debug ? "testBox qty font2" : "qty font2"} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: props.fontSize || "2em", fontFamily: props.fontFamily || "Bubblegum Sans", ...ubication  }}>
