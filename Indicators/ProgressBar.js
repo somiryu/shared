@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react'
 export default function ProgressBar(props) {
     const [percentage, setPercentage] = useState(100)
     useEffect(() => {
-        console.log('PERCENTAGE ==> ', props.percentage)
+       // console.log('PERCENTAGE ==> ', props.percentage)
         setPercentage(props.percentage);
     }, [props.percentage])
     const styleBar = {

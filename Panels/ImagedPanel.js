@@ -7,7 +7,7 @@ export default (props) => {
 	return(
 		<div className="ImagedPanel" id={props.id} style={{position:"relative", display:"inline-block",...props.style}}>
 			<img alt="" src={props.image} style={{width:"100%"}}/>
-			<div style={mainStyle} className={props.debug ? "testBox" : ""}>
+			<div  style={mainStyle} className={props.debug ? "testBox" : ""}>
 				<div style={{
 						position:"relative", width:"100%", 
 						padding: props.padding || "5%",
