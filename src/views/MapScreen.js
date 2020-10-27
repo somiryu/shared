@@ -5,23 +5,74 @@ import Absolute from "../shared/Containers/Absolute"
 import TableGame from "./layout/TableGame"
 import logomapa from "../images/logos/logoaniosmapa.png"
 import logoacreditacion from "../images/logos/logoacreditacionmapa.png"
-import inportalvillamapa from "../images/Iconos/inportalvillamapa.png"
-import inescudovilla from "../images/Iconos/inescudovilla.png"
+import portalBogota from "../images/Iconos/inportalbgtamapa.png"
+import portalMedellin from "../images/Iconos/inportalmedellinmapa.png"
+import portalTunja from "../images/Iconos/inportaltunjamapa.png"
+import portalVillavicencio from "../images/Iconos/inportalvillamapa.png"
+import portalBucaramanga from "../images/Iconos/inportalvillamapa.png"
+import escudoBogota from "../images/Iconos/inescudobgta.png"
+import escudoBucaramanga from "../images/Iconos/inescudobuca.png"
+import escudoMedellin from "../images/Iconos/inescudomedellin.png"
+import escudoTunja from "../images/Iconos/inescudotunja.png"
+import escudoVillavicencio from "../images/Iconos/inescudovilla.png"
 import contatiempoactivo from "../images/buttons/contatiempoactivo.png"
-import sedeprincipalbogota from "../images/Graficos/sedeprincipalbogota.png"
+import sedeBogota from "../images/Graficos/sedeprincipalbogota.png"
+import sedeMedellin from "../images/Graficos/sedemedellin.png"
+import sedeBucaramanga from "../images/Graficos/sedebucaramanga.png"
+import sedeVillavicencio from "../images/Graficos/sedeprincipalbogota.png"
+import sedeTunja from "../images/Graficos/sedeprincipalbogota.png"
+import sedeDistancia from "../images/Graficos/sededistancia.png"
 import MaskedAvatar from '../shared/Hubs/MaskedAvatar'
 import btnsedesmarcomapa from "../images/buttons/btnsedesmarcomapa.png"
 import ButtonImage from "../shared/Buttons/ButtonImage";
 import btnatras from "../images/buttons/btnatras.png";
 import Timer from "../shared/TimerV2"
 import Flex from '../shared/Containers/Flex'
+import sedes from './models'
+
+const imagesSedes={
+    "Bogota":sedeBogota,
+    'Bucaramanga':sedeBucaramanga,
+    'Tunja':sedeTunja,
+    'Medellin':sedeMedellin,
+    'Villavicencio':sedeVillavicencio,
+    'Distancia':sedeDistancia,
+}
+const escudos={
+    "Bogota":escudoBogota,
+    'Bucaramanga':escudoBucaramanga,
+    'Tunja':escudoTunja,
+    'Medellin':escudoMedellin,
+    'Villavicencio':escudoVillavicencio,
+}
+
+const portales={
+    "Bogota":portalBogota,
+    'Bucaramanga':portalBucaramanga,
+    'Tunja':portalTunja,
+    'Medellin':portalMedellin,
+    'Villavicencio':portalVillavicencio,
+}
 
 function MapScreen(props) {
     const [screen] = useState(window.screen.width)
     const [portalInferior, setPortalInferior] = useState(false)
+    const [tableGame, setTableGame] = useState(sedes[0])
     console.log(screen)
-    const handlePortal = () => {
+    
+    const handlePortal = (e) => {
         console.log("estoy entrando")
+        let sede = (e.target.id).split("_")
+        let tableSede;
+        console.log(sede)
+        sedes.map((e)=>{
+            if(e.name===sede[0]){
+                console.log('lo encontre')
+                tableSede = e
+            }
+        })
+        console.log(tableSede)
+        setTableGame(tableSede)
         if (portalInferior === false) {
             setPortalInferior(true)
         }
@@ -67,27 +118,32 @@ function MapScreen(props) {
                                 ></Absolute>
                             </React.Fragment>
                         }
-                        <Portal top="50%" left="50%" imageSede={sedeprincipalbogota} listener={handlePortal} portal={inportalvillamapa} escudo={inescudovilla}></Portal>
-                        <Portal top="20%" left="40%" listener={handlePortal} portal={inportalvillamapa} escudo={inescudovilla}></Portal>
+                        {
+                        sedes.map((e)=>
+                            <Portal id={e.name} top={e.y + "%"} left={e.x + "%"} imageSede={imagesSedes[e.name]} listener={handlePortal} portal={portales[e.name]} escudo={escudos[e.name]}></Portal>
+                        )
+                        }
+                        {/* <Portal top="50%" left="50%" imageSede={sedeBogota} listener={handlePortal} portal={inportalvillamapa} escudo={escudoBogota}></Portal>
+                        <Portal top="20%" left="40%" listener={handlePortal} portal={inportalvillamapa} escudo={escudoVilla}></Portal> */}
                     </div>}
                 >
                 </ImagePanel>
                 {screen > 800 &&
                     <div>
-                        <TableGame listener={props.listener} ></TableGame>
+                        <TableGame listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
                     </div>
                 }
                 {screen < 800 &&
                     <Absolute style={{ top: "80%", right: "80%" }}>
-                        <ButtonImage image={btnatras} listener={handlePortal} styleImage={{ transform: "rotate(90deg)" }}>
+                        <ButtonImage image={btnatras} listener={handlePortal} styleImage={!portalInferior ? { transform: "rotate(90deg)" }: { transform: "rotate(270deg)" } }>
 
                         </ButtonImage>
                     </Absolute>
                 }
             </div>
             { (screen < 800 && portalInferior === true) &&
-                <Absolute style={{ top: "40%", left: "0%" }}>
-                    <TableGame listener={props.listener} ></TableGame>
+                <Absolute style={{ top: "30%", left: "0%" }}>
+                    <TableGame listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
                 </Absolute>
             }
             {/* <Timer seconds={59}/>  */}
@@ -105,18 +161,18 @@ function Portal(props) {
     }, [])
     let stylePortal = {
         position: 'relative',
-        height: "60px",
+        height: "50px",
         width: "50px",
         top: props.top || 0,
         left: props.left || 0,
         right: props.right || 0
     }
     return (
-        <div style={{ ...stylePortal }} onClick={props.listener}>
+        <div id={props.id} style={{ ...stylePortal }} onClick={props.listener}>
             <Absolute style={{ width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "black", top: "10px" }}>
                 <MaskedAvatar
-                    id="colaborador1"
-                    avatar={sedeprincipalbogota}
+                    id={props.id}
+                    avatar={props.imageSede || sedeBogota}
                     styleImage={{ borderRadius: "50%" }}
                     containerImage={btnsedesmarcomapa}
                     padding={0}
@@ -130,9 +186,9 @@ function Portal(props) {
             <Absolute style={{ width: "20px", height: "20px", borderRadius: "50%", backgroundColor: "", top: "60%", right: "80%", left: "auto" }}>
                 <img alt="portal2" src={props.portal}></img>
             </Absolute>
-            <Absolute style={{ top: "90%", right: "15%", borderRadius: "10px", border: "1px solid", textAlign: "center", color: "black" }}>
+            <Absolute style={{ top: "90%", right: "15%" , textAlign: "center", color: "black" }}>
                 <Flex style={{ position: 'relative', width: '100%', height: '100%' }} >
-                    <img src={contatiempoactivo} style={{ width: '200%', height: '100%' }}></img>
+                    <img alt="contetiempo" src={contatiempoactivo} style={{ width: '180%', height: '100%' }}></img>
                     <Absolute top='20%'>
                         <Timer
                             horas={0}

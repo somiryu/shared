@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import circ20 from "../../shared/ExampleImages/Circ-20.png"
 import Flex from "../../shared/Containers/Flex"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
@@ -17,6 +17,7 @@ import ImagedPanel from "../../shared/Panels/ImagedPanel";
 
 function TableGame(props){
     const [state1, setState1] = useState("off");
+    console.log(props.title)
 	return(
         <ImagedPanel
             image={containformacion}
@@ -30,12 +31,12 @@ function TableGame(props){
                         <img alt="cerebro"src={incerebrodificil} ></img>
                     </Flex>
                     <Flex style={{margin:"10px 10px"}}align="center">
-                        <h5 style={{fontFamily:'Source Serif Pro'}}>{props.title || "NOMBRE SEDE"} - {props.city || "CIUDAD"}</h5>
+                        <h5 style={{fontFamily:'Source Serif Pro'}}>{"Sede "}  {props.city || "CIUDAD"}</h5>
                     </Flex>
                 </Flex>
                 <Flex direction={"column"} align={"center"} style={{width:"100%", height:'27.5%'}}>
                     <Flex style={{width:"100%", height:'70%'}}>
-                        <img alt="shell" src={villavicencio} ></img>
+                        <img alt="shell" src={props.escudos[props.city] || villavicencio} ></img>
                     </Flex>
                     <Flex align='center' style={{ width:"100%", height:'30%'}}>
                         <h5 style={{fontFamily:'Source Serif Pro'}}>{props.city || "Ciudad"}</h5>
@@ -52,7 +53,7 @@ function TableGame(props){
                     </Flex>
                     <Flex style={{width:'100%', height:'100%'}}>
                         <CurrencyHorizontal
-                            quantity={30}
+                            quantity={props.data.keysRequiredForOpen || 0}
                             image={key}
                             displayX={true}
                             styleImage={{transform: "rotate(330deg)",height:'70%', display:'flex', alignItems:'center'}}

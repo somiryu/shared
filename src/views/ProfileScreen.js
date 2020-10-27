@@ -85,7 +85,7 @@ function ProfileScreen(props) {
                     >
                         <Flex
                             id="infoprofile"
-                            style={{ height: "25%" }}
+                            style={{ height: "17%", width:"70%"}}
                         >   
                             <MaskedAvatar
                                 id="colaborador1"
@@ -95,17 +95,21 @@ function ProfileScreen(props) {
                                 listener={() => console.log('Clicked MarkedAvatar')}
                                 maskBorder={100}
                             />
-                            <Flex  direction="column" align="center">
-                                <h2 className="sourceSerif" >Javier Velazques</h2>
-                                <CurrencyHorizontal
-                                    className="sourceSerif"
-                                    quantity={200}
-                                    image={circ20}
-                                    // displayX={true}
-                                    styleBox={{fontSize:"20px"}}
-                                    id="counterbar1"
-                                    justify="end"
-                                ></CurrencyHorizontal>
+                            <Flex  direction="column" align="center" style={{width:"100%",height:"100%"}}>
+                                <Flex style={{width:"100%",height:"70%",whiteSpace:"nowrap",textOverflow:"ellipsis",overflow:"hidden"}} justify={"flex-start"} align="center">
+                                    <h2 className="sourceSerif" >Javier Velazques</h2>
+                                </Flex>
+                                <Flex style={{width:"100%",height:"30%"}} justify={"flex-start"}>
+                                    <CurrencyHorizontal
+                                        className="sourceSerif"
+                                        quantity={200}
+                                        image={circ20}
+                                        // displayX={true}
+                                        styleBox={{fontSize:"20px"}}
+                                        id="counterbar1"
+                                        justify="end"
+                                    ></CurrencyHorizontal>
+                                </Flex>
                             </Flex>
                         </Flex>
                         <Flex 
@@ -115,45 +119,53 @@ function ProfileScreen(props) {
                             justify="space-around"
                             style={{ height: "75%" }}
                         >
-                            <Flex align="center" justify="space-evenly" style={{  width: "100%", height: "33%"}}>
-                                <Flex style={{width:"30%"}}>
+                            <Flex align="center" justify="space-evenly" style={{  width: "80%", height: "30%"}}>
+                                <Flex style={{width:"30%",height: "80%"}}>
                                     <MaskedAvatar
                                         id="colaborador1"
                                         avatar={sedeprincipalbogota}
-                                        styleImage={{borderRadius:"50%"}}
+                                        styleImage={{width:"100%",height: "100%"}}
                                         containerImage={btnsedesmarcomapa}
                                         padding={12}
                                         listener={() => console.log('Clicked MarkedAvatar')}
                                         maskBorder={100}
                                     />
                                 </Flex>
-                                <h3 className="sourceSerif">Lorem Ipsum</h3>
+                                <Flex style={{width:"70%"}}>
+                                    <h3 className="sourceSerif">Lorem Ipsum</h3>
+                                </Flex>
                             </Flex>
-                            <Flex align="center" justify="space-evenly" style={{  width: "100%", height: "33%" }}>
-                                <Flex style={{width:"30%"}}>
+                            <Flex align="center" justify="space-evenly" style={{  width: "80%", height: "30%" }}>
+                                <Flex style={{width:"30%",height: "90%"}}>
                                     <MaskedAvatar
                                             id="inmas"
                                             avatar={inmas}
+                                            styleImage={{width:"100%",height: "100%"}}
                                             containerImage={btnsedesmarcomapa}
                                             padding={12}
                                             listener={() => console.log('Clicked MarkedAvatar')}
                                             maskBorder={100}
                                     />
                                 </Flex>
-                                <h3 className="sourceSerif">Lorem Ipsum</h3>
+                                <Flex style={{width:"70%"}}>
+                                    <h3 className="sourceSerif">Lorem Ipsum</h3>
+                                </Flex>
                             </Flex>
-                            <Flex align="center" justify="space-evenly" style={{  width: "100%", height: "33%" }}>
-                                <Flex style={{width:"30%"}}>
+                            <Flex align="center" justify="space-evenly" style={{  width: "80%", height: "30%" }}>
+                                <Flex style={{width:"30%",height: "60%"}}>
                                     <MaskedAvatar
                                             id="papiro"
                                             avatar={inpapiro}
+                                            styleImage={{width:"100%",height: "100%"}}
                                             containerImage={btnsedesmarcomapa}
                                             padding={12}
                                             listener={() => props.listener(5)}
                                             maskBorder={100}
                                     />
                                 </Flex>
-                                <h3 className="sourceSerif">Lorem Ipsum</h3>
+                                <Flex style={{width:"70%"}}>
+                                    <h3 className="sourceSerif">Lorem Ipsum</h3>
+                                </Flex>
                             </Flex>
                         </Flex>
                     </Flex>

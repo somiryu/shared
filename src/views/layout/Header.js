@@ -12,9 +12,10 @@ import sedeprincipalbogota from "../../images/Graficos/sedeprincipalbogota.png"
 import contasedeheader from "../../images/buttons/contasedeheader.png"
 import MaskedAvatar from "../../shared/Hubs/MaskedAvatar"
 import "./header.css"
+import btnatras from "../../images/buttons/btnatras.png";
 
 
-function Header(props) {
+function Header(props){ 
     return (
         <Flex  className="header" style={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", zIndex: "999"}}>
             <ImagedPanel
@@ -23,6 +24,13 @@ function Header(props) {
                 debug={false} //testBox appears
                 padding="5%" //5%
             >
+               
+                <Flex style={{ position: "absolute",left: "20px" }}>
+                    <ButtonImage image={btnatras} listener={props.listener(3)} >
+
+                    </ButtonImage>
+                </Flex>
+                
                 <Flex
                     style={{ width: '100%',height: '100%',marginTop: "2%" }}
                     align='center'
@@ -107,7 +115,7 @@ function Header(props) {
                         <ButtonImage
                             id="btn1"
                             image={btnlideres}
-                            listener={(id) => { console.log("clicked", id) }}
+                            listener={(id) => { props.listener(4) }}
                             scale={1.1} //1.1
                             style={{ margin: 10 }} // {}
                         />

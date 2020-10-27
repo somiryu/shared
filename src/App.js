@@ -57,7 +57,7 @@ function App() {
         }
        <PlayArea width={layout === 'BeginGame' ? 1400 : 1000}>
         {(layout !== "Register" && layout !== "Legend" && layout !== "Choose") &&
-          <Header></Header>
+          <Header listener={listener} layout={layout}></Header>
         }
        
         {layout === "Register" &&
@@ -103,7 +103,7 @@ function App() {
         }
         
       </PlayArea>
-      <div style={{position:"fixed",top:"86%"}}>
+      <div style={{display:"flex",justifyContent:"center",position:"fixed",bottom:"0%",width:"100%"}}>
         <img src={footer} alt="footer">
         </img>
       </div>
