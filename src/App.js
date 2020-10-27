@@ -18,13 +18,24 @@ import fondo from "./images/general/fondopatron.png"
 import PlayArea from "./shared/PlayArea"
 import footer from './images/Graficos/footer.png'
 import ChooseScreen from "./views/ChooseScreen"
+import Flash from "./shared/Flash"
+import EventEmitter from "events"
 window.DEBUG = false;
+
+window.EM = new EventEmitter();
+window.flash = (message, type="success") => window.EM.emit('flash', ({message, type}));
+
 function App() {
-  const [layout,setLayout] = useState("Mapa")
+  const [layout,setLayout] = useState("Question")
+  const [respuesta,setRespuesta] = useState(false)
   const [secondaryBg] = useState(true)
   let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback"]
   const listener = (indice) =>{
     setLayout(pages[indice])
+  }
+  const listenerQuestion = (indice,res) =>{
+    setLayout(pages[indice])
+    setRespuesta(res)
   }
   let addClass;
   if (layout === "Mapa" || layout === "EndGame" || layout === "BeginGame") addClass = "SkyBackground";
@@ -90,22 +101,26 @@ function App() {
           </RolProfileScreen>
         }
         {layout === "Question" &&
-          <QuestionScreen listener = {listener}>
+          <QuestionScreen listener = {listenerQuestion}>
           </QuestionScreen>
         }
         {layout === "Feedback" &&
-          <FeedBackScreen listener = {listener}>
+          <FeedBackScreen 
+            listener = {listener}
+            respuesta = {respuesta}
+          >
           </FeedBackScreen>
         }
         {layout === "Choose" &&
           <ChooseScreen listener = {listener}>
           </ChooseScreen>
         }
+        <Flash/>
         
       </PlayArea>
-      <div style={{display:"flex",justifyContent:"center",position:"fixed",bottom:"0%",width:"100%"}}>
-        <img src={footer} alt="footer">
-        </img>
+      <div style={{display:"flex",justifyContent:"center",position:"fixed",bottom:"0%",width:"100%",height:"100px",backgroundImage:`url(${footer})`}}>
+        {/* <img src={footer} alt="footer">
+        </img> */}
       </div>
     </div>
   );

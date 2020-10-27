@@ -26,7 +26,7 @@ function Header(props){
             >
                
                 <Flex style={{ position: "absolute",left: "20px" }}>
-                    <ButtonImage image={btnatras} listener={props.listener(3)} >
+                    <ButtonImage image={btnatras} listener={()=>{props.listener(3)}} >
 
                     </ButtonImage>
                 </Flex>

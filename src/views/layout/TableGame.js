@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react";
+import React,{useState} from "react";
 import circ20 from "../../shared/ExampleImages/Circ-20.png"
 import Flex from "../../shared/Containers/Flex"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
@@ -84,7 +84,7 @@ function TableGame(props){
                                 scale={1.2} //1.1
                                 images={{ off:door, on:door }}
                                 listeners={{
-                                    off: () => { setState1("on"); props.listener(4);},
+                                    off: () => { setState1("on"); props.listener(5);},
                                     on: () => { setState1("off")},
                                 }}
                                 styles={{ off: { filter: "grayscale(100%)" } }}

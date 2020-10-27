@@ -15,7 +15,7 @@ import profesora from '../images/Graficos/profesora.png'
 import secretaria from '../images/Graficos/secretaria.png'
 const Roles = [
     {
-        text: 'profesora',
+        text: 'Profesora',
         image: profesora,
         schedule1: '7 - 9 pm',
         schedule2: '8 - 9 pm'
@@ -70,12 +70,12 @@ function SedeScreen(props) {
                                 avatar={rol.image || estudiante}
                                 containerImage={contapersonajes}
                                 padding={'20%'}
-                                paddingLabel={5}
-                                maskBorder={100}
+                                paddingLabel={0}
+                                maskBorder={0}
                                 imageTitle={Colaborador}
                                 textAlign={"center"}
-                                debug={true}
-                                label={<label style={{ color: '#fff' }}>{rol.text}</label>}
+                                debug={false}
+                                label={<label style={{ color: "var(--yellow-ligth)" }}>{rol.text}</label>}
                                 pointer={true}
                                 listener={() => props.listener(6)}
                                 leftLabel={"-1%"}

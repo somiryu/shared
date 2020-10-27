@@ -7,8 +7,27 @@ import lamp from "../images/general/lampara.png"
 import tubo from "../images/general/lineatubocontenedor.png"
 import btnrespuesta from "../images/buttons/btnrespuesta.png"
 import btnrespuestaactivo from "../images/buttons/btnrespuestaactivo.png"
+import preguntas from "../views/models/trivias"
 
 function QuestionScreen(props) {
+    let resp = false
+    let ran = Math.floor(Math.random() * 4)
+    let question = preguntas[ran]
+
+
+    const marcado = (e) =>{
+        console.log(e)
+        let llaves = Object.keys(e)
+        llaves.map((llave)=>{
+            if(e[llave]==="check"){
+                 resp = llave
+            }
+            return null
+        })
+    }
+
+    console.log()
+
     return (
         <Flex id="QuestionScreen" align="center" direction="column" style={{ marginTop: "0%", marginLeft: "5%", marginRight: "5%", height: '80vh' }}>
             <Flex style={{height:'10%'}} align="center">
@@ -22,13 +41,14 @@ function QuestionScreen(props) {
                     <img alt="lamp2" src={lamp}></img>
                 </Flex>
             </Flex>
-            <Tubo></Tubo>
+            <Tubo legend={question.question}></Tubo>
             <Flex style={{width:'100%', height:'auto'}}>
                 <CheckBoxesController
-                    options={[{ id: "pregunta1", description: <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>, images: { uncheck: btnrespuesta, check: btnrespuestaactivo } },
-                    { id: "pregunta2", description: <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>, images: { uncheck: btnrespuesta, check: btnrespuestaactivo } }
-                        , { id: "pregunta3", description: <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>, images: { uncheck: btnrespuesta, check: btnrespuestaactivo } }
-                        , { id: "pregunta4", description: <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>, images: { uncheck: btnrespuesta, check: btnrespuestaactivo } }]}
+                    options={[{ id: "option1", description: <p>{question.option1}</p>, images: { uncheck: btnrespuesta, check: btnrespuestaactivo } },
+                    { id: "option2", description: <p>{question.option2}</p>, images: { uncheck: btnrespuesta, check: btnrespuestaactivo } }
+                        , { id: "option3", description: <p>{question.option3}</p>, images: { uncheck: btnrespuesta, check: btnrespuestaactivo } }
+                        , { id: "option4", description: <p>{question.option4}</p>, images: { uncheck: btnrespuesta, check: btnrespuestaactivo } }]}
+                    listener={marcado}
                 >
                 </CheckBoxesController>
             </Flex>
@@ -39,7 +59,17 @@ function QuestionScreen(props) {
                     image={props.buttonImage || ButtonImage}
                     label={props.buttonLabel || <label className='label-bg' style={{ fontWeight: "700" }}>CONTINUAR</label>}
                     listener={() => {
-                        props.listener(8)
+                        if(resp === false){
+                            window.flash("No has elegido aun una respuesta", "error")
+                        }else{
+                            if(question.susseful === resp){
+                                console.log("es correcto")
+                                props.listener(8,true)
+                            }else{
+                                console.log("es incorrecto")
+                                props.listener(8,false) 
+                            }
+                        }
                     }}
                 >
                 </ButtonImageWithLabel>

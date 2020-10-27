@@ -28,7 +28,7 @@ import ButtonImage from "../shared/Buttons/ButtonImage";
 import btnatras from "../images/buttons/btnatras.png";
 import Timer from "../shared/TimerV2"
 import Flex from '../shared/Containers/Flex'
-import sedes from './models'
+import sedes from './models/sedes'
 
 const imagesSedes={
     "Bogota":sedeBogota,
@@ -58,20 +58,24 @@ function MapScreen(props) {
     const [screen] = useState(window.screen.width)
     const [portalInferior, setPortalInferior] = useState(false)
     const [tableGame, setTableGame] = useState(sedes[0])
-    console.log(screen)
+    console.log("=======>",tableGame)
+    //const time = Date.now(); aun no lo implementare pero se usara para calcular si el portal esta abierto o cerrado
     
     const handlePortal = (e) => {
-        console.log("estoy entrando")
-        let sede = (e.target.id).split("_")
+        console.log("estoy entrando",e)
+        let sede = e
+        if(sede === undefined){
+            sede="Bogota"
+        }
         let tableSede;
         console.log(sede)
         sedes.map((e)=>{
-            if(e.name===sede[0]){
-                console.log('lo encontre')
+            if(e.name===sede){
                 tableSede = e
             }
+            return null
         })
-        console.log(tableSede)
+        console.log("tablegame===>",tableSede)        
         setTableGame(tableSede)
         if (portalInferior === false) {
             setPortalInferior(true)
@@ -128,12 +132,12 @@ function MapScreen(props) {
                     </div>}
                 >
                 </ImagePanel>
-                {screen > 800 &&
+                {(screen > 800 && tableGame)&&
                     <div>
                         <TableGame listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
                     </div>
                 }
-                {screen < 800 &&
+                {(screen < 800 && tableGame) &&
                     <Absolute style={{ top: "80%", right: "80%" }}>
                         <ButtonImage image={btnatras} listener={handlePortal} styleImage={!portalInferior ? { transform: "rotate(90deg)" }: { transform: "rotate(270deg)" } }>
 
@@ -168,23 +172,24 @@ function Portal(props) {
         right: props.right || 0
     }
     return (
-        <div id={props.id} style={{ ...stylePortal }} onClick={props.listener}>
-            <Absolute style={{ width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "black", top: "10px" }}>
+        <div  style={{ ...stylePortal }}>
+            <Absolute id={props.id} style={{ width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "black", top: "10px" }} listener={props.listener}>
                 <MaskedAvatar
                     id={props.id}
                     avatar={props.imageSede || sedeBogota}
                     styleImage={{ borderRadius: "50%" }}
                     containerImage={btnsedesmarcomapa}
-                    padding={0}
-                    listener={() => console.log('Clicked MarkedAvatar')}
+                    padding={1}
+                    paddingTop={"20%"}
+                    // listener={props.listener}
                     maskBorder={100}
                 />
             </Absolute>
             <Absolute style={{ width: "20px", height: "20px", borderRadius: "50%", backgroundColor: "", left: "60%", top: "60%" }}>
-                <img alt="portal1" src={props.escudo} width="20px" height="20px"></img>
+                <img alt="portal1" src={props.escudo || escudoBogota} width="20px" height="20px"></img>
             </Absolute>
             <Absolute style={{ width: "20px", height: "20px", borderRadius: "50%", backgroundColor: "", top: "60%", right: "80%", left: "auto" }}>
-                <img alt="portal2" src={props.portal}></img>
+                <img alt="portal2" src={props.portal ||  portalTunja}></img>
             </Absolute>
             <Absolute style={{ top: "90%", right: "15%" , textAlign: "center", color: "black" }}>
                 <Flex style={{ position: 'relative', width: '100%', height: '100%' }} >

@@ -28,7 +28,7 @@ function FeedbackScreen(props) {
 
                         <Flex align='center' justify='center' style={{height:'20%', width:'100%'}}>
                             <CurrencyHorizontal
-                                quantity={30}
+                                quantity={props.respuesta ? 2 : -1  }
                                 image={key}
                                 displayX={true}
                                 styleX={{ padding: "5px", fontSize: "30px" }}
