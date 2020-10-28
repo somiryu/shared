@@ -13,6 +13,7 @@ import ButtonMultiStateWithText from '../shared/Buttons/ButtonMultiStateWithText
 import estudiante from '../images/Graficos/estudiante.png'
 import profesora from '../images/Graficos/profesora.png'
 import secretaria from '../images/Graficos/secretaria.png'
+import Absolute from '../shared/Containers/Absolute';
 const Roles = [
     {
         text: 'Profesora',
@@ -65,33 +66,44 @@ function SedeScreen(props) {
                 {Roles.map((rol, index) => {
                     return (
                         <Flex direction="column" align="center" style={{ margin: "20px", width: "160px" }}>
-                            <MaskedAvatarWithTitle
-                                id="colaborador2"
-                                avatar={rol.image || estudiante}
-                                containerImage={contapersonajes}
-                                padding={'20%'}
-                                paddingLabel={0}
-                                maskBorder={0}
-                                imageTitle={Colaborador}
-                                textAlign={"center"}
-                                debug={false}
-                                label={<label style={{ color: "var(--yellow-ligth)" }}>{rol.text}</label>}
-                                pointer={true}
-                                listener={() => props.listener(6)}
-                                leftLabel={"-1%"}
-                                topLabel={"75%"}
-                            >
-                            </MaskedAvatarWithTitle>
+                            <Flex style={{ position: 'relative' }}>
+                                <Absolute className='background-container-profiles ' style={{
+                                    backgroundColor: 'red', width: '80%',
+                                    height: '74%',
+                                    margin: '15% auto 34%'
+                                }}>
+
+                                </Absolute>
+                                <Flex>
+                                    <MaskedAvatarWithTitle
+                                        id="colaborador2"
+                                        avatar={rol.image || estudiante}
+                                        containerImage={contapersonajes}
+                                        padding={'20%'}
+                                        paddingLabel={0}
+                                        maskBorder={0}
+                                        imageTitle={Colaborador}
+                                        textAlign={"center"}
+                                        debug={false}
+                                        label={<label style={{ color: "var(--yellow-ligth)" }}>{rol.text}</label>}
+                                        pointer={true}
+                                        listener={() => props.listener(6)}
+                                        leftLabel={"-1%"}
+                                        topLabel={"75%"}
+                                    >
+                                    </MaskedAvatarWithTitle>
+                                </Flex>
+                            </Flex>
                             <ButtonMultiStateWithText
                                 id={`btn${index}1`}
                                 state={'on'}
                                 scale={1.2} //1.1
                                 images={{ off: contatiempo, on: contatiempoactivo }}
                                 listeners={{
-                                    off: () => {  },
-                                    on: () => {  },
+                                    off: () => { },
+                                    on: () => { },
                                 }}
-                                stylesText={{ off: { color: 'var(--dark-grey)', marginBottom:'5%' }, on: { color: 'var(--yellow-ligth)', marginBottom:'5%' } }}
+                                stylesText={{ off: { color: 'var(--dark-grey)', marginBottom: '5%' }, on: { color: 'var(--yellow-ligth)', marginBottom: '5%' } }}
                                 styles={{}}
                                 text={<label className='label'>{rol.schedule1}</label>}
                             />
@@ -101,10 +113,10 @@ function SedeScreen(props) {
                                 scale={1.2} //1.1
                                 images={{ off: contatiempo, on: contatiempoactivo }}
                                 listeners={{
-                                    off: () => {  },
-                                    on: () => {  },
+                                    off: () => { },
+                                    on: () => { },
                                 }}
-                                stylesText={{ off: { color: 'var(--dark-grey)', marginBottom:'5%' }, on: { color: 'var(--yellow-ligth)', marginBottom:'5%' } }}
+                                stylesText={{ off: { color: 'var(--dark-grey)', marginBottom: '5%' }, on: { color: 'var(--yellow-ligth)', marginBottom: '5%' } }}
                                 styles={{}}
                                 text={<label className='label2'>{rol.schedule2}</label>}
                             />
