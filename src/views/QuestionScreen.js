@@ -8,7 +8,7 @@ import tubo from "../images/general/lineatubocontenedor.png"
 import btnrespuesta from "../images/buttons/btnrespuesta.png"
 import btnrespuestaactivo from "../images/buttons/btnrespuestaactivo.png"
 import preguntas from "../views/models/trivias"
-import ProgressBarWhithImage from "../shared/Indicators/ProgressBarWhithImage"
+import ProgressBarWithImage from "../shared/Indicators/ProgressBarWithImage"
 import screw from "../images/Graficos/tornillobarratrivias.png"
 
 function QuestionScreen(props) {
@@ -77,7 +77,7 @@ function QuestionScreen(props) {
                 </ButtonImageWithLabel>
             </div>
             <Flex>
-                <ProgressBarWhithImage
+                <ProgressBarWithImage
                     percentage="30"
                     //image={Bar}
                     padding='1% 0% 1%'
@@ -87,7 +87,7 @@ function QuestionScreen(props) {
                     border={{border:"1px var(--yellow-ligth) solid"}}
                     barColor={"var(--green)"}
                 >
-                </ProgressBarWhithImage>
+                </ProgressBarWithImage>
             </Flex>
         </Flex>
     )

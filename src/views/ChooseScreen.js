@@ -27,7 +27,7 @@ function ChooseScreen(props) {
                                 style={{ width: '50%' }}
                             >
                                 <Flex align="center" justify='center' style={{ height: '100%', width: '60%', margin: '0 auto' }}>
-                                    <p style={{ color: 'var(--dark-yellow)' }}>ELIGE UN AVENTURERO</p>
+                                    <p style={{ color: 'var(--ligth-grey)' }}>ELIGE UN AVENTURERO</p>
                                 </Flex>
                             </ImagePanel>
                         </Flex>
