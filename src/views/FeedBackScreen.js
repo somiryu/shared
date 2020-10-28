@@ -42,7 +42,7 @@ function FeedbackScreen(props) {
                                 image={props.buttonImage || ButtonImage}
                                 label={props.buttonLabel || <label style={{ fontWeight: "700", fontSize: "17px", height: "30px" }}>VOLVER</label>}
                                 listener={() => {
-                                    props.listener(0)
+                                    props.listener(props.respuesta ? 2 : -1)
                                 }}
                             >
                             </ButtonImageWithLabel>

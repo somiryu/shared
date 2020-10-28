@@ -26,8 +26,9 @@ window.EM = new EventEmitter();
 window.flash = (message, type="success") => window.EM.emit('flash', ({message, type}));
 
 function App() {
-  const [layout,setLayout] = useState("Question")
+  const [layout,setLayout] = useState("Register")
   const [respuesta,setRespuesta] = useState(false)
+  const [globalKeys,setGlobalKeys] = useState(0)
   const [secondaryBg] = useState(true)
   let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback"]
   const listener = (indice) =>{
@@ -36,6 +37,10 @@ function App() {
   const listenerQuestion = (indice,res) =>{
     setLayout(pages[indice])
     setRespuesta(res)
+  }
+  const listenerFeedback = (points) =>{
+    setGlobalKeys(globalKeys + points)
+    setLayout(pages[3])
   }
   let addClass;
   if (layout === "Mapa" || layout === "EndGame" || layout === "BeginGame") addClass = "SkyBackground";
@@ -68,7 +73,7 @@ function App() {
         }
        <PlayArea width={layout === 'BeginGame' ? 1400 : 1000}>
         {(layout !== "Register" && layout !== "Legend" && layout !== "Choose") &&
-          <Header listener={listener} layout={layout}></Header>
+          <Header listener={listener} layout={layout} points={globalKeys}></Header>
         }
        
         {layout === "Register" &&
@@ -106,7 +111,7 @@ function App() {
         }
         {layout === "Feedback" &&
           <FeedBackScreen 
-            listener = {listener}
+            listener = {listenerFeedback}
             respuesta = {respuesta}
           >
           </FeedBackScreen>

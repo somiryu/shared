@@ -53,13 +53,14 @@ function Header(props){
                                 image={Bar}
                                 padding='2% 10% 4%'
                                 styleContainer={{ width: "100%", height: "80%" }}
+                                background={"linear-gradient(to left, rgba(25,15,11,1) 0%, rgba(66,33,11,1) 25%, rgba(96,56,19,1) 51%, rgba(66,33,11,1) 80%, rgba(25,15,11,1) 100%)"}
                             >
                             </ProgressBar>
                         </Flex>
                         <Flex style={{height:'33%', width:'50%'}}>
                             <CurrencyHorizontal
                                 className="source"
-                                quantity={30}
+                                quantity={props.points || 0}
                                 image={key}
                                 displayX={true}
                                 styleX={{padding:"0 5px", color:'var(--yellow-ligth)'}}

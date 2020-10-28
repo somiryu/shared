@@ -8,6 +8,8 @@ import tubo from "../images/general/lineatubocontenedor.png"
 import btnrespuesta from "../images/buttons/btnrespuesta.png"
 import btnrespuestaactivo from "../images/buttons/btnrespuestaactivo.png"
 import preguntas from "../views/models/trivias"
+import ProgressBarWhithImage from "../shared/Indicators/ProgressBarWhithImage"
+import screw from "../images/Graficos/tornillobarratrivias.png"
 
 function QuestionScreen(props) {
     let resp = false
@@ -53,7 +55,7 @@ function QuestionScreen(props) {
                 </CheckBoxesController>
             </Flex>
 
-            <div style={{ display: "flex", justifyContent: "center", margin: "0 auto", width: props.widthButton || "60%",marginBottom:"100px"}}>
+            <div style={{ display: "flex", justifyContent: "center", margin: "0 auto", width: props.widthButton || "60%",marginBottom:"10px"}}>
                 <ButtonImageWithLabel
                     id={props.buttonId || "firstbutton"}
                     image={props.buttonImage || ButtonImage}
@@ -74,6 +76,19 @@ function QuestionScreen(props) {
                 >
                 </ButtonImageWithLabel>
             </div>
+            <Flex>
+                <ProgressBarWhithImage
+                    percentage="30"
+                    //image={Bar}
+                    padding='1% 0% 1%'
+                    styleContainer={{ width: "300px", height: "21px" }}
+                    imageRelative={screw}
+                    background={"linear-gradient(to left, rgba(25,15,11,1) 0%, rgba(66,33,11,1) 25%, rgba(96,56,19,1) 51%, rgba(66,33,11,1) 80%, rgba(25,15,11,1) 100%)"}
+                    border={{border:"1px var(--yellow-ligth) solid"}}
+                    barColor={"var(--green)"}
+                >
+                </ProgressBarWhithImage>
+            </Flex>
         </Flex>
     )
 }
