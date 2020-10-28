@@ -51,13 +51,13 @@ function Carrousel(props) {
 		}}>
 
 			<div className="arrowleft" style={{ display: 'flex', alignItems:'center',justifyContent:'100%', height: '100%',width:'10%',zIndex:'3', cursor:'pointer' }} onClick={props.clickL || next}>
-				<img src={props.leftIcon} alt='Flecha Derecha' style={{ width: '100%' }} />
+				<img src={props.leftIcon} style={{ width: '100%' }} />
 			</div>
 			<div style={{ display: 'flex', height: '100%',width:'80%', zIndex:'1' }}>
 				{props.children}
 			</div>
 			<div className="arrowrigth" style={{ display: 'flex',alignItems:'center', justifyContent:'100%',width:'10%', height:'100%',zIndex:'3', cursor:'pointer' }} onClick={props.clickR || next}>
-				<img src={props.rightIcon} alt='Flecha Derecha' style={{ width: '100%' }} />
+				<img src={props.rightIcon}  style={{ width: '100%' }} />
 			</div>
 
 		</div>
