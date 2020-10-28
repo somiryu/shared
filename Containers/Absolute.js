@@ -12,7 +12,7 @@ export default function Absolute(props) {
         right: props.right || 0
     }
     return (
-        <div id={props.id} className={window.DEBUG ? 'testBox' : ''} style={{...styleAbs, ...props.style}} onClick={props.listener ? () => props.listener(props.id) : () => {} }>
+        <div id={props.id} className={window.DEBUG ? `testBox ${props.className ? props.className : ''}` : `${props.className ? props.className : ''}`} style={{...styleAbs, ...props.style}} onClick={props.listener ? () => props.listener(props.id) : () => {} }>
             {props.children}
         </div>
     )

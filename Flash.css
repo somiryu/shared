@@ -1,0 +1,28 @@
+.alert {
+	color: white;
+	border-radius: 10px;
+	position: fixed;
+	top: 80px;
+	right: 10px;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	z-index: 1111;
+}
+.alert p {
+	margin: 0;
+}
+.alert-error {
+	background: linear-gradient(to left, rgba(25,15,11,1) 0%, rgba(66,33,11,1) 25%, rgba(96,56,19,1) 51%, rgba(66,33,11,1) 80%, rgba(25,15,11,1) 100%)
+}
+.alert-warning {
+	background: var(--orange);
+}
+.alert-success {
+	background: var(--purple);
+}
+.closeFlash {
+	color: white;
+	cursor: pointer;
+	margin-right: 10px;
+}
