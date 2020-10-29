@@ -24,10 +24,10 @@ export default function CountdownRealtime(props) {
     } else{
       reset();
       return () => {
-        clearInterval(interval.current);      
+        clearInterval(null);      
       }
     }
-  });
+  },[countDownDate,timerSeconds,timerMinutes,props.fechaFin]);
   const reset = () =>{
     props.reset(props.id);
   }
@@ -40,6 +40,7 @@ export default function CountdownRealtime(props) {
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)));
       const minutes = Math.floor(distance % (1000 * 60 * 60)) / (1000 * 60);
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
       if (distance < 0) {
         //terminar timer
         clearInterval(interval.current);
@@ -56,7 +57,7 @@ export default function CountdownRealtime(props) {
   }
   return (
     <Flex>
-      <h3>{timerHours}:{timerMinutes}:{timerSeconds}</h3>
+      <h3>{timerHours<=9?`0${timerHours}`:timerHours}:{timerMinutes<=9?`0${timerMinutes}`:timerMinutes}:{timerSeconds}</h3>
     </Flex>
   )
 }
