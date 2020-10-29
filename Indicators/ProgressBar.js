@@ -31,12 +31,12 @@ export default function ProgressBar(props) {
         ...props.styleProgress
     }
     return (
-        <div style={{ display: 'inline-block', position:'relative', ...props.styleContainer,...props.border}}>
+        <div style={{ display: 'inline-block', position:'relative', ...props.styleContainer}}>
             <div className={props.debug ? 'testBox ProgressBar' : 'ProgressBar'} style={{ display: 'inline-block', position: 'relative', zIndex: '2' }}>
                 <img src={props.image ? props.image : ''} alt="Progress Bar" style={{ width: '100%', display: props.image ? 'block' : 'none' }}></img>
             </div>
             <div className={props.debug ? 'testBox' : ''} style={styleBar}>
-                <div className={props.debug ? 'testBox' : ''} style={{ width: '100%', height: '100%', backgroundColor: props.backgroundColor || '', borderRadius: props.borderRadius || '5px' }}>
+                <div className={props.debug ? 'testBox' : ''} style={{ width: '100%', height: '100%', background: props.background || '',backgroundColor: props.backgroundColor || '', borderRadius: props.borderRadius || '5px',...props.border }}>
                     <div className={props.debug ? 'testBox' : ''} style={styleProgress}>
                     </div>
                 </div>
