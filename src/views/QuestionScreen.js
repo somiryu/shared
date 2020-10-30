@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Flex from "../shared/Containers/Flex"
 import ButtonImage from "../images/buttons/btnprincipal.png"
 import ButtonImageWithLabel from '../shared/Buttons/ButtonImageWithLabel'

@@ -59,7 +59,7 @@ function MapScreen(props) {
     const [portalInferior, setPortalInferior] = useState(false)
     const [tableGame, setTableGame] = useState(sedes[0])
     console.log("=======>",tableGame)
-    //const time = Date.now(); aun no lo implementare pero se usara para calcular si el portal esta abierto o cerrado
+    
     
     const handlePortal = (e) => {
         console.log("estoy entrando",e)
@@ -124,7 +124,7 @@ function MapScreen(props) {
                         }
                         {
                         sedes.map((e)=>
-                            <Portal id={e.name} top={e.y + "%"} left={e.x + "%"} imageSede={imagesSedes[e.name]} listener={handlePortal} portal={portales[e.name]} escudo={escudos[e.name]}></Portal>
+                            <Portal id={e.name} top={e.y + "%"} left={e.x + "%"} imageSede={imagesSedes[e.name]} sede={e} listener={handlePortal} portal={portales[e.name]} escudo={escudos[e.name]}></Portal>
                         )
                         }
                         {/* <Portal top="50%" left="50%" imageSede={sedeBogota} listener={handlePortal} portal={inportalvillamapa} escudo={escudoBogota}></Portal>
@@ -158,6 +158,34 @@ function MapScreen(props) {
 
 function Portal(props) {
     const [startTimer, setstartTimer] = useState(false)
+    const [statePortal, setStatePortal] = useState(false)
+    const [horas,setHoras] = useState(0)
+    const [minutos,setMinutos] = useState(0)
+    const [segundos,setSegundos] = useState(0)
+    useEffect(() => {
+        var date = new Date();
+        let hour = date.getHours()
+        let minutes = date.getMinutes()
+        let seconds = date.getSeconds()
+        if(props.sede){
+            let horarios=[]
+            props.sede.schedule.map((e)=>{
+                horarios=e.split("-")
+                let hi = parseInt(horarios[0])
+                let hf = parseInt(horarios[1])
+                if(hour>hi && hour<hf){
+                    setHoras(hf-hour)
+                    setMinutos(minutes)
+                    setSegundos(seconds)
+                    setStatePortal(true)
+                    // setstartTimer(true)
+                    return null  
+                }
+                return null  
+            })
+        }
+          
+    }, [props.sede])
     useEffect(() => {
         setTimeout(() => {
             setstartTimer(true)
@@ -169,36 +197,38 @@ function Portal(props) {
         width: "50px",
         top: props.top || 0,
         left: props.left || 0,
-        right: props.right || 0
+        right: props.right || 0,
+        filter:statePortal?"":"grayscale(1)"
     }
+    console.log("Tiempo===============>",props.id,horas,minutos,segundos,startTimer)
     return (
-        <div  style={{ ...stylePortal }}>
+        <div  style={{...stylePortal}}>
             <Absolute id={props.id} style={{ width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "black", top: "10px" }} listener={props.listener}>
                 <MaskedAvatar
                     id={props.id}
                     avatar={props.imageSede || sedeBogota}
                     styleImage={{ borderRadius: "50%" }}
                     containerImage={btnsedesmarcomapa}
-                    padding={1}
+                    padding={"8px 4px"}
                     paddingTop={"20%"}
                     // listener={props.listener}
-                    maskBorder={100}
+                    maskBorder={50}
                 />
             </Absolute>
             <Absolute style={{ width: "20px", height: "20px", borderRadius: "50%", backgroundColor: "", left: "60%", top: "60%" }}>
-                <img alt="portal1" src={props.escudo || escudoBogota} width="20px" height="20px"></img>
+                <img alt="escudo" src={props.escudo || escudoBogota} width="20px" height="20px"></img>
             </Absolute>
             <Absolute style={{ width: "20px", height: "20px", borderRadius: "50%", backgroundColor: "", top: "60%", right: "80%", left: "auto" }}>
-                <img alt="portal2" src={props.portal ||  portalTunja}></img>
+                <img alt="portal"  src={props.portal ||  portalTunja}></img>
             </Absolute>
             <Absolute style={{ top: "90%", right: "15%" , textAlign: "center", color: "black" }}>
                 <Flex style={{ position: 'relative', width: '100%', height: '100%' }} >
                     <img alt="contetiempo" src={contatiempoactivo} style={{ width: '180%', height: '100%' }}></img>
                     <Absolute top='20%'>
                         <Timer
-                            horas={0}
-                            minutos={30}
-                            segundos={30}
+                            horas={horas}
+                            minutos={minutos}
+                            segundos={segundos}
                             iniciar={startTimer}
                             detener={false}
                             reiniciar={false} //inicia o reanuda
@@ -211,34 +241,5 @@ function Portal(props) {
         </div>
     )
 }
-
-// var time = {
-//     segundos:0,
-//     minutos:0,
-//     horas:0
-// }
-
-// function Timer(props){
-//     const [seconds, setSeconds] = useState(props.seconds || 0)
-//     const [minutes, setMinutes] = useState(props.minutes || 0)
-//     const [hours, setHours] = useState(props.hours || 0)
-//     while(seconds > 0 ){
-//         if(seconds !== 0){
-//             console.log("entre al if")
-//             let i = seconds;
-//             while( i > 1){
-//                 console.log(i);
-//                 i=i-1;
-//                 setTimeout(console.log("un segundo"),1000);
-//             }      
-//         }     
-//     }
-
-//     return(<h1>{seconds}</h1>)
-
-// }
-
-
-
 
 export default MapScreen;

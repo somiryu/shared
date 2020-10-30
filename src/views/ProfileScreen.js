@@ -64,7 +64,7 @@ function ProfileScreen(props) {
                 <ChipController
                     imageChip={button}
                     imageChipDeactivate={buttonDeactivate}
-                    chips={[{ id: "Perfil",listener:listenerPerfil,label: <label className="label1" id="Perfil" style={{zIndex: "999"}}>Perfil</label> }, { id: "Regional",listener:listenerRegional,label: <label className="label1" id="Regional" style={{zIndex: "999"}}>Regional</label> }, { id: "Cofradia",listener:listenerCofradia,label: <label className="label1" id={"Cofradia"} style={{zIndex: "999"}}>Cofradia</label> }]}
+                    chips={[{ id: "Perfil",listener:listenerPerfil,label: <label className="label-bg" id="Perfil" style={{zIndex: "999"}}>Perfil</label> }, { id: "Regional",listener:listenerRegional,label: <label className="label-bg" id="Regional" style={{zIndex: "999"}}>Regional</label> }, { id: "Cofradia",listener:listenerCofradia,label: <label className="label-bg" id={"Cofradia"} style={{zIndex: "999"}}>Cofradia</label> }]}
                     styleChips={{ fontFamily: 'Source Serif Pro' }}
                     styleActivate={{ color: "#EAAB1C" }}
                     chipControllerStyle={{ width: '100%' }}

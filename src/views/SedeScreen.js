@@ -1,7 +1,7 @@
 import React from 'react'
 import Flex from "../shared/Containers/Flex"
 import MaskedAvatarWithTitle from "../shared/Hubs/MaskedAvatarWithTitle";
-import Avatar from "../shared/ExampleImages/avatar.png"
+import Fraile from "../images/Graficos/fraile-temp.png"
 import Colaborador from "../shared/ExampleImages/Hubs/tituloColaborador.png"
 import contatiempo from "../images/buttons/contatiempo.png"
 import contatiempoactivo from "../images/buttons/contatiempoactivo.png"
@@ -10,9 +10,9 @@ import ContentSede from "../images/general/contasedejuego.png"
 import contapersonajes from "../images/general/contapersonajes.png"
 import portalVillavicencio from "../images/Portales/inportalvilla.png"
 import ButtonMultiStateWithText from '../shared/Buttons/ButtonMultiStateWithText';
-import estudiante from '../images/Graficos/estudiante.png'
-import profesora from '../images/Graficos/profesora.png'
-import secretaria from '../images/Graficos/secretaria.png'
+import estudiante from '../images/Graficos/estudiante-temp.png'
+import profesora from '../images/Graficos/profesora-temp.png'
+import secretaria from '../images/Graficos/secretari-temp.png'
 import Absolute from '../shared/Containers/Absolute';
 const Roles = [
     {
@@ -29,7 +29,7 @@ const Roles = [
     },
     {
         text: 'Fraile',
-        image: Avatar,
+        image: Fraile,
         schedule1: '7 - 9 pm',
         schedule2: '8 - 9 pm'
     },
@@ -54,7 +54,7 @@ function SedeScreen(props) {
                             <h2>{props.title || "Titulo"}</h2>
                         </Flex>
                         <Flex className='scrollbar' align="flex-start" style={{ margin: '5% 0', width: '60%', height: '30%', overflowY: 'auto' }} >
-                            <p style={{ color: 'var(--yellow-ligth)' }}>{props.legend || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."}</p>
+                            <p style={{ color: 'white' }}>{props.legend || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."}</p>
                         </Flex>
                         <Flex align="flex-start" style={{ height: '50%' }} >
                             <img alt="portal" src={portalVillavicencio} style={{ width: '80%' }}></img>
@@ -68,7 +68,7 @@ function SedeScreen(props) {
                         <Flex direction="column" align="center" style={{ margin: "20px", width: "160px" }}>
                             <Flex style={{ position: 'relative' }}>
                                 <Absolute className='background-container-profiles ' style={{
-                                    backgroundColor: 'red', width: '80%',
+                                    width: '80%',
                                     height: '74%',
                                     margin: '15% auto 34%'
                                 }}>
@@ -79,7 +79,7 @@ function SedeScreen(props) {
                                         id="colaborador2"
                                         avatar={rol.image || estudiante}
                                         containerImage={contapersonajes}
-                                        padding={'20%'}
+                                        padding={'20% 20% 38% 21%'}
                                         paddingLabel={0}
                                         maskBorder={0}
                                         imageTitle={Colaborador}
@@ -87,7 +87,7 @@ function SedeScreen(props) {
                                         debug={false}
                                         label={<label style={{ color: "var(--yellow-ligth)" }}>{rol.text}</label>}
                                         pointer={true}
-                                        listener={() => props.listener(6)}
+                                        listener={() => props.listener(rol.text)}
                                         leftLabel={"-1%"}
                                         topLabel={"75%"}
                                     >

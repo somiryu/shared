@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
 import Flex from "../shared/Containers/Flex"
 import ButtonImageWithLabel from "../shared/Buttons/ButtonImageWithLabel"
 import MaskedAvatarWithTitle from "../shared/Hubs/MaskedAvatarWithTitle"
@@ -8,9 +8,51 @@ import ImageTest from "../images/buttons/btnprincipal.png"
 import ImagePanel from "../shared/Panels/ImagedPanel"
 import imagedefault from "../images/general/imagedefault.png"
 import imageArrow from "../images/buttons/btnsiguienteflechas.png"
-import estudiante from '../images/Graficos/estudiante.png'
+import profesora from '../images/Graficos/profesora-temp.png'
+import secretaria from '../images/Graficos/secretari-temp.png'
+import Absolute from '../shared/Containers/Absolute';
+import estudiante from '../images/Graficos/estudiante-temp.png'
+import Fraile from "../images/Graficos/fraile-temp.png"
+
+const Roles = [
+    {
+        text: 'Profesora',
+        image: profesora,
+        schedule1: '7 - 9 pm',
+        schedule2: '8 - 9 pm'
+    },
+    {
+        text: 'Secretaria',
+        image: secretaria,
+        schedule1: '7 - 9 pm',
+        schedule2: '8 - 9 pm'
+    },
+    {
+        text: 'Fraile',
+        image: Fraile,
+        schedule1: '7 - 9 pm',
+        schedule2: '8 - 9 pm'
+    },
+    {
+        text: 'Estudiante',
+        image: estudiante,
+        schedule1: '7 - 9 pm',
+        schedule2: '8 - 9 pm'
+    }
+]
 
 function ProfileScreen(props) {
+    const [rol] = useState(props.character || 'Estudiante')
+    const [currentRol,setCurrentRol] = useState(false)
+    useEffect(() => {
+        Roles.map((e)=>{
+            if(e.text === rol){
+                setCurrentRol(e)
+            }
+            return null
+        })
+    }, [rol])
+    
     return (
         <Flex align="center" direction="column" style={{marginTop: "0%", marginLeft: "10%", marginRight: "10%" }}>
             <Flex id='ProfileScreenContainer' align="center" style={{ flexWrap: "wrap-reverse", height:'70vh' }}>
@@ -46,21 +88,30 @@ function ProfileScreen(props) {
                         align="center"
                         style={{width:'100%'}}
                     >
-                        <MaskedAvatarWithTitle
-                            id="colaborador2"
-                            avatar={estudiante}
-                            containerImage={contapersonajes}
-                            padding='20%'
-                            paddingLabel='5'
-                            maskBorder={100}
-                            textAlign={"center"}
-                            // imageLabel={TituloColaborador}
-                            label={<label className='label1' style={{ color: "var(--yellow-ligth)" }}>SECRETARIA</label>}
-                            pointer={true}
-                            listener={() => console.log('Clicked MarkedAvatar')}
-                            topLabel={"72%"}
-                        >
-                        </MaskedAvatarWithTitle>
+                        <Flex style={{ position: 'relative' }}>
+                            <Absolute className='background-container-profiles ' style={{
+                                width: '80%',
+                                height: '74%',
+                                margin: '15% auto 34%'
+                            }}>
+
+                            </Absolute>
+                            <MaskedAvatarWithTitle
+                                id="colaborador2"
+                                avatar={currentRol?currentRol.image:estudiante}
+                                containerImage={contapersonajes}
+                                padding={'20% 20% 38% 21%'}
+                                paddingLabel='5'
+                                maskBorder={0}
+                                textAlign={"center"}
+                                // imageLabel={TituloColaborador}
+                                label={<label  style={{ color: "var(--yellow-ligth)" }}>{currentRol?currentRol.text:'ESTUDIANTE'}</label>}
+                                pointer={true}
+                                listener={() => console.log('Clicked MarkedAvatar')}
+                                topLabel={"72%"}
+                            >
+                            </MaskedAvatarWithTitle>
+                        </Flex>
                     </Flex>
                     <Flex
                         direction="column"

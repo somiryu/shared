@@ -87,7 +87,7 @@ body {
     --dark-ocher: #744A1C;
     --mid-ocher: #AB8745;
     --ligth-ocher: #D1AB69;
-    --green: #508a2a;
+    --green: #24a01f;
     --blue: #2C2C44;
     --dark-blue: #1C1323;
     --white: #FFFAF0;
@@ -826,7 +826,9 @@ p {
 }
 
 .label-bg {
-    font-size: 1em;
+    font-size: 1.4rem;
+    color: black;
+    font-family: 'Source Serif Pro', serif;
 }
 
 .paper-options {
@@ -1044,6 +1046,8 @@ p {
     }
     .label-bg {
         font-size: 1em;
+        color: black;
+        font-family: 'Source Serif Pro', serif;
     }
     .h1-number {
         font-size: 1rem;

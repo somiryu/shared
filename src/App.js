@@ -26,10 +26,11 @@ window.EM = new EventEmitter();
 window.flash = (message, type="success") => window.EM.emit('flash', ({message, type}));
 
 function App() {
-  const [layout,setLayout] = useState("Sede")
+  const [layout,setLayout] = useState("Register")
   const [respuesta,setRespuesta] = useState(false)
   const [globalKeys,setGlobalKeys] = useState(0)
   const [secondaryBg] = useState(true)
+  const [currentCahracter,setCurrentCahracter]=useState(false)
   let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback"]
   const listener = (indice) =>{
     setLayout(pages[indice])
@@ -41,6 +42,10 @@ function App() {
   const listenerFeedback = (points) =>{
     setGlobalKeys(globalKeys + points)
     setLayout(pages[3])
+  }
+  const listenerSede = (character) =>{
+    setCurrentCahracter(character)
+    setLayout(pages[6])
   }
   let addClass;
   if (layout === "Mapa" || layout === "EndGame" || layout === "BeginGame") addClass = "SkyBackground";
@@ -98,11 +103,11 @@ function App() {
           </ProfileScreen>
         }
         {layout === "Sede" &&
-          <SedeScreen listener = {listener}>
+          <SedeScreen listener = {listenerSede}>
           </SedeScreen>
         }
         {layout === "Rol" &&
-          <RolProfileScreen listener = {listener}>
+          <RolProfileScreen listener = {listener} character={currentCahracter}>
           </RolProfileScreen>
         }
         {layout === "Question" &&

@@ -1,5 +1,6 @@
 import React from "react";
 import Flex from "../../shared/Containers/Flex"
+import Absolute from "../../shared/Containers/Absolute"
 import ProgressBar from "../../shared/Indicators/ProgressBar";
 import ButtonImage from "../../shared/Buttons/ButtonImage"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
@@ -54,6 +55,7 @@ function Header(props){
                                 padding='2% 10% 4%'
                                 styleContainer={{ width: "100%", height: "80%" }}
                                 background={"linear-gradient(to left, rgba(25,15,11,1) 0%, rgba(66,33,11,1) 25%, rgba(96,56,19,1) 51%, rgba(66,33,11,1) 80%, rgba(25,15,11,1) 100%)"}
+                                barColor={"var(--green)"}
                             >
                             </ProgressBar>
                         </Flex>
@@ -82,15 +84,28 @@ function Header(props){
                             <CurrencyHorizontal
                                 className="source"
                                 quantity={30}
-                                image={<MaskedAvatar
+                                image={
+                                <Flex style={{ position: 'relative' }}>
+                                    <Absolute  style={{
+                                        backgroundColor: 'black',
+                                        width: '90%',
+                                        height: '78%',
+                                        margin: '12% auto 34%',
+                                        borderRadius: '50%',
+                                    }}>
+
+                                    </Absolute>
+                                <MaskedAvatar
                                     id="sedeHeader"
+                                    paddingTop={"25%"}
                                     avatar={sedeprincipalbogota}
                                     styleImage={{borderRadius:"50%"}}
                                     containerImage={contasedeheader}
-                                    padding={8}
+                                    padding={"15px 5px"}
                                     listener={() => console.log('Clicked MarkedAvatar')}
-                                    maskBorder={100}
-                                />}
+                                    maskBorder={50}
+                                />
+                                </Flex>}
                                 imageHtml={true}
                                 displayX={false}
                                 id="middleContent"
