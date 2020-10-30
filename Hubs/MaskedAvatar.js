@@ -10,8 +10,7 @@ export default (props) =>{
 			<div style={{position:"absolute", width:"100%", height:"100%", top:0, left:0, display:"flex", justifyContent:"center"}}>
 				<div style={{
 					display:'inline-block',
-					margin:props.padding,
-					marginTop:props.paddingTop || props.padding, 
+					margin:props.padding, 
 					overflow:"hidden",
 					borderRadius:props.maskBorder+"%",
 					WebkitBorderRadius:props.maskBorder+"%",
