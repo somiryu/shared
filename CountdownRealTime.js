@@ -57,7 +57,7 @@ export default function CountdownRealtime(props) {
   }
   return (
     <Flex>
-      <h3>{timerHours<=9?`0${timerHours}`:timerHours}:{timerMinutes<=9?`0${timerMinutes}`:timerMinutes}:{timerSeconds}</h3>
+      <h3 style={{color:'white'}}>{timerHours<=9?`0${timerHours}`:timerHours}:{timerMinutes<=9?`0${timerMinutes}`:timerMinutes}:{timerSeconds}</h3>
     </Flex>
   )
 }

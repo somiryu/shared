@@ -3,9 +3,8 @@
 import React from "react";
 
 export default (props) =>{
-	
 	return(
-		<div id={props.id} className="MaskedAvatar" style={{cursor:'pointer', display:"inline-block", position:"relative", maxWidth:"100%",...props.style}}  onClick={props.listener}>
+		<div id={props.id} className="MaskedAvatar" style={{display:"inline-block", position:"relative", maxWidth:"100%",...props.style}}  onClick={props.listener}>
 			<img src={props.containerImage} style={{width:"100%",zIndex:"2"}} alt=""/>
 			<div style={{position:"absolute", width:"100%", height:"100%", top:0, left:0, display:"flex", justifyContent:"center"}}>
 				<div style={{
