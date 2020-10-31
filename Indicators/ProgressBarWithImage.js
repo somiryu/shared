@@ -5,9 +5,10 @@
 // backgroundColor = default(#fff)
 // styleContainer = {}
 
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import ProgressBar from './ProgressBar'
 import Flex from '../Containers/Flex'
+let flagFun = 'add'
 export default function ProgressBarWithImage(props) {
     const [percentage, setPercentage] = useState(0)
     useEffect(() => {
