@@ -1,17 +1,21 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Flex from "../shared/Containers/Flex"
 import ButtonImage from "../images/buttons/btnprincipal.png"
 import ButtonImageWithLabel from '../shared/Buttons/ButtonImageWithLabel'
 import CheckBoxesController from '../shared/Controllers/CheckboxesController'
-import lamp from "../images/general/lampara.png"
+import lampHard from "../images/Graficos/bombillorojo.png"
+import lampMedium from "../images/Graficos/bombillonaranja.png"
+import lampLow from "../images/Graficos/bombilloverde.png"
 import tubo from "../images/general/lineatubocontenedor.png"
 import btnrespuesta from "../images/buttons/btnrespuesta.png"
+import ButtonMultiState from "../shared/Buttons/ButtonMultiState"
 import btnrespuestaactivo from "../images/buttons/btnrespuestaactivo.png"
 import preguntas from "../views/models/trivias"
 import ProgressBarWithImage from "../shared/Indicators/ProgressBarWithImage"
 import screw from "../images/Graficos/tornillobarratrivias.png"
 
 function QuestionScreen(props) {
+    const [difficulty, setDifficulty] = useState("hard")
     let resp = false
     let ran = Math.floor(Math.random() * 4)
     let question = preguntas[ran]
@@ -30,13 +34,33 @@ function QuestionScreen(props) {
         <Flex id="QuestionScreen" align="center" direction="column" style={{ marginTop: "0%", marginLeft: "5%", marginRight: "5%", height: '80vh' }}>
             <Flex style={{ height: '10%' }} align="center">
                 <Flex>
-                    <img alt="lamp" src={lamp}></img>
+                    <ButtonMultiState
+                        id="btnlamp"
+                        state={difficulty}
+                        scale={1.2} //1.1
+                        images={{ hard:lampHard,medium:lampMedium,low:lampLow }}
+                        listeners={{
+                            hard: () => { setDifficulty("medium")},
+                            medium: () => { setDifficulty("low")},
+                            low: () => { setDifficulty("hard")},
+                        }}
+                    ></ButtonMultiState>
                 </Flex>
                 <Flex>
                     <p style={{ color: "#F2C75C" }}>Encuentra la palabra escondida. Si ganas puedes conseguir 2 llaves, sino pierdes 1</p>
                 </Flex>
                 <Flex>
-                    <img alt="lamp2" src={lamp}></img>
+                    <ButtonMultiState
+                        id="btnlamp"
+                        state={difficulty}
+                        scale={1.2} //1.1
+                        images={{ hard:lampHard,medium:lampMedium,low:lampLow }}
+                        listeners={{
+                            hard: () => { setDifficulty("medium")},
+                            medium: () => { setDifficulty("low")},
+                            low: () => { setDifficulty("hard")},
+                        }}
+                    ></ButtonMultiState>
                 </Flex>
             </Flex>
             <Tubo legend={question.question}></Tubo>

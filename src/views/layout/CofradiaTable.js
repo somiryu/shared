@@ -17,9 +17,10 @@ function CofradiaTable(props){
                         style={{ width: "100%" }}
                     >
                         <Flex
-                            style={{width: "100%",position: "relative",padding:"5%"}}
+                            style={{width: "100%",position: "relative",padding:"5%",height:"90%"}}
+                            align="center"
                         >
-                            <Flex style={{width: "30%"}}>
+                            <Flex style={{width: "30%",heigth: "70%"}} align="center">
                                 <MaskedAvatar
                                 id="colaborador1"
                                 avatar={cofradia.image}
@@ -29,7 +30,7 @@ function CofradiaTable(props){
                                 maskBorder={100}
                                 />
                             </Flex>
-                            <Flex style={{width: "70%"}} direction="column">
+                            <Flex style={{width: "70%",heigth: "70%"}} direction="column">
                                 <Flex style={{width: "100%"}}>
                                     <h2>{"Cofradia " + (cofradia.name ? cofradia.name:"Lorem ipsum")}</h2>
                                 </Flex>

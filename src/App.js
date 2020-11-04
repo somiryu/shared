@@ -26,7 +26,7 @@ window.EM = new EventEmitter();
 window.flash = (message, type="success") => window.EM.emit('flash', ({message, type}));
 
 function App() {
-  const [layout,setLayout] = useState("Register")
+  const [layout,setLayout] = useState("Profile")
   const [respuesta,setRespuesta] = useState(false)
   const [globalKeys,setGlobalKeys] = useState(0)
   const [secondaryBg] = useState(true)
