@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import circ20 from "../shared/ExampleImages/Circ-20.png"
 import Flex from "../shared/Containers/Flex"
+import Absolute from "../shared/Containers/Absolute"
 import MaskedAvatar from "../shared/Hubs/MaskedAvatar"
 import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
 import ChipController from "../shared/Controllers/ChipContoller"
@@ -23,38 +24,20 @@ function ProfileScreen(props) {
     const [perfil, setPerfil] = useState(true)
 
     const listenerRegional = () =>{
-        if(regional){
-            setRegional(false)
-            setCofradia(false)
-            setPerfil(true)
-        }else{
-            setRegional(true)
-            setCofradia(false)
-            setPerfil(false)
-        }
+        setRegional(true)
+        setCofradia(false)
+        setPerfil(false)
     }
     const listenerCofradia = () =>{
-        if(cofradia){
-            setRegional(false)
-            setCofradia(false)
-            setPerfil(true)
-        }else{
-            setRegional(false)
-            setCofradia(true)
-            setPerfil(false)
-        }
+        setRegional(false)
+        setCofradia(true)
+        setPerfil(false)
     }
 
     const listenerPerfil = () =>{
-        if(cofradia){
-            setRegional(false)
-            setCofradia(false)
-            setPerfil(true)
-        }else{
-            setRegional(false)
-            setCofradia(false)
-            setPerfil(true)
-        }
+        setRegional(false)
+        setCofradia(false)
+        setPerfil(true)
     }
 
 
@@ -85,16 +68,18 @@ function ProfileScreen(props) {
                     >
                         <Flex
                             id="infoprofile"
-                            style={{ height: "17%", width:"70%"}}
+                            style={{ height: "20%", width:"70%", padding: "0% 0% 5% 0%"}}
                         >   
-                            <MaskedAvatar
-                                id="colaborador1"
-                                avatar={estudiante}
-                                containerImage={contaavatar}
-                                padding={11}
-                                listener={() => console.log('Clicked MarkedAvatar')}
-                                maskBorder={100}
-                            />
+                            <Flex align="center" style={{width:"100%",height:"100%"}}>   
+                                <MaskedAvatar
+                                    id="colaborador1"
+                                    avatar={estudiante}
+                                    containerImage={contaavatar}
+                                    padding={11}
+                                    listener={() => console.log('Clicked MarkedAvatar')}
+                                    maskBorder={100}
+                                />
+                            </Flex>
                             <Flex  direction="column" align="center" style={{width:"100%",height:"100%"}}>
                                 <Flex style={{width:"100%",height:"70%",whiteSpace:"nowrap",textOverflow:"ellipsis",overflow:"hidden"}} justify={"flex-start"} align="center">
                                     <h2 className="sourceSerif" >Javier Velazques</h2>
@@ -120,13 +105,22 @@ function ProfileScreen(props) {
                             style={{ height: "75%" }}
                         >
                             <Flex align="center" justify="space-evenly" style={{  width: "80%", height: "30%"}}>
-                                <Flex style={{width:"30%",height: "80%"}}>
+                                <Flex style={{width:"30%",height: "80%",position:"relative"}}>
+                                    <Absolute  style={{
+                                        backgroundColor: 'black',
+                                        width: '70%',
+                                        height: '88%',
+                                        margin: '7% auto 34%',
+                                        borderRadius: '50%',
+                                        }}>
+
+                                    </Absolute>
                                     <MaskedAvatar
                                         id="colaborador1"
                                         avatar={sedeprincipalbogota}
                                         styleImage={{width:"100%",height: "100%"}}
                                         containerImage={btnsedesmarcomapa}
-                                        padding={12}
+                                        padding={"15px 6px"}
                                         listener={() => console.log('Clicked MarkedAvatar')}
                                         maskBorder={100}
                                     />
@@ -136,7 +130,16 @@ function ProfileScreen(props) {
                                 </Flex>
                             </Flex>
                             <Flex align="center" justify="space-evenly" style={{  width: "80%", height: "30%" }}>
-                                <Flex style={{width:"30%",height: "90%"}}>
+                                <Flex style={{width:"30%",height: "90%",position:"relative"}}>
+                                    <Absolute  style={{
+                                        backgroundColor: 'black',
+                                        width: '70%',
+                                        height: '88%',
+                                        margin: '7% auto 34%',
+                                        borderRadius: '50%',
+                                        }}>
+
+                                    </Absolute>
                                     <MaskedAvatar
                                             id="inmas"
                                             avatar={inmas}
@@ -152,7 +155,16 @@ function ProfileScreen(props) {
                                 </Flex>
                             </Flex>
                             <Flex align="center" justify="space-evenly" style={{  width: "80%", height: "30%" }}>
-                                <Flex style={{width:"30%",height: "60%"}}>
+                                <Flex style={{width:"30%",height: "60%", position:"relative"}}>
+                                    <Absolute  style={{
+                                        backgroundColor: 'black',
+                                        width: '70%',
+                                        height: '98%',
+                                        margin: '7% auto 34%',
+                                        borderRadius: '50%',
+                                        }}>
+
+                                    </Absolute>
                                     <MaskedAvatar
                                             id="papiro"
                                             avatar={inpapiro}
