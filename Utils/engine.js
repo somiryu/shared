@@ -90,12 +90,13 @@
 // value = getProp(agent, tag)
 // [agent, item, category] = getSingleAgentItem(agent, category,tag)
 
+import APIKey from "../../env"
 import Loading from "../Loading"
 import APIkey from "../../env"
 
 export const config = {
-	api_token: APIkey,
-	test_api_token: APIkey,
+	api_token: APIKey,
+	test_api_token: "35446ca1c5968fb4d87345ef8bcca46e",
 	base_url: 'https://engine2.playngage.io/api/',
 	test_url: "http://localhost:3001/api/",
 	cable_url: "wss://engine2.playngage.io/cable/",

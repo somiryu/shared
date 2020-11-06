@@ -11,7 +11,7 @@ function Button(props){
 	      direction: "alternate",
 	      easing: "linear",
 	      complete: function(anim){
-	      	props.listener && props.listener(props.id);
+			props.listener && props.listener(props.id);
 	      }
 	   })  
    }
