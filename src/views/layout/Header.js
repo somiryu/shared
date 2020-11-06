@@ -1,10 +1,10 @@
 import React from "react";
 import Flex from "../../shared/Containers/Flex"
 import Absolute from "../../shared/Containers/Absolute"
-import ProgressBar from "../../shared/Indicators/ProgressBar";
+import ProgressBar from "../../shared/Indicators/ProgressBar"
 import ButtonImage from "../../shared/Buttons/ButtonImage"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
-import ImagedPanel from "../../shared/Panels/ImagedPanel";
+import ImagedPanel from "../../shared/Panels/ImagedPanel"
 import header629 from "../../images/header/contaheader.png"
 import Bar from "../../images/header/barraheader.png"
 import key from "../../images/header/llaveheader.png"
@@ -12,8 +12,10 @@ import btnlideres from "../../images/buttons/btnlideres.png"
 import sedeprincipalbogota from "../../images/Graficos/sedeprincipalbogota.png"
 import contasedeheader from "../../images/buttons/contasedeheader.png"
 import MaskedAvatar from "../../shared/Hubs/MaskedAvatar"
+import btnatras from "../../images/buttons/btnatras.png"
+import ButtonMultiState from  '../../shared/Buttons/ButtonMultiState'
 import "./header.css"
-import btnatras from "../../images/buttons/btnatras.png";
+
 
 
 function Header(props){ 
@@ -117,7 +119,7 @@ function Header(props){
                         <Flex
                             className="source"
                         >
-                            <p style={{color:'var(--yellow-ligth)'}}> &nbsp; X &nbsp; {props.multiplicator ? props.multiplicator : "1.2"}</p>
+                            <p className="mult-header" style={{color:'var(--yellow-ligth)'}}> &nbsp; X &nbsp; {props.multiplicator ? props.multiplicator : "1.2"}</p>
                         </Flex>
                     </Flex>
                     <Flex
@@ -128,13 +130,25 @@ function Header(props){
                         justify='center'
                         style={{  width: "30%",height: '100%' }}
                     >
-                        <ButtonImage
+                        {/* <ButtonImage
                             id="btn1"
                             image={btnlideres}
                             listener={(id) => { props.listener(4) }}
                             scale={1.1} //1.1
                             style={{ margin: 10 }} // {}
-                        />
+                        /> */}
+                        <ButtonMultiState
+                            id="btnLideres"
+                            state={props.layout === "Profile" ? "off":"on"}
+                            scale={1.1} //1.1
+                            images={{ off:btnlideres, on:btnlideres }}
+                            listeners={{
+                                off: () => {},
+                                on: () => { props.listener(4);},
+                            }}
+                            styles={{ off: { filter: "grayscale(100%)" } }}
+                        >
+                        </ButtonMultiState>
                     </Flex>
                 </Flex>
             </ImagedPanel>

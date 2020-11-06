@@ -16,7 +16,7 @@ import ImagedPanel from "../../shared/Panels/ImagedPanel";
 
 
 function TableGame(props){
-    const [state1, setState1] = useState("off");
+    const [state1, setState1] = useState("on");
     console.log(props.title)
 	return(
         <ImagedPanel
@@ -35,8 +35,8 @@ function TableGame(props){
                     </Flex>
                 </Flex>
                 <Flex direction={"column"} align={"center"} style={{width:"100%", height:'27.5%'}}>
-                    <Flex style={{width:"100%", height:'70%'}}>
-                        <img alt="shell" src={props.escudos[props.city] || villavicencio} ></img>
+                    <Flex style={{width:"100%", height:'60%'}}>
+                        <img style={{height:'90%'}} alt="shell" src={props.escudos[props.city] || villavicencio} ></img>
                     </Flex>
                     <Flex align='center' style={{ width:"100%", height:'30%'}}>
                         <h5 style={{fontFamily:'Source Serif Pro'}}>{props.city || "Ciudad"}</h5>
@@ -85,7 +85,7 @@ function TableGame(props){
                                 images={{ off:door, on:door }}
                                 listeners={{
                                     off: () => { setState1("on"); props.listener(5);},
-                                    on: () => { setState1("off")},
+                                    on: () => { setState1("off"); props.listener(5);},
                                 }}
                                 styles={{ off: { filter: "grayscale(100%)" } }}
                             >

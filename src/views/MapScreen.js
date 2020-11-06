@@ -63,7 +63,15 @@ function MapScreen(props) {
     
     const handlePortal = (e) => {
         console.log("estoy entrando",e)
-        let sede = e
+        let sede;
+        if(screen < 800 && e['target']){
+            console.log("la pantalla es tactil",e.target.id.split("_"))
+            let vector = e.target.id.split("_")
+            sede = vector[0]
+        }
+        else{
+            sede = e
+        }
         if(sede === undefined){
             sede="Bogota"
         }
@@ -83,6 +91,10 @@ function MapScreen(props) {
         else {
             setPortalInferior(false)
         }
+    }
+
+    let closePortal =()=>{
+        setPortalInferior(false)
     }
 
     return (
@@ -139,18 +151,17 @@ function MapScreen(props) {
                 }
                 {(screen < 800 && tableGame) &&
                     <Absolute style={{ top: "80%", right: "80%" }}>
-                        <ButtonImage image={btnatras} listener={handlePortal} styleImage={!portalInferior ? { transform: "rotate(90deg)" }: { transform: "rotate(270deg)" } }>
+                        <ButtonImage image={btnatras} listener={closePortal} styleImage={!portalInferior ? { transform: "rotate(90deg)" }: { transform: "rotate(270deg)" } }>
 
                         </ButtonImage>
                     </Absolute>
                 }
             </div>
-            { (screen < 800 && portalInferior === true) &&
+            { (screen < 800 && portalInferior === true && tableGame) &&
                 <Absolute style={{ top: "30%", left: "0%" }}>
                     <TableGame listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
                 </Absolute>
             }
-            {/* <Timer seconds={59}/>  */}
         </div>
     )
 }

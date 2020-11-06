@@ -132,9 +132,9 @@ function ProfileScreen(props) {
                             <Flex align="center" justify="space-evenly" style={{  width: "80%", height: "30%" }}>
                                 <Flex style={{width:"30%",height: "90%",position:"relative"}}>
                                     <Absolute  style={{
-                                        backgroundColor: 'black',
+                                        backgroundColor: '#115b31',
                                         width: '70%',
-                                        height: '88%',
+                                        height: '80%',
                                         margin: '7% auto 34%',
                                         borderRadius: '50%',
                                         }}>
@@ -155,11 +155,11 @@ function ProfileScreen(props) {
                                 </Flex>
                             </Flex>
                             <Flex align="center" justify="space-evenly" style={{  width: "80%", height: "30%" }}>
-                                <Flex style={{width:"30%",height: "60%", position:"relative"}}>
+                                <Flex style={{width:"30%",height: "auto", position:"relative"}}>
                                     <Absolute  style={{
                                         backgroundColor: 'black',
                                         width: '70%',
-                                        height: '98%',
+                                        height: '88%',
                                         margin: '7% auto 34%',
                                         borderRadius: '50%',
                                         }}>

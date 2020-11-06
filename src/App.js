@@ -16,6 +16,7 @@ import FeedBackScreen from "./views/FeedBackScreen"
 // import QuestionWithTitleScreen from "./views/QuestionWithTitleScreen"
 import fondo from "./images/general/fondopatron.png"
 import PlayArea from "./shared/PlayArea"
+import Login from "./shared/Login"
 import footer from './images/Graficos/footer.png'
 import ChooseScreen from "./views/ChooseScreen"
 import Flash from "./shared/Flash"
@@ -26,12 +27,12 @@ window.EM = new EventEmitter();
 window.flash = (message, type="success") => window.EM.emit('flash', ({message, type}));
 
 function App() {
-  const [layout,setLayout] = useState("Profile")
+  const [layout,setLayout] = useState("Register")
   const [respuesta,setRespuesta] = useState(false)
   const [globalKeys,setGlobalKeys] = useState(0)
   const [secondaryBg] = useState(true)
   const [currentCahracter,setCurrentCahracter]=useState(false)
-  let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback"]
+  let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback","Login"]
   const listener = (indice) =>{
     setLayout(pages[indice])
   }
@@ -77,10 +78,18 @@ function App() {
           </Components>
         }
        <PlayArea width={layout === 'BeginGame' ? 1400 : 1000}>
-        {(layout !== "Register" && layout !== "Legend" && layout !== "Choose") &&
+        {(layout !== "Register" && layout !== "Legend" && layout !== "Choose" && layout !== "Login") &&
           <Header listener={listener} layout={layout} points={globalKeys}></Header>
         }
-       
+
+        {layout === "Login" &&
+          <Login
+            listener = {listener}
+          >
+
+          </Login>
+        }
+
         {layout === "Register" &&
           <StartScreen
             listener = {listener}
