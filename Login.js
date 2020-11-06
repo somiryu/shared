@@ -59,11 +59,11 @@ class Login extends Component{
 
 	handleInputs(event){
 		const target = event.target;
-	   let value = target.type === 'checkbox' ? target.checked : target.value;
-	   const name = target.name;
-	   if(name === "email"){value = value.toLowerCase()}
-	   console.log("Will change", name, value)
-	   this.setState({
+		let value = target.type === 'checkbox' ? target.checked : target.value;
+		const name = target.name;
+		if(name === "email"){value = value.toLowerCase()}
+		console.log("Will change", name, value)
+		this.setState({
       	[name]: value
    	});
 	}

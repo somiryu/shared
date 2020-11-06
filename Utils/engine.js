@@ -91,10 +91,11 @@
 // [agent, item, category] = getSingleAgentItem(agent, category,tag)
 
 import Loading from "../Loading"
+import APIkey from "../../env"
 
 export const config = {
-	api_token: "35446ca1c5968fb4d87345ef8bcca46e",
-	test_api_token: "35446ca1c5968fb4d87345ef8bcca46e",
+	api_token: APIkey,
+	test_api_token: APIkey,
 	base_url: 'https://engine2.playngage.io/api/',
 	test_url: "http://localhost:3001/api/",
 	cable_url: "wss://engine2.playngage.io/cable/",

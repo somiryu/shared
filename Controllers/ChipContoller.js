@@ -6,6 +6,7 @@ let aux={};
 function ChipController(props){
     const [estado, setEstado] = useState({})
     useEffect(() => {
+        console.log("una vez")
         props.chips.map(e=>{
             return aux[e.id]=false
         })
@@ -13,16 +14,11 @@ function ChipController(props){
     }, [props.chips])
 
 	const listener = (state) => {
-        console.log("click aqui vamos",state[0].target.id)
         props.chips.map(e=>{
             return aux[e.id]=false
         })
-        //console.log(aux)
-        let auxnn = (aux[state[0].target.id]=true)
-        console.log("AQUIIIIIII",aux[state[0].target.id],aux,auxnn)
-        let auxn = {...aux}
-        //console.log(auxn)
-        setEstado(auxn)
+        aux[state[0].target.id]=state[1]
+        setEstado(aux)
     }
     console.log("----Chips",aux)
  	return( 
@@ -33,7 +29,7 @@ function ChipController(props){
                     label={e.label}
                     listener={listener}
                     handle = {e.listener}
-                    active={estado[e.id]}
+                    active={estado[e.id]?estado[e.id]:false}
                     imageselect={props.imageChip}
                     imagenoselect={props.imageChipDeactivate}
                     style ={{width: "33%",height: "78px",color: "black",fontSize: "28px",fontFamily: 'Squada One', paddingBottom:"10px"}}

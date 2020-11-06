@@ -9,7 +9,12 @@ function Chip(props){
     // console.log(props.active)
 	const clickHandler = (e) => {
         if(props.listener){
-            props.listener([e,active])
+            if(active===false){
+                props.listener([e,true])
+            }
+            else{
+                props.listener([e,false])
+            }
             setActive(!props.active)
         }
         console.log(props.id,props.active)
@@ -36,7 +41,7 @@ function Chip(props){
             onClick={clickHandler}
             style={{cursor:"pointer", display:"flex", alignItems: props.align || "center", justifyContent: props.justify || "center", position:"relative",...props.style}}
 		>
-            <img style={{position:"absolute",width:'100%'}} src={image} alt='background' ></img>
+            <img id={props.id}  style={{position:"absolute",width:'100%'}} src={image} alt='background' ></img>
 			{props.label}
 		</div>
     )
