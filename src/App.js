@@ -29,12 +29,17 @@ window.flash = (message, type="success") => window.EM.emit('flash', ({message, t
 function App() {
   const [layout,setLayout] = useState("Register")
   const [respuesta,setRespuesta] = useState(false)
+  const [player,setPlayer] = useState()
   const [globalKeys,setGlobalKeys] = useState(0)
   const [secondaryBg] = useState(true)
   const [currentCahracter,setCurrentCahracter]=useState(false)
   let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback","Login"]
   const listener = (indice) =>{
     setLayout(pages[indice])
+  }
+  const listenerLogin = (indice,player) =>{
+    setLayout(pages[indice])
+    setPlayer(player)
   }
   const listenerQuestion = (indice,res) =>{
     setLayout(pages[indice])
@@ -93,6 +98,7 @@ function App() {
         {layout === "Register" &&
           <StartScreen
             listener = {listener}
+            listenerPlayer = {listenerLogin}
           >
 
           </StartScreen>

@@ -1,12 +1,52 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 //images test
 import button from "../images/buttons/btnprincipal.png";
 import imageTitle from "../images/general/bienvenido.png";
 import SimpleForm from "../shared/Forms/SimpleForm"
 import Flex  from "../shared/Containers/Flex"
 import logosantoto from "../images/general/logosantoto.png";
+import {Players} from "../shared/Utils/engine";
+import engine from "../shared/Utils/engine";
 
 function StartScreen(props) {
+    const [wrong_email] = useState("Email incorrecto")
+    const [wrong_password] = useState("Verifica tus credenciales.")
+    console.log(props)
+    useEffect(() => {
+        if(engine.getUser()){
+            console.log("comprobando usuario")
+            //console.log(Players.get())
+            props.listener(1); 
+        }
+    }, [])
+
+    const handleSubmit =(data)=>{
+            /* LOGIN */
+        if (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(data.email) ){} else { 
+            window.flash("Verifica correo electronico", "error")
+            return
+        }
+        Players.create(data.document,data,(r)=>{
+            engine.logIn(data.document)
+            props.listenerPlayer(1,r);
+        });
+        // Players.get_or_create();
+        // window.engine.getPlayer(data.password, (response) => {
+        //     if(response.success === false){
+        //         console.log(wrong_password);
+        //     } else {
+        //         if(response.basic.email !== data.email){
+        //             console.log(wrong_email);
+        //         } else {
+        //             /* Login succesful */
+        //             window.engine.logIn(data.password);
+        //         }
+        //     }
+        // })
+    }
+    		
+	
+
 
 	return(
         <Flex id="startScreen" style={{height: "100vh"}}>
@@ -20,14 +60,15 @@ function StartScreen(props) {
                     inputs={
                         [{id:"name", type:"text", placeholder:"Nombre", name:"name"},
                         {id:"email", type:"text", placeholder:"Correo", name:"email"},
-                        {id:"documento", type:"text", placeholder:"Documento", name:"documento"},]
+                        {id:"document", type:"text", placeholder:"Documento", name:"document"},]
                     }
                     button={{id:"button",label:<label className='label-bg' style={{fontWeight:'600'}}>INGRESAR</label>, image:button,}}
                     idForm={"formstart"}
                     styles={{width:"auto",minHeight:"450px",padding:"10px",alignItems:"center"}}
                     listener={(dic)=>{
                         console.log(dic);
-                        props.listener(1);
+                        //props.listener(1);
+                        handleSubmit(dic);
                     }}
                 />
             </Flex>
