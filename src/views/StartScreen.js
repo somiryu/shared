@@ -7,10 +7,9 @@ import Flex  from "../shared/Containers/Flex"
 import logosantoto from "../images/general/logosantoto.png";
 import {Players} from "../shared/Utils/engine";
 import engine from "../shared/Utils/engine";
+import sedes from './models/sedes'
 
 function StartScreen(props) {
-    const [wrong_email] = useState("Email incorrecto")
-    const [wrong_password] = useState("Verifica tus credenciales.")
     console.log(props)
     useEffect(() => {
         if(engine.getUser()){

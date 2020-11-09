@@ -68,7 +68,7 @@ function TableGame(props){
                 <Flex  style={{justifyContent:"space-around",width:"100%", height:'28%'}} align="center">
                     <Flex>
                         <CurrencyHorizontal
-                            quantity={30}
+                            quantity={props.data.numbersOfKeys || 0}
                             image={copa}
                             //displayX={true}
                             id="counterCup"

@@ -17,12 +17,16 @@ import FeedBackScreen from "./views/FeedBackScreen"
 import fondo from "./images/general/fondopatron.png"
 import PlayArea from "./shared/PlayArea"
 import Login from "./shared/Login"
+import Absolute from "./shared/Containers/Absolute"
 import footer from './images/Graficos/footer.png'
 import ChooseScreen from "./views/ChooseScreen"
 import Flash from "./shared/Flash"
 import EventEmitter from "events"
+import door from "./images/Iconos/inpuerta.png"
+import engine from "./shared/Utils/engine"
+import s from './views/models/sedes'
 window.DEBUG = false;
-
+let sedes = s;
 window.EM = new EventEmitter();
 window.flash = (message, type="success") => window.EM.emit('flash', ({message, type}));
 
@@ -32,6 +36,7 @@ function App() {
   const [player,setPlayer] = useState()
   const [globalKeys,setGlobalKeys] = useState(0)
   const [secondaryBg] = useState(true)
+  const [sede,setSede] = useState(false)
   const [currentCahracter,setCurrentCahracter]=useState(false)
   let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback","Login"]
   const listener = (indice) =>{
@@ -47,12 +52,34 @@ function App() {
   }
   const listenerFeedback = (points) =>{
     setGlobalKeys(globalKeys + points)
+    if(sede === "Bogota"){
+      sedes[0].numbersOfKeys = sedes[0].numbersOfKeys + points
+    }else{
+      console.log("================> Restando")
+      sedes.map((e)=>{
+        if(e.name===sede){
+            e.numbersOfKeys = e.numbersOfKeys - points
+        }
+        return null
+    })
+    }
     setLayout(pages[3])
   }
   const listenerSede = (character) =>{
     setCurrentCahracter(character)
     setLayout(pages[6])
   }
+  const LogOut = () =>{
+    engine.logOut();
+    setLayout(pages[0])
+  }
+
+  const changeSede = (newSede) =>{
+    console.log("cambiando sede")
+    setSede(newSede);
+  }
+
+  
   let addClass;
   if (layout === "Mapa" || layout === "EndGame" || layout === "BeginGame") addClass = "SkyBackground";
   if (layout === "GameLayout" || layout === "Book") addClass = "PurpleBackground";
@@ -110,29 +137,35 @@ function App() {
           </LegendScreen>
         }
          {layout === "Mapa" &&
-          <MapScreen listener = {listener}>
+          <MapScreen 
+            listener = {listener} 
+            sede={sede} 
+            changeSede={changeSede}
+            sedes = {sedes}
+          >
           </MapScreen>
         }
         {layout === "Profile" &&
-          <ProfileScreen listener = {listener}>
+          <ProfileScreen listener = {listener} sede={sede}>
           </ProfileScreen>
         }
         {layout === "Sede" &&
-          <SedeScreen listener = {listenerSede}>
+          <SedeScreen listener = {listenerSede} sede={sede}>
           </SedeScreen>
         }
         {layout === "Rol" &&
-          <RolProfileScreen listener = {listener} character={currentCahracter}>
+          <RolProfileScreen listener = {listener} character={currentCahracter} sede={sede}>
           </RolProfileScreen>
         }
         {layout === "Question" &&
-          <QuestionScreen listener = {listenerQuestion}>
+          <QuestionScreen listener = {listenerQuestion} sede={sede}>
           </QuestionScreen>
         }
         {layout === "Feedback" &&
           <FeedBackScreen 
             listener = {listenerFeedback}
             respuesta = {respuesta}
+            sede={sede}
           >
           </FeedBackScreen>
         }
@@ -140,8 +173,14 @@ function App() {
           <ChooseScreen listener = {listener}>
           </ChooseScreen>
         }
+        {engine.getUser()&&
+        <Absolute right={"80%"} top={"10%"} >
+          <div onClick={LogOut}>
+            <img src={door}>
+            </img>
+          </div>
+        </Absolute>}
         <Flash/>
-        
       </PlayArea>
       <div style={{display:"flex",justifyContent:"center",position:"fixed",bottom:"0%",width:"100%",height:"100px",backgroundImage:`url(${footer})`}}>
         {/* <img src={footer} alt="footer">

@@ -57,7 +57,8 @@ const portales={
 function MapScreen(props) {
     const [screen] = useState(window.screen.width)
     const [portalInferior, setPortalInferior] = useState(false)
-    const [tableGame, setTableGame] = useState(sedes[0])
+    const [tableGame, setTableGame] = useState(props.sedes[0])
+    console.log(props.sedes)
     console.log("=======>",tableGame)
     
     
@@ -77,7 +78,8 @@ function MapScreen(props) {
         }
         let tableSede;
         console.log(sede)
-        sedes.map((e)=>{
+        props.changeSede(sede)
+        props.sedes.map((e)=>{
             if(e.name===sede){
                 tableSede = e
             }
@@ -135,7 +137,7 @@ function MapScreen(props) {
                             </React.Fragment>
                         }
                         {
-                        sedes.map((e)=>
+                        props.sedes.map((e)=>
                             <Portal id={e.name} top={e.y + "%"} left={e.x + "%"} imageSede={imagesSedes[e.name]} sede={e} listener={handlePortal} portal={portales[e.name]} escudo={escudos[e.name]}></Portal>
                         )
                         }
