@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 // import {BrowserRouter ,Redirect, Route, Switch } from "react-router-dom";
 import './App.css';
 import Header from '../src/views/layout/Header'
@@ -34,12 +34,16 @@ function App() {
   const [secondaryBg] = useState(true)
   const [currentCahracter,setCurrentCahracter]=useState(false)
   let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback","Login"]
+  useEffect(() => {
+    console.log('Player ===> ', player)
+  }, [player])
   const listener = (indice) =>{
     setLayout(pages[indice])
   }
   const listenerLogin = (indice,player) =>{
     setLayout(pages[indice])
     setPlayer(player)
+    console.log('Player ===> ', player)
   }
   const listenerQuestion = (indice,res) =>{
     setLayout(pages[indice])
