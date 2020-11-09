@@ -92,6 +92,7 @@
 
 import APIKey from "../../env"
 import Loading from "../Loading"
+import APIkey from "../../env"
 
 export const config = {
 	api_token: APIKey,
