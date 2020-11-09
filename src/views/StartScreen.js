@@ -5,17 +5,28 @@ import imageTitle from "../images/general/bienvenido.png";
 import SimpleForm from "../shared/Forms/SimpleForm"
 import Flex  from "../shared/Containers/Flex"
 import logosantoto from "../images/general/logosantoto.png";
-import {Players} from "../shared/Utils/engine";
+import {getCookie, Players, Trivia} from "../shared/Utils/engine";
 import engine from "../shared/Utils/engine";
 import sedes from './models/sedes'
-
+const ID_IN_APP = getCookie('iia');
+const sedes = [
+    {
+        extension: 'usantotomas',
+        team: 'Bogota'
+    }
+]
 function StartScreen(props) {
     console.log(props)
     useEffect(() => {
         if(engine.getUser()){
             console.log("comprobando usuario")
-            //console.log(Players.get())
-            props.listener(1); 
+            Players.get(ID_IN_APP, (response) => {
+                console.log('Response ==> ', response)
+            })
+            Trivia.all( (trivias) => {
+                console.log('Trivias ===> ', trivias)
+            })
+            // props.listener(1); 
         }
     }, [])
 
