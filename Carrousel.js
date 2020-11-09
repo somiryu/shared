@@ -20,25 +20,32 @@ function Carrousel(props) {
 			slides[currentSlide].className = 'slide';
 			currentSlide = (currentSlide + 1) % slides.length;
 			slides[currentSlide].className = 'slide showing';
+			
 		}
 		return () => {
 			clearInterval(slideInterval)
 		}
 	})
 
-	const next = () => {
+	const next = (dir) => {
 		let slides = document.querySelectorAll(`#${props.id}.Banner .slide`);
 		let index = 0;
-		console.log('props.children', props.children)
-		console.log(slides)
 		slides.forEach((slide, current) => {
-			console.log('className ==> ', slide.className)
 			if(slide.className === 'slide showing') {
-				index = slides[current+1] ? current+1 : 0;
+				if(dir === 0) {
+					index = slides[current-1] ? current-1 : 0;
+				} else if(dir === 1) {
+					index = slides[current+1] ? current+1 : 0;
+				}
 				slides[current].className = 'slide'
 			}
 		})
-		slides[index].className = 'slide showing'
+		console.log(slides, index)
+		if(slides[index]){
+			slides[index].className = 'slide showing'
+		}
+		
+		if(props.slideCurrent) props.slideCurrent(index)
 	}
 	return (
 		<div id={props.id} className="Banner flex" style={{
@@ -50,13 +57,13 @@ function Carrousel(props) {
 			zIndex:'2'
 		}}>
 
-			<div className="arrowleft" style={{ display: 'flex', alignItems:'center',justifyContent:'100%', height: '100%',width:'10%',zIndex:'3', cursor:'pointer' }} onClick={props.clickL || next}>
-				<img src={props.leftIcon} alt='' style={{ width: '100%' }} />
+			<div className="arrowleft" style={{ display: 'flex', alignItems:'center',justifyContent:'100%', height: '100%',width:'10%',zIndex:'3', cursor:'pointer' }} onClick={() => {if(props.clickL) props.clickL(); else next(0)}}>
+				<img src={props.leftIcon} alt='' style={{ display: props.leftIcon && 'hidden',  width: '100%' }} />
 			</div>
 			<div style={{ display: 'flex', height: '100%',width:'80%', zIndex:'1' }}>
 				{props.children}
 			</div>
-			<div className="arrowrigth" style={{ display: 'flex',alignItems:'center', justifyContent:'100%',width:'10%', height:'100%',zIndex:'3', cursor:'pointer' }} onClick={props.clickR || next}>
+			<div className="arrowrigth" style={{ display: 'flex',alignItems:'center', justifyContent:'100%',width:'10%', height:'100%',zIndex:'3', cursor:'pointer' }} onClick={() => { if(props.clickR) props.clickR(); else next(1)}}>
 				<img src={props.rightIcon} alt='' style={{ width: '100%' }} />
 			</div>
 
