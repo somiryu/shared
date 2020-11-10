@@ -303,9 +303,9 @@ export const Teams = {
 	getAll: () => { },
 	getTeam: () => { },
 	delete: () => { },
-	managePlayer: (agent, data, listener ) => {
+	managePlayer: (agent, id_team , data, listener ) => {
 		setCall(data = data || { id_in_app: engine.getUser() });
-		call("PUT", "teams/:" + agent.id_or_tag + "/players/:" + agent.id_in_app, setParams(data), listener)
+		call("PUT", "teams/:" + id_team + "/players/:" + agent.id_in_app, setParams(data), listener)
 	}
 }
 export const Trivia = {
