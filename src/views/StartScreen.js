@@ -66,41 +66,39 @@ function StartScreen(props) {
         
         
         // evaluateEmail("GET", serviceEmail,(r)=>{console.log("--------Este es el resultado",r)},urlEmail)
+  
 
-        Players.get_or_create(data.document,data,(r)=>{
-            console.log("============> nuevo user",r)
-            if(r.status ==="id_in_app already taken"){
-                engine.logIn(data.document)
+        Players.get(data.document,(r)=>{
+            console.log("trajo",r);
+            if(r["basic"]){
+                if(r.basic.email === data.email && r.basic.id_in_app === data.document && r.basic.name === r.basic.name){
+                    engine.logIn(data.document)
+                    props.listenerPlayer(1,r); 
+                }else{
+                    window.flash("Credenciales incorrectas", "error")
+                    return 
+                }
             }else{
-                engine.logIn(data.document)
                 let stringf = data.email.split("@");
                 let sede =stringf[1].split(".");//de aca sacamos la sede
                 sedesAuth.map((e)=>{
                     if(e.extension === sede){
-                        Teams.managePlayer(r,e.id,{option: 'join'},() => console.log('Equipo Agregado'));
+                        data["team"] = {"id":e.id}
                     }
                     else{
-                        Teams.managePlayer(r,1,{option: 'join'},() => console.log('Equipo Agregado'));
+                        data["team"] = {"id":1}
                     }
                     return null;
                 })
+                Players.create(data.document,data,(r)=>{
+                    console.log("============> nuevo user",r)
+                    engine.logIn(data.document)
+                    props.listenerPlayer(1,r);  
+                })
             }
             
-            props.listenerPlayer(1,r);
-        });
-        // Players.get_or_create();
-        // window.engine.getPlayer(data.password, (response) => {
-        //     if(response.success === false){
-        //         console.log(wrong_password);
-        //     } else {
-        //         if(response.basic.email !== data.email){
-        //             console.log(wrong_email);
-        //         } else {
-        //             /* Login succesful */
-        //             window.engine.logIn(data.password);
-        //         }
-        //     }
-        // })
+        },data)
+
     }
     		
 	
@@ -124,7 +122,7 @@ function StartScreen(props) {
                     idForm={"formstart"}
                     styles={{width:"auto",minHeight:"450px",padding:"10px",alignItems:"center"}}
                     listener={(dic)=>{
-                        console.log(dic);
+                        //console.log(dic);
                         //props.listener(1);
                         handleSubmit(dic);
                     }}
