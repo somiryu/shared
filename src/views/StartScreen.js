@@ -5,39 +5,87 @@ import imageTitle from "../images/general/bienvenido.png";
 import SimpleForm from "../shared/Forms/SimpleForm"
 import Flex  from "../shared/Containers/Flex"
 import logosantoto from "../images/general/logosantoto.png";
-import {getCookie, Players, Trivia} from "../shared/Utils/engine";
+import {getCookie, Players, Trivia, evaluateEmail,Teams} from "../shared/Utils/engine";
 import engine from "../shared/Utils/engine";
-import sedes from './models/sedes'
+import sedes from '../models/Sedes'
 const ID_IN_APP = getCookie('iia');
-const sedes = [
+// @usantotomas.edu.co (Bogota)
+// @ustamed.edu.co (Medellin)
+// @ustadistancia.edu.co (Distancia)
+// @ustabuca.edu.co  (Bucaramanga)
+// @ustatunja.edu.co (Tunja)
+// @f2p.co (Azar en pruebas)
+const sedesAuth = [
     {
+        id:1,
         extension: 'usantotomas',
         team: 'Bogota'
+    },
+    {
+        id:7,
+        extension:"ustamed",
+        team:"Medellin",
+    },
+    {
+        id:4,
+        extension:"ustadistancia",
+        team:"Distancia",
+    },
+    {
+        id:3,
+        extension:"ustabuca",
+        team:"Bucaramanga",
+    },
+    {
+        id:5,
+        extension:"ustatunja",
+        team:"Tunja",
     }
 ]
 function StartScreen(props) {
     console.log(props)
     useEffect(() => {
         if(engine.getUser()){
-            console.log("comprobando usuario")
             Players.get(ID_IN_APP, (response) => {
-                console.log('Response ==> ', response)
+                props.listenerPlayer(1,response);
             })
             Trivia.all( (trivias) => {
                 console.log('Trivias ===> ', trivias)
-            })
-            // props.listener(1); 
+            }) 
         }
     }, [])
-
+   
     const handleSubmit =(data)=>{
+        const urlEmail = "https://api.hunter.io;"
+        const serviceEmail = "/v2/email-verifier?email=" + data.email +"&api_key=96199ec63dc500ee57e2671cab1e9a0a0d7e9f33";
             /* LOGIN */
         if (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(data.email) ){} else { 
             window.flash("Verifica correo electronico", "error")
             return
         }
-        Players.create(data.document,data,(r)=>{
-            engine.logIn(data.document)
+        
+        
+        // evaluateEmail("GET", serviceEmail,(r)=>{console.log("--------Este es el resultado",r)},urlEmail)
+
+        Players.get_or_create(data.document,data,(r)=>{
+            console.log("============> nuevo user",r)
+            if(r.status ==="id_in_app already taken"){
+                engine.logIn(data.document)
+            }else{
+                engine.logIn(data.document)
+                let stringf = data.email.split("@");
+                let sede =stringf[1].split(".");//de aca sacamos la sede
+                sedesAuth.map((e)=>{
+                    if(e.extension === sede){
+                        Teams.managePlayer(r,e.id,{option: 'join'},() => console.log('Equipo Agregado'));
+                    }
+                    else{
+                        Teams.managePlayer(r,1,{option: 'join'},() => console.log('Equipo Agregado'));
+                    }
+                    return null;
+                })
+            }
+            
             props.listenerPlayer(1,r);
         });
         // Players.get_or_create();

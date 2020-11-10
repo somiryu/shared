@@ -53,7 +53,7 @@ function TableGame(props){
                     </Flex>
                     <Flex style={{width:'100%', height:'100%'}}>
                         <CurrencyHorizontal
-                            quantity={props.data.keysRequiredForOpen || 0}
+                            quantity={props.data.numbersOfKeys || 0}
                             image={key}
                             displayX={true}
                             styleImage={{transform: "rotate(330deg)",height:'70%', display:'flex', alignItems:'center'}}
@@ -68,7 +68,7 @@ function TableGame(props){
                 <Flex  style={{justifyContent:"space-around",width:"100%", height:'28%'}} align="center">
                     <Flex>
                         <CurrencyHorizontal
-                            quantity={props.data.numbersOfKeys || 0}
+                            quantity={props.data.keysRequiredForOpen || 0}
                             image={copa}
                             //displayX={true}
                             id="counterCup"

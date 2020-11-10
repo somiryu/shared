@@ -24,7 +24,7 @@ import Flash from "./shared/Flash"
 import EventEmitter from "events"
 import door from "./images/Iconos/inpuerta.png"
 import engine from "./shared/Utils/engine"
-import s from './views/models/sedes'
+import s from './models/Sedes'
 window.DEBUG = false;
 let sedes = s;
 window.EM = new EventEmitter();
@@ -45,24 +45,36 @@ function App() {
   const listener = (indice) =>{
     setLayout(pages[indice])
   }
+
+  const listenerChoose = (indice,player) =>{
+    setPlayer(player)
+    setLayout(pages[indice])
+  }
+
   const listenerLogin = (indice,player) =>{
     setLayout(pages[indice])
     setPlayer(player)
-    console.log('Player ===> ', player)
   }
   const listenerQuestion = (indice,res) =>{
     setLayout(pages[indice])
     setRespuesta(res)
   }
   const listenerFeedback = (points) =>{
-    setGlobalKeys(globalKeys + points)
+    if(globalKeys===0 && points < 0){
+      setGlobalKeys(0);
+    }else{
+      setGlobalKeys(globalKeys + points);
+    }
     if(sede === "Bogota"){
       sedes[0].numbersOfKeys = sedes[0].numbersOfKeys + points
     }else{
-      console.log("================> Restando")
       sedes.map((e)=>{
         if(e.name===sede){
+          if(e.numbersOfKeys = 0){
+            e.numbersOfKeys = 0
+          }else{
             e.numbersOfKeys = e.numbersOfKeys - points
+          }
         }
         return null
     })
@@ -137,6 +149,7 @@ function App() {
         {layout === "Legend" &&
           <LegendScreen
             listener = {listener}
+            player ={player}
           >
           </LegendScreen>
         }
@@ -174,7 +187,10 @@ function App() {
           </FeedBackScreen>
         }
         {layout === "Choose" &&
-          <ChooseScreen listener = {listener}>
+          <ChooseScreen 
+            listener = {listener}
+            player={player}
+          >
           </ChooseScreen>
         }
         {engine.getUser()&&

@@ -28,7 +28,7 @@ import ButtonImage from "../shared/Buttons/ButtonImage";
 import btnatras from "../images/buttons/btnatras.png";
 import Timer from "../shared/TimerV2"
 import Flex from '../shared/Containers/Flex'
-import sedes from './models/sedes'
+import sedes from '../models/Sedes'
 
 const imagesSedes={
     "Bogota":sedeBogota,

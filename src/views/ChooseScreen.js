@@ -8,9 +8,22 @@ import MaskedAvatar from "../shared/Hubs/MaskedAvatar"
 import contaavatar from "../images/general/contaavatar.png"
 import masculino from '../images/Graficos/personajehombre.png'
 import femenino from '../images/Graficos/personajemujer.png'
+import {Agents} from '../shared/Utils/engine'
 
 
 function ChooseScreen(props) {
+    console.log("=======>", props.player);
+    const selectAvatarM = (e) => {
+        console.log("=======>", props.player);
+        Agents.update(props.player,{agent:{1: "select"}},(e)=>{console.log("Avatr cambiado",e);props.listener(3,e)})
+        
+    }
+    const selectAvatarF = (e) => {
+        console.log("=======>", props.player);
+        Agents.update(props.player,{agent:{2: "select"}},(e)=>{console.log("Avatr cambiado",e);props.listener(3,e)})
+        
+    }
+
     return (
         <Flex id="chooseScreen" align='center' justify='center' style={{ height: "100vh" }}>
             <Flex align='center' justify='center' direction='column' style={{ margin: "auto", maxWidth: "800px", ...props.styles }}>
@@ -34,22 +47,22 @@ function ChooseScreen(props) {
                         <Flex style={{ width: '80%' }}>
                             <Flex style={{width:'40%', margin:'0 auto'}}>
                                 <MaskedAvatar
-                                    id="colaborador1"
+                                    id="1"
                                     avatar={masculino}
                                     containerImage={contaavatar}
                                     padding={11}
-                                    listener={() => props.listener(3)}
+                                    listener={selectAvatarM}
                                     maskBorder={100}
                                     style={{ width: '100%' }}
                                 />
                             </Flex>
                             <Flex  style={{width:'40%', margin:'0 auto'}}>
                                 <MaskedAvatar
-                                    id="colaborador1"
+                                    id="2"
                                     avatar={femenino}
                                     containerImage={contaavatar}
                                     padding={11}
-                                    listener={() => console.log('Clicked MarkedAvatar')}
+                                    listener={selectAvatarF}
                                     style={{ width: '100%' }}
                                     maskBorder={100}
                                 />

@@ -10,15 +10,25 @@ import tubo from "../images/general/lineatubocontenedor.png"
 import btnrespuesta from "../images/buttons/btnrespuesta.png"
 import ButtonMultiState from "../shared/Buttons/ButtonMultiState"
 import btnrespuestaactivo from "../images/buttons/btnrespuestaactivo.png"
-import preguntas from "../views/models/trivias"
+import preguntas from "../models/Trivias"
 import ProgressBarWithImage from "../shared/Indicators/ProgressBarWithImage"
 import screw from "../images/Graficos/tornillobarratrivias.png"
 
 function QuestionScreen(props) {
-    const [difficulty, setDifficulty] = useState("hard")
     let resp = false
     let ran = Math.floor(Math.random() * 4)
     let question = preguntas[ran]
+    let difficultyAux;
+    if(question.difficulty === 1 ){
+        difficultyAux = "low"
+    }
+    else if(question.difficulty === 2){
+        difficultyAux = "medium"
+    }
+    else{
+        difficultyAux = "hard"
+    }
+    const [difficulty, setDifficulty] = useState(difficultyAux)
     const marcado = (e) => {
         console.log(e)
         let llaves = Object.keys(e)

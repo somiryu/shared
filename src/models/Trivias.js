@@ -7,6 +7,7 @@ const trivias=[
         option3:"2",
         option4:"11",
         susseful:"option4",
+        difficulty:2,
     },
     {
         id:2,
@@ -16,6 +17,7 @@ const trivias=[
         option3:"20",
         option4:"13",
         susseful:"option4",
+        difficulty:1,
     },
     {
         id:3,
@@ -25,6 +27,7 @@ const trivias=[
         option3:"350",
         option4:"365",
         susseful:"option4",
+        difficulty:3,
     },
     {
         id:4,
@@ -34,6 +37,7 @@ const trivias=[
         option3:"filipinas",
         option4:"suecia",
         susseful:"option4",
+        difficulty:1,
     },
 
 ]
