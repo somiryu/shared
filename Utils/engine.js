@@ -92,7 +92,6 @@
 
 import APIKey from "../../env"
 import Loading from "../Loading"
-import APIkey from "../../env"
 
 export const config = {
 	api_token: APIKey,
@@ -111,6 +110,7 @@ export const config = {
 export const getCookie = (cookie) =>{var ca = document.cookie.split(';');for(var i = 0; i < ca.length; i++){var c = ca[i]; while (c.charAt(0) === ' ') {c = c.substring(1);}; if (c.indexOf(cookie+"=") === 0) {return c.split("=")[1];}}; return false;}
 export const setCookie = (cookie, cvalue) => {let expDays = 3;let d = new Date();d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000));const expires = "expires="+d.toUTCString();document.cookie = cookie+"=" + cvalue + ";" + expires + ";path=/";}
 export const deleteCookie = (cookie) =>{document.cookie = cookie+"=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"}
+export const evaluateEmail = (method, service, url, listener) => { call(method, service,{},listener, url)}
 
 const engine = {
 	image: function(path){
@@ -143,10 +143,9 @@ const engine = {
 const setParams = function(data, get){var formData = get ? {} : new FormData();engine.log("Params");engine.log(data);var checkNested = function(fD, key, value){function ins(k,v){get ? fD[k] = v : fD.append(k,v)}if(typeof value != "object"){ins(key, value)} else {if(Array.isArray(value)){var v = value.join(",");ins(key, v) } else {for (var obj in value) {var k = key + "[" + obj + "]";checkNested(fD, k, value[obj]);}}}};for (var obj in data) {var key = obj;checkNested(formData, key, data[obj])};return formData;}
 const	setCall =  function(data, defaults){if(data === undefined || data === null){data = {}};defaults = defaults || {};for (var key in defaults){data[key] = defaults[key]};}
 
-const call = function(method, service, formData, listener){
+const call = function(method, service, formData, listener,url= config.test ? config.test_url : config.base_url){
 	console.log(method, service, formData)
 	var token = config.test ? config.test_api_token : config.api_token;
-	var url = config.test ? config.test_url : config.base_url;
 	//Set Headers
 	var myHeaders = new Headers();
 	myHeaders.append("Accept", "application/json");
@@ -169,6 +168,8 @@ const call = function(method, service, formData, listener){
    fetch(built, miInit)
 		.then(response => response.json()).then(function(data) {middlewareListener(data)});
 }
+
+
 
 export const Players = {
 	create: function(id_in_app, data, listener){setCall(data = data || {}, {id_in_app: id_in_app});call("POST", "players/v2", setParams(data), listener)},
