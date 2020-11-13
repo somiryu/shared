@@ -28,7 +28,7 @@ import ButtonImage from "../shared/Buttons/ButtonImage";
 import btnatras from "../images/buttons/btnatras.png";
 import Timer from "../shared/TimerV2"
 import Flex from '../shared/Containers/Flex'
-import sedes from '../models/Sedes'
+//import sedes from '../models/Sedes'
 
 const imagesSedes={
     "Bogota":sedeBogota,
@@ -44,6 +44,7 @@ const escudos={
     'Tunja':escudoTunja,
     'Medellin':escudoMedellin,
     'Villavicencio':escudoVillavicencio,
+    'Distancia':escudoBogota,
 }
 
 const portales={
@@ -52,18 +53,17 @@ const portales={
     'Tunja':portalTunja,
     'Medellin':portalMedellin,
     'Villavicencio':portalVillavicencio,
+    'Distancia':portalBogota,
 }
 
 function MapScreen(props) {
     const [screen] = useState(window.screen.width)
     const [portalInferior, setPortalInferior] = useState(false)
     const [tableGame, setTableGame] = useState(props.sedes[0])
-    console.log(props.sedes)
-    console.log("=======>",tableGame)
+    
     
     
     const handlePortal = (e) => {
-        console.log("estoy entrando",e)
         let sede;
         if(screen < 800 && e['target']){
             console.log("la pantalla es tactil",e.target.id.split("_"))
@@ -138,7 +138,7 @@ function MapScreen(props) {
                         }
                         {
                         props.sedes.map((e)=>
-                            <Portal id={e.name} top={e.y + "%"} left={e.x + "%"} imageSede={imagesSedes[e.name]} sede={e} listener={handlePortal} portal={portales[e.name]} escudo={escudos[e.name]}></Portal>
+                            <Portal {...props} id={e.name} top={e.y + "%"} left={e.x + "%"} imageSede={imagesSedes[e.name]} sede={e} listener={handlePortal} portal={portales[e.name]} escudo={escudos[e.name]}></Portal>
                         )
                         }
                         {/* <Portal top="50%" left="50%" imageSede={sedeBogota} listener={handlePortal} portal={inportalvillamapa} escudo={escudoBogota}></Portal>
@@ -148,7 +148,7 @@ function MapScreen(props) {
                 </ImagePanel>
                 {(screen > 800 && tableGame)&&
                     <div>
-                        <TableGame listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
+                        <TableGame {...props} listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
                     </div>
                 }
                 {(screen < 800 && tableGame) &&
@@ -161,7 +161,7 @@ function MapScreen(props) {
             </div>
             { (screen < 800 && portalInferior === true && tableGame) &&
                 <Absolute style={{ top: "30%", left: "0%" }}>
-                    <TableGame listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
+                    <TableGame  {...props} listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
                 </Absolute>
             }
         </div>
@@ -171,15 +171,35 @@ function MapScreen(props) {
 
 function Portal(props) {
     const [startTimer, setstartTimer] = useState(false)
+    const [stateSede, setStateSede] = useState(false)
     const [statePortal, setStatePortal] = useState(false)
-    const [horas,setHoras] = useState(0)
-    const [minutos,setMinutos] = useState(0)
-    const [segundos,setSegundos] = useState(0)
+    let horas = 0
+    let minutos = 0
+    let segundos = 0
+    let hour = props.date.getHours()
+    let minutes = props.date.getMinutes()
+    let seconds = props.date.getSeconds()
+    if(props.sede){
+        let horarios=[]
+        props.sede.schedule.map((e)=>{
+            horarios=e.split("-")
+            let hi = parseInt(horarios[0])
+            let hf = parseInt(horarios[1])
+            if(hour>hi && hour<hf){
+                console.log("horas",hi,hf)
+                horas = hf-hour
+                minutos = 59-minutes
+                segundos = 59-seconds
+                //setStatePortal(true)
+                // setstartTimer(true)
+                return null  
+            }
+            return null  
+        })
+    }
     useEffect(() => {
         var date = new Date();
         let hour = date.getHours()
-        let minutes = date.getMinutes()
-        let seconds = date.getSeconds()
         if(props.sede){
             let horarios=[]
             props.sede.schedule.map((e)=>{
@@ -187,36 +207,42 @@ function Portal(props) {
                 let hi = parseInt(horarios[0])
                 let hf = parseInt(horarios[1])
                 if(hour>hi && hour<hf){
-                    setHoras(hf-hour)
-                    setMinutos(minutes)
-                    setSegundos(seconds)
-                    setStatePortal(true)
+                    setStateSede(true)
                     // setstartTimer(true)
                     return null  
                 }
                 return null  
             })
         }
-          
-    }, [props.sede])
-    useEffect(() => {
-        setTimeout(() => {
+        setTimeout(() => {        
             setstartTimer(true)
         }, 100);
-    }, [])
-    let stylePortal = {
+    }, [props.sede])
+    // useEffect(() => {
+    //     setTimeout(() => {           
+    //         setstartTimer(true)
+    //     }, 100);
+    // }, [])
+    let styles = {
         position: 'relative',
         height: "50px",
         width: "50px",
         top: props.top || 0,
         left: props.left || 0,
         right: props.right || 0,
+        //filter:statePortal?"":"grayscale(1)"
+    }
+    let styleSede = {
+        filter:stateSede?"":"grayscale(1)"
+    }
+
+    let styleAvatar = {
         filter:statePortal?"":"grayscale(1)"
     }
-    console.log("Tiempo===============>",props.id,horas,minutos,segundos,startTimer)
+
     return (
-        <div  style={{...stylePortal}}>
-            <Absolute id={props.id} style={{ width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "black", top: "10px" }} listener={props.listener}>
+        <div  style={{...styles}}>
+            <Absolute id={props.id} style={{ width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "black", top: "10px", ...styleSede}} listener={stateSede?props.listener:""}>
                 <MaskedAvatar
                     id={props.id}
                     avatar={props.imageSede || sedeBogota}
@@ -231,7 +257,7 @@ function Portal(props) {
             <Absolute style={{ width: "20px", height: "20px", borderRadius: "50%", backgroundColor: "", left: "60%", top: "60%" }}>
                 <img alt="escudo" src={props.escudo || escudoBogota} width="20px" height="20px"></img>
             </Absolute>
-            <Absolute style={{ width: "20px", height: "20px", borderRadius: "50%", backgroundColor: "", top: "60%", right: "80%", left: "auto" }}>
+            <Absolute style={{ width: "20px", height: "20px", borderRadius: "50%", backgroundColor: "", top: "60%", right: "80%", left: "auto", ...styleAvatar}}>
                 <img alt="portal"  src={props.portal ||  portalTunja}></img>
             </Absolute>
             <Absolute style={{ top: "90%", right: "15%" , textAlign: "center", color: "black" }}>

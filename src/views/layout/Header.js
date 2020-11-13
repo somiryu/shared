@@ -48,7 +48,7 @@ function Header(props){
                         style={{ width: "40%",height: '80%' }}
                     >
                         <Flex className="source" style={{height:'33%'}}>
-                            <h3 style={{ textAlign:'center', padding:'5px 0px', color:'var(--yellow-ligth)' }}>{props.titleBar ? props.titleBar:"Nivel 1" }</h3>
+                            <h3 style={{ textAlign:'center', padding:'5px 0px', color:'var(--yellow-ligth)' }}>{props.player.agent.levels.xp.level.name ? props.player.agent.levels.xp.level.name:"Nivel 0" }</h3>
                         </Flex>
                         <Flex style={{height:'33%'}}>
                             <ProgressBar

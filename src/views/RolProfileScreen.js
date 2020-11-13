@@ -18,26 +18,26 @@ const Roles = [
     {
         text: 'Profesora',
         image: profesora,
-        schedule1: '7 - 9 pm',
-        schedule2: '8 - 9 pm'
+        schedule1: '7-9',
+        schedule2: '20-21'
     },
     {
         text: 'Secretaria',
         image: secretaria,
-        schedule1: '7 - 9 pm',
-        schedule2: '8 - 9 pm'
+        schedule1: '7-9',
+        schedule2: '20-21'
     },
     {
         text: 'Fraile',
         image: Fraile,
-        schedule1: '7 - 9 pm',
-        schedule2: '8 - 9 pm'
+        schedule1: '7-9',
+        schedule2: '20-21'
     },
     {
         text: 'Estudiante',
         image: estudiante,
-        schedule1: '7 - 9 pm',
-        schedule2: '8 - 9 pm'
+        schedule1: '7-9',
+        schedule2: '20-21'
     }
 ]
 

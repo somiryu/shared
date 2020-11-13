@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import circ20 from "../../shared/ExampleImages/Circ-20.png"
 import Flex from "../../shared/Containers/Flex"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
@@ -13,11 +13,44 @@ import timer from "../../images/Iconos/inretry.png"
 import door from "../../images/Iconos/inpuerta.png"
 import containformacion from "../../images/general/containformacion.png"
 import ImagedPanel from "../../shared/Panels/ImagedPanel";
+import Timer from "../../shared/TimerV2"
+
 
 
 function TableGame(props){
+    const [startTimer, setstartTimer] = useState(false)
     const [state1, setState1] = useState("on");
-    console.log(props.title)
+    console.log("========================TABLEGAME================",props.data);
+    let horas = 0
+    let minutos = 0
+    let segundos = 0
+    //var date = new Date();
+    let hour = props.date.getHours()
+    let minutes = props.date.getMinutes()
+    let seconds = props.date.getSeconds()
+    if(props.data){
+        console.log("=================ENTRE AL PRIMER IF==================")
+        let horarios=[]
+        props.data.schedule.map((e)=>{
+            horarios=e.split("-")
+            let hi = parseInt(horarios[0])
+            let hf = parseInt(horarios[1])
+            if(hour>hi && hour<hf){
+                console.log("=================ENTRE AL SEGUNDO IF==================")
+                horas = hf-hour
+                minutos = 59-minutes
+                segundos = 59-seconds
+                return null  
+            }
+            return null  
+        })
+    }
+    useEffect(() => {
+        setTimeout(() => {           
+            setstartTimer(true)
+        }, 100);
+    }, [])
+    console.log("==========TIMETABLE",horas,minutos,segundos,startTimer)
 	return(
         <ImagedPanel
             image={containformacion}
@@ -92,7 +125,16 @@ function TableGame(props){
                             </ButtonMultiState>
                         </Flex>
                         <div>
-                            <h5 style={{fontFamily:'Source Serif Pro'}}>{props.count||"00:00:00"}</h5>
+                            {/* <h5 style={{fontFamily:'Source Serif Pro'}}>{props.count||"00:00:00"}</h5> */}
+                            <Timer
+                                horas={horas}
+                                minutos={minutos}
+                                segundos={segundos}
+                                iniciar={startTimer}
+                                detener={false}
+                                reiniciar={false} //inicia o reanuda
+                                styleTimer={{fontSize:'.6rem',fontFamily:'Source Serif Pro'}}
+                            ></Timer>
                         </div>
                     </Flex>
                     <div >

@@ -82,12 +82,12 @@ function ProfileScreen(props) {
                             </Flex>
                             <Flex  direction="column" align="center" style={{width:"100%",height:"100%"}}>
                                 <Flex style={{width:"100%",height:"70%",whiteSpace:"nowrap",textOverflow:"ellipsis",overflow:"hidden"}} justify={"flex-start"} align="center">
-                                    <h2 className="sourceSerif" >Javier Velazques</h2>
+                                    <h2 className="sourceSerif" >{props.player.basic.name}</h2>
                                 </Flex>
                                 <Flex style={{width:"100%",height:"30%"}} justify={"flex-start"}>
                                     <CurrencyHorizontal
                                         className="sourceSerif"
-                                        quantity={200}
+                                        quantity={props.player.agent.levels.xp.quantity}
                                         image={circ20}
                                         // displayX={true}
                                         styleBox={{fontSize:"20px"}}
@@ -121,12 +121,12 @@ function ProfileScreen(props) {
                                         styleImage={{width:"100%",height: "100%"}}
                                         containerImage={btnsedesmarcomapa}
                                         padding={"15px 6px"}
-                                        listener={() => console.log('Clicked MarkedAvatar')}
+                                        listener={() => listenerRegional()}
                                         maskBorder={100}
                                     />
                                 </Flex>
                                 <Flex style={{width:"70%"}}>
-                                    <h3 className="sourceSerif">Lorem Ipsum</h3>
+                                    <h3 className="sourceSerif">Sede a la que pertenece</h3>
                                 </Flex>
                             </Flex>
                             <Flex align="center" justify="space-evenly" style={{  width: "80%", height: "30%" }}>
@@ -146,12 +146,12 @@ function ProfileScreen(props) {
                                             styleImage={{width:"100%",height: "100%"}}
                                             containerImage={btnsedesmarcomapa}
                                             padding={12}
-                                            listener={() => console.log('Clicked MarkedAvatar')}
+                                            listener={() => listenerCofradia()}
                                             maskBorder={100}
                                     />
                                 </Flex>
                                 <Flex style={{width:"70%"}}>
-                                    <h3 className="sourceSerif">Lorem Ipsum</h3>
+                                    <h3 className="sourceSerif">Cofradia a la que pertenece</h3>
                                 </Flex>
                             </Flex>
                             <Flex align="center" justify="space-evenly" style={{  width: "80%", height: "30%" }}>
@@ -176,7 +176,7 @@ function ProfileScreen(props) {
                                     />
                                 </Flex>
                                 <Flex style={{width:"70%"}}>
-                                    <h3 className="sourceSerif">Lorem Ipsum</h3>
+                                    <h3 className="sourceSerif">Historial de informacion encontrada</h3>
                                 </Flex>
                             </Flex>
                         </Flex>

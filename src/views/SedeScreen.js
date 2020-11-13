@@ -18,29 +18,49 @@ const Roles = [
     {
         text: 'Profesora',
         image: profesora,
-        schedule1: '7 - 9 pm',
-        schedule2: '8 - 9 pm'
+        schedule1: '7-9',
+        schedule2: '20-21'
     },
     {
         text: 'Secretaria',
         image: secretaria,
-        schedule1: '7 - 9 pm',
-        schedule2: '8 - 9 pm'
+        schedule1: '7-9',
+        schedule2: '20-21'
     },
     {
         text: 'Fraile',
         image: Fraile,
-        schedule1: '7 - 9 pm',
-        schedule2: '8 - 9 pm'
+        schedule1: '7-9',
+        schedule2: '20-21'
     },
     {
         text: 'Estudiante',
         image: estudiante,
-        schedule1: '7 - 9 pm',
-        schedule2: '8 - 9 pm'
+        schedule1: '7-9',
+        schedule2: '20-23'
     }
 ]
 function SedeScreen(props) {
+    const time1 = (rol) =>{
+        let tiempo = rol.schedule1.split("-")
+        let hour = props.date.getHours();
+        if(tiempo[0] < hour &&  tiempo[1] > hour){
+            return "on"
+        }
+        else{
+            return "off"
+        }
+    }
+    const time2 = (rol) =>{
+        let tiempo = rol.schedule2.split("-")
+        let hour = props.date.getHours()
+        if(tiempo[0] < hour &&  tiempo[1] > hour){
+            return "on"
+        }
+        else{
+            return "off"
+        }
+    }
     return (
         <Flex id="SedeScreenContainer" align="center" style={{ marginTop: "0%", marginLeft: "5%", marginRight: "5%", flexWrap: "wrap" }}>
             <Flex style={{ width: "50%" }} align="center" direction="column">
@@ -96,7 +116,7 @@ function SedeScreen(props) {
                             </Flex>
                             <ButtonMultiStateWithText
                                 id={`btn${index}1`}
-                                state={'on'}
+                                state={time1(rol)}
                                 scale={1.2} //1.1
                                 images={{ off: contatiempo, on: contatiempoactivo }}
                                 listeners={{
@@ -109,7 +129,7 @@ function SedeScreen(props) {
                             />
                             <ButtonMultiStateWithText
                                 id={`btn${index}2`}
-                                state={'off'}
+                                state={time2(rol)}
                                 scale={1.2} //1.1
                                 images={{ off: contatiempo, on: contatiempoactivo }}
                                 listeners={{

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useEffect} from "react";
 //images test
 import button from "../images/buttons/btnprincipal.png";
 import imageTitle from "../images/general/bienvenido.png";

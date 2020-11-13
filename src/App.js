@@ -29,7 +29,6 @@ window.DEBUG = false;
 let sedes = s;
 window.EM = new EventEmitter();
 window.flash = (message, type="success") => window.EM.emit('flash', ({message, type}));
-
 function App() {
   const [layout,setLayout] = useState("Register")
   const [respuesta,setRespuesta] = useState(false)
@@ -38,6 +37,7 @@ function App() {
   const [secondaryBg] = useState(true)
   const [sede,setSede] = useState(false)
   const [currentCahracter,setCurrentCahracter]=useState(false)
+  let date = new Date();
   let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback","Login"]
   useEffect(() => {
     console.log('Player ===> ', player)
@@ -70,7 +70,7 @@ function App() {
     }else{
       sedes.map((e)=>{
         if(e.name===sede){
-          if(e.numbersOfKeys = 0){
+          if(e.numbersOfKeys === 0){
             e.numbersOfKeys = 0
           }else{
             e.numbersOfKeys = e.numbersOfKeys - points
@@ -127,7 +127,13 @@ function App() {
         }
        <PlayArea width={layout === 'BeginGame' ? 1400 : 1000}>
         {(layout !== "Register" && layout !== "Legend" && layout !== "Choose" && layout !== "Login") &&
-          <Header listener={listener} layout={layout} points={globalKeys}></Header>
+          <Header 
+            listener={listener} 
+            layout={layout} 
+            points={globalKeys}
+            player = {player}
+            >
+            </Header>
         }
 
         {layout === "Login" &&
@@ -159,15 +165,24 @@ function App() {
             sede={sede} 
             changeSede={changeSede}
             sedes = {sedes}
+            date = {date}
           >
           </MapScreen>
         }
         {layout === "Profile" &&
-          <ProfileScreen listener = {listener} sede={sede}>
+          <ProfileScreen 
+            listener = {listener} 
+            sede={sede}
+            player = {player}
+          >
           </ProfileScreen>
         }
         {layout === "Sede" &&
-          <SedeScreen listener = {listenerSede} sede={sede}>
+          <SedeScreen 
+            listener = {listenerSede} 
+            sede={sede}
+            date = {date}
+            >
           </SedeScreen>
         }
         {layout === "Rol" &&
