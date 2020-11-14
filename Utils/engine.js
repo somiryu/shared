@@ -107,16 +107,10 @@ export const config = {
 	getCableUrl: function () { return this.test ? this.cable_url_test : this.cable_url },
 }
 
-<<<<<<< HEAD
 export const getCookie = (cookie) =>{var ca = document.cookie.split(';');for(var i = 0; i < ca.length; i++){var c = ca[i]; while (c.charAt(0) === ' ') {c = c.substring(1);}; if (c.indexOf(cookie+"=") === 0) {return c.split("=")[1];}}; return false;}
 export const setCookie = (cookie, cvalue) => {let expDays = 3;let d = new Date();d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000));const expires = "expires="+d.toUTCString();document.cookie = cookie+"=" + cvalue + ";" + expires + ";path=/";}
 export const deleteCookie = (cookie) =>{document.cookie = cookie+"=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"}
 export const evaluateEmail = (method, service, url, listener) => { call(method, service,{},listener, url)}
-=======
-export const getCookie = (cookie) => { var ca = document.cookie.split(';'); for (var i = 0; i < ca.length; i++) { var c = ca[i]; while (c.charAt(0) === ' ') { c = c.substring(1); }; if (c.indexOf(cookie + "=") === 0) { return c.split("=")[1]; } }; return false; }
-export const setCookie = (cookie, cvalue) => { let expDays = 3; let d = new Date(); d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000)); const expires = "expires=" + d.toUTCString(); document.cookie = cookie + "=" + cvalue + ";" + expires + ";path=/"; }
-export const deleteCookie = (cookie) => { document.cookie = cookie + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;" }
->>>>>>> 3e17bfa59176e77d209dc05246c81387e6f44400
 
 const engine = {
 	image: function (path) {
@@ -157,11 +151,7 @@ const setCall = function (data, defaults) {
 	};
 }
 
-<<<<<<< HEAD
 const call = function(method, service, formData, listener,url= config.test ? config.test_url : config.base_url){
-=======
-const call = function (method, service, formData, listener) {
->>>>>>> 3e17bfa59176e77d209dc05246c81387e6f44400
 	console.log(method, service, formData)
 	var token = config.test ? config.test_api_token : config.api_token;
 	//Set Headers

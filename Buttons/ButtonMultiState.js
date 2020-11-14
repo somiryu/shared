@@ -10,7 +10,6 @@ import React, { useState, useEffect } from 'react'
 import anime from "../Animations/anime"
 
 function Button(props) {
-	console.log("================>>>>>>>>",props)
 	const [current, setCurrent] = useState(props.state)
 	useEffect(() => { setCurrent(props.state) }, [props.state])
 	let styles = {}
