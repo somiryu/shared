@@ -17,6 +17,8 @@ export default function Flex(props) {
     return (
         <div id={props.id} className={props.className || (window.DEBUG ? 'testBox' : '') } style={{ ...styleFlex, ...props.style  }}
             onClick={props.onClick}
+            onMouseOver={props.onMouseOver}
+            onMouseLeave={props.onMouseLeave}
         >
             {props.children}
         </div>
