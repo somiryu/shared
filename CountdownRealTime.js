@@ -3,9 +3,9 @@ import Flex from './Containers/Flex';
 //
 export default function CountdownRealtime(props) {
   const [timerDays, setTimerDays] = useState(null);
-  const [timerHours, setTimerHours] = useState(null);
-  const [timerMinutes, setTimerMinutes] = useState(null);
-  const [timerSeconds, setTimerSeconds] = useState(null);
+  const [timerHours, setTimerHours] = useState(0);
+  const [timerMinutes, setTimerMinutes] = useState(0);
+  const [timerSeconds, setTimerSeconds] = useState(0);
   const [countDownDate, setCountDownDate] = useState(null);
   let interval = useRef();
   useEffect(() => {
@@ -29,6 +29,7 @@ export default function CountdownRealtime(props) {
     }
   },[countDownDate,timerSeconds,timerMinutes,props.fechaFin]);
   const reset = () =>{
+    console.log('RESET TIMER')
     props.reset(props.id);
   }
   const startTimer = () => {
@@ -56,8 +57,13 @@ export default function CountdownRealtime(props) {
     }, 1000)
   }
   return (
-    <Flex>
-      <h3 style={{color:'white'}}>{timerHours<=9?`0${timerHours}`:timerHours}:{timerMinutes<=9?`0${timerMinutes}`:timerMinutes}:{timerSeconds}</h3>
+    <Flex direction='column' justify="center" align="center">
+      <Flex>
+        <h1>{props.msg}</h1>
+      </Flex>
+      <Flex>
+      <div style={{...props.style}}>{timerHours<=9?`0${timerHours}`:timerHours}:{timerMinutes<=9?`0${timerMinutes}`:timerMinutes}:{timerSeconds<=9?`0${timerSeconds}`:timerSeconds}</div>
+      </Flex> 
     </Flex>
   )
 }

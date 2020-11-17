@@ -151,7 +151,7 @@ const setCall = function (data, defaults) {
 	};
 }
 
-const call = function(method, service, formData, listener,url= config.test ? config.test_url : config.base_url){
+const call = function(method, service, formData, listener, url = config.test ? config.test_url : config.base_url) {
 	console.log(method, service, formData)
 	var token = config.test ? config.test_api_token : config.api_token;
 	//Set Headers
@@ -216,6 +216,22 @@ export const Items = {
 		setCall(data = data || { items: tags });
 		call("POST", "items/players/" + id_in_app + "/multiple", setParams(data), listener)
 	},
+}
+export const hora_server= {
+	get: function(){
+		let fecha = fetch('https://engine2.playngage.io/api/server_time', {
+		method: 'GET',
+		headers: {
+			'Accept': "application/json",
+			'Authorization': "Token token=" + APIKey
+		}
+	})
+		.then(response => response.json())
+		.then(fecha=>fecha)
+	return fecha
+	}
+	
+	
 }
 
 export const Agents = {
@@ -304,7 +320,7 @@ export const Teams = {
 	getAll: () => { },
 	getTeam: () => { },
 	delete: () => { },
-	managePlayer: (agent, id_team , data, listener ) => {
+	managePlayer: (agent, id_team, data, listener) => {
 		setCall(data = data || { id_in_app: engine.getUser() });
 		call("PUT", "teams/:" + id_team + "/players/:" + agent.id_in_app, setParams(data), listener)
 	}
