@@ -3,9 +3,9 @@ import Flex from './Containers/Flex';
 //
 export default function CountdownRealtime(props) {
   const [timerDays, setTimerDays] = useState(null);
-  const [timerHours, setTimerHours] = useState(0);
-  const [timerMinutes, setTimerMinutes] = useState(0);
-  const [timerSeconds, setTimerSeconds] = useState(0);
+  const [timerHours, setTimerHours] = useState(null);
+  const [timerMinutes, setTimerMinutes] = useState(null);
+  const [timerSeconds, setTimerSeconds] = useState(null);
   const [countDownDate, setCountDownDate] = useState(null);
   let interval = useRef();
   useEffect(() => {
@@ -62,7 +62,10 @@ export default function CountdownRealtime(props) {
         <h1>{props.msg}</h1>
       </Flex>
       <Flex>
-      <div style={{...props.style}}>{timerHours<=9?`0${timerHours}`:timerHours}:{timerMinutes<=9?`0${timerMinutes}`:timerMinutes}:{timerSeconds<=9?`0${timerSeconds}`:timerSeconds}</div>
+        {timerHours===null?<h2>cargando...</h2>:
+          <div style={{...props.style}}>{timerHours<=9?`0${timerHours}`:timerHours}:{timerMinutes<=9?`0${timerMinutes}`:timerMinutes}:{timerSeconds<=9?`0${timerSeconds}`:timerSeconds}</div>
+        }
+         
       </Flex> 
     </Flex>
   )
