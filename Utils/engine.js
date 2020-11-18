@@ -187,9 +187,12 @@ export const Players = {
 	get: function (id_in_app, listener, data) { setCall(data = data || {}, { include: "basic,agent,items" }); call("GET", "players/" + id_in_app, setParams(data, true), listener) },
 	get_or_create: function (id_in_app, listener, data) {
 		this.get(id_in_app, (d) => {
-			if (d.status && d.status === "Invalid player: check id_in_app") { this.create(id_in_app, data, (cd) => { if (cd.player) this.get(id_in_app, (r) => listener(r)) }) } else { listener(d) }
+			if (d.status && d.status === "Invalid player: check id_in_app") { this.create(id_in_app, data, (cd) => { if (cd.player) this.get(id_in_app, (r) => listener(r = {...r, d})) }) } else { listener(d) }
 		}, data)
-	}
+	},
+	update:function (id_in_app, listener, data) { 
+		setCall(data = data || {}); 
+		call("PUT", "players/" + id_in_app, setParams(data), listener) },
 }
 
 export const Items = {
