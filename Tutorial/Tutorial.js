@@ -106,7 +106,7 @@ export default (props) => {
 	}
 	if(!tutorial) { return (<div></div>)} 
 	return (
-		<div className="tutorial" style={{ display: 'flex', flexDirection: 'row',alignItems:'center', justifyContent:'center', width: `100%`,height:'100%', zIndex: props.zIndex || 2 }}>
+		<div className="tutorial" style={{ display: 'flex', flexDirection: 'row',alignItems:'center', justifyContent:'center', width: `100%`,height:'100%', zIndex: props.zIndex || 0 }}>
 			{tutorial.arrow &&
 				<div className="arrow" style={{
 					position: 'absolute',
@@ -123,7 +123,7 @@ export default (props) => {
 					</Levitation>
 				</div>
 			}
-			<div className="tutorialContent" style={{top:props.top || '75%'}}>
+			<div className="tutorialContent" style={{top:props.top || '75%', zIndex: props.zIndexContent || 0 }}>
 				<div className="tutorialContentText" style={{width: (tutorial.texts[index + 1]) || (!tutorial.texts[index + 1] && tutorial.button) ? '75%' : '100%'}}>
 					{(props.image || tutorial.image) &&
 						<div className="character">

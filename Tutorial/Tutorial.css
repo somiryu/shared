@@ -48,6 +48,9 @@
 	justify-content: center;
 	height:100%;
 }
+.tutorialText span{
+	font-size: .9rem;
+}
 .tutorialContentText{
 	width: 75%;
 }
