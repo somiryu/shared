@@ -18,17 +18,18 @@ import ButtonImageWithLabel from "../Buttons/ButtonImageWithLabel";
 import Levitation from "../Animations/Levitation";
 import Flecha from "../../images/Buttons/flechaUp.png";
 import { getCookie, Players } from "../Utils/engine";
-import {TutorialModel} from "../../models/TutorialModel";
+// import {TutorialModel} from "../../models/TutorialModel";
 export default (props) => {
 	const [index, setIndex] = useState(0)
-	const [tutorial, setTutorial] = useState(TutorialModel[props.scope] && TutorialModel[props.scope][props.current] ? TutorialModel[props.scope][props.current] : null)
+	const [tutorial, setTutorial] = useState(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
 	useEffect(() => {
-	}, [props.tutorial])
+		console.log('PROP TUTORIAL ====> ', tutorial)
+	}, [tutorial])
 	useEffect(() => {
 		if(tutorial && tutorial.next && tutorial.next !== 'null' && props.scope){
 			if( tutorial.next !== 'end') {
-				if(TutorialModel[props.scope] && TutorialModel[props.scope][tutorial.next] && TutorialModel[props.scope][tutorial.next].screen)
-					props.saveNextTutorial(tutorial.next, TutorialModel[props.scope][tutorial.next].screen || tutorial.screen)
+				if(props.tutorial[props.scope] && props.tutorial[props.scope][tutorial.next] && props.tutorial[props.scope][tutorial.next].screen)
+					props.saveNextTutorial(tutorial.next, props.tutorial[props.scope][tutorial.next].screen || tutorial.screen)
 			}
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -36,7 +37,7 @@ export default (props) => {
 	useEffect(() => {
 		if(props.current !== 'end'){
 			setIndex(0)
-			setTutorial(TutorialModel[props.scope] && TutorialModel[props.scope][props.current] ? TutorialModel[props.scope][props.current] : null)
+			setTutorial(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
 		} else {
 			setTutorial(null)
 		}
