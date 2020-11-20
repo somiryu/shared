@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Flex from "../shared/Containers/Flex"
 import ButtonImage from "../images/buttons/btnprincipal.png"
 import ButtonImageWithLabel from '../shared/Buttons/ButtonImageWithLabel'
@@ -13,12 +13,58 @@ import btnrespuestaactivo from "../images/buttons/btnrespuestaactivo.png"
 import preguntas from "../models/Trivias"
 import ProgressBarWithImage from "../shared/Indicators/ProgressBarWithImage"
 import screw from "../images/Graficos/tornillobarratrivias.png"
+import {Trivia} from "../shared/Utils/engine"
+import profesora from '../images/Graficos/profesora-temp.png'
+import secretaria from '../images/Graficos/secretari-temp.png'
+import estudiante from '../images/Graficos/estudiante-temp.png'
+import Fraile from "../images/Graficos/fraile-temp.png"
+
+const Roles = [
+    {
+        id:1,
+        text: 'Profesora',
+        image: profesora,
+        schedule1: '7-9',
+        schedule2: '12-21'
+    },
+    {
+        id:2,
+        text: 'Secretaria',
+        image: secretaria,
+        schedule1: '7-9',
+        schedule2: '12-21'
+    },
+    {
+        id:3,
+        text: 'Fraile',
+        image: Fraile,
+        schedule1: '7-9',
+        schedule2: '12-21'
+    },
+    {
+        id:4,
+        text: 'Estudiante',
+        image: estudiante,
+        schedule1: '7-9',
+        schedule2: '12-21'
+    }
+]
 
 function QuestionScreen(props) {
+    const [rol] = useState(props.character || 'Estudiante')
+    const [currentRol,setCurrentRol] = useState(false)
     let resp = false
     let ran = Math.floor(Math.random() * 4)
     let question = preguntas[ran]
     let difficultyAux;
+    useEffect(() => {
+        Roles.map((e)=>{
+            if(e.text === rol){
+                setCurrentRol(e)
+            }
+            return null
+        })
+    }, [rol])
     if(question.difficulty === 1 ){
         difficultyAux = "low"
     }
@@ -39,7 +85,12 @@ function QuestionScreen(props) {
             return null
         })
     }
-    console.log()
+    // Trivia.all((r)=>{
+    //     console.log("traigo las trivias",r)
+    // })
+    Trivia.get((currentRol.id || 1) ,(r)=>{
+        console.log("traigo las trivias",r)
+    })
     return (
         <Flex id="QuestionScreen" align="center" direction="column" style={{ marginTop: "0%", marginLeft: "5%", marginRight: "5%", height: '80vh' }}>
             <Flex style={{ height: '10%' }} align="center">

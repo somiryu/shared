@@ -16,35 +16,39 @@ import secretaria from '../images/Graficos/secretari-temp.png'
 import Absolute from '../shared/Containers/Absolute';
 const Roles = [
     {
+        id:1,
         text: 'Profesora',
         image: profesora,
         schedule1: '7-9',
-        schedule2: '20-21'
+        schedule2: '12-21'
     },
     {
+        id:2,
         text: 'Secretaria',
         image: secretaria,
         schedule1: '7-9',
-        schedule2: '20-21'
+        schedule2: '12-21'
     },
     {
+        id:3,
         text: 'Fraile',
         image: Fraile,
         schedule1: '7-9',
-        schedule2: '20-21'
+        schedule2: '12-21'
     },
     {
+        id:1,
         text: 'Estudiante',
         image: estudiante,
         schedule1: '7-9',
-        schedule2: '20-23'
+        schedule2: '12-21'
     }
 ]
 function SedeScreen(props) {
     const time1 = (rol) =>{
         let tiempo = rol.schedule1.split("-")
         let hour = props.date.getHours();
-        if(tiempo[0] < hour &&  tiempo[1] > hour){
+        if(parseInt(tiempo[0]) <= hour &&  parseInt(tiempo[1]) >= hour){
             return "on"
         }
         else{
@@ -54,7 +58,7 @@ function SedeScreen(props) {
     const time2 = (rol) =>{
         let tiempo = rol.schedule2.split("-")
         let hour = props.date.getHours()
-        if(tiempo[0] < hour &&  tiempo[1] > hour){
+        if(parseInt(tiempo[0]) <= hour &&  parseInt(tiempo[1]) >= hour){
             return "on"
         }
         else{
@@ -107,7 +111,7 @@ function SedeScreen(props) {
                                         debug={false}
                                         label={<label style={{ color: "var(--yellow-ligth)" }}>{rol.text}</label>}
                                         pointer={true}
-                                        listener={() => props.listener(rol.text)}
+                                        listener={()=>{}}
                                         leftLabel={"-1%"}
                                         topLabel={"75%"}
                                     >
@@ -121,7 +125,7 @@ function SedeScreen(props) {
                                 images={{ off: contatiempo, on: contatiempoactivo }}
                                 listeners={{
                                     off: () => { },
-                                    on: () => { },
+                                    on: () => {props.listener(rol.text)},
                                 }}
                                 stylesText={{ off: { color: 'var(--dark-grey)', marginBottom: '5%' }, on: { color: 'var(--yellow-ligth)', marginBottom: '5%' } }}
                                 styles={{}}
@@ -134,7 +138,7 @@ function SedeScreen(props) {
                                 images={{ off: contatiempo, on: contatiempoactivo }}
                                 listeners={{
                                     off: () => { },
-                                    on: () => { },
+                                    on: () => {props.listener(rol.text)},
                                 }}
                                 stylesText={{ off: { color: 'var(--dark-grey)', marginBottom: '5%' }, on: { color: 'var(--yellow-ligth)', marginBottom: '5%' } }}
                                 styles={{}}

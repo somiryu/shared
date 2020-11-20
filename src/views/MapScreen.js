@@ -216,6 +216,10 @@ function Portal(props) {
         }
         setTimeout(() => {        
             setstartTimer(true)
+            console.log("COprobacion de llaves",props.currentKeys,props.sede.keysRequiredForOpen)
+            if(props.currentKeys >=  props.sede.keysRequiredForOpen){
+                setStatePortal(true)
+            }
         }, 100);
     }, [props.sede])
     // useEffect(() => {

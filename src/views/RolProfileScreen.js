@@ -16,28 +16,32 @@ import Fraile from "../images/Graficos/fraile-temp.png"
 
 const Roles = [
     {
+        id:1,
         text: 'Profesora',
         image: profesora,
         schedule1: '7-9',
-        schedule2: '20-21'
+        schedule2: '12-21'
     },
     {
+        id:2,
         text: 'Secretaria',
         image: secretaria,
         schedule1: '7-9',
-        schedule2: '20-21'
+        schedule2: '12-21'
     },
     {
+        id:3,
         text: 'Fraile',
         image: Fraile,
         schedule1: '7-9',
-        schedule2: '20-21'
+        schedule2: '12-21'
     },
     {
+        id:4,
         text: 'Estudiante',
         image: estudiante,
         schedule1: '7-9',
-        schedule2: '20-21'
+        schedule2: '12-21'
     }
 ]
 

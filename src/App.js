@@ -33,7 +33,7 @@ function App() {
   const [layout,setLayout] = useState("Register")
   const [respuesta,setRespuesta] = useState(false)
   const [player,setPlayer] = useState()
-  const [globalKeys,setGlobalKeys] = useState(0)
+  const [globalKeys,setGlobalKeys] = useState(100)
   const [secondaryBg] = useState(true)
   const [sede,setSede] = useState(false)
   const [currentCahracter,setCurrentCahracter]=useState(false)
@@ -166,6 +166,7 @@ function App() {
             changeSede={changeSede}
             sedes = {sedes}
             date = {date}
+            currentKeys={globalKeys}
           >
           </MapScreen>
         }
@@ -190,7 +191,10 @@ function App() {
           </RolProfileScreen>
         }
         {layout === "Question" &&
-          <QuestionScreen listener = {listenerQuestion} sede={sede}>
+          <QuestionScreen 
+            listener = {listenerQuestion} 
+            sede={sede}
+            player = {player}>
           </QuestionScreen>
         }
         {layout === "Feedback" &&

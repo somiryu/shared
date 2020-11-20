@@ -20,7 +20,6 @@ import Timer from "../../shared/TimerV2"
 function TableGame(props){
     const [startTimer, setstartTimer] = useState(false)
     const [state1, setState1] = useState("on");
-    console.log("========================TABLEGAME================",props.data);
     let horas = 0
     let minutos = 0
     let segundos = 0
@@ -29,14 +28,12 @@ function TableGame(props){
     let minutes = props.date.getMinutes()
     let seconds = props.date.getSeconds()
     if(props.data){
-        console.log("=================ENTRE AL PRIMER IF==================")
         let horarios=[]
         props.data.schedule.map((e)=>{
             horarios=e.split("-")
             let hi = parseInt(horarios[0])
             let hf = parseInt(horarios[1])
             if(hour>hi && hour<hf){
-                console.log("=================ENTRE AL SEGUNDO IF==================")
                 horas = hf-hour
                 minutos = 59-minutes
                 segundos = 59-seconds
@@ -46,10 +43,10 @@ function TableGame(props){
         })
     }
     useEffect(() => {
-        setTimeout(() => {           
+        setTimeout(() => {     
             setstartTimer(true)
         }, 100);
-    }, [])
+    }, [props])
     console.log("==========TIMETABLE",horas,minutos,segundos,startTimer)
 	return(
         <ImagedPanel
