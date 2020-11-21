@@ -16,7 +16,6 @@ import ButtonImageWithLabel from "../Buttons/ButtonImageWithLabel";
 export default (props) => {
     let paddingText = props.paddingText || '5%';
     let random = Math.random();
-    console.log(random);
     return (
         <div id={props.id + "_panel"} className="PanelWithTwoImagedLabel">
             <ImagedPanel {...props}>

@@ -22,9 +22,7 @@ import { getCookie, Players } from "../Utils/engine";
 export default (props) => {
 	const [index, setIndex] = useState(0)
 	const [tutorial, setTutorial] = useState(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
-	useEffect(() => {
-		console.log('PROP TUTORIAL ====> ', tutorial)
-	}, [tutorial])
+
 	useEffect(() => {
 		if(tutorial && tutorial.next && tutorial.next !== 'null' && props.scope){
 			if( tutorial.next !== 'end') {

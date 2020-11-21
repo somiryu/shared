@@ -152,7 +152,6 @@ const setCall = function (data, defaults) {
 }
 
 const call = function (method, service, formData, listener, url = config.test ? config.test_url : config.base_url) {
-	console.log(method, service, formData)
 	var token = config.test ? config.test_api_token : config.api_token;
 	//Set Headers
 	var myHeaders = new Headers();

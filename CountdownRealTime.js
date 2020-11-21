@@ -59,7 +59,7 @@ export default function CountdownRealtime(props) {
   return (
     <Flex direction='column' justify="center" align="center">
       <Flex>
-        <h1 style={{color:'white'}}>{props.msg}</h1>
+        <h1 style={{color:'white', textShadow: '2px 1px 30px rgba(0, 0, 0, 1)'}}>{props.msg}</h1>
       </Flex>
       <Flex>
         {timerHours===null?<h2>cargando...</h2>:

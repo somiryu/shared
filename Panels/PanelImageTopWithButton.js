@@ -7,9 +7,7 @@ import React from "react";
 import PanelWithImageTop from "./PanelWithImageTop";
 
 export default (props) => {
-    console.log(props);
     let displaySub = (props.subtitle ? 'inline-block' : 'none');
-    console.log('displatSub', displaySub);
     let positionTopImage = props.positionTopImage || '-10%';
     let marginTitle = props.marginTitle || '5%';
     return (

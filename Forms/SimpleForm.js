@@ -5,11 +5,9 @@ import ButtonImageWithLabel from  '../Buttons/ButtonImageWithLabel'
 let formAux ={}
 function SimpleForm(props) {
     useEffect(() => {
-        console.log("se disparo use effect")
         props.inputs.map(e=>{
             return formAux[e.name]=""
         }) 
-        console.log(formAux)
     }, [props.inputs])
     return (
         <div>
