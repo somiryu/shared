@@ -21,7 +21,6 @@ function Button(props) {
 	return (
 		<div id={props.id} className={props.debug ? "testBox ButtonImage" : "ButtonImage"}
 			style={{ ...props.style, display: 'inline-block', animation: 'filter 1s linear', filter: `grayscale(${props.disabled ? '75%' : '0%'})` }}
-
 			onClick={clickHandler}
 		>
 			<div style={{ cursor: "pointer", display: "flex", alignItems: "flex-start", position: "relative", width: '100%' }}>
