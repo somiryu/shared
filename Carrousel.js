@@ -10,6 +10,7 @@ function Carrousel(props) {
 			}
 			console.log(slides)
 		}, 20);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 	useEffect(() => {
 		let slides = document.querySelectorAll('.Banner .slide');

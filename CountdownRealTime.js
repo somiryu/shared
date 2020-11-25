@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Flex from './Containers/Flex';
 //
 export default function CountdownRealtime(props) {
+  // eslint-disable-next-line no-unused-vars
   const [timerDays, setTimerDays] = useState(null);
   const [timerHours, setTimerHours] = useState(null);
   const [timerMinutes, setTimerMinutes] = useState(null);
@@ -27,9 +28,9 @@ export default function CountdownRealtime(props) {
         clearInterval(null);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countDownDate, timerSeconds, timerMinutes, props.fechaFin]);
   const reset = () => {
-    console.log('RESET TIMER')
     props.reset(props.id);
   }
   const startTimer = () => {
