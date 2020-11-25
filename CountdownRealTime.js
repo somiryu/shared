@@ -10,7 +10,7 @@ export default function CountdownRealtime(props) {
   let interval = useRef();
   useEffect(() => {
     let limit = new Date();
-    if(props.fechaFin<limit){
+    if (props.fechaFin < limit) {
       reset();
     }
     if (timerMinutes !== 0) {
@@ -21,14 +21,14 @@ export default function CountdownRealtime(props) {
       startTimer();
     } else if (timerSeconds !== 0) {
       startTimer()
-    } else{
+    } else {
       reset();
       return () => {
-        clearInterval(null);      
+        clearInterval(null);
       }
     }
-  },[countDownDate,timerSeconds,timerMinutes,props.fechaFin]);
-  const reset = () =>{
+  }, [countDownDate, timerSeconds, timerMinutes, props.fechaFin]);
+  const reset = () => {
     console.log('RESET TIMER')
     props.reset(props.id);
   }
@@ -41,7 +41,7 @@ export default function CountdownRealtime(props) {
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)));
       const minutes = Math.floor(distance % (1000 * 60 * 60)) / (1000 * 60);
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
+
       if (distance < 0) {
         //terminar timer
         clearInterval(interval.current);
@@ -52,21 +52,27 @@ export default function CountdownRealtime(props) {
         setTimerDays(days);
         setTimerHours(hours);
         setTimerMinutes(~~minutes);
-        
+
       }
     }, 1000)
   }
   return (
     <Flex direction='column' justify="center" align="center">
       <Flex>
-        <h1 style={{color:'white', textShadow: '2px 1px 30px rgba(0, 0, 0, 1)'}}>{props.msg}</h1>
+        <h1 className='h1-bg' style={{ color: 'white', textShadow: '2px 1px 30px rgba(0, 0, 0, 1)' }}>{props.msg}</h1>
       </Flex>
       <Flex>
-        {timerHours===null?<h2>cargando...</h2>:
-          <div style={{...props.style}}>{timerHours<=9?`0${timerHours}`:timerHours}:{timerMinutes<=9?`0${timerMinutes}`:timerMinutes}:{timerSeconds<=9?`0${timerSeconds}`:timerSeconds}</div>
+        {timerHours === null ? <h2 className='h1-bg' style={{ color: 'white' }}>cargando...</h2> :
+          <div style={{ ...props.style }}>
+            <h1 className='h1-bg'>
+              {timerHours <= 9 ?
+                `0${timerHours}` : timerHours}:{timerMinutes <= 9 ? `0${timerMinutes}` : timerMinutes} :
+              {timerSeconds <= 9 ? `0${timerSeconds}` : timerSeconds}
+            </h1>
+          </div>
         }
-         
-      </Flex> 
+
+      </Flex>
     </Flex>
   )
 }
