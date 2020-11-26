@@ -31,7 +31,7 @@ let sedes = s;
 window.EM = new EventEmitter();
 window.flash = (message, type="success") => window.EM.emit('flash', ({message, type}));
 function App() {
-  const [layout,setLayout] = useState("Loading")
+  const [layout,setLayout] = useState("Register")
   const [respuesta,setRespuesta] = useState(false)
   const [player,setPlayer] = useState()
   const [globalKeys,setGlobalKeys] = useState(100)

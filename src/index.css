@@ -1109,6 +1109,9 @@ p {
     }
 }
 @media (max-width: 450px) {
+    #FlexLoading{
+        width: 100% !important;
+    }
     #Cofradia .label-bg {
         font-size: 0.3em;
     }
