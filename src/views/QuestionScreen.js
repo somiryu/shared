@@ -57,6 +57,12 @@ function QuestionScreen(props) {
     let ran = Math.floor(Math.random() * 4)
     let question = preguntas[ran]
     let difficultyAux;
+    let puntos;
+
+    const pointsBar=(points)=>{
+        //console.log("puntos",points)
+        puntos = points
+    }
     useEffect(() => {
         Roles.map((e)=>{
             if(e.text === rol){
@@ -147,7 +153,11 @@ function QuestionScreen(props) {
                         } else {
                             if (question.susseful === resp) {
                                 console.log("es correcto")
-                                props.listener(8, true)
+                                if(question.difficulty>=3){
+                                    props.listener(8, true)
+                                }else{
+                                    props.listener(8, true)
+                                }
                             } else {
                                 console.log("es incorrecto")
                                 props.listener(8, false)
@@ -157,9 +167,11 @@ function QuestionScreen(props) {
                 >
                 </ButtonImageWithLabel>
             </div>
+            {question.difficulty >= 3 &&
             <Flex>
                 <ProgressBarWithImage 
                     //image={Bar}
+                    listener = {pointsBar}
                     padding='1% 0% 1%'
                     styleContainer={{ width: "300px", height: "21px" }}
                     imageRelative={screw}
@@ -169,6 +181,7 @@ function QuestionScreen(props) {
                 >
                 </ProgressBarWithImage>
             </Flex>
+            }
         </Flex>
     )
 }

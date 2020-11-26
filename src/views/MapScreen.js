@@ -62,7 +62,6 @@ function MapScreen(props) {
     const [tableGame, setTableGame] = useState(props.sedes[0])
     
     
-    
     const handlePortal = (e) => {
         let sede;
         if(screen < 800 && e['target']){
@@ -148,7 +147,7 @@ function MapScreen(props) {
                 </ImagePanel>
                 {(screen > 800 && tableGame)&&
                     <div>
-                        <TableGame {...props} listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
+                        <TableGame {...props}  listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
                     </div>
                 }
                 {(screen < 800 && tableGame) &&
@@ -161,7 +160,7 @@ function MapScreen(props) {
             </div>
             { (screen < 800 && portalInferior === true && tableGame) &&
                 <Absolute style={{ top: "30%", left: "0%" }}>
-                    <TableGame  {...props} listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
+                    <TableGame  {...props}  listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
                 </Absolute>
             }
         </div>

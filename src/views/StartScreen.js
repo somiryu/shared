@@ -93,7 +93,7 @@ function StartScreen(props) {
                 Players.create(data.document,data,(r)=>{
                     console.log("============> nuevo user",r)
                     engine.logIn(data.document)
-                    props.listenerPlayer(1,r);  
+                    Players.get(data.document,(r)=>{ props.listenerPlayer(1,r);})
                 })
             }
             

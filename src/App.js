@@ -11,6 +11,7 @@ import SedeScreen from "./views/SedeScreen"
 import RolProfileScreen from "./views/RolProfileScreen"
 import QuestionScreen from "./views/QuestionScreen"
 import FeedBackScreen from "./views/FeedBackScreen"
+import LoadingScreen from "./views/LoadingScreen"
 // import ButtonImage from "./shared/Buttons/ButtonImage"¡
 // import QuestionBarScreen from "./views/QuestionBarScreen"
 // import QuestionWithTitleScreen from "./views/QuestionWithTitleScreen"
@@ -30,13 +31,14 @@ let sedes = s;
 window.EM = new EventEmitter();
 window.flash = (message, type="success") => window.EM.emit('flash', ({message, type}));
 function App() {
-  const [layout,setLayout] = useState("Register")
+  const [layout,setLayout] = useState("Loading")
   const [respuesta,setRespuesta] = useState(false)
   const [player,setPlayer] = useState()
   const [globalKeys,setGlobalKeys] = useState(100)
   const [secondaryBg] = useState(true)
-  const [sede,setSede] = useState(false)
+  const [sede,setSede] = useState("Bogota")
   const [currentCahracter,setCurrentCahracter]=useState(false)
+  const [pointsBar,setPointsBar]=useState(0)
   let date = new Date();
   let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback","Login"]
   useEffect(() => {
@@ -55,9 +57,12 @@ function App() {
     setLayout(pages[indice])
     setPlayer(player)
   }
-  const listenerQuestion = (indice,res) =>{
+  const listenerQuestion = (indice,res,points) =>{
     setLayout(pages[indice])
     setRespuesta(res)
+    if(points > 0){
+      setPointsBar(points)
+    }
   }
   const listenerFeedback = (points) =>{
     if(globalKeys===0 && points < 0){
@@ -126,7 +131,7 @@ function App() {
           </Components>
         }
        <PlayArea width={layout === 'BeginGame' ? 1400 : 1000}>
-        {(layout !== "Register" && layout !== "Legend" && layout !== "Choose" && layout !== "Login") &&
+        {(layout !== "Register" && layout !== "Legend" && layout !== "Choose" && layout !== "Login" && layout !== "Loading") &&
           <Header 
             listener={listener} 
             layout={layout} 
@@ -202,6 +207,7 @@ function App() {
             listener = {listenerFeedback}
             respuesta = {respuesta}
             sede={sede}
+            pointsBar = {pointsBar}
           >
           </FeedBackScreen>
         }
@@ -211,6 +217,10 @@ function App() {
             player={player}
           >
           </ChooseScreen>
+        }
+        {layout === "Loading" &&
+          <LoadingScreen >
+          </LoadingScreen>
         }
         {engine.getUser()&&
         <Absolute right={"80%"} top={"10%"} >

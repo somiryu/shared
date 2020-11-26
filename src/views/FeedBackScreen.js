@@ -28,7 +28,7 @@ function FeedbackScreen(props) {
 
                         <Flex align='center' justify='center' style={{height:'20%', width:'100%'}}>
                             <CurrencyHorizontal
-                                quantity={props.respuesta ? 2 : -1  }
+                                quantity={props.respuesta ? (props.pointsBar>0 ? props.pointsBar:2):-1 }
                                 image={key}
                                 displayX={true}
                                 styleX={{ padding: "5px", fontSize: "30px" }}
@@ -42,7 +42,7 @@ function FeedbackScreen(props) {
                                 image={props.buttonImage || ButtonImage}
                                 label={props.buttonLabel || <label style={{ fontWeight: "700", fontSize: "17px", height: "30px" }}>VOLVER</label>}
                                 listener={() => {
-                                    props.listener(props.respuesta ? 2 : -1)
+                                    props.listener(props.respuesta ? (props.pointsBar>0 ? props.pointsBar:2):-1)
                                 }}
                             >
                             </ButtonImageWithLabel>

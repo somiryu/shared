@@ -19,6 +19,7 @@ import Timer from "../../shared/TimerV2"
 
 function TableGame(props){
     const [startTimer, setstartTimer] = useState(false)
+    const [reiniciar, setReiniciar] = useState(false)
     const [state1, setState1] = useState("on");
     let horas = 0
     let minutos = 0
@@ -43,11 +44,12 @@ function TableGame(props){
         })
     }
     useEffect(() => {
-        setTimeout(() => {     
+        setTimeout(() => {
+            setReiniciar(true)     
             setstartTimer(true)
         }, 100);
     }, [props])
-    console.log("==========TIMETABLE",horas,minutos,segundos,startTimer)
+    console.log("==========TIMETABLE",horas,minutos,segundos,startTimer,reiniciar)
 	return(
         <ImagedPanel
             image={containformacion}
@@ -129,7 +131,7 @@ function TableGame(props){
                                 segundos={segundos}
                                 iniciar={startTimer}
                                 detener={false}
-                                reiniciar={false} //inicia o reanuda
+                                reiniciar={reiniciar} //inicia o reanuda
                                 styleTimer={{fontSize:'.6rem',fontFamily:'Source Serif Pro'}}
                             ></Timer>
                         </div>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import Flex from "../shared/Containers/Flex"
 import MaskedAvatarWithTitle from "../shared/Hubs/MaskedAvatarWithTitle";
 import Fraile from "../images/Graficos/fraile-temp.png"
@@ -14,6 +14,10 @@ import estudiante from '../images/Graficos/estudiante-temp.png'
 import profesora from '../images/Graficos/profesora-temp.png'
 import secretaria from '../images/Graficos/secretari-temp.png'
 import Absolute from '../shared/Containers/Absolute';
+import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
+import s from '../models/Sedes'
+import key from "../images/header/llaveheader.png"
+let sedes = s;
 const Roles = [
     {
         id:1,
@@ -26,14 +30,14 @@ const Roles = [
         id:2,
         text: 'Secretaria',
         image: secretaria,
-        schedule1: '7-9',
+        schedule1: '9-11',
         schedule2: '12-21'
     },
     {
         id:3,
         text: 'Fraile',
         image: Fraile,
-        schedule1: '7-9',
+        schedule1: '7-8',
         schedule2: '12-21'
     },
     {
@@ -45,6 +49,18 @@ const Roles = [
     }
 ]
 function SedeScreen(props) {
+    const  [currentSede,setCurrentSede] = useState(sedes[0])
+    
+
+    useEffect(() => {
+        sedes.map((e)=>{
+            if(e.name===props.sede){
+                setCurrentSede(e)
+            }
+            return null
+        })
+    }, [props.sede])
+
     const time1 = (rol) =>{
         let tiempo = rol.schedule1.split("-")
         let hour = props.date.getHours();
@@ -65,6 +81,7 @@ function SedeScreen(props) {
             return "off"
         }
     }
+    console.log("===========SEDE ACTUAL ===========", currentSede, currentSede.keysRequiredForOpen)
     return (
         <Flex id="SedeScreenContainer" align="center" style={{ marginTop: "0%", marginLeft: "5%", marginRight: "5%", flexWrap: "wrap" }}>
             <Flex style={{ width: "50%" }} align="center" direction="column">
@@ -74,14 +91,27 @@ function SedeScreen(props) {
                     style={{ width: "400px", }}
                 >
                     <Flex align="center" direction="column" style={{ width: '100%', height: '100%' }}>
-                        <Flex align="center" style={{ width: '100%', height: '18%' }} >
+                        <Flex align="center" style={{ width: '100%', height: '20%' }} >
                             <h2>{props.title || "Titulo"}</h2>
                         </Flex>
-                        <Flex className='scrollbar' align="flex-start" style={{ margin: '5% 0', width: '60%', height: '30%', overflowY: 'auto' }} >
+                        <Flex className='scrollbar' align="flex-start" style={{ margin: '2% 0', width: '60%', height: '25%', overflowY: 'auto' }} >
                             <p style={{ color: 'white' }}>{props.legend || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."}</p>
                         </Flex>
-                        <Flex align="flex-start" style={{ height: '50%' }} >
-                            <img alt="portal" src={portalVillavicencio} style={{ width: '80%' }}></img>
+                        <Flex align="flex-start" style={{ height: '25%' }} >
+                            <img alt="portal" src={portalVillavicencio} style={{ height: '100%' }}></img>
+                        </Flex>
+                        <Flex jsutify={"center"} style={{ height: '30%' }}>
+                            <CurrencyHorizontal
+                                className="source"
+                                quantity={currentSede.keysRequiredForOpen || 0}
+                                image={key}
+                                displayX={true}
+                                styleX={{padding:"0 5px", color:'var(--yellow-ligth)'}}
+                                childStyle={{color:'var(--yellow-ligth)'}}
+                                id="counterkeyssede"
+                                idX="xcounterkeyssede"
+                                styleBox={{display:"flex"}}
+                            ></CurrencyHorizontal>
                         </Flex>
                     </Flex>
                 </ImagePanel>
