@@ -24,22 +24,22 @@ export default (props) => {
 	const [tutorial, setTutorial] = useState(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
 
 	useEffect(() => {
-		if(tutorial && tutorial.next && tutorial.next !== 'null' && props.scope){
-			if( tutorial.next !== 'end') {
-				if(props.tutorial[props.scope] && props.tutorial[props.scope][tutorial.next] && props.tutorial[props.scope][tutorial.next].screen)
+		if (tutorial && tutorial.next && tutorial.next !== 'null' && props.scope) {
+			if (tutorial.next !== 'end') {
+				if (props.tutorial[props.scope] && props.tutorial[props.scope][tutorial.next] && props.tutorial[props.scope][tutorial.next].screen)
 					props.saveNextTutorial(tutorial.next, props.tutorial[props.scope][tutorial.next].screen || tutorial.screen)
 			}
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [tutorial])
 	useEffect(() => {
-		if(props.current !== 'end'){
+		if (props.current !== 'end') {
 			setIndex(0)
 			setTutorial(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
 		} else {
 			setTutorial(null)
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.current]);
 	useEffect(() => {
 		let animation;
@@ -85,9 +85,11 @@ export default (props) => {
 		}
 	}, [props.animateTop])
 	const updateKeyTutorial = (current) => {
-		let id = getCookie("temp_engine_id");
-		Players.update_tutorial(id, current, {}, (res) => {
-		})
+		if (!window.test) {
+			let id = getCookie("temp_engine_id");
+			Players.update_tutorial(id, current, {}, (res) => {
+			})
+		}
 	}
 	const calculatePositionArrow = (direction) => {
 		let rotate = 0
@@ -102,9 +104,9 @@ export default (props) => {
 		}
 		return rotate + 'deg'
 	}
-	if(!tutorial) { return (<div></div>)} 
+	if (!tutorial) { return (<div></div>) }
 	return (
-		<div className="tutorial" style={{ display: 'flex', flexDirection: 'row',alignItems:'center', justifyContent:'center', width: `100%`,height:'100%', zIndex: props.zIndex || 0 }}>
+		<div className="tutorial" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: `100%`, height: '100%', zIndex: props.zIndex || 0 }}>
 			{tutorial.arrow &&
 				<div className="arrow" style={{
 					position: 'absolute',
@@ -121,15 +123,15 @@ export default (props) => {
 					</Levitation>
 				</div>
 			}
-			<div className="tutorialContent" style={{top:props.top || '75%', zIndex: props.zIndexContent || 0 }}>
-				<div className="tutorialContentText" style={{width: (tutorial.texts[index + 1]) || (!tutorial.texts[index + 1] && tutorial.button) ? '75%' : '100%'}}>
+			<div className="tutorialContent" style={{ top: props.top || '75%', zIndex: props.zIndexContent || 0 }}>
+				<div className="tutorialContentText" style={{ width: (tutorial.texts[index + 1]) || (!tutorial.texts[index + 1] && tutorial.button) ? '75%' : '100%' }}>
 					{(props.image || tutorial.image) &&
 						<div className="character">
 							<img src={tutorial.image || props.image} alt="Character" />
 						</div>
 					}
 					<div className="tutorialText">
-						<div style={{display:tutorial.title ? 'flex': 'none'}}><strong>Tutorial:</strong></div><br />
+						<div style={{ display: tutorial.title ? 'flex' : 'none' }}><strong>Tutorial:</strong></div><br />
 						<AnimatedText
 							value={tutorial.texts[index]}
 							id="tutorialText"
@@ -142,12 +144,12 @@ export default (props) => {
 				</div>
 				{tutorial.texts[index + 1] &&
 					<div className="cta">
-						<ButtonImageWithLabel image={props.imageButton || ImageTest} id="saltar" state="off" label={<label id="labelBtn">Siguiente</label>} listener={() => {setIndex(index + 1);}} />
+						<ButtonImageWithLabel image={props.imageButton || ImageTest} id="saltar" state="off" label={<label id="labelBtn">Siguiente</label>} listener={() => { setIndex(index + 1); }} />
 					</div>
 				}
 				{!tutorial.texts[index + 1] && tutorial.button &&
 					<div className="cta">
-						<ButtonImageWithLabel image={props.imageButton || ImageTest} id="continuar" state="off" label={<label id="labelBtn">Continuar</label>} listener={() => { setIndex(0); props.nextTutorial(tutorial.next, tutorial.screen); updateKeyTutorial(props.current)}  }/>
+						<ButtonImageWithLabel image={props.imageButton || ImageTest} id="continuar" state="off" label={<label id="labelBtn">Continuar</label>} listener={() => { setIndex(0); props.nextTutorial(tutorial.next, tutorial.screen); updateKeyTutorial(props.current) }} />
 					</div>
 				}
 			</div>
