@@ -16,7 +16,6 @@ class Timer extends Component{
     }
 
     componentDidMount(){
-    	console.log(this.props.seconds,this.props.start )
     	this.setState({seconds: this.props.seconds, start: this.props.start})
     	if(this.props.stopOn){this.stopOn = this.props.stopOn}
     }
@@ -30,7 +29,6 @@ class Timer extends Component{
     }
 
     componentWillUnmount(){
-        console.log("------------TIMER UNMOUNTED")
     	this.timer && clearInterval(this.timer)
     }
 

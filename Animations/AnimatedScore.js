@@ -19,7 +19,6 @@ class AnimatedScore extends Component {
 
 	animate(_from, _to) {
 		if (this.props.id) {
-			console.log('FIRST CHILD ===> ', this.props.id)
 			let e = document.getElementById(this.props.id).firstChild
 			let v = { qty: _from }
 			if (e) {

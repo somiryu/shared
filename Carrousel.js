@@ -8,7 +8,6 @@ function Carrousel(props) {
 			if(slides.length > 0){
 				slides[0].className = 'slide showing' 
 			}
-			console.log(slides)
 		}, 20);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
@@ -41,7 +40,6 @@ function Carrousel(props) {
 				slides[current].className = 'slide'
 			}
 		})
-		console.log(slides, index)
 		if(slides[index]){
 			slides[index].className = 'slide showing'
 		}

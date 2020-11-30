@@ -43,7 +43,6 @@ class AnimatedText extends Component{
 
 
 	render(){
-		// console.log("AnimatedText", this.props);
 		return( 
 			<div className="AnimatedText" id={"animatedText"+this.props.id}>
 			 	<span></span>

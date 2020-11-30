@@ -17,7 +17,6 @@ function ButtonMultiStateWithText(props) {
         width: '100%',
         height: '100%'
     }
-    console.log('STYLES TEXT ===> ', props.stylesText)
     return (
         <ButtonMultiState
             {...props}

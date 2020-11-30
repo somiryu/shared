@@ -160,7 +160,6 @@ const call = function (method, service, formData, listener, url = config.test ? 
 	var miInit = { method: method, headers: myHeaders, mode: 'cors', cache: 'default' };
 	//Include formData in body if post or put
 	if (formData && (method === "POST" || method === "PUT" || method === "DELETE")) {
-		//console.log('miInit =>', miInit); 
 		formData.append("noEmpty", "true") //avoid multipart errors
 		miInit.body = formData;
 	}

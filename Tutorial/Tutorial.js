@@ -85,11 +85,9 @@ export default (props) => {
 		}
 	}, [props.animateTop])
 	const updateKeyTutorial = (current) => {
-		if (!window.test) {
-			let id = getCookie("temp_engine_id");
-			Players.update_tutorial(id, current, {}, (res) => {
-			})
-		}
+		let id = getCookie("temp_engine_id");
+		Players.update_tutorial(id, current, {}, (res) => {
+		})
 	}
 	const calculatePositionArrow = (direction) => {
 		let rotate = 0
@@ -106,7 +104,7 @@ export default (props) => {
 	}
 	if (!tutorial) { return (<div></div>) }
 	return (
-		<div className="tutorial" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: `100%`, height: '100%', zIndex: props.zIndex || 0 }}>
+		<div className="tutorial" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: `100%`, height: '100%' }}>
 			{tutorial.arrow &&
 				<div className="arrow" style={{
 					position: 'absolute',
