@@ -107,16 +107,10 @@ export const config = {
 	getCableUrl: function () { return this.test ? this.cable_url_test : this.cable_url },
 }
 
-<<<<<<< HEAD
 export const getCookie = (cookie) =>{var ca = document.cookie.split(';');for(var i = 0; i < ca.length; i++){var c = ca[i]; while (c.charAt(0) === ' ') {c = c.substring(1);}; if (c.indexOf(cookie+"=") === 0) {return c.split("=")[1];}}; return false;}
 export const setCookie = (cookie, cvalue) => {let expDays = 3;let d = new Date();d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000));const expires = "expires="+d.toUTCString();document.cookie = cookie+"=" + cvalue + ";" + expires + ";path=/";}
 export const deleteCookie = (cookie) =>{document.cookie = cookie+"=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"}
 export const evaluateEmail = (method, service, url, listener) => { call(method, service,{},listener, url)}
-=======
-export const getCookie = (cookie) => { var ca = document.cookie.split(';'); for (var i = 0; i < ca.length; i++) { var c = ca[i]; while (c.charAt(0) === ' ') { c = c.substring(1); }; if (c.indexOf(cookie + "=") === 0) { return c.split("=")[1]; } }; return false; }
-export const setCookie = (cookie, cvalue) => { let expDays = 3; let d = new Date(); d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000)); const expires = "expires=" + d.toUTCString(); document.cookie = cookie + "=" + cvalue + ";" + expires + ";path=/"; }
-export const deleteCookie = (cookie) => { document.cookie = cookie + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;" }
->>>>>>> 3e17bfa59176e77d209dc05246c81387e6f44400
 
 const engine = {
 	image: function (path) {
@@ -157,11 +151,7 @@ const setCall = function (data, defaults) {
 	};
 }
 
-<<<<<<< HEAD
 const call = function(method, service, formData, listener,url= config.test ? config.test_url : config.base_url){
-=======
-const call = function (method, service, formData, listener) {
->>>>>>> 3e17bfa59176e77d209dc05246c81387e6f44400
 	console.log(method, service, formData)
 	var token = config.test ? config.test_api_token : config.api_token;
 	//Set Headers
@@ -193,9 +183,10 @@ const call = function (method, service, formData, listener) {
 
 
 export const Players = {
+	getAll: function (data,listener) { setCall(data = data || {}, { include: "basic,agent,items" }); call("GET", "players", setParams(data, true), listener)},
 	create: function (id_in_app, data, listener) { setCall(data = data || {}, { id_in_app: id_in_app }); call("POST", "players/v2", setParams(data), listener) },
 	get: function (id_in_app, listener, data) { setCall(data = data || {}, { include: "basic,agent,items" }); call("GET", "players/" + id_in_app, setParams(data, true), listener) },
-	get_or_create: function (id_in_app, listener, data) {
+	get_or_create: function (id_in_app, data, listener) {
 		this.get(id_in_app, (d) => {
 			if (d.status && d.status === "Invalid player: check id_in_app") { this.create(id_in_app, data, (cd) => { if (cd.player) this.get(id_in_app, (r) => listener(r)) }) } else { listener(d) }
 		}, data)
@@ -316,7 +307,7 @@ export const Teams = {
 	delete: () => { },
 	managePlayer: (agent, id_team , data, listener ) => {
 		setCall(data = data || { id_in_app: engine.getUser() });
-		call("PUT", "teams/:" + id_team + "/players/:" + agent.id_in_app, setParams(data), listener)
+		call("PUT", "teams/" + id_team + "/players/:" + agent.id_in_app, setParams(data), listener)
 	}
 }
 export const Trivia = {
