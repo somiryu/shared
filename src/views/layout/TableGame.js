@@ -7,7 +7,8 @@ import ButtonMultiState from  '../../shared/Buttons/ButtonMultiState'
 //import gameZone from "../../images/general/contajuego.png"
 import copa from "../../images/Iconos/incopa.png"
 import villavicencio from "../../images/Iconos/inescudovilla.png"
-import incerebrodificil from "../../images/Iconos/incerebrodificil.png" 
+import incerebrodificil from "../../images/Iconos/incerebrodificil.png"
+import incerebrofacil from "../../images/Iconos/incerebrofacil.png"  
 import key from "../../images/header/llaveheader.png" 
 import timer from "../../images/Iconos/inretry.png" 
 import door from "../../images/Iconos/inpuerta.png"
@@ -60,7 +61,7 @@ function TableGame(props){
             <Flex direction="column" align="center" style={{backgroundColor:"rgba(5,5,5,0.3)",borderRadius:"20px",width:"100%",padding: "10px",height:"100%"}}>
                 <Flex align={"center"} style={{width:"100%", height:'20%'}}>
                     <Flex align="center" style={{}}>
-                        <img alt="cerebro"src={incerebrodificil} ></img>
+                        <img alt="cerebro"src={props.data.racha === true ? incerebrodificil : incerebrofacil} ></img>
                     </Flex>
                     <Flex style={{margin:"10px 10px"}}align="center">
                         <h5 style={{fontFamily:'Source Serif Pro'}}>{"Sede "}  {props.city || "CIUDAD"}</h5>

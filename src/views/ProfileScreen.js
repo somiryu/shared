@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import circ20 from "../shared/ExampleImages/Circ-20.png"
 import Flex from "../shared/Containers/Flex"
 import Absolute from "../shared/Containers/Absolute"
@@ -17,11 +17,17 @@ import inpapiro from "../images/Iconos/inpapiro@2x.png"
 import SedesTable from "./layout/SedesTable"
 import CofradiaTable from "./layout/CofradiaTable"
 import estudiante from '../images/Graficos/estudiante.png'
+import {Players} from  '../shared/Utils/engine'
 
 function ProfileScreen(props) {
     const [regional, setRegional] = useState(false)
     const [cofradia, setCofradia] = useState(false)
     const [perfil, setPerfil] = useState(true)
+    const [lideres, setLideres] = useState()
+
+    useEffect(() => {
+        setLideres(Players.getAll(()=>{console.log("=========> JUGADORES")}))
+    }, [])
 
     const listenerRegional = () =>{
         setRegional(true)
@@ -185,6 +191,7 @@ function ProfileScreen(props) {
                 {regional &&
                 <SedesTable
                     sedes={[{name:"Bogota",points:100,image:sedeprincipalbogota}]}
+                    leaders = {lideres}
                 ></SedesTable>
                 }
                 {cofradia &&

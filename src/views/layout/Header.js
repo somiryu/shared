@@ -18,7 +18,9 @@ import "./header.css"
 
 
 
-function Header(props){ 
+function Header(props){
+    //const [percentage, setPorcentage] = useState(props.player.agent.levels.xp.percentage )
+    
     return (
         <Flex  className="header" style={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", zIndex: "999"}}>
             <ImagedPanel
@@ -52,7 +54,7 @@ function Header(props){
                         </Flex>
                         <Flex style={{height:'33%'}}>
                             <ProgressBar
-                                percentage="30"
+                                percentage={props.player.agent.levels.xp.percentage || 0}
                                 image={Bar}
                                 padding='2% 10% 4%'
                                 styleContainer={{ width: "100%", height: "80%" }}

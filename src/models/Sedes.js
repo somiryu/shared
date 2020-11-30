@@ -14,6 +14,7 @@ const sedes = [
         ],
         x: 38,
         y: 37,
+        racha:true,
     },
     {
         id: 2,
@@ -30,6 +31,7 @@ const sedes = [
         ],
         x: 40,
         y: 15,
+        racha:false,
     },
     {
         id: 2,
@@ -46,6 +48,7 @@ const sedes = [
         ],
         x: 55,
         y: 12,
+        racha:true,
     },
     {
         id: 2,
@@ -62,6 +65,7 @@ const sedes = [
         ],
         x: 22,
         y: 0,
+        racha:false,
     },
     {
         id: 2,
@@ -78,6 +82,7 @@ const sedes = [
         ],
         x: 50,
         y: 10,
+        racha:true,
     },
     {
         id: 2,
@@ -94,6 +99,7 @@ const sedes = [
         ],
         x: 25,
         y: 5,
+        racha:false,
     },
 
 ]
