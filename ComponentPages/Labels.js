@@ -4,7 +4,6 @@ import ImagedWithText from "../Labels/ImagedWithText";
 
 export default (props) => {
 	const [debug, setDebug] = useState(true)
-	console.log(props)
 	return(
 		<div className="Labels">
 			<span>Debug</span>

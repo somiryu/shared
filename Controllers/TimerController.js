@@ -26,7 +26,6 @@ class Timer extends Component {
     componentDidUpdate(prev) {
         if (this.props.newSecond) {
             if (prev.newSecond !== this.props.newSecond) { 
-                console.log('PROPS NEWSECONDS  ====> ', this.props.newSecond) 
                 this.setState({ seconds: this.props.newSecond });
             } 
         }
@@ -43,7 +42,6 @@ class Timer extends Component {
     }
 
     componentWillUnmount() {
-        console.log("------------TIMER UNMOUNTED")
         this.timer && clearInterval(this.timer)
     }
 

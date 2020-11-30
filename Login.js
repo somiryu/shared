@@ -62,7 +62,6 @@ class Login extends Component{
 		let value = target.type === 'checkbox' ? target.checked : target.value;
 		const name = target.name;
 		if(name === "email"){value = value.toLowerCase()}
-		console.log("Will change", name, value)
 		this.setState({
       	[name]: value
    	});
@@ -70,7 +69,6 @@ class Login extends Component{
 
 	handleSubmit(e){
 		if(!this.state.loading){
-			console.log("Submitting");
 			/* Validations */
 			if (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.state.email) ){} else { 
 				this.setState({error: "Email inválido. Verificar"});
@@ -134,12 +132,10 @@ class Login extends Component{
 						params.properties[sf[i].name] = state[sf[i].name]
 					}
 				}
-				console.log("Params to send", params)
 				window.engine.postPlayer(
 					this.state.password,
 					params,
 					(data) => {
-						console.log("Player Creation", data);
 						if(data.success === false){
 							callError("El jugador ya existe.")
 						} else {
@@ -149,7 +145,7 @@ class Login extends Component{
 					}
 				)
 			}
-		} else {console.log("Prevented")}		
+		}		
 	}
 
 	toggleView(){

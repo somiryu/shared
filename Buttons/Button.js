@@ -6,7 +6,6 @@ class Button extends Component{
     clickHandler = () =>{
     	const t = this
     	var scale = this.props.scale || 1.1
-	   console.log("clicked", this.props.id)
 	   anime({
 	      targets: "#"+this.props.id,
 	      scale: scale, duration: 200,
