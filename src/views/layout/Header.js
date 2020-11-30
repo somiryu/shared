@@ -13,33 +13,33 @@ import sedeprincipalbogota from "../../images/Graficos/sedeprincipalbogota.png"
 import contasedeheader from "../../images/buttons/contasedeheader.png"
 import MaskedAvatar from "../../shared/Hubs/MaskedAvatar"
 import btnatras from "../../images/buttons/btnatras.png"
-import ButtonMultiState from  '../../shared/Buttons/ButtonMultiState'
+import ButtonMultiState from '../../shared/Buttons/ButtonMultiState'
 import "./header.css"
 
 
 
-function Header(props){
+function Header(props) {
     //const [percentage, setPorcentage] = useState(props.player.agent.levels.xp.percentage )
-    
+
     return (
-        <Flex  className="header" style={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", zIndex: "999"}}>
+        <Flex className="header" style={{ width: "100%", height: "auto", display: "flex", justifyContent: "center", zIndex: "999" }}>
             <ImagedPanel
                 id="tiP1"
                 image={header629}
                 debug={false} //testBox appears
                 padding="5%" //5%
             >
-               
-                <Flex style={{ position: "absolute",left: "20px" }}>
-                    <ButtonImage image={btnatras} listener={()=>{props.listener(3)}} >
+
+                <Flex style={{ position: "absolute", left: "20px" }}>
+                    <ButtonImage image={btnatras} listener={() => { props.listener(3) }} >
 
                     </ButtonImage>
                 </Flex>
-                
+
                 <Flex
-                    style={{ width: '100%',height: '100%',marginTop: "2%" }}
+                    style={{ width: '100%', height: '100%', marginTop: "2%" }}
                     align='center'
-                    justify='center'  
+                    justify='center'
                 >
                     <Flex
                         className=""
@@ -47,34 +47,21 @@ function Header(props){
                         margin="5%"
                         align='center'
                         justify='center'
-                        style={{ width: "40%",height: '80%' }}
+                        style={{ width: "40%", height: '80%' }}
                     >
-                        <Flex className="source" style={{height:'33%'}}>
-                            <h3 style={{ textAlign:'center', padding:'5px 0px', color:'var(--yellow-ligth)' }}>{props.player.agent.levels.xp.level.name ? props.player.agent.levels.xp.level.name:"Nivel 0" }</h3>
+                        <Flex className="source" style={{ height: '45%' }}>
+                            <h3 style={{ textAlign: 'center', padding: '5px 0px', color: 'var(--yellow-ligth)' }}>{props.player.agent.levels.xp.level.name ? props.player.agent.levels.xp.level.name : "Nivel 0"}</h3>
                         </Flex>
-                        <Flex style={{height:'33%'}}>
+                        <Flex style={{ height: '45%' }}>
                             <ProgressBar
                                 percentage={props.player.agent.levels.xp.percentage || 0}
                                 image={Bar}
-                                padding='2% 10% 4%'
+                                padding='2% 10% 10%'
                                 styleContainer={{ width: "100%", height: "80%" }}
                                 background={"linear-gradient(to left, rgba(25,15,11,1) 0%, rgba(66,33,11,1) 25%, rgba(96,56,19,1) 51%, rgba(66,33,11,1) 80%, rgba(25,15,11,1) 100%)"}
                                 barColor={"var(--green)"}
                             >
                             </ProgressBar>
-                        </Flex>
-                        <Flex style={{height:'33%', width:'50%'}}>
-                            <CurrencyHorizontal
-                                className="source"
-                                quantity={props.points || 0}
-                                image={key}
-                                displayX={true}
-                                styleX={{padding:"0 5px", color:'var(--yellow-ligth)'}}
-                                childStyle={{color:'var(--yellow-ligth)'}}
-                                id="counterbar"
-                                idX="xcounterbar"
-                                styleBox={{display:"flex"}}
-                            ></CurrencyHorizontal>
                         </Flex>
                     </Flex>
                     <Flex
@@ -82,46 +69,24 @@ function Header(props){
                         margin="5%"
                         justify='center'
                         align='center'
-                        style={{ width: "30%",height: '100%' }}
+                        style={{ width: "30%", height: '100%' }}
                     >
                         <Flex>
-                            <CurrencyHorizontal
-                                className="source"
-                                quantity={30}
-                                image={
-                                <Flex style={{ position: 'relative' }}>
-                                    <Absolute  style={{
-                                        backgroundColor: 'black',
-                                        width: '90%',
-                                        height: '78%',
-                                        margin: '12% auto 34%',
-                                        borderRadius: '50%',
-                                    }}>
-
-                                    </Absolute>
-                                <MaskedAvatar
-                                    id="sedeHeader"
-                                    paddingTop={"25%"}
-                                    avatar={sedeprincipalbogota}
-                                    styleImage={{borderRadius:"50%"}}
-                                    containerImage={contasedeheader}
-                                    padding={"15px 5px"}
-                                    listener={() => console.log('Clicked MarkedAvatar')}
-                                    maskBorder={50}
-                                />
-                                </Flex>}
-                                imageHtml={true}
-                                displayX={false}
-                                id="middleContent"
-                                childStyle={{ color:'var(--yellow-ligth)'}}
-                                styleBox={{display:"flex"}}
-                                idX="xmiddleContent"
-                            ></CurrencyHorizontal>
+                            <MaskedAvatar
+                                id="sedeHeader"
+                                paddingTop={"25%"}
+                                avatar={sedeprincipalbogota}
+                                styleImage={{ borderRadius: "50%" }}
+                                containerImage={contasedeheader}
+                                padding={"15px 5px"}
+                                listener={() => console.log('Clicked MarkedAvatar')}
+                                maskBorder={50}
+                            />
                         </Flex>
                         <Flex
                             className="source"
                         >
-                            <p className="mult-header" style={{color:'var(--yellow-ligth)'}}> &nbsp; X &nbsp; {props.multiplicator ? props.multiplicator : "1.2"}</p>
+                            <p className="mult-header" style={{ color: 'var(--yellow-ligth)' }}> &nbsp; X &nbsp; {props.multiplicator ? props.multiplicator : "2.0"}</p>
                         </Flex>
                     </Flex>
                     <Flex
@@ -130,7 +95,7 @@ function Header(props){
                         margin="5%"
                         align='center'
                         justify='center'
-                        style={{  width: "30%",height: '100%' }}
+                        style={{ width: "30%", height: '100%' }}
                     >
                         {/* <ButtonImage
                             id="btn1"
@@ -141,12 +106,12 @@ function Header(props){
                         /> */}
                         <ButtonMultiState
                             id="btnLideres"
-                            state={props.layout === "Profile" ? "off":"on"}
+                            state={props.layout === "Profile" ? "off" : "on"}
                             scale={1.1} //1.1
-                            images={{ off:btnlideres, on:btnlideres }}
+                            images={{ off: btnlideres, on: btnlideres }}
                             listeners={{
-                                off: () => {},
-                                on: () => { props.listener(4);},
+                                off: () => { },
+                                on: () => { props.listener(4); },
                             }}
                             styles={{ off: { filter: "grayscale(100%)" } }}
                         >

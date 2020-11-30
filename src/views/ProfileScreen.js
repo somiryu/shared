@@ -26,7 +26,7 @@ function ProfileScreen(props) {
     const [lideres, setLideres] = useState()
 
     useEffect(() => {
-        setLideres(Players.getAll(()=>{console.log("=========> JUGADORES")}))
+        // setLideres(Players.getAll(()=>{console.log("=========> JUGADORES")}))
     }, [])
 
     const listenerRegional = () =>{

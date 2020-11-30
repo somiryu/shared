@@ -1,16 +1,16 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import circ20 from "../../shared/ExampleImages/Circ-20.png"
 import Flex from "../../shared/Containers/Flex"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
-import ButtonMultiState from  '../../shared/Buttons/ButtonMultiState'
+import ButtonMultiState from '../../shared/Buttons/ButtonMultiState'
 //import ImagePanel from "../../shared/Panels/ImagedPanel"
 //import gameZone from "../../images/general/contajuego.png"
 import copa from "../../images/Iconos/incopa.png"
 import villavicencio from "../../images/Iconos/inescudovilla.png"
 import incerebrodificil from "../../images/Iconos/incerebrodificil.png"
-import incerebrofacil from "../../images/Iconos/incerebrofacil.png"  
-import key from "../../images/header/llaveheader.png" 
-import timer from "../../images/Iconos/inretry.png" 
+import incerebrofacil from "../../images/Iconos/incerebrofacil.png"
+import key from "../../images/header/llaveheader.png"
+import timer from "../../images/Iconos/inretry.png"
 import door from "../../images/Iconos/inpuerta.png"
 import containformacion from "../../images/general/containformacion.png"
 import ImagedPanel from "../../shared/Panels/ImagedPanel";
@@ -18,7 +18,7 @@ import Timer from "../../shared/TimerV2"
 
 
 
-function TableGame(props){
+function TableGame(props) {
     const [startTimer, setstartTimer] = useState(false)
     const [reiniciar, setReiniciar] = useState(false)
     const [state1, setState1] = useState("on");
@@ -29,84 +29,79 @@ function TableGame(props){
     let hour = props.date.getHours()
     let minutes = props.date.getMinutes()
     let seconds = props.date.getSeconds()
-    if(props.data){
-        let horarios=[]
-        props.data.schedule.map((e)=>{
-            horarios=e.split("-")
+    if (props.data) {
+        let horarios = []
+        props.data.schedule.map((e) => {
+            horarios = e.split("-")
             let hi = parseInt(horarios[0])
             let hf = parseInt(horarios[1])
-            if(hour>hi && hour<hf){
-                horas = hf-hour
-                minutos = 59-minutes
-                segundos = 59-seconds
-                return null  
+            if (hour > hi && hour < hf) {
+                horas = hf - hour
+                minutos = 59 - minutes
+                segundos = 59 - seconds
+                return null
             }
-            return null  
+            return null
         })
     }
     useEffect(() => {
         setTimeout(() => {
-            setReiniciar(true)     
+            setReiniciar(true)
             setstartTimer(true)
         }, 100);
     }, [props])
-    console.log("==========TIMETABLE",horas,minutos,segundos,startTimer,reiniciar)
-	return(
+    console.log("==========TIMETABLE", horas, minutos, segundos, startTimer, reiniciar)
+    return (
         <ImagedPanel
             image={containformacion}
             padding="0%"
-            style={{width:"280px",height:"290px"}}
+            style={{ width: "280px", height: "290px" }}
             {...props}
-            >
-            <Flex direction="column" align="center" style={{backgroundColor:"rgba(5,5,5,0.3)",borderRadius:"20px",width:"100%",padding: "10px",height:"100%"}}>
-                <Flex align={"center"} style={{width:"100%", height:'20%'}}>
+        >
+            <Flex direction="column" align="center" style={{ backgroundColor: "rgba(5,5,5,0.3)", borderRadius: "20px", width: "100%", padding: "10px", height: "100%" }}>
+                <Flex align={"center"} style={{ width: "100%", height: '20%' }}>
                     <Flex align="center" style={{}}>
-                        <img alt="cerebro"src={props.data.racha === true ? incerebrodificil : incerebrofacil} ></img>
+                        <img alt="cerebro" src={props.data.racha === true ? incerebrodificil : incerebrofacil} ></img>
                     </Flex>
-                    <Flex style={{margin:"10px 10px"}}align="center">
-                        <h5 style={{fontFamily:'Source Serif Pro'}}>{"Sede "}  {props.city || "CIUDAD"}</h5>
-                    </Flex>
-                </Flex>
-                <Flex direction={"column"} align={"center"} style={{width:"100%", height:'27.5%'}}>
-                    <Flex style={{width:"100%", height:'60%'}}>
-                        <img style={{height:'90%'}} alt="shell" src={props.escudos[props.city] || villavicencio} ></img>
-                    </Flex>
-                    <Flex align='center' style={{ width:"100%", height:'30%'}}>
-                        <h5 style={{fontFamily:'Source Serif Pro'}}>{props.city || "Ciudad"}</h5>
+                    <Flex style={{ margin: "10px 10px" }} align="center">
+                        <h5 style={{ fontFamily: 'Source Serif Pro' }}>{"Sede "}  {props.city || "CIUDAD"}</h5>
                     </Flex>
                 </Flex>
-                <Flex style={{justifyContent:"space-around",width:"100%", height:'27%'}} align="center">
-                    <Flex direction={"column"} align={"center"} style={{width:'100%', height:'100%'}}>
-                        <Flex align='center' style={{width:"100%", height:'70%'}}>
+                <Flex direction={"column"} align={"center"} style={{ width: "100%", height: '27.5%' }}>
+                    <Flex style={{ width: "100%", height: '60%' }}>
+                        <img style={{ height: '90%' }} alt="shell" src={props.escudos[props.city] || villavicencio} ></img>
+                    </Flex>
+                    <Flex align='center' style={{ width: "100%", height: '30%' }}>
+                        <h5 style={{ fontFamily: 'Source Serif Pro' }}>{props.city || "Ciudad"}</h5>
+                    </Flex>
+                </Flex>
+                <Flex style={{ justifyContent: "space-around", width: "100%", height: '27%' }} align="center">
+                    <Flex direction={"column"} align={"center"} style={{ width: '100%', height: '100%' }}>
+                        <Flex align='center' style={{ width: "100%", height: '70%' }}>
                             <img alt="placelogo" src={circ20} ></img>
                         </Flex>
-                        <Flex align='center' style={{width:"100%", height:'30%'}}>
-                            <h5 style={{fontFamily:'Source Serif Pro'}}>20 x 1.2</h5>
+                        <Flex align='center' style={{ width: "100%", height: '30%' }}>
+                            <h5 style={{ fontFamily: 'Source Serif Pro' }}>X 2.0</h5>
                         </Flex>
                     </Flex>
-                    <Flex style={{width:'100%', height:'100%'}}>
-                        <CurrencyHorizontal
-                            quantity={props.data.numbersOfKeys || 0}
-                            image={key}
-                            displayX={true}
-                            styleImage={{transform: "rotate(330deg)",height:'70%', display:'flex', alignItems:'center'}}
-                            id="counterNumber"
-                            direction ="column"
-                            fontSize = "1em"
-                            styleQuantiy={{height:'30%'}}
-                        >
-                        </CurrencyHorizontal>
+                    <Flex direction='column' style={{ width: '100%', height: '100%' }}>
+                        <Flex align='center' style={{ width: "100%", height: '70%' }}>
+                            <img alt="placelogo" src={key} ></img>
+                        </Flex>
+                        <Flex align='center' style={{ width: "100%", height: '30%' }}>
+                            <h5 style={{ fontFamily: 'Source Serif Pro' }}>{'20 / 100' }</h5>
+                        </Flex>
                     </Flex>
                 </Flex>
-                <Flex  style={{justifyContent:"space-around",width:"100%", height:'28%'}} align="center">
+                <Flex style={{ justifyContent: "space-around", width: "100%", height: '28%' }} align="center">
                     <Flex>
                         <CurrencyHorizontal
                             quantity={props.data.keysRequiredForOpen || 0}
                             image={copa}
                             //displayX={true}
                             id="counterCup"
-                            direction ="column"
-                            fontSize = "1em"
+                            direction="column"
+                            fontSize="1em"
                         ></CurrencyHorizontal>
                     </Flex>
                     <Flex direction={"column"} align={"center"} >
@@ -115,27 +110,15 @@ function TableGame(props){
                                 id="btn2"
                                 state={state1}
                                 scale={1.2} //1.1
-                                images={{ off:door, on:door }}
+                                images={{ off: door, on: door }}
                                 listeners={{
-                                    off: () => { setState1("on"); props.listener(5);},
-                                    on: () => { setState1("off"); props.listener(5);},
+                                    off: () => { setState1("on"); props.listener(5); },
+                                    on: () => { setState1("off"); props.listener(5); },
                                 }}
                                 styles={{ off: { filter: "grayscale(100%)" } }}
                             >
                             </ButtonMultiState>
                         </Flex>
-                        <div>
-                            {/* <h5 style={{fontFamily:'Source Serif Pro'}}>{props.count||"00:00:00"}</h5> */}
-                            <Timer
-                                horas={horas}
-                                minutos={minutos}
-                                segundos={segundos}
-                                iniciar={startTimer}
-                                detener={false}
-                                reiniciar={reiniciar} //inicia o reanuda
-                                styleTimer={{fontSize:'.6rem',fontFamily:'Source Serif Pro'}}
-                            ></Timer>
-                        </div>
                     </Flex>
                     <div >
                         <CurrencyHorizontal
@@ -143,16 +126,16 @@ function TableGame(props){
                             image={timer}
                             //displayX={true}
                             id="counterArrows"
-                            styleImage={{width: "28px"}}
-                            direction ="column"
-                            fontSize = "1em"
+                            styleImage={{ width: "28px" }}
+                            direction="column"
+                            fontSize="1em"
                         ></CurrencyHorizontal>
                     </div>
                 </Flex>
-                
+
             </Flex>
         </ImagedPanel>
-	)
+    )
 }
 
 export default TableGame;

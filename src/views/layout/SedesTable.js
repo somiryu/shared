@@ -69,7 +69,7 @@ function SedesTable(props){
                                             style={{ width: "50%",height: '100%' }}
                                         >
                                             <Flex>
-                                                <CurrencyHorizontal
+                                               <CurrencyHorizontal
                                                     className="source"
                                                     quantity={30}
                                                     image={hut}
@@ -77,14 +77,14 @@ function SedesTable(props){
                                                     displayX={false}
                                                     id="middleContent"
                                                     childStyle={{ color:'var(--yellow-ligth)'}}
-                                                    styleBox={{display:"flex"}}
+                                                    styleBox={{display: "flex"}}
                                                     idX="xmiddleContent"
                                                 ></CurrencyHorizontal>
                                             </Flex>
                                             <Flex
                                                 className="source"
                                             >
-                                                <p style={{color:'var(--yellow-ligth)'}}> &nbsp; X &nbsp; {props.multiplicator ? props.multiplicator : "1.2"}</p>
+                                                <p style={{color:'var(--yellow-ligth)'}}> &nbsp; X &nbsp; {props.multiplicator ? props.multiplicator : "2.0"}</p>
                                             </Flex>
                                         </Flex>
                                         <Flex style={{ width: "50%",height: '100%' }}>

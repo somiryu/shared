@@ -90,7 +90,7 @@ function SedeScreen(props) {
                     padding={"0"}
                     style={{ width: "400px", }}
                 >
-                    <Flex align="center" direction="column" style={{ width: '100%', height: '100%' }}>
+                    <Flex align="center" justify='flex-start' direction="column" style={{ width: '100%', height: '100%' }}>
                         <Flex align="center" style={{ width: '100%', height: '20%' }} >
                             <h2>{props.title || "Titulo"}</h2>
                         </Flex>
@@ -100,7 +100,7 @@ function SedeScreen(props) {
                         <Flex align="flex-start" style={{ height: '25%' }} >
                             <img alt="portal" src={portalVillavicencio} style={{ height: '100%' }}></img>
                         </Flex>
-                        <Flex jsutify={"center"} style={{ height: '30%' }}>
+                        <Flex jsutify={"center"} style={{ height: '15%' }}>
                             <CurrencyHorizontal
                                 className="source"
                                 quantity={currentSede.keysRequiredForOpen || 0}
@@ -150,7 +150,7 @@ function SedeScreen(props) {
                             </Flex>
                             <ButtonMultiStateWithText
                                 id={`btn${index}1`}
-                                state={time1(rol)}
+                                state={'on'}
                                 scale={1.2} //1.1
                                 images={{ off: contatiempo, on: contatiempoactivo }}
                                 listeners={{
@@ -160,19 +160,6 @@ function SedeScreen(props) {
                                 stylesText={{ off: { color: 'var(--dark-grey)', marginBottom: '5%' }, on: { color: 'var(--yellow-ligth)', marginBottom: '5%' } }}
                                 styles={{}}
                                 text={<label className='label'>{rol.schedule1}</label>}
-                            />
-                            <ButtonMultiStateWithText
-                                id={`btn${index}2`}
-                                state={time2(rol)}
-                                scale={1.2} //1.1
-                                images={{ off: contatiempo, on: contatiempoactivo }}
-                                listeners={{
-                                    off: () => { },
-                                    on: () => {props.listener(rol.text)},
-                                }}
-                                stylesText={{ off: { color: 'var(--dark-grey)', marginBottom: '5%' }, on: { color: 'var(--yellow-ligth)', marginBottom: '5%' } }}
-                                styles={{}}
-                                text={<label className='label2'>{rol.schedule2}</label>}
                             />
                         </Flex>
                     )

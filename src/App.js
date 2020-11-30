@@ -24,7 +24,7 @@ import ChooseScreen from "./views/ChooseScreen"
 import Flash from "./shared/Flash"
 import EventEmitter from "events"
 import door from "./images/Iconos/inpuerta.png"
-import engine from "./shared/Utils/engine"
+import engine, { Immutables, Teams } from "./shared/Utils/engine"
 import s from './models/Sedes'
 window.DEBUG = false;
 let sedes = s;
@@ -43,12 +43,16 @@ function App() {
   let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback","Login"]
   useEffect(() => {
     console.log('Player ===> ', player)
+    Teams.getAll((teams) => {
+      console.log('TEAMS ===> ', teams)
+    })
   }, [player])
   const listener = (indice) =>{
     setLayout(pages[indice])
   }
 
   const listenerChoose = (indice,player) =>{
+    
     setPlayer(player)
     setLayout(pages[indice])
   }
