@@ -7,7 +7,7 @@ export default (props)=>{
 		let elem = document.getElementById(props.id || "Fade")
 		anime({
 			targets: elem,
-			duration: props.duration || 500,
+			duration: props.duration || 2000,
 			easing: props.easing || "easeOutSine",
 			delay: props.delay || 0,
 			opacity: [props.from || 0, 1]
@@ -33,7 +33,7 @@ export default (props)=>{
 	},[props.out])
 
 	return(
-		<div id={props.id || "Fade"}>
+		<div id={props.id || "Fade"} style={{...props.styleContainer}}>
 			{props.children}
 		</div>
 	)

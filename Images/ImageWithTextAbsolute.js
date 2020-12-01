@@ -13,7 +13,7 @@ export default function ImageWithTextAbsolute(props) {
     return (
         <div className={window.DEBUG ? 'ImageWithTextAbsolute testBox' : 'ImageWithTextAbsolute'} style={{position:'relative', ...props.style}}>
            <img src={props.image} alt="Logo" width="100%"></img> 
-           <Absolute top={position.top} left={position.left} right={position.right} bottom={position.bottom} style={{display:'flex', width:'100%', justifyContent:'center'}}>
+           <Absolute top={position.top} left={position.left} right={position.right} bottom={position.bottom} style={{display:'flex', width: props.width || '100%', justifyContent:'center'}}>
                {props.children}
            </Absolute>
         </div>

@@ -9,7 +9,6 @@ class Modal extends Component{
     	const height=this.props.height || 80
     	const opacity=this.props.opacity || 0.7
     	const display = this.props.open ? "block" : "none"
-    	console.log("Modal", display)
     	return ReactDOM
     		.createPortal(
 		    	<div onClick={this.avoidBubbling} id="Modal"

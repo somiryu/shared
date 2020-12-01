@@ -8,8 +8,8 @@ function Carrousel(props) {
 			if(slides.length > 0){
 				slides[0].className = 'slide showing' 
 			}
-			console.log(slides)
 		}, 20);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 	useEffect(() => {
 		let slides = document.querySelectorAll('.Banner .slide');
@@ -40,7 +40,6 @@ function Carrousel(props) {
 				slides[current].className = 'slide'
 			}
 		})
-		console.log(slides, index)
 		if(slides[index]){
 			slides[index].className = 'slide showing'
 		}
@@ -57,13 +56,13 @@ function Carrousel(props) {
 			zIndex:'2'
 		}}>
 
-			<div className="arrowleft" style={{ display: 'flex', alignItems:'center',justifyContent:'100%', height: '100%',width:'10%',zIndex:'3', cursor:'pointer' }} onClick={() => {if(props.clickL) props.clickL(); else next(0)}}>
+			<div className="arrowleft" style={{ display: 'flex', alignItems:'center',justifyContent:'100%', height: '100%',width:'10%',zIndex:'3', cursor:'pointer' }} onClick={() => {if(props.leftIcon) {if(props.clickL) props.clickL(); else next(0)}}}>
 				<img src={props.leftIcon} alt='' style={{ display: props.leftIcon && 'hidden',  width: '100%' }} />
 			</div>
-			<div style={{ display: 'flex', height: '100%',width:'80%', zIndex:'1' }}>
+			<div style={{ display: 'flex', height: '100%',width:'80%', zIndex:'1', justifyContent:'center' }}>
 				{props.children}
 			</div>
-			<div className="arrowrigth" style={{ display: 'flex',alignItems:'center', justifyContent:'100%',width:'10%', height:'100%',zIndex:'3', cursor:'pointer' }} onClick={() => { if(props.clickR) props.clickR(); else next(1)}}>
+			<div className="arrowrigth" style={{ display: 'flex',alignItems:'center', justifyContent:'100%',width:'10%', height:'100%',zIndex:'3', cursor:'pointer' }} onClick={() => { if(props.rightIcon) {if(props.clickR) props.clickR(); else next(1)}}}>
 				<img src={props.rightIcon} alt='' style={{ width: '100%' }} />
 			</div>
 

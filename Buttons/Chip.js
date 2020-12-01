@@ -4,9 +4,6 @@ import "../../shared/SimpleButton.css"
 function Chip(props){
     const [active,setActive] = useState(props.active)
     const [image] = useState(props.active === true?props.imageselect:props.imagenoselect)
-    // console.log("Boton")
-    // console.log(props)
-    // console.log(props.active)
 	const clickHandler = (e) => {
         if(props.listener){
             if(active===false){
@@ -17,7 +14,6 @@ function Chip(props){
             }
             setActive(!props.active)
         }
-        console.log(props.id,props.active)
         if(props.handle){
             props.handle()
         }

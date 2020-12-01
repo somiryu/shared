@@ -252,5 +252,4 @@ function But(props) {
 	)
 }
 function handleClick(i) {
-	console.log('Click ON =>', i);
 }

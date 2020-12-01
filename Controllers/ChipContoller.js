@@ -6,7 +6,6 @@ let aux={};
 function ChipController(props){
     const [estado, setEstado] = useState({})
     useEffect(() => {
-        console.log("una vez")
         props.chips.map(e=>{
             return aux[e.id]=false
         })
@@ -20,7 +19,6 @@ function ChipController(props){
         aux[state[0].target.id]=state[1]
         setEstado(aux)
     }
-    console.log("----Chips",aux)
  	return( 
     	<div style={{display:"flex",justifyContent:"space-around",margin:"2%",...props.chipControllerStyle}}>
             {props.chips.map(e=>

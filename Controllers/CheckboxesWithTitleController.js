@@ -9,8 +9,6 @@ import {shuffle} from '../Utils/libs'
 export default function CheckboxesWithTitleController(props) {
     const [stateCheckBoxes, setStateCheckboxes] = useState(null);
     const [options, setOptions] = useState([])
-    console.log("las opciones")
-    console.log(props.options)
     useEffect(() => {
         let opt = props.shuffle ? shuffle(props.options) : props.options;
         let controlCheck = {}

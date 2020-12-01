@@ -11,6 +11,7 @@ import Flex from '../Containers/Flex'
 let flagFun = 'add'
 export default function ProgressBarWithImage(props) {
     const [percentage, setPercentage] = useState(0)
+    
     useEffect(() => {
         setTimeout(() => {
             if (flagFun === 'add') {
@@ -23,6 +24,9 @@ export default function ProgressBarWithImage(props) {
                 if (percentage === 0) {
                     flagFun = 'add'
                 }
+            }
+            if(props.listener){
+                props.listener(percentage)
             }
         }, 10);
     }, [percentage])

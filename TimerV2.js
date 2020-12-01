@@ -6,12 +6,12 @@ import React,{Component} from 'react';
 //iniciar {bolean} //iniciar {true} detener {false} reiniciar {false} //inicia o reanuda
 //detener {bolean} //iniciar {false} detener {true} reiniciar {false}
 //reiniciar {bolean} //iniciar {false} detener {false} reiniciar {true} //luego iniciar
+//finish = listener
 //style
 //styleTimer
 class TimerGameboard extends Component{
     constructor(props) {
         super(props);
-        console.log("props timer ===========>",props)
         let hours=this.props.horas*3600;
         let minutes=this.props.minutos*60;
         let segundos=hours+minutes+this.props.segundos;
@@ -22,7 +22,7 @@ class TimerGameboard extends Component{
         this.resetTimer = this.resetTimer.bind(this);
         this.countDown = this.countDown.bind(this);
       }
-    
+      
       secondsToTime(secs){
         let hours = Math.floor(secs / (60 * 60));
         
@@ -85,13 +85,14 @@ class TimerGameboard extends Component{
         });
         }
         if (seconds === 0) { 
+          if(this.props.finish) this.props.finish()
           clearInterval(this.timer);
         }
       }
 
       render() {
         return(
-          <div style={this.props.style}>
+          <div id={`Timer${this.props.id}`} style={this.props.style}>
               {
                 /*
                 <button onClick={this.startTimer}>Start</button>
@@ -99,7 +100,7 @@ class TimerGameboard extends Component{
                 <button onClick={this.resetTimer}>reset</button>
                 */ 
               } 
-            <p style={{...this.props.styleTimer}}>{this.state.time.h}:{this.state.time.m}:{this.state.time.s}</p>
+            <p style={{...this.props.styleTimer}}>{(this.state.time.h < 10 && '0') + this.state.time.h}:{((this.state.time.m < 10 && '0')+ this.state.time.m)}:{(this.state.time.s < 10 && '0') + this.state.time.s}</p>
           </div>
         );
       }

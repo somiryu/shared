@@ -93,7 +93,6 @@
 import APIKey from "../../env"
 import Loading from "../Loading"
 
-
 export const config = {
 	api_token: APIKey,
 	test_api_token: "35446ca1c5968fb4d87345ef8bcca46e",
@@ -108,9 +107,10 @@ export const config = {
 	getCableUrl: function () { return this.test ? this.cable_url_test : this.cable_url },
 }
 
-export const getCookie = (cookie) => { var ca = document.cookie.split(';'); for (var i = 0; i < ca.length; i++) { var c = ca[i]; while (c.charAt(0) === ' ') { c = c.substring(1); }; if (c.indexOf(cookie + "=") === 0) { return c.split("=")[1]; } }; return false; }
-export const setCookie = (cookie, cvalue) => { let expDays = 3; let d = new Date(); d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000)); const expires = "expires=" + d.toUTCString(); document.cookie = cookie + "=" + cvalue + ";" + expires + ";path=/"; }
-export const deleteCookie = (cookie) => { document.cookie = cookie + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;" }
+export const getCookie = (cookie) =>{var ca = document.cookie.split(';');for(var i = 0; i < ca.length; i++){var c = ca[i]; while (c.charAt(0) === ' ') {c = c.substring(1);}; if (c.indexOf(cookie+"=") === 0) {return c.split("=")[1];}}; return false;}
+export const setCookie = (cookie, cvalue) => {let expDays = 3;let d = new Date();d.setTime(d.getTime() + (expDays * 24 * 60 * 60 * 1000));const expires = "expires="+d.toUTCString();document.cookie = cookie+"=" + cvalue + ";" + expires + ";path=/";}
+export const deleteCookie = (cookie) =>{document.cookie = cookie+"=;expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"}
+export const evaluateEmail = (method, service, url, listener) => { call(method, service,{},listener, url)}
 
 const engine = {
 	image: function (path) {
@@ -178,10 +178,8 @@ const setCall = function (data, defaults) {
 	};
 }
 
-const call = function (method, service, formData, listener) {
-	console.log(method, service, formData)
+const call = function (method, service, formData, listener, url = config.test ? config.test_url : config.base_url) {
 	var token = config.test ? config.test_api_token : config.api_token;
-	var url = config.test ? config.test_url : config.base_url;
 	//Set Headers
 	var myHeaders = new Headers();
 	myHeaders.append("Accept", "application/json");
@@ -189,7 +187,6 @@ const call = function (method, service, formData, listener) {
 	var miInit = { method: method, headers: myHeaders, mode: 'cors', cache: 'default' };
 	//Include formData in body if post or put
 	if (formData && (method === "POST" || method === "PUT" || method === "DELETE")) {
-		//console.log('miInit =>', miInit); 
 		formData.append("noEmpty", "true") //avoid multipart errors
 		miInit.body = formData;
 	}
@@ -208,122 +205,151 @@ const call = function (method, service, formData, listener) {
 		.then(response => response.json()).then(function (data) { middlewareListener(data) });
 }
 
+
+
 export const Players = {
+	getAll: function (data,listener) { setCall(data = data || {}, { include: "basic,agent,items" }); call("GET", "players", setParams(data, true), listener)},
 	create: function (id_in_app, data, listener) { setCall(data = data || {}, { id_in_app: id_in_app }); call("POST", "players/v2", setParams(data), listener) },
 	get: function (id_in_app, listener, data) { setCall(data = data || {}, { include: "basic,agent,items" }); call("GET", "players/" + id_in_app, setParams(data, true), listener) },
 	get_or_create: function (id_in_app, listener, data) {
 		this.get(id_in_app, (d) => {
-			if (d.status && d.status === "Invalid player: check id_in_app") { this.create(id_in_app, data, (cd) => { if (cd.player) this.get(id_in_app, (r) => listener(r)) }) } else { listener(d) }
+			if (d.status && d.status === "Invalid player: check id_in_app") { this.create(id_in_app, data, (cd) => { if (cd.player) this.get(id_in_app, (r) => listener(r = { ...r, d })) }) } else { listener(d) }
 		}, data)
+	},
+	update: function (id_in_app, listener, data) {
+		setCall(data = data || {});
+		call("PUT", "players/" + id_in_app, setParams(data), listener)
+	},
+	get_tutorial: function (id_in_app, data, listener) {
+		call("GET", "v2/players/" + id_in_app + "/tutorials", setParams(data, true), listener)
+	},
+	update_tutorial: function (id_in_app, id_or_tag, data, listener) {
+		call("POST", "v2/players/" + id_in_app + "/tutorials/" + id_or_tag, setParams(data), listener)
 	}
 }
 
 export const Items = {
-	getAgentItems: function (listener, data) {
-		setCall(data = data || {});
-		call("GET", "agent_items", setParams(data, true), listener)
-	},
-	getOwnedAgentItems: function (agent, listener, data) {
-		setCall(data = data || {}, { agent: agent.agent_id, agent_type: agent.agent_type });
-		call("GET", "agent_items", setParams(data, true), listener)
-	},
-	get: function (tag, listener) {
-		call("GET", "items/" + tag, {}, listener)
-	},
-	all: function (listener, data) {
-		setCall(data = data || {});
-		call("GET", "items", setParams(data, true), listener)
-	},
-	give: function (id_in_app, id_or_tag, listener, data) {
-		setCall(data = data || {});
-		call("POST", "items/" + id_or_tag + "/players/" + id_in_app + "/add", setParams(data), listener)
-	},
-	giveMultiple: function (id_in_app, tags, listener, data) {
-		setCall(data = data || { items: tags });
-		call("POST", "items/players/" + id_in_app + "/multiple", setParams(data), listener)
-	},
-}
+		getAgentItems: function (listener, data) {
+			setCall(data = data || {});
+			call("GET", "agent_items", setParams(data, true), listener)
+		},
+		getOwnedAgentItems: function (agent, listener, data) {
+			setCall(data = data || {}, { agent: agent.agent_id, agent_type: agent.agent_type });
+			call("GET", "agent_items", setParams(data, true), listener)
+		},
+		get: function (tag, listener) {
+			call("GET", "items/" + tag, {}, listener)
+		},
+		all: function (listener, data) {
+			setCall(data = data || {});
+			call("GET", "items", setParams(data, true), listener)
+		},
+		give: function (id_in_app, id_or_tag, listener, data) {
+			setCall(data = data || {});
+			call("POST", "items/" + id_or_tag + "/players/" + id_in_app + "/add", setParams(data), listener)
+		},
+		giveMultiple: function (id_in_app, tags, listener, data) {
+			setCall(data = data || { items: tags });
+			call("POST", "items/players/" + id_in_app + "/multiple", setParams(data), listener)
+		},
+	}
+export const hora_server = {
+		get: function () {
+			let fecha = fetch('https://engine2.playngage.io/api/server_time', {
+				method: 'GET',
+				headers: {
+					'Accept': "application/json",
+					'Authorization': "Token token=" + APIKey
+				}
+			})
+				.then(response => response.json())
+				.then(fecha => fecha)
+			return fecha
+		}
+
+
+	}
 
 export const Agents = {
-	update: function (agent, data, listener) {
-		setCall(data = data || {}); call("PUT", "agents/" + agent.agent_id + "/agent_type/" + agent.agent_type, setParams(data), listener)
-	},
-	//in agent object include: updates: with all the options available in the api.
-	multiple_update(agents, listener) {
-		let data = { agents: {} }
-		for (var i = agents.length - 1; i >= 0; i--) {
-			let agent = agents[i]
-			data.agents[agent.agent_id] = { ...agent.updates, agent_type: agent.agent_type }
-		}
-		call("PUT", "agents/multiple", setParams(data), listener)
-	},
-	topLeaderboard: function (currency_tag, listener, data) {
-		setCall(data = data || {});
-		call("GET", "agents/leaderboard/top/" + currency_tag, setParams(data), listener)
-	},
-	table_properties: function (agent, tag, data, listener) {
-		setCall(data = data || {});
-		call("GET", "agents/" + agent.agent_id + "/agent_type/" + agent.agent_type + "/table_properties/" + tag, setParams(data, true), listener)
-	},
-	send_trigger: function (agent, id_or_tag, listener, data) {
-		setCall(data = data || {}, { agent_id: agent.agent_id, agent_type: agent.agent_type });
-		call("POST", "missions/" + id_or_tag + "/complete", setParams(data), listener)
-	},
-	feedback: function (agent, tag, listener, data) {
-		setCall(data = data || {}, { reward: tag });
-		this.update(agent, data, listener)
-	},
+		update: function (agent, data, listener) {
+			setCall(data = data || {}); call("PUT", "agents/" + agent.agent_id + "/agent_type/" + agent.agent_type, setParams(data), listener)
+		},
+		//in agent object include: updates: with all the options available in the api.
+		multiple_update(agents, listener) {
+			let data = { agents: {} }
+			for (var i = agents.length - 1; i >= 0; i--) {
+				let agent = agents[i]
+				data.agents[agent.agent_id] = { ...agent.updates, agent_type: agent.agent_type }
+			}
+			call("PUT", "agents/multiple", setParams(data), listener)
+		},
+		topLeaderboard: function (currency_tag, listener, data) {
+			setCall(data = data || {});
+			call("GET", "agents/leaderboard/top/" + currency_tag, setParams(data), listener)
+		},
+		table_properties: function (agent, tag, data, listener) {
+			setCall(data = data || {});
+			call("GET", "agents/" + agent.agent_id + "/agent_type/" + agent.agent_type + "/table_properties/" + tag, setParams(data, true), listener)
+		},
+		send_trigger: function (agent, id_or_tag, listener, data) {
+			setCall(data = data || {}, { agent_id: agent.agent_id, agent_type: agent.agent_type });
+			call("POST", "missions/" + id_or_tag + "/complete", setParams(data), listener)
+		},
+		feedback: function (agent, tag, listener, data) {
+			setCall(data = data || {}, { reward: tag });
+			this.update(agent, data, listener)
+		},
 
-	//No endpoints
-	getProp: (agent, tag) => agent.agent.properties[tag] ? agent.agent.properties[tag].value : null,
-	getItemsByCategory: (agent, cat) => {
-		if (!agent.items) return [false, "No items key"];
-		const category = agent.items.items[cat]
-		if (!category) return [false, "No category " + cat];
-		return [category.items, true]
-	},
-	getSingleAgentItem: (agent, cat, tag) => {
-		let [items, status] = this.getItemsByCategory(agent, cat)
-		if (!items) return [items, status];
-		const info = items[tag]
-		if (!info) return [false, "No key with this tag: " + tag];
-		const item = info.item
-		const owned = info.owned[0]
-		return [owned, item, items];
-	},
-}
+		//No endpoints
+		getProp: (agent, tag) => agent.agent.properties[tag] ? agent.agent.properties[tag].value : null,
+		getItemsByCategory: (agent, cat) => {
+			if (!agent.items) return [false, "No items key"];
+			const category = agent.items.items[cat]
+			if (!category) return [false, "No category " + cat];
+			return [category.items, true]
+		},
+		getSingleAgentItem: (agent, cat, tag) => {
+			let [items, status] = this.getItemsByCategory(agent, cat)
+			if (!items) return [items, status];
+			const info = items[tag]
+			if (!info) return [false, "No key with this tag: " + tag];
+			const item = info.item
+			const owned = info.owned[0]
+			return [owned, item, items];
+		},
+	}
 
 export const Deck = {
-	update: function (tag, action, listener, data) {
-		setCall(data = data || {}, { id_in_app: engine.getUser(), do: action })
-		call("PUT", "agents/decks/" + tag, setParams(data), listener)
-	},
-}
+		update: function (tag, action, listener, data) {
+			setCall(data = data || {}, { id_in_app: engine.getUser(), do: action })
+			call("PUT", "agents/decks/" + tag, setParams(data), listener)
+		},
+	}
 
 export const Rooms = {
-	all: (listener) => { call("GET", "rooms", {}, listener) },
-	instances: (room_id, listener, data) => { setCall(data = data || {}); call("GET", "rooms/" + room_id + "/instances", setParams(data, true), listener) },
-	instance: (id, listener) => { call("GET", "rooms/instances/" + id, {}, listener) },
-	by_code: (code, listener) => { call("GET", "rooms/instances/code/" + code, {}, listener) },
-	update_state: (id, state, listener) => { call("PUT", "rooms/instances/" + id + "/" + state, {}, listener) },
-	join: (id, listener, data) => {
-		setCall(data = data || {}, { id_in_app: engine.getUser() })
-		call("POST", "rooms/instances/" + id + "/join", setParams(data), (d) => {
-			if (d.success === true) { setCookie("instance_" + id, "joined"); setCookie("current_instance", id) }
-			if (d.status === "Already in the room") { setCookie("instance_" + id, "joined"); setCookie("current_instance", id) }
-			listener(d);
-		})
-	},
-	kick: (id, id_in_app, listener, data) => { setCall(data = data || {}, { id_in_app: id_in_app }); call("DELETE", "rooms/instances/" + id + "/kick", setParams(data), listener) },
-	getOwnParticipant: (instance) => {
-		let participant = { isSpectator: true };
-		if (!engine.getUser()) return participant;
-		for (let i = 0; i < instance.participants.length; i++) {
-			if (instance.participants[i].owner.basic.id_in_app === engine.getUser()) participant = instance.participants[i];
-		}
-		return participant;
-	},
-}
+		all: (listener) => { call("GET", "rooms", {}, listener) },
+		instances: (room_id, listener, data) => { setCall(data = data || {}); call("GET", "rooms/" + room_id + "/instances", setParams(data, true), listener) },
+		instance: (id, listener) => { call("GET", "rooms/instances/" + id, {}, listener) },
+		by_code: (code, listener) => { call("GET", "rooms/instances/code/" + code, {}, listener) },
+		update_state: (id, state, listener) => { call("PUT", "rooms/instances/" + id + "/" + state, {}, listener) },
+		join: (id, listener, data) => {
+			setCall(data = data || {}, { id_in_app: engine.getUser() })
+			call("POST", "rooms/instances/" + id + "/join", setParams(data), (d) => {
+				if (d.success === true) { setCookie("instance_" + id, "joined"); setCookie("current_instance", id) }
+				if (d.status === "Already in the room") { setCookie("instance_" + id, "joined"); setCookie("current_instance", id) }
+				listener(d);
+			})
+		},
+		kick: (id, id_in_app, listener, data) => { setCall(data = data || {}, { id_in_app: id_in_app }); call("DELETE", "rooms/instances/" + id + "/kick", setParams(data), listener) },
+		getOwnParticipant: (instance) => {
+			let participant = { isSpectator: true };
+			if (!engine.getUser()) return participant;
+			for (let i = 0; i < instance.participants.length; i++) {
+				if (instance.participants[i].owner.basic.id_in_app === engine.getUser()) participant = instance.participants[i];
+			}
+			return participant;
+		},
+	}
 export const Teams = {
 	create: () => { },
 	update: () => { },
@@ -335,29 +361,29 @@ export const Teams = {
 	delete: () => { },
 	managePlayer: (agent, id_team, data, listener) => {
 		setCall(data = data || { id_in_app: engine.getUser() });
-		call("PUT", "teams/:" + id_team + "/players/:" + agent.id_in_app, setParams(data), listener)
+		call("PUT", "teams/" + id_team + "/players/:" + agent.id_in_app, setParams(data), listener)
 	}
 }
 export const Trivia = {
-	all: function (listener, data) {
-		setCall(data = data || { id_in_app: engine.getUser() });
-		call("GET", "trivia", setParams(data, true), listener)
-	},
-	get: function (id, listener, data) {
-		setCall(data = data || { id_in_app: engine.getUser() });
-		call("GET", "trivia/" + id, setParams(data, true), listener)
-	},
-	answer: function (q_id, a_ids, listener) {
-		let data;
-		setCall(data = {}, { answer_ids: a_ids });
-		call("POST", "questions/" + q_id + "/players/" + engine.getUser(), setParams(data), listener)
-	},
-	open_answer: function (q_id, answer, listener) {
-		let data = null;
-		setCall(data = {}, { open_answer: answer });
-		call("POST", "questions/" + q_id + "/players/" + engine.getUser(), setParams(data), listener)
-	},
-}
+		all: function (listener, data) {
+			setCall(data = data || { id_in_app: engine.getUser() });
+			call("GET", "trivia", setParams(data, true), listener)
+		},
+		get: function (id, listener, data) {
+			setCall(data = data || { id_in_app: engine.getUser() });
+			call("GET", "trivia/" + id, setParams(data, true), listener)
+		},
+		answer: function (q_id, a_ids, listener) {
+			let data;
+			setCall(data = {}, { answer_ids: a_ids });
+			call("POST", "questions/" + q_id + "/players/" + engine.getUser(), setParams(data), listener)
+		},
+		open_answer: function (q_id, answer, listener) {
+			let data = null;
+			setCall(data = {}, { open_answer: answer });
+			call("POST", "questions/" + q_id + "/players/" + engine.getUser(), setParams(data), listener)
+		},
+	}
 
 //params:
 //all: by_categories:true, page, per_page, filter:{categories: "a,a"}, exclude:{categories:"a,a"}
@@ -371,5 +397,5 @@ export const Immutables = {
 }
 
 export const Load = Loading;
-export default engine;
+	export default engine;
 
