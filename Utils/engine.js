@@ -140,7 +140,34 @@ const engine = {
 	},
 }
 
-const setParams = function (data, get) { var formData = get ? {} : new FormData(); engine.log("Params"); engine.log(data); var checkNested = function (fD, key, value) { function ins(k, v) { get ? fD[k] = v : fD.append(k, v) } if (typeof value != "object") { ins(key, value) } else { if (Array.isArray(value)) { var v = value.join(","); ins(key, v) } else { for (var obj in value) { var k = key + "[" + obj + "]"; checkNested(fD, k, value[obj]); } } } }; for (var obj in data) { var key = obj; checkNested(formData, key, data[obj]) }; return formData; }
+const setParams = function (data, get) {
+	var formData = get ? {} : new FormData();
+	engine.log("Params");
+	engine.log(data);
+	var checkNested = function (fD, key, value) {
+		function ins(k, v) {
+			get ? fD[k] = v : fD.append(k, v)
+		}
+		if (typeof value != "object") {
+			ins(key, value)
+		} else {
+			if (Array.isArray(value)) {
+				var v = value.join(","); ins(key, v)
+			} else {
+				for (var obj in value) {
+					var k = key + "[" + obj + "]";
+					checkNested(fD, k, value[obj]);
+				}
+			}
+		}
+	};
+	for (var obj in data) {
+		var key = obj;
+		checkNested(formData, key, data[obj])
+	};
+	console.log('FORMDATA => ', formData)
+	return formData;
+}
 const setCall = function (data, defaults) {
 	if (data === undefined || data === null) {
 		data = {}
@@ -326,10 +353,13 @@ export const Rooms = {
 export const Teams = {
 	create: () => { },
 	update: () => { },
-	getAll: () => { },
+	getAll: (listener, data) => {
+		setCall(data || {});
+		call("GET", "teams/", setParams(data, true), listener)
+	},
 	getTeam: () => { },
 	delete: () => { },
-	managePlayer: (agent, id_team , data, listener ) => {
+	managePlayer: (agent, id_team, data, listener) => {
 		setCall(data = data || { id_in_app: engine.getUser() });
 		call("PUT", "teams/" + id_team + "/players/:" + agent.id_in_app, setParams(data), listener)
 	}
@@ -358,10 +388,13 @@ export const Trivia = {
 //params:
 //all: by_categories:true, page, per_page, filter:{categories: "a,a"}, exclude:{categories:"a,a"}
 export const Immutables = {
-		all: (listener, data) => { call("GET", "immutable_objects", setParams(data, true), listener) },
-		//
-		byName: (arr, name) => { for (let i in arr) { if (arr[i].name === name) return arr[i] } }
-	}
+	all: (listener, data) => {
+		setCall(data = data || { id_in_app: engine.getUser() });
+		call("GET", "immutable_objects", setParams(data, true), listener)
+	},
+	//
+	byName: (arr, name) => { for (let i in arr) { if (arr[i].name === name) return arr[i] } }
+}
 
 export const Load = Loading;
 	export default engine;
