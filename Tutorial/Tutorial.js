@@ -36,13 +36,17 @@ export default (props) => {
 		if (props.current !== 'end') {
 			setIndex(0)
 			setTimeout(() => {
+				console.log('TUTORIAL =======> TUTORIAL; SCOPE; CURRENT', props.tutorial, props.scope, props.current)
 				setTutorial(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
-			}, 100);
+			}, 200);
 		} else {
 			setTutorial(null)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.current]);
+	useEffect(() => {
+		console.log('TUTORIAL ====> ', tutorial)
+	}, [tutorial])
 	useEffect(() => {
 		let animation;
 		window.anime({
@@ -90,9 +94,6 @@ export default (props) => {
 		// if (!window.test) {
 		let id = getCookie("temp_engine_id");
 		Players.update_tutorial(id, current, {}, (res) => {
-			if (res && res.response && res.response) {
-				window.setTutorial(res.response)
-			}
 		})
 		// }
 	}

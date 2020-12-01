@@ -21,7 +21,6 @@ class TimerGameboard extends Component{
         this.pauseTimer = this.pauseTimer.bind(this);
         this.resetTimer = this.resetTimer.bind(this);
         this.countDown = this.countDown.bind(this);
-        console.log('this.state ==> ', this.props)
       }
       
       secondsToTime(secs){
