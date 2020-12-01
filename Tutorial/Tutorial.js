@@ -111,7 +111,7 @@ export default (props) => {
 					top: `${tutorial.arrow['y']}%`,
 					left: `${tutorial.arrow['x']}%`,
 					transform: `rotate(${calculatePositionArrow(tutorial.arrow['direction'])})`,
-					zIndex: props.zIndexContent || 0
+					zIndex: props.zIndexArrow || (props.zIndexContent || 0)
 				}}>
 					<Levitation id="ArrowAnimation" duration={200} endDelay={30} to='30%'>
 						<div id='imgArrow'>
