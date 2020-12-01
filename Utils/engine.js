@@ -326,7 +326,9 @@ export const Rooms = {
 export const Teams = {
 	create: () => { },
 	update: () => { },
-	getAll: () => { },
+	getAll: ({},listener) => {
+		call("GET", "teams/", setParams({}, true), listener)
+	},
 	getTeam: () => { },
 	delete: () => { },
 	managePlayer: (agent, id_team , data, listener ) => {
