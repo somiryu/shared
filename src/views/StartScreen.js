@@ -49,7 +49,7 @@ function StartScreen(props) {
             Players.get(ID_IN_APP, (response) => {
                 props.listenerPlayer(1,response);
             })
-            Trivia.all( (trivias) => {
+            Trivia.get("estudiante_2",(trivias) => {
                 console.log('Trivias ===> ', trivias)
             }) 
         }

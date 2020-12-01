@@ -28,6 +28,7 @@ import ButtonImage from "../shared/Buttons/ButtonImage";
 import btnatras from "../images/buttons/btnatras.png";
 import Timer from "../shared/TimerV2"
 import Flex from '../shared/Containers/Flex'
+import {Teams} from "../shared/Utils/engine"
 //import sedes from '../models/Sedes'
 
 const imagesSedes={
@@ -97,6 +98,10 @@ function MapScreen(props) {
     let closePortal =()=>{
         setPortalInferior(false)
     }
+
+    useEffect(() => {
+        Teams.getAll((r)=>{console.log("Teams",r)})
+    }, [])
 
     return (
         <div>
