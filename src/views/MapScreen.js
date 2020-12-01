@@ -61,8 +61,10 @@ function MapScreen(props) {
     const [screen] = useState(window.screen.width)
     const [portalInferior, setPortalInferior] = useState(false)
     const [tableGame, setTableGame] = useState(props.sedes[0])
-    
-    
+    useEffect(() => {
+        console.log('PROPS ===> ', props);
+    }, [props])
+
     const handlePortal = (e) => {
         let sede;
         if(screen < 800 && e['target']){

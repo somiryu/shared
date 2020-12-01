@@ -39,8 +39,10 @@ function App() {
   const [sede,setSede] = useState("Bogota")
   const [currentCahracter,setCurrentCahracter]=useState(false)
   const [pointsBar,setPointsBar]=useState(0)
+  const [immutables, setImmutables] = useState(getImmutables)
   let date = new Date();
   let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback","Login"]
+  const Sedes = {1: 'Bogota', 2: 'Bucaramanga', 3:'Tunja', 4:'Medellin', 5: 'Villavicencio', 6:'Distancia'}
   useEffect(() => {
     console.log('Player ===> ', player)
     Teams.getAll((teams) => {
@@ -50,13 +52,15 @@ function App() {
   const listener = (indice) =>{
     setLayout(pages[indice])
   }
-
   const listenerChoose = (indice,player) =>{
-    
     setPlayer(player)
     setLayout(pages[indice])
   }
-
+  function getImmutables(){
+    Immutables.all((immutables) => {
+      setImmutables(immutables)
+    })
+  }
   const listenerLogin = (indice,player) =>{
     setLayout(pages[indice])
     setPlayer(player)
@@ -104,7 +108,16 @@ function App() {
     setSede(newSede);
   }
 
-  
+  const getSchedules = () => {
+    let schedules = {}
+    if(immutables){
+      for (let index = 1; index <= 6; index++) {
+        schedules[Sedes[index]] = Immutables.byName(immutables, `cooldown_sedes`)[`text_${index}`].split(',')
+      }
+    }
+    console.log('SCHEDULES ===> ', schedules);
+    return schedules
+  }
   let addClass;
   if (layout === "Mapa" || layout === "EndGame" || layout === "BeginGame") addClass = "SkyBackground";
   if (layout === "GameLayout" || layout === "Book") addClass = "PurpleBackground";
@@ -165,6 +178,7 @@ function App() {
           <LegendScreen
             listener = {listener}
             player ={player}
+            legend={immutables && Immutables.byName(immutables, 'text_welcome_players')['text_1']}
           >
           </LegendScreen>
         }
@@ -176,6 +190,7 @@ function App() {
             sedes = {sedes}
             date = {date}
             currentKeys={globalKeys}
+            schedules={getSchedules()}
           >
           </MapScreen>
         }
@@ -192,6 +207,7 @@ function App() {
             listener = {listenerSede} 
             sede={sede}
             date = {date}
+            
             >
           </SedeScreen>
         }
