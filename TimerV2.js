@@ -22,7 +22,7 @@ class TimerGameboard extends Component{
         this.resetTimer = this.resetTimer.bind(this);
         this.countDown = this.countDown.bind(this);
       }
-    
+      
       secondsToTime(secs){
         let hours = Math.floor(secs / (60 * 60));
         

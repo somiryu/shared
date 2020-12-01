@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React,{useState, useEffect} from "react"
 // import Loading from "./Loading"
 // import medalGold from "../../images/ICONS/medalGold.png"
 // import medalSilver from "../../images/ICONS/medalSilver.png"
@@ -11,26 +11,18 @@ import avatar from "../images/Graficos/estudiante.png"
 import contaavatar from "../images/general/contaavatar.png"
 //const medals = [medalGold, medalSilver, medalBronze]
 import gear from "../images/Graficos/engranajejugadores.png"
+import {Players} from  '../shared/Utils/engine'
 
 export default props => {
-	const [leaderboard] = useState([{name:"Javier Velasquez"}])
-	// const [loading, setLoading] = useState(true)
-	// useEffect(()=>{
-	// 	if(loading){
-	// 		window.engine.topLeaderboard(props.tag, (lb)=>{
-	// 			setLoading(false)
-	// 			let lbFinal = lb.leaderboard.map(e => {
-	// 				return {robot: window.robots.build(e.agent, e.item), points:e.quantity, player: e.owner}
-	// 			})
-	// 			setLeaderboard(lbFinal)
-	// 		}, {agent_type: "AgentItem", page:1, per_page:3})
-	// 	}
-	// },[loading, props.tag])
-
-	// if(loading) return <Loading id="lbLoad"/>
+	const [leaderboard,setLeaderboard] = useState([])
+	useEffect(() => {
+		console.log("entre al use efffect")
+        Players.getAll((r)=>{console.log("Players ================>", r)})
+	}, [])
+	console.log("================> Jugadores",leaderboard)
 	return(
 		<Flex className="LeaderBoard" style={{width:"100%"}}>
-			{leaderboard.map((e,i) =>
+			{leaderboard && leaderboard.map((e,i) =>
 				<div key={i} className="lbItem" style={{width:"100%",height:"27%", margin:"0 3%",textAlign: "center",paddingRight:"5%",paddingLeft:"5%", background: "linear-gradient(to left, rgba(25,15,11,1) 0%, rgba(66,33,11,1) 25%, rgba(96,56,19,1) 51%, rgba(66,33,11,1) 80%, rgba(25,15,11,1) 100%)", borderTop:"3px var(--yellow) solid", borderBottom:"3px var(--yellow) solid" }}>
 					<div style={{width:"10%"}}>
 						<img src={gear} alt={`gear${(i+1)}`}>
@@ -53,14 +45,7 @@ export default props => {
 					<Flex style={{width:"auto"}}>
 						<h2>{e.name}</h2>
 					</Flex>
-					{/* <div className="lb_player">
-						<Robot id={"lbrobot"+i} data={e.robot} noLabel={true}/>
-					</div>
-					<div className="lb_points">
-						<div>Dueño:</div>
-						<div>{e.player.basic.name}</div><br/>
-						<div>XP: {e.points}</div>
-					</div> */}
+					
 				</div>
 			)}
 		</Flex>
