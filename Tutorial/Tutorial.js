@@ -35,7 +35,9 @@ export default (props) => {
 	useEffect(() => {
 		if (props.current !== 'end') {
 			setIndex(0)
-			setTutorial(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
+			setTimeout(() => {
+				setTutorial(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
+			}, 100);
 		} else {
 			setTutorial(null)
 		}
@@ -86,13 +88,12 @@ export default (props) => {
 	}, [props.animateTop])
 	const updateKeyTutorial = (current) => {
 		// if (!window.test) {
-			let id = getCookie("temp_engine_id");
-			Players.update_tutorial(id, current, {}, (res) => {
-				console.log('Current ===> ', res.response)
-				if(res && res.response && res.response){
-					window.setTutorial(res.response) 
-				}
-			})
+		let id = getCookie("temp_engine_id");
+		Players.update_tutorial(id, current, {}, (res) => {
+			if (res && res.response && res.response) {
+				window.setTutorial(res.response)
+			}
+		})
 		// }
 	}
 	const calculatePositionArrow = (direction) => {
