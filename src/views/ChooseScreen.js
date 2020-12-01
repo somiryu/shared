@@ -12,16 +12,13 @@ import {Agents} from '../shared/Utils/engine'
 
 
 function ChooseScreen(props) {
-    console.log("=======>", props.player);
     const selectAvatarM = (e) => {
         console.log("=======>", props.player);
-        Agents.update(props.player,{agent:{1: "select"}},(e)=>{console.log("Avatr cambiado",e);props.listener(3,e)})
-        
+        Agents.update(props.player,{avatars:{42: "select"}},(e)=>{console.log("Avatr cambiado",e);props.listener(3,e)})
     }
     const selectAvatarF = (e) => {
         console.log("=======>", props.player);
-        Agents.update(props.player,{agent:{2: "select"}},(e)=>{console.log("Avatr cambiado",e);props.listener(3,e)})
-        
+        Agents.update(props.player,{avatars:{41: "select"}},(e)=>{console.log("Avatr cambiado",e);props.listener(3,e)})
     }
 
     return (
