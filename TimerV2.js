@@ -12,8 +12,8 @@ import React,{Component} from 'react';
 class TimerGameboard extends Component{
     constructor(props) {
         super(props);
-        let hours=this.props.horas*3600;
-        let minutes=this.props.minutos*60;
+        let hours=this.props.horas ? this.props.horas*3600 : 0;
+        let minutes=this.props.minutos ? this.props.minutos*60 : 0;
         let segundos=hours+minutes+this.props.segundos;
         this.state = { time: {}, seconds: segundos, pause:false};
         this.timer = 0;
