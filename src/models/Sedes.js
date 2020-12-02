@@ -1,4 +1,12 @@
 
+export const HashSedes = {
+    'Bogota': 1,
+    'Bucaramanga': 2,
+    'Tunja': 3,
+    'Medellin': 4,
+    'Villavicencio': 5,
+    'Distancia': 6
+}
 
 const sedes = [
     {

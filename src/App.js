@@ -26,6 +26,13 @@ import EventEmitter from "events"
 import door from "./images/Iconos/inpuerta.png"
 import engine, { getCookie, Immutables, Players, Teams } from "./shared/Utils/engine"
 import s from './models/Sedes'
+import { getCooldown } from './models/Characters';
+const INIT_COOLDOWNS = {
+  'estudiante': 0,
+  'fraile': 0,
+  'secretaria': 0,
+  'profesora': 0
+}
 window.DEBUG = false;
 let sedes = s;
 window.EM = new EventEmitter();
@@ -41,6 +48,7 @@ function App() {
   const [currentCharacter, setCurrentCharacter] = useState(false)
   const [pointsBar, setPointsBar] = useState(0)
   const [immutables, setImmutables] = useState(getImmutables)
+  const [cooldownChars, setCooldownChars] = useState(INIT_COOLDOWNS)
   let date = new Date();
   let pages = ["Register", "Legend", "Choose", "Mapa", "Profile", "Sede", "Rol", "Question", "Feedback", "Login"]
   const Sedes = { 1: 'Bogota', 2: 'Bucaramanga', 3: 'Tunja', 4: 'Medellin', 5: 'Villavicencio', 6: 'Distancia' }
@@ -72,7 +80,14 @@ function App() {
   }
   const listenerLogin = (indice, player) => {
     setLayout(pages[indice])
-    setPlayer(player)
+    if (player) {
+      console.log('PLAYER ==> ', player)
+      setPlayer(player)
+      const cooldowns = getCooldown(player, cooldownChars)
+      console.log('COOLDOWNS ==> ', cooldowns)
+      setCooldownChars(cooldowns)
+    }
+
   }
   const listenerQuestion = (indice, res, points) => {
     setLayout(pages[indice])
@@ -113,7 +128,6 @@ function App() {
   }
 
   const changeSede = (newSede) => {
-    console.log("cambiando sede")
     setSede(newSede);
   }
 
@@ -124,7 +138,6 @@ function App() {
         schedules[Sedes[index]] = Immutables.byName(immutables, `cooldown_sedes`)[`text_${index}`].split(',')
       }
     }
-    console.log('SCHEDULES ===> ', schedules);
     return schedules
   }
   let addClass;
@@ -214,7 +227,8 @@ function App() {
             listener={listenerSede}
             sede={sede}
             date={date}
-
+            immutables={immutables}
+            cooldowns={cooldownChars}
           >
           </SedeScreen>
         }
@@ -223,6 +237,7 @@ function App() {
             listener={listener}
             character={currentCharacter}
             sede={sede}
+            immutables={immutables}
           >
           </RolProfileScreen>
         }

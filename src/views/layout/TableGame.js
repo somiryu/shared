@@ -25,20 +25,25 @@ function TableGame(props) {
     let hour = props.date.getHours()
     let minutes = props.date.getMinutes()
     let seconds = props.date.getSeconds()
-    if (props.data) {
-        let horarios = []
-        props.data.schedule.map((e) => {
-            horarios = e.split("-")
-            let hi = parseInt(horarios[0])
-            let hf = parseInt(horarios[1])
-            if (hour > hi && hour < hf) {
-                horas = hf - hour
-                minutos = 59 - minutes
-                segundos = 59 - seconds
-                return null
-            }
-            return null
-        })
+    if(props.data){
+        if(props.schedules[props.data.basic.name]){
+            let horarios=[]
+            props.schedules[props.data.basic.name].map((e)=>{
+                horarios=e.split("-")
+                let hi = parseInt(horarios[0])
+                let hf = parseInt(horarios[1])
+                if(hour>hi && hour<hf){
+                    console.log("horas",hi,hf)
+                    horas = hf-hour
+                    minutos = 59-minutes
+                    segundos = 59-seconds
+                    //setStatePortal(true)
+                    // setstartTimer(true)
+                    return null  
+                }
+                return null  
+            })
+        }
     }
     useEffect(() => {
         setTimeout(() => {
@@ -59,15 +64,15 @@ function TableGame(props) {
                         <img alt="cerebro" src={props.data.racha === true ? incerebrodificil : incerebrofacil} ></img>
                     </Flex>
                     <Flex style={{ margin: "10px 10px" }} align="center">
-                        <h5 style={{ fontFamily: 'Source Serif Pro' }}>{"Sede "}  {props.city || "CIUDAD"}</h5>
+                        <h5 style={{ fontFamily: 'Source Serif Pro' }}>{"Sede "}  {props.data.basic.name || "CIUDAD"}</h5>
                     </Flex>
                 </Flex>
                 <Flex direction={"column"} align={"center"} style={{ width: "100%", height: '27.5%' }}>
                     <Flex style={{ width: "100%", height: '60%' }}>
-                        <img style={{ height: '90%' }} alt="shell" src={props.escudos[props.city] || villavicencio} ></img>
+                        <img style={{ height: '90%' }} alt="shell" src={props.escudos[props.data.basic.name] || villavicencio} ></img>
                     </Flex>
                     <Flex align='center' style={{ width: "100%", height: '30%' }}>
-                        <h5 style={{ fontFamily: 'Source Serif Pro' }}>{props.city || "Ciudad"}</h5>
+                        <h5 style={{ fontFamily: 'Source Serif Pro' }}>{props.data.basic.name || "Ciudad"}</h5>
                     </Flex>
                 </Flex>
                 <Flex style={{ justifyContent: "space-around", width: "100%", height: '27%' }} align="center">
@@ -84,7 +89,7 @@ function TableGame(props) {
                             <img alt="placelogo" src={key} ></img>
                         </Flex>
                         <Flex align='center' style={{ width: "100%", height: '30%' }}>
-                            <h5 style={{ fontFamily: 'Source Serif Pro' }}>{'20 / 100' }</h5>
+                            <h5 style={{ fontFamily: 'Source Serif Pro' }}>{'20 /' + props.data.agent.currencies.keys_required.quantity }</h5>
                         </Flex>
                     </Flex>
                 </Flex>

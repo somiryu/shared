@@ -12,6 +12,9 @@ import {Agents} from '../shared/Utils/engine'
 
 
 function ChooseScreen(props) {
+    console.log("=======>", props.player);
+    let hombre = props.player.agent.avatars.not_selected[1].agent_avatar_id;
+    let mujer = props.player.agent.avatars.not_selected[0].agent_avatar_id;
     const selectAvatarM = (e) => {
         Agents.update(props.player,{avatars:{42: "select"}},(e)=>{console.log("Avatr cambiado",e);props.listener(3,e)})
     }

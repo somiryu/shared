@@ -14,6 +14,10 @@ import ProgressBarWithImage from "../shared/Indicators/ProgressBarWithImage"
 import screw from "../images/Graficos/tornillobarratrivias.png"
 import { Agents, Trivia } from "../shared/Utils/engine"
 import { formatTrivia } from "../models/Trivias"
+import ImagePanel from "../shared/Panels/ImagedPanel"
+import ContentSede from "../images/general/contasedejuego.png"
+import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
+import key from "../images/header/llaveheader.png"
 
 const formatDifficulty = (dif) => {
     let strDif = ''
@@ -56,6 +60,7 @@ const getTagFeedbackVP = (dif) => {
 function QuestionScreen(props) {
     const [trivia, setTrivia] = useState(null)
     const [difficulty, setDifficulty] = useState('low')
+    const [screen, setScreen] = useState('Trivia')
     let resp = false
     useEffect(() => {
         if (props.player && props.character) {
@@ -63,6 +68,7 @@ function QuestionScreen(props) {
             setDifficulty(formatDifficulty(dif))
             Trivia.get(`${props.character.toLowerCase()}_${dif}`, (trivia) => {
                 setTrivia(formatTrivia(trivia))
+                console.log('TRIVIA ==> ', trivia)
             })
         }
     }, [props.player, props.character])
@@ -80,6 +86,62 @@ function QuestionScreen(props) {
             return null
         })
     }
+    const incrementCurrencies = (listener, result) => {
+        let currencies = {}
+        if (result === 'won') {
+            currencies = {
+                currencies: {
+                    [`trivias_${props.character.toLowerCase()}`]: {
+                        add: {
+                            value: 1
+                        }
+                    },
+                    exp: {
+                        add: {
+                            value: 10
+                        }
+                    },
+                    trivia_difficulty: {
+                        add: {
+                            value: 1
+                        }
+                    }
+                }
+            }
+        } else if (result === 'lost') {
+            currencies = {
+                currencies: {
+                    [`trivias_${props.character.toLowerCase()}`]: {
+                        add: {
+                            value: 1
+                        }
+                    }
+                }
+            }
+        }
+        Agents.update(
+            props.player,
+            currencies,
+            listener
+        )
+    }
+    const validateTrivias = ( result) => {
+        incrementCurrencies(
+            (player_update) => {
+                const triviaDif = player_update.agent.currencies.trivia_difficulty;
+                validateTrivias(triviaDif)
+                if(result === 'won') {
+
+                }
+                if(result === 'lost'){
+                    Agents.feedback(props.player, 'reset_trivia_difficulty', (feedback_result) => { 
+
+                    })
+                }
+            },
+            result
+        )
+    }
     const verifyTrivia = () => {
         if (resp === false) {
             window.flash("No has elegido aun una respuesta", "error")
@@ -87,18 +149,15 @@ function QuestionScreen(props) {
             Trivia.answer(trivia.id, resp, (answer) => {
                 console.log('ANSWER TRIVIA ===> ', answer)
                 if (answer.correct) {
-                    Agents.feedback(props.player, getTagFeedbackVP(), (result_feedback) => {
-                        console.log('RESULT FEEDBACK ===> ', result_feedback)
-                        
-                    })
+                    validateTrivias('won')
                 } else {
-
+                    validateTrivias('lost')
                 }
             })
         }
     }
     if (!trivia) return <div></div>
-    return (
+    return screen === 'Trivia' ? (
         <Flex id="QuestionScreen" align="center" direction="column" style={{ marginTop: "0%", marginLeft: "5%", marginRight: "5%", height: '80vh' }}>
             <Flex style={{ height: '10%' }} align="center">
                 <Flex>
@@ -166,7 +225,7 @@ function QuestionScreen(props) {
                 </Flex>
             }
         </Flex>
-    )
+    ) : <FeedbackScreen />
 }
 
 function Tubo(props) {
@@ -191,4 +250,48 @@ function Tubo(props) {
     )
 }
 
+function FeedbackScreen(props) {
+    return (
+        <Flex id='FeedbackScreen' align="center" direction="column" style={{ marginTop: "0%", marginLeft: "10%", marginRight: "10%", height: '80vh' }}>
+            <Flex id='FeedbackScreenContainer' style={{ width: "80%" , height:'100%'}} align={"center"} direction={"column"}>
+                <ImagePanel
+                    image={ContentSede}
+                    padding={"2% 10%"}
+                    style={{ width: "90%", }}
+                >
+                    <Flex style={{height:'90%', width:'100%'}} align={"center"} direction={"column"}>
+                        <Flex align='center' justify='center' style={{height:'18%', width:'100%'}}>
+                            <h2>{props.title || "Titulo"}</h2>
+                        </Flex>
+                        <Flex align='flex-start' justify='center' style={{marginTop:'10%',height:'30%', width:'100%', overflowX: "auto"}}>
+                            <p style={{ color: "#F2C75C", paddingTop: "10px" }}>{props.legend || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."}</p>
+                        </Flex>
+
+                        <Flex align='center' justify='center' style={{height:'20%', width:'100%'}}>
+                            <CurrencyHorizontal
+                                quantity={props.respuesta ? (props.pointsBar>0 ? props.pointsBar:2):-1 }
+                                image={key}
+                                displayX={true}
+                                styleX={{ padding: "5px", fontSize: "30px" }}
+                                styleImage={{ transform: "rotate(330deg)" }}
+                                id="counterfeed"
+                            ></CurrencyHorizontal>
+                        </Flex>
+                        <Flex align='flex-start' justify='center' style={{ height:'25%', margin: "0 auto", width: props.widthButton || "80%" }}>
+                            <ButtonImageWithLabel
+                                id={props.buttonId || "firstbutton"}
+                                image={props.buttonImage || ButtonImage}
+                                label={props.buttonLabel || <label style={{ fontWeight: "700", fontSize: "17px", height: "30px" }}>VOLVER</label>}
+                                listener={() => {
+                                    props.listener(props.respuesta ? (props.pointsBar>0 ? props.pointsBar:2):-1)
+                                }}
+                            >
+                            </ButtonImageWithLabel>
+                        </Flex>
+                    </Flex>
+                </ImagePanel>
+            </Flex>
+        </Flex>
+    )
+}
 export default QuestionScreen;

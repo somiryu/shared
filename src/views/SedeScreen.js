@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Flex from "../shared/Containers/Flex"
 import MaskedAvatarWithTitle from "../shared/Hubs/MaskedAvatarWithTitle";
 import Fraile from "../images/Graficos/fraile-temp.png"
@@ -15,73 +15,74 @@ import profesora from '../images/Graficos/profesora-temp.png'
 import secretaria from '../images/Graficos/secretari-temp.png'
 import Absolute from '../shared/Containers/Absolute';
 import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
-import s from '../models/Sedes'
+import s, { HashSedes } from '../models/Sedes'
 import key from "../images/header/llaveheader.png"
+import { Immutables } from '../shared/Utils/engine';
+import Timer from "../shared/TimerV2"
 let sedes = s;
 const Roles = [
     {
-        id:1,
+        id: 1,
         text: 'Profesora',
-        image: profesora,
-        schedule1: '7-9',
-        schedule2: '12-21'
+        image: profesora
     },
     {
-        id:2,
+        id: 2,
         text: 'Secretaria',
-        image: secretaria,
-        schedule1: '9-11',
-        schedule2: '12-21'
+        image: secretaria
     },
     {
-        id:3,
+        id: 3,
         text: 'Fraile',
-        image: Fraile,
-        schedule1: '7-8',
-        schedule2: '12-21'
+        image: Fraile
     },
     {
-        id:4,
+        id: 4,
         text: 'Estudiante',
-        image: estudiante,
-        schedule1: '7-9',
-        schedule2: '12-21'
+        image: estudiante
     }
 ]
 function SedeScreen(props) {
-    const  [currentSede,setCurrentSede] = useState(sedes[0])
-    
-
+    const [currentSede, setCurrentSede] = useState(sedes[0])
+    const [description, setDescription] = useState('')
+    const [start, setstart] = useState(false)
     useEffect(() => {
-        sedes.map((e)=>{
-            if(e.name===props.sede){
+        if (!start) {
+            setTimeout(() => {
+                setstart(true)
+            }, 500);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.cooldowns])
+    useEffect(() => {
+        sedes.map((e) => {
+            if (e.name === props.sede) {
                 setCurrentSede(e)
+                setDescription(Immutables.byName(props.immutables, 'text_welcome_sede')[`text_${HashSedes[e.name]}`])
             }
             return null
         })
-    }, [props.sede])
-
-    const time1 = (rol) =>{
+    }, [props.sede, props.immutables])
+    const time1 = (rol) => {
         let tiempo = rol.schedule1.split("-")
         let hour = props.date.getHours();
-        if(parseInt(tiempo[0]) <= hour &&  parseInt(tiempo[1]) >= hour){
+        if (parseInt(tiempo[0]) <= hour && parseInt(tiempo[1]) >= hour) {
             return "on"
         }
-        else{
+        else {
             return "off"
         }
     }
-    const time2 = (rol) =>{
+    const time2 = (rol) => {
         let tiempo = rol.schedule2.split("-")
         let hour = props.date.getHours()
-        if(parseInt(tiempo[0]) <= hour &&  parseInt(tiempo[1]) >= hour){
+        if (parseInt(tiempo[0]) <= hour && parseInt(tiempo[1]) >= hour) {
             return "on"
         }
-        else{
+        else {
             return "off"
         }
     }
-    console.log("===========SEDE ACTUAL ===========", currentSede, currentSede.keysRequiredForOpen)
     return (
         <Flex id="SedeScreenContainer" align="center" style={{ marginTop: "0%", marginLeft: "5%", marginRight: "5%", flexWrap: "wrap" }}>
             <Flex style={{ width: "50%" }} align="center" direction="column">
@@ -95,7 +96,7 @@ function SedeScreen(props) {
                             <h2>{props.title || "Titulo"}</h2>
                         </Flex>
                         <Flex className='scrollbar' align="flex-start" style={{ margin: '2% 0', width: '60%', height: '25%', overflowY: 'auto' }} >
-                            <p style={{ color: 'white' }}>{props.legend || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."}</p>
+                            <p style={{ color: 'white' }} dangerouslySetInnerHTML={{ __html: description || '<b>Not found</b>' }}></p>
                         </Flex>
                         <Flex align="flex-start" style={{ height: '25%' }} >
                             <img alt="portal" src={portalVillavicencio} style={{ height: '100%' }}></img>
@@ -106,11 +107,11 @@ function SedeScreen(props) {
                                 quantity={currentSede.keysRequiredForOpen || 0}
                                 image={key}
                                 displayX={true}
-                                styleX={{padding:"0 5px", color:'var(--yellow-ligth)'}}
-                                childStyle={{color:'var(--yellow-ligth)'}}
+                                styleX={{ padding: "0 5px", color: 'var(--yellow-ligth)' }}
+                                childStyle={{ color: 'var(--yellow-ligth)' }}
                                 id="counterkeyssede"
                                 idX="xcounterkeyssede"
-                                styleBox={{display:"flex"}}
+                                styleBox={{ display: "flex" }}
                             ></CurrencyHorizontal>
                         </Flex>
                     </Flex>
@@ -118,6 +119,7 @@ function SedeScreen(props) {
             </Flex>
             <Flex style={{ width: "50%", flexWrap: "wrap" }}>
                 {Roles.map((rol, index) => {
+                    console.log('ROL ===> ', props.cooldowns[`${rol.text.toLowerCase()}`])
                     return (
                         <Flex direction="column" align="center" style={{ margin: "20px", width: "160px" }}>
                             <Flex style={{ position: 'relative' }}>
@@ -141,7 +143,7 @@ function SedeScreen(props) {
                                         debug={false}
                                         label={<label style={{ color: "var(--yellow-ligth)" }}>{rol.text}</label>}
                                         pointer={true}
-                                        listener={()=>{}}
+                                        listener={() => { }}
                                         leftLabel={"-1%"}
                                         topLabel={"75%"}
                                     >
@@ -150,16 +152,27 @@ function SedeScreen(props) {
                             </Flex>
                             <ButtonMultiStateWithText
                                 id={`btn${index}1`}
-                                state={'on'}
+                                state={!props.cooldowns[`${rol.text.toLowerCase()}`] ? 'on' : 'off'}
                                 scale={1.2} //1.1
                                 images={{ off: contatiempo, on: contatiempoactivo }}
                                 listeners={{
                                     off: () => { },
-                                    on: () => {props.listener(rol.text)},
+                                    on: () => { props.listener(rol.text) },
                                 }}
-                                stylesText={{ off: { color: 'var(--dark-grey)', marginBottom: '5%' }, on: { color: 'var(--yellow-ligth)', marginBottom: '5%' } }}
+                                stylesText={{ off: { color: 'var(--dark-grey)', marginBottom: '5%' }, on: { color: 'var(--yellow-ligth)', marginBottom: '5%', fontSize:'.7rem' } }}
                                 styles={{}}
-                                text={<label className='label'>{rol.schedule1}</label>}
+                                text={
+                                    !props.cooldowns[`${rol.text.toLowerCase()}`] ?
+                                        <label>
+                                            Abierto
+                                        </label>
+                                        :
+                                        <Timer
+                                            segundos={props.cooldowns[`${rol.text.toLowerCase()}`]}
+                                            iniciar={start}
+                                            styleTimer={{ fontSize: '.7rem' }}
+                                        />
+                                }
                             />
                         </Flex>
                     )
