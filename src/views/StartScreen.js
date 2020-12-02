@@ -7,7 +7,7 @@ import Flex from "../shared/Containers/Flex"
 import logosantoto from "../images/general/logosantoto.png";
 import { getCookie, Players, Trivia, evaluateEmail, Teams } from "../shared/Utils/engine";
 import engine from "../shared/Utils/engine";
-import sedes from '../models/Sedes'
+//import sedes from '../models/Sedes'
 const ID_IN_APP = getCookie('iia');
 // @usantotomas.edu.co (Bogota)
 // @ustamed.edu.co (Medellin)

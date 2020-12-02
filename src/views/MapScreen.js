@@ -65,35 +65,27 @@ function MapScreen(props) {
     
 
     useEffect(() => {
-        console.log('PROPS ===> ', props);
-    }, [props])
-
-    useEffect(() => {
         Teams.getAll((r)=>{
             let sedesAux =[]
             r.map((e)=>{
-                //console.log("Entre al map",props.sedes)
                 if(props.sedes){
                     props.sedes.map((e2)=>{
-                        //console.log("Entre al map",e2.name,e.basic.name)
                         if(e.basic.name === e2.name){
                             sedesAux.push(e)
                         }
                     })
                 } 
             })
-            console.log("TEMINAMOS ===============>",sedesAux)
             setSedesApi(sedesAux)
-            // if(sedesAux.length >= 1){
-            //     setTableGame(sedesAux[0])
-            // }
+            if(sedesAux.length >= 1){
+                setTableGame(sedesAux[0])
+            }
         })
     }, [])
 
     const handlePortal = (e) => {
         let sede;
         if(screen < 800 && e['target']){
-            console.log("la pantalla es tactil",e.target.id.split("_"))
             let vector = e.target.id.split("_")
             sede = vector[0]
         }
@@ -196,9 +188,8 @@ function MapScreen(props) {
 
 function Portal(props) {
     const [startTimer, setstartTimer] = useState(false)
-    const [stateSede, setStateSede] = useState(false)
+    const [stateSede, setStateSede] = useState(true)
     const [statePortal, setStatePortal] = useState(false)
-    console.log("=========PROPS PORTAL =================", props)
     let horas = 0
     let minutos = 0
     let segundos = 0
@@ -212,7 +203,6 @@ function Portal(props) {
             let hi = parseInt(horarios[0])
             let hf = parseInt(horarios[1])
             if(hour>hi && hour<hf){
-                console.log("horas",hi,hf)
                 horas = hf-hour
                 minutos = 59-minutes
                 segundos = 59-seconds
@@ -233,7 +223,7 @@ function Portal(props) {
                 let hi = parseInt(horarios[0])
                 let hf = parseInt(horarios[1])
                 if(hour>hi && hour<hf){
-                    setStateSede(true)
+                    setStateSede(false)
                     // setstartTimer(true)
                     return null  
                 }
@@ -242,7 +232,6 @@ function Portal(props) {
         }
         setTimeout(() => {        
             setstartTimer(true)
-            console.log("COprobacion de llaves",props.currentKeys,props.sede.keysRequiredForOpen)
             if(props.currentKeys >=  props.sede.keysRequiredForOpen){
                 setStatePortal(true)
             }
@@ -271,7 +260,7 @@ function Portal(props) {
 
     return (
         <Absolute  style={{...styles}}>
-            <Absolute id={props.id} style={{ width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "black", top: "10px", ...styleSede}} listener={stateSede?props.listener:""}>
+            <Absolute id={props.id} style={{ width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "black", top: "10px", ...styleSede}} listener={props.listener}>
                 <MaskedAvatar
                     id={props.id}
                     avatar={props.imageSede || sedeBogota}
@@ -293,6 +282,11 @@ function Portal(props) {
                 <Flex style={{ position: 'relative', width: '100%', height: '100%' }} >
                     <img alt="contetiempo" src={contatiempoactivo} style={{ width: '180%', height: '100%' }}></img>
                     <Absolute top='20%'>
+                        {(horas===0 && minutos===0 && segundos===0)?
+                        <div>
+                            <p style={{fontSize:'.6rem'}}>ABIERTO</p>
+                        </div>
+                        :
                         <Timer
                             horas={horas}
                             minutos={minutos}
@@ -302,6 +296,7 @@ function Portal(props) {
                             reiniciar={false} //inicia o reanuda
                             styleTimer={{fontSize:'.6rem'}}
                         ></Timer>
+                        }
                     </Absolute>
                 </Flex>
                 {/* <h6 style={{margin:"0px"}}>{"00:00:00"}</h6>  */}

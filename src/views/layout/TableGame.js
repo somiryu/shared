@@ -17,11 +17,10 @@ import ImagedPanel from "../../shared/Panels/ImagedPanel";
 function TableGame(props) {
     const [startTimer, setstartTimer] = useState(false)
     const [reiniciar, setReiniciar] = useState(false)
-    const [state1, setState1] = useState("on");
+    let estado = "on"
     let horas = 0
     let minutos = 0
     let segundos = 0
-    //var date = new Date();
     let hour = props.date.getHours()
     let minutes = props.date.getMinutes()
     let seconds = props.date.getSeconds()
@@ -37,8 +36,7 @@ function TableGame(props) {
                     horas = hf-hour
                     minutos = 59-minutes
                     segundos = 59-seconds
-                    //setStatePortal(true)
-                    // setstartTimer(true)
+                    estado="off"
                     return null  
                 }
                 return null  
@@ -46,11 +44,32 @@ function TableGame(props) {
         }
     }
     useEffect(() => {
+        console.log("useeffect estado portal")
+        if(props.data){
+            if(props.schedules[props.data.basic.name]){
+                let horarios=[]
+                props.schedules[props.data.basic.name].map((e)=>{
+                    horarios=e.split("-")
+                    let hi = parseInt(horarios[0])
+                    let hf = parseInt(horarios[1])
+                    if(hour>hi && hour<hf){
+                        console.log("cambia estado")
+                        //setStatePortal("off")
+                        return null  
+                    }else{
+                        //setStatePortal("on") 
+                        return null 
+                    }
+                    return null  
+                })
+            }
+        }
         setTimeout(() => {
             setReiniciar(true)
             setstartTimer(true)
         }, 100);
     }, [props])
+    //console.log("Estado de puerta",statePortal)
     return (
         <ImagedPanel
             image={containformacion}
@@ -108,12 +127,12 @@ function TableGame(props) {
                         <Flex>
                             <ButtonMultiState
                                 id="btn2"
-                                state={state1}
+                                state={estado}
                                 scale={1.2} //1.1
                                 images={{ off: door, on: door }}
                                 listeners={{
-                                    off: () => { setState1("on"); props.listener(5); },
-                                    on: () => { setState1("off"); props.listener(5); },
+                                    off: () => { },
+                                    on: () => { props.listener(5); },
                                 }}
                                 styles={{ off: { filter: "grayscale(100%)" } }}
                             >
