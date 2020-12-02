@@ -19,7 +19,6 @@ export default props => {
 		console.log("entre al use efffect")
         Players.getAll((r)=>{console.log("Players ================>", r)})
 	}, [])
-	console.log("================> Jugadores",leaderboard)
 	return(
 		<Flex className="LeaderBoard" style={{width:"100%"}}>
 			{leaderboard && leaderboard.map((e,i) =>

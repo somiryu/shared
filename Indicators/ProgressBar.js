@@ -27,7 +27,6 @@ export default function ProgressBar(props) {
         width: `${percentage}%`,
         backgroundColor: props.barColor || '#327B79',
         borderRadius: props.borderRadius || '5px',
-        transition: 'width 2s linear',
         ...props.styleProgress
     }
     return (
