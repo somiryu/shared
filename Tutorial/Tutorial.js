@@ -85,9 +85,15 @@ export default (props) => {
 		}
 	}, [props.animateTop])
 	const updateKeyTutorial = (current) => {
-		let id = getCookie("temp_engine_id");
-		Players.update_tutorial(id, current, {}, (res) => {
-		})
+		// if (!window.test) {
+			let id = getCookie("temp_engine_id");
+			Players.update_tutorial(id, current, {}, (res) => {
+				console.log('Current ===> ', res.response)
+				if(res && res.response && res.response){
+					window.setTutorial(res.response) 
+				}
+			})
+		// }
 	}
 	const calculatePositionArrow = (direction) => {
 		let rotate = 0
@@ -111,7 +117,7 @@ export default (props) => {
 					top: `${tutorial.arrow['y']}%`,
 					left: `${tutorial.arrow['x']}%`,
 					transform: `rotate(${calculatePositionArrow(tutorial.arrow['direction'])})`,
-					zIndex: props.zIndexContent || 0
+					zIndex: props.zIndexArrow || (props.zIndexContent || 0)
 				}}>
 					<Levitation id="ArrowAnimation" duration={200} endDelay={30} to='30%'>
 						<div id='imgArrow'>
