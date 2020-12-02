@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 // import {BrowserRouter ,Redirect, Route, Switch } from "react-router-dom";
 import './App.css';
 import Header from '../src/views/layout/Header'
@@ -24,93 +24,102 @@ import ChooseScreen from "./views/ChooseScreen"
 import Flash from "./shared/Flash"
 import EventEmitter from "events"
 import door from "./images/Iconos/inpuerta.png"
-import engine, { Immutables, Teams } from "./shared/Utils/engine"
+import engine, { getCookie, Immutables, Players, Teams } from "./shared/Utils/engine"
 import s from './models/Sedes'
 window.DEBUG = false;
 let sedes = s;
 window.EM = new EventEmitter();
-window.flash = (message, type="success") => window.EM.emit('flash', ({message, type}));
+window.flash = (message, type = "success") => window.EM.emit('flash', ({ message, type }));
+const ID_IN_APP = getCookie('iia');
 function App() {
-  const [layout,setLayout] = useState("Register")
-  const [respuesta,setRespuesta] = useState(false)
-  const [player,setPlayer] = useState()
-  const [globalKeys,setGlobalKeys] = useState(100)
+  const [layout, setLayout] = useState("Register")
+  const [respuesta, setRespuesta] = useState(false)
+  const [player, setPlayer] = useState()
+  const [globalKeys, setGlobalKeys] = useState(100)
   const [secondaryBg] = useState(true)
-  const [sede,setSede] = useState("Bogota")
-  const [currentCahracter,setCurrentCahracter]=useState(false)
-  const [pointsBar,setPointsBar]=useState(0)
+  const [sede, setSede] = useState("Bogota")
+  const [currentCharacter, setCurrentCharacter] = useState(false)
+  const [pointsBar, setPointsBar] = useState(0)
   const [immutables, setImmutables] = useState(getImmutables)
   let date = new Date();
-  let pages =["Register","Legend","Choose","Mapa","Profile","Sede","Rol","Question","Feedback","Login"]
-  const Sedes = {1: 'Bogota', 2: 'Bucaramanga', 3:'Tunja', 4:'Medellin', 5: 'Villavicencio', 6:'Distancia'}
+  let pages = ["Register", "Legend", "Choose", "Mapa", "Profile", "Sede", "Rol", "Question", "Feedback", "Login"]
+  const Sedes = { 1: 'Bogota', 2: 'Bucaramanga', 3: 'Tunja', 4: 'Medellin', 5: 'Villavicencio', 6: 'Distancia' }
+  window.getPlayerAgain = () => {
+    if (engine.getUser()) {
+      Players.get(ID_IN_APP, (response) => {
+        setPlayer(response)
+      })
+    }
+  }
   useEffect(() => {
     console.log('Player ===> ', player)
     Teams.getAll((teams) => {
       console.log('TEAMS ===> ', teams)
     })
   }, [player])
-  const listener = (indice) =>{
+  const listener = (indice) => {
+    console.log('LISTENER ===> ', indice)
     setLayout(pages[indice])
   }
-  const listenerChoose = (indice,player) =>{
+  const listenerChoose = (indice, player) => {
     setPlayer(player)
     setLayout(pages[indice])
   }
-  function getImmutables(){
+  function getImmutables() {
     Immutables.all((immutables) => {
       setImmutables(immutables)
     })
   }
-  const listenerLogin = (indice,player) =>{
+  const listenerLogin = (indice, player) => {
     setLayout(pages[indice])
     setPlayer(player)
   }
-  const listenerQuestion = (indice,res,points) =>{
+  const listenerQuestion = (indice, res, points) => {
     setLayout(pages[indice])
     setRespuesta(res)
-    if(points > 0){
+    if (points > 0) {
       setPointsBar(points)
     }
   }
-  const listenerFeedback = (points) =>{
-    if(globalKeys===0 && points < 0){
+  const listenerFeedback = (points) => {
+    if (globalKeys === 0 && points < 0) {
       setGlobalKeys(0);
-    }else{
+    } else {
       setGlobalKeys(globalKeys + points);
     }
-    if(sede === "Bogota"){
+    if (sede === "Bogota") {
       sedes[0].numbersOfKeys = sedes[0].numbersOfKeys + points
-    }else{
-      sedes.map((e)=>{
-        if(e.name===sede){
-          if(e.numbersOfKeys === 0){
+    } else {
+      sedes.map((e) => {
+        if (e.name === sede) {
+          if (e.numbersOfKeys === 0) {
             e.numbersOfKeys = 0
-          }else{
+          } else {
             e.numbersOfKeys = e.numbersOfKeys - points
           }
         }
         return null
-    })
+      })
     }
     setLayout(pages[3])
   }
-  const listenerSede = (character) =>{
-    setCurrentCahracter(character)
+  const listenerSede = (character) => {
+    setCurrentCharacter(character)
     setLayout(pages[6])
   }
-  const LogOut = () =>{
+  const LogOut = () => {
     engine.logOut();
     setLayout(pages[0])
   }
 
-  const changeSede = (newSede) =>{
+  const changeSede = (newSede) => {
     console.log("cambiando sede")
     setSede(newSede);
   }
 
   const getSchedules = () => {
     let schedules = {}
-    if(immutables){
+    if (immutables) {
       for (let index = 1; index <= 6; index++) {
         schedules[Sedes[index]] = Immutables.byName(immutables, `cooldown_sedes`)[`text_${index}`].split(',')
       }
@@ -125,115 +134,119 @@ function App() {
   if (layout === "GameLayout" && secondaryBg) addClass = "PurpleBackground";
   const bgClass = "App " + addClass;
   return (
-    <div className={bgClass+` general`}  style={{ overflow: "hidden", backgroundImage:fondo}}>
-        {/* <div style={{position:"absolute",top:"5%", left:"5%"}}>
-          <ButtonImage
-              id="btn1"
-              image={btnlideres}
-              listener={(id) => { 
-                console.log("si estoy")
-                if(i>=pages.length){
-                  i = 0
-                }else{
-                  i=i+1; 
-                }
-                setLayout(pages[i]); 
-              }}
-              scale={1.1} //1.1
-              style={{ margin: 10 }} // {}
-          />
-        </div> */}
-        {layout === "Componentes" && 
-          <Components>
-          </Components>
-        }
-       <PlayArea width={layout === 'BeginGame' ? 1400 : 1000}>
+    <div className={bgClass + ` general`} style={{ overflow: "hidden", backgroundImage: fondo }}>
+      {/* <div style={{position:"absolute",top:"5%", left:"5%"}}>
+            <ButtonImage
+                id="btn1"
+                image={btnlideres}
+                listener={(id) => { 
+                  console.log("si estoy")
+                  if(i>=pages.length){
+                    i = 0
+                  }else{
+                    i=i+1; 
+                  }
+                  setLayout(pages[i]); 
+                }}
+                scale={1.1} //1.1
+                style={{ margin: 10 }} // {}
+            />
+          </div> */}
+      {layout === "Componentes" &&
+        <Components>
+        </Components>
+      }
+      <PlayArea width={layout === 'BeginGame' ? 1400 : 1000}>
         {(layout !== "Register" && layout !== "Legend" && layout !== "Choose" && layout !== "Login" && layout !== "Loading") &&
-          <Header 
-            listener={listener} 
-            layout={layout} 
+          <Header
+            listener={listener}
+            layout={layout}
             points={globalKeys}
-            player = {player}
-            >
-            </Header>
+            player={player}
+          >
+          </Header>
         }
 
         {layout === "Login" &&
           <Login
-            listener = {listener}
+            listener={listener}
           >
-
           </Login>
         }
 
         {layout === "Register" &&
           <StartScreen
-            listener = {listener}
-            listenerPlayer = {listenerLogin}
+            listener={listener}
+            listenerPlayer={listenerLogin}
           >
-
           </StartScreen>
         }
         {layout === "Legend" &&
           <LegendScreen
-            listener = {listener}
-            player ={player}
+            listener={listener}
+            player={player}
             legend={immutables && Immutables.byName(immutables, 'text_welcome_players')['text_1']}
           >
           </LegendScreen>
         }
-         {layout === "Mapa" &&
-          <MapScreen 
-            listener = {listener} 
-            sede={sede} 
+        {layout === "Mapa" &&
+          <MapScreen
+            listener={listener}
+            sede={sede}
             changeSede={changeSede}
-            sedes = {sedes}
-            date = {date}
+            sedes={sedes}
+            date={date}
             currentKeys={globalKeys}
             schedules={getSchedules()}
           >
           </MapScreen>
         }
         {layout === "Profile" &&
-          <ProfileScreen 
-            listener = {listener} 
+          <ProfileScreen
+            listener={listener}
             sede={sede}
-            player = {player}
+            player={player}
           >
           </ProfileScreen>
         }
         {layout === "Sede" &&
-          <SedeScreen 
-            listener = {listenerSede} 
+          <SedeScreen
+            listener={listenerSede}
             sede={sede}
-            date = {date}
-            
-            >
+            date={date}
+
+          >
           </SedeScreen>
         }
         {layout === "Rol" &&
-          <RolProfileScreen listener = {listener} character={currentCahracter} sede={sede}>
+          <RolProfileScreen
+            listener={listener}
+            character={currentCharacter}
+            sede={sede}
+          >
           </RolProfileScreen>
         }
         {layout === "Question" &&
-          <QuestionScreen 
-            listener = {listenerQuestion} 
+          <QuestionScreen
+            listener={listenerQuestion}
             sede={sede}
-            player = {player}>
+            player={player}
+            character={currentCharacter}
+          >
           </QuestionScreen>
         }
         {layout === "Feedback" &&
-          <FeedBackScreen 
-            listener = {listenerFeedback}
-            respuesta = {respuesta}
+          <FeedBackScreen
+            listener={listenerFeedback}
+            respuesta={respuesta}
             sede={sede}
-            pointsBar = {pointsBar}
+            pointsBar={pointsBar}
           >
           </FeedBackScreen>
         }
         {layout === "Choose" &&
-          <ChooseScreen 
-            listener = {listener}
+          <ChooseScreen
+            listener={listener}
             player={player}
           >
           </ChooseScreen>
@@ -242,16 +255,16 @@ function App() {
           <LoadingScreen >
           </LoadingScreen>
         }
-        {engine.getUser()&&
-        <Absolute right={"80%"} top={"10%"} >
-          <div onClick={LogOut}>
-            <img src={door}>
-            </img>
-          </div>
-        </Absolute>}
-        <Flash/>
+        {engine.getUser() &&
+          <Absolute right={"80%"} top={"10%"} >
+            <div onClick={LogOut}>
+              <img src={door}>
+              </img>
+            </div>
+          </Absolute>}
+        <Flash />
       </PlayArea>
-      <div style={{display:"flex",justifyContent:"center",position:"fixed",bottom:"0%",width:"100%",height:"100px",backgroundImage:`url(${footer})`}}>
+      <div style={{ display: "flex", justifyContent: "center", position: "fixed", bottom: "0%", width: "100%", height: "100px", backgroundImage: `url(${footer})` }}>
         {/* <img src={footer} alt="footer">
         </img> */}
       </div>

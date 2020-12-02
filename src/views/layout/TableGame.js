@@ -14,10 +14,6 @@ import timer from "../../images/Iconos/inretry.png"
 import door from "../../images/Iconos/inpuerta.png"
 import containformacion from "../../images/general/containformacion.png"
 import ImagedPanel from "../../shared/Panels/ImagedPanel";
-import Timer from "../../shared/TimerV2"
-
-
-
 function TableGame(props) {
     const [startTimer, setstartTimer] = useState(false)
     const [reiniciar, setReiniciar] = useState(false)
@@ -50,7 +46,6 @@ function TableGame(props) {
             setstartTimer(true)
         }, 100);
     }, [props])
-    console.log("==========TIMETABLE", horas, minutos, segundos, startTimer, reiniciar)
     return (
         <ImagedPanel
             image={containformacion}

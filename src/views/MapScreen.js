@@ -60,9 +60,6 @@ function MapScreen(props) {
     const [screen] = useState(window.screen.width)
     const [portalInferior, setPortalInferior] = useState(false)
     const [tableGame, setTableGame] = useState(props.sedes[0])
-    useEffect(() => {
-        console.log('PROPS ===> ', props);
-    }, [props])
 
     const handlePortal = (e) => {
         let sede;
@@ -78,15 +75,13 @@ function MapScreen(props) {
             sede="Bogota"
         }
         let tableSede;
-        console.log(sede)
         props.changeSede(sede)
         props.sedes.map((e)=>{
             if(e.name===sede){
                 tableSede = e
             }
             return null
-        })
-        console.log("tablegame===>",tableSede)        
+        })     
         setTableGame(tableSede)
         if (portalInferior === false) {
             setPortalInferior(true)
