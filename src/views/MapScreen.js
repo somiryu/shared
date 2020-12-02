@@ -60,10 +60,35 @@ const portales={
 function MapScreen(props) {
     const [screen] = useState(window.screen.width)
     const [portalInferior, setPortalInferior] = useState(false)
-    const [tableGame, setTableGame] = useState(props.sedes[0])
+    const [sedesApi, setSedesApi] = useState([])
+    const [tableGame, setTableGame] = useState(null)
+    
+
     useEffect(() => {
         console.log('PROPS ===> ', props);
     }, [props])
+
+    useEffect(() => {
+        Teams.getAll((r)=>{
+            let sedesAux =[]
+            r.map((e)=>{
+                //console.log("Entre al map",props.sedes)
+                if(props.sedes){
+                    props.sedes.map((e2)=>{
+                        //console.log("Entre al map",e2.name,e.basic.name)
+                        if(e.basic.name === e2.name){
+                            sedesAux.push(e)
+                        }
+                    })
+                } 
+            })
+            console.log("TEMINAMOS ===============>",sedesAux)
+            setSedesApi(sedesAux)
+            // if(sedesAux.length >= 1){
+            //     setTableGame(sedesAux[0])
+            // }
+        })
+    }, [])
 
     const handlePortal = (e) => {
         let sede;
@@ -81,8 +106,8 @@ function MapScreen(props) {
         let tableSede;
         console.log(sede)
         props.changeSede(sede)
-        props.sedes.map((e)=>{
-            if(e.name===sede){
+        sedesApi.map((e)=>{
+            if(e.basic.name===sede){
                 tableSede = e
             }
             return null
@@ -100,10 +125,6 @@ function MapScreen(props) {
     let closePortal =()=>{
         setPortalInferior(false)
     }
-
-    useEffect(() => {
-        Teams.getAll((r)=>{console.log("Teams",r)})
-    }, [])
 
     return (
         <div>
@@ -143,8 +164,8 @@ function MapScreen(props) {
                             </React.Fragment>
                         }
                         {
-                        props.sedes.map((e)=>
-                            <Portal {...props} id={e.name} top={e.y + "%"} left={e.x + "%"} imageSede={imagesSedes[e.name]} sede={e} listener={handlePortal} portal={portales[e.name]} escudo={escudos[e.name]}></Portal>
+                        sedesApi.map((e)=>
+                            <Portal {...props} id={e.basic.name} top={(e.agent.properties.y.value || "40") + "%"} left={(e.agent.properties.x.value || "50")+ "%"} imageSede={imagesSedes[e.basic.name]} sede={e} listener={handlePortal} portal={portales[e.basic.name]} escudo={escudos[e.basic.name]}></Portal>
                         )
                         }
                         {/* <Portal top="50%" left="50%" imageSede={sedeBogota} listener={handlePortal} portal={inportalvillamapa} escudo={escudoBogota}></Portal>
@@ -154,7 +175,7 @@ function MapScreen(props) {
                 </ImagePanel>
                 {(screen > 800 && tableGame)&&
                     <div>
-                        <TableGame {...props}  listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
+                        <TableGame {...props} schedules={props.schedules} listener={props.listener} data={tableGame}  sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
                     </div>
                 }
                 {(screen < 800 && tableGame) &&
@@ -167,7 +188,7 @@ function MapScreen(props) {
             </div>
             { (screen < 800 && portalInferior === true && tableGame) &&
                 <Absolute style={{ top: "30%", left: "0%" }}>
-                    <TableGame  {...props}  listener={props.listener} data={tableGame} city={tableGame.name} sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
+                    <TableGame  {...props} schedules={props.schedules} listener={props.listener} data={tableGame}  sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
                 </Absolute>
             }
         </div>
@@ -179,15 +200,16 @@ function Portal(props) {
     const [startTimer, setstartTimer] = useState(false)
     const [stateSede, setStateSede] = useState(false)
     const [statePortal, setStatePortal] = useState(false)
+    console.log("=========PROPS PORTAL =================", props)
     let horas = 0
     let minutos = 0
     let segundos = 0
     let hour = props.date.getHours()
     let minutes = props.date.getMinutes()
     let seconds = props.date.getSeconds()
-    if(props.sede){
+    if(props.schedules[props.sede.basic.name]){
         let horarios=[]
-        props.sede.schedule.map((e)=>{
+        props.schedules[props.sede.basic.name].map((e)=>{
             horarios=e.split("-")
             let hi = parseInt(horarios[0])
             let hf = parseInt(horarios[1])
@@ -208,7 +230,7 @@ function Portal(props) {
         let hour = date.getHours()
         if(props.sede){
             let horarios=[]
-            props.sede.schedule.map((e)=>{
+            props.schedules[props.sede.basic.name].map((e)=>{
                 horarios=e.split("-")
                 let hi = parseInt(horarios[0])
                 let hf = parseInt(horarios[1])

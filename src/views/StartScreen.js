@@ -49,11 +49,7 @@ function StartScreen(props) {
             Players.get(ID_IN_APP, (response) => {
                 props.listenerPlayer(1,response);
             })
-<<<<<<< HEAD
-            Trivia.get("estudiante_2",(trivias) => {
-=======
             Trivia.get('estudiante_2' , (trivias) => {
->>>>>>> 310012310b591693674e3cede06176c86b65c5ec
                 console.log('Trivias ===> ', trivias)
             }) 
         }

@@ -115,7 +115,7 @@ function App() {
         schedules[Sedes[index]] = Immutables.byName(immutables, `cooldown_sedes`)[`text_${index}`].split(',')
       }
     }
-    console.log('SCHEDULES ===> ', schedules);
+    console.log('SCHEDULES ===> ', immutables);
     return schedules
   }
   let addClass;
