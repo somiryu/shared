@@ -20,7 +20,9 @@ export default function CheckboxesController(props) {
     
     const setCheckbox = (id, nextState) => {
         let controlCheckAux = {...stateCheckBoxes};
-        Object.keys(stateCheckBoxes).map((key) => key === id && nextState === 'check' ? controlCheckAux[key] = 'check' : controlCheckAux[key] = 'uncheck')
+        // eslint-disable-next-line eqeqeq
+        Object.keys(stateCheckBoxes).map((key) => key == id && nextState === 'check' ? controlCheckAux[key] = 'check' : controlCheckAux[key] = 'uncheck')
+        console.log('stateCheckBoxes ===> ', controlCheckAux, id, nextState)
         setStateCheckboxes(controlCheckAux)
         if(props.listener) props.listener(controlCheckAux)
     }
