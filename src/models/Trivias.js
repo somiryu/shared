@@ -1,4 +1,5 @@
 export const formatTrivia = (trivia) => {
+    console.log('TRIVIA ====> ', trivia)
     const triviaFormat = {
         id: trivia.question.question_id,
         title: trivia.question.title,
@@ -8,5 +9,6 @@ export const formatTrivia = (trivia) => {
             ...trivia.question.answers
         ]
     }
+    console.log('TRIVIA FORMAT ===> ', triviaFormat)
     return triviaFormat
 }

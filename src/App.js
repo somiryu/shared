@@ -56,6 +56,7 @@ function App() {
     if (engine.getUser()) {
       Players.get(ID_IN_APP, (response) => {
         setPlayer(response)
+        setCooldownChars(getCooldown(response, cooldownChars))
       })
     }
   }
@@ -95,6 +96,9 @@ function App() {
     if (points > 0) {
       setPointsBar(points)
     }
+  }
+  const changeLayout = (indice) => {
+    setLayout(pages[indice])
   }
   const listenerFeedback = (points) => {
     if (globalKeys === 0 && points < 0) {
@@ -247,6 +251,7 @@ function App() {
             sede={sede}
             player={player}
             character={currentCharacter}
+            changeLayout={changeLayout}
           >
           </QuestionScreen>
         }
