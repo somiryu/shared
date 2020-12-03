@@ -9,7 +9,7 @@ import ProfileScreen from "../views/ProfileScreen"
 import SedeScreen from "../views/SedeScreen"
 import RolProfileScreen from "../views/RolProfileScreen"
 
-export default (props) =>{
+export default (props) =>{ 
 	const [compType, setCompType] = useState("Forms");
 
 	return(
