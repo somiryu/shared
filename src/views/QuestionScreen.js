@@ -12,13 +12,21 @@ import ButtonMultiState from "../shared/Buttons/ButtonMultiState"
 import btnrespuestaactivo from "../images/buttons/btnrespuestaactivo.png"
 import ProgressBarWithImage from "../shared/Indicators/ProgressBarWithImage"
 import screw from "../images/Graficos/tornillobarratrivias.png"
-import { Agents, Trivia } from "../shared/Utils/engine"
+import { Agents, Immutables, Trivia } from "../shared/Utils/engine"
 import { formatTrivia } from "../models/Trivias"
 import ImagePanel from "../shared/Panels/ImagedPanel"
 import ContentSede from "../images/general/contasedejuego.png"
 import CurrencyHorizontal from "../shared/Indicators/CurrencyHorizontal"
 import key from "../images/header/llaveheader.png"
-
+const feedbacks = {
+    won: 'Muy bien',
+    lost: 'La cagaste'
+}
+const keysWin = {
+    low: 1,
+    medium: 2,
+    hard: 3
+}
 const formatDifficulty = (dif) => {
     let strDif = ''
     switch (dif) {
@@ -61,7 +69,18 @@ function QuestionScreen(props) {
     const [trivia, setTrivia] = useState(null)
     const [difficulty, setDifficulty] = useState('low')
     const [screen, setScreen] = useState('Trivia')
+    const [result, setResult] = useState(false)
     let resp = false
+    useEffect(() => {
+        if (props.immutables) {
+            feedbacks.won = Immutables.byName(props.immutables, 'feedback_trivias')['text_1']
+            feedbacks.lost = Immutables.byName(props.immutables, 'feedback_trivias')['text_2']
+            keysWin.low = Immutables.byName(props.immutables, 'keys_win_trivias')['text_1']
+            keysWin.medium = Immutables.byName(props.immutables, 'keys_win_trivias')['text_1']
+            keysWin.hard = Immutables.byName(props.immutables, 'keys_win_trivias')['text_1']
+
+        }
+    }, [props.immutables])
     useEffect(() => {
         if (props.player && props.character) {
             const dif = props.player.agent.currencies.trivia_difficulty.quantity;
@@ -96,7 +115,7 @@ function QuestionScreen(props) {
                             value: 1
                         }
                     },
-                    exp: {
+                    xp: {
                         add: {
                             value: 10
                         }
@@ -125,17 +144,20 @@ function QuestionScreen(props) {
             listener
         )
     }
-    const validateTrivias = ( result) => {
+    const validateTrivias = (result) => {
         incrementCurrencies(
             (player_update) => {
                 const triviaDif = player_update.agent.currencies.trivia_difficulty;
                 validateTrivias(triviaDif)
-                if(result === 'won') {
-
+                if (result === 'won') {
+                    setResult(true)
+                    setScreen('feedback')
+                    window.getPlayerAgain()
                 }
-                if(result === 'lost'){
-                    Agents.feedback(props.player, 'reset_trivia_difficulty', (feedback_result) => { 
-
+                if (result === 'lost') {
+                    Agents.feedback(props.player, 'reset_trivia_difficulty', (feedback_result) => {
+                        setResult(false)
+                        setScreen('feedback')
                     })
                 }
             },
@@ -155,6 +177,9 @@ function QuestionScreen(props) {
                 }
             })
         }
+    }
+    const listenerFeedback = () => {
+        console.log('FEEDBACK')
     }
     if (!trivia) return <div></div>
     return screen === 'Trivia' ? (
@@ -225,7 +250,13 @@ function QuestionScreen(props) {
                 </Flex>
             }
         </Flex>
-    ) : <FeedbackScreen />
+    ) : <FeedbackScreen
+            listener={listenerFeedback}
+            pointsBar={pointsBar}
+            legend={result ? feedbacks.won : feedbacks.lost}
+            keysWon={result ? keysWin[difficulty] : 0}
+            title={result ? 'Felicitaciones' : 'Lo lamento'}
+        />
 }
 
 function Tubo(props) {
@@ -250,26 +281,26 @@ function Tubo(props) {
     )
 }
 
-function FeedbackScreen(props) {
+function FeedbackScreen({ title,keysWon, respuesta, legend, pointsBar, listener }) {
     return (
         <Flex id='FeedbackScreen' align="center" direction="column" style={{ marginTop: "0%", marginLeft: "10%", marginRight: "10%", height: '80vh' }}>
-            <Flex id='FeedbackScreenContainer' style={{ width: "80%" , height:'100%'}} align={"center"} direction={"column"}>
+            <Flex id='FeedbackScreenContainer' style={{ width: "80%", height: '100%' }} align={"center"} direction={"column"}>
                 <ImagePanel
                     image={ContentSede}
                     padding={"2% 10%"}
                     style={{ width: "90%", }}
                 >
-                    <Flex style={{height:'90%', width:'100%'}} align={"center"} direction={"column"}>
-                        <Flex align='center' justify='center' style={{height:'18%', width:'100%'}}>
-                            <h2>{props.title || "Titulo"}</h2>
+                    <Flex style={{ height: '90%', width: '100%' }} align={"center"} direction={"column"}>
+                        <Flex align='center' justify='center' style={{ height: '18%', width: '100%' }}>
+                            <h2>{title || "Titulo"}</h2>
                         </Flex>
-                        <Flex align='flex-start' justify='center' style={{marginTop:'10%',height:'30%', width:'100%', overflowX: "auto"}}>
-                            <p style={{ color: "#F2C75C", paddingTop: "10px" }}>{props.legend || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."}</p>
+                        <Flex align='flex-start' justify='center' style={{ marginTop: '10%', height: '30%', width: '100%', overflowX: "auto" }}>
+                            <p style={{ color: "#F2C75C", paddingTop: "10px" }}>{legend || "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."}</p>
                         </Flex>
 
-                        <Flex align='center' justify='center' style={{height:'20%', width:'100%'}}>
+                        <Flex align='center' justify='center' style={{ height: '20%', width: '100%' }}>
                             <CurrencyHorizontal
-                                quantity={props.respuesta ? (props.pointsBar>0 ? props.pointsBar:2):-1 }
+                                quantity={keysWon}
                                 image={key}
                                 displayX={true}
                                 styleX={{ padding: "5px", fontSize: "30px" }}
@@ -277,13 +308,13 @@ function FeedbackScreen(props) {
                                 id="counterfeed"
                             ></CurrencyHorizontal>
                         </Flex>
-                        <Flex align='flex-start' justify='center' style={{ height:'25%', margin: "0 auto", width: props.widthButton || "80%" }}>
+                        <Flex align='flex-start' justify='center' style={{ height: '25%', margin: "0 auto", width: "80%" }}>
                             <ButtonImageWithLabel
-                                id={props.buttonId || "firstbutton"}
-                                image={props.buttonImage || ButtonImage}
-                                label={props.buttonLabel || <label style={{ fontWeight: "700", fontSize: "17px", height: "30px" }}>VOLVER</label>}
+                                id={"firstbutton"}
+                                image={ButtonImage}
+                                label={<label style={{ fontWeight: "700", fontSize: "17px", height: "30px" }}>VOLVER</label>}
                                 listener={() => {
-                                    props.listener(props.respuesta ? (props.pointsBar>0 ? props.pointsBar:2):-1)
+                                    listener(respuesta ? (pointsBar > 0 ? pointsBar : 2) : -1)
                                 }}
                             >
                             </ButtonImageWithLabel>
