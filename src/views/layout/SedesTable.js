@@ -15,6 +15,7 @@ function SedesTable(props){
     const [leaders,setLeaders] = useState([])
     const listener = () =>{
         Agents.topLeaderboard("xp",(r)=>{
+            console.log("======TOP========LEADERs",r)
             setLeaders(r.leaderboard)
         })
     }
@@ -113,8 +114,12 @@ function SedesTable(props){
                 )
             })
             }
-            <Leaderboard leaders = {leaders}>
-            </Leaderboard>
+            <React.Fragment>
+                {leaders <= 0 &&
+                    <Leaderboard leaders = {leaders}>
+                    </Leaderboard>
+                }
+            </React.Fragment>
         </Flex>
 	)
 }
