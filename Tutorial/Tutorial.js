@@ -26,7 +26,7 @@ export default (props) => {
 	const [keyActive, setkeyActive] = useState(true)
 	let contStyle = { zIndex: props.zIndexContent || 0 }
 	useEffect(() => {
-		if(firstTime){
+		if (firstTime) {
 			setkeyActive(true)
 		}
 	}, [])
@@ -98,19 +98,19 @@ export default (props) => {
 		}
 	}, [props.animateTop])
 	const updateKeyTutorial = (current) => {
-		// if (!window.test) {
-		const id = window.id_in_app;
-		console.log('CURRENT TUTORIAL UPDATE T', current, id)
-		Players.update_tutorial(id, current, {}, (res) => {
-			console.log('TUTORIAL UPDATE BEFORE T ===> ', res)
-			if (res && res.response) {
-				console.log('TUTORIAL UPDATE ===> ', res)
-				firstTime = false;
-				setkeyActive(true)
-				window.setTutorial(res.response)
-			}
-		})
-		// }
+		if (!window.testTutorial) {
+			const id = window.id_in_app;
+			console.log('CURRENT TUTORIAL UPDATE T', current, id)
+			Players.update_tutorial(id, current, {}, (res) => {
+				console.log('TUTORIAL UPDATE BEFORE T ===> ', res)
+				if (res && res.response) {
+					console.log('TUTORIAL UPDATE ===> ', res)
+					firstTime = false;
+					setkeyActive(true)
+					window.setTutorial(res.response)
+				}
+			})
+		}
 	}
 	const calculatePositionArrow = (direction) => {
 		let rotate = 0
@@ -170,7 +170,7 @@ export default (props) => {
 				}
 				{!tutorial.texts[index + 1] && tutorial.button && keyActive &&
 					<div className="cta">
-						<ButtonImageWithLabel image={props.imageButton || ImageTest} id="continuar" state="off" label={<label id="labelBtn">Continuar</label>} listener={() => { setkeyActive(false); setIndex(0); props.nextTutorial(tutorial.next, tutorial.screen); updateKeyTutorial(props.current) }} />
+						<ButtonImageWithLabel image={props.imageButton || ImageTest} id="continuar" state="off" label={<label id="labelBtn">Continuar</label>} listener={() => { setkeyActive(window.testTutorial ? true : false); setIndex(0); props.nextTutorial(tutorial.next, tutorial.screen); updateKeyTutorial(props.current) }} />
 					</div>
 				}
 			</div>
