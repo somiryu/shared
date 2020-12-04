@@ -218,6 +218,7 @@ function App() {
           <ProfileScreen
             listener={listener}
             sede={sede}
+            sedes={sedes}
             player={player}
           >
           </ProfileScreen>

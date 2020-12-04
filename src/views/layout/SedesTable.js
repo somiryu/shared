@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import Flex from "../../shared/Containers/Flex"
 import Absolute from "../../shared/Containers/Absolute"
 import ImagePanel from "../../shared/Panels/ImagedPanel"
@@ -9,8 +9,16 @@ import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
 import copa from "../../images/Iconos/incopa.png"
 import hut from "../../images/Iconos/insombrero.png"
 import Leaderboard from "../../shared/Leaderboard"
+import {Agents} from "../../shared/Utils/engine"
 
 function SedesTable(props){
+    const [leaders,setLeaders] = useState([])
+    const listener = () =>{
+        Agents.topLeaderboard("xp",(r)=>{
+            setLeaders(r.leaderboard)
+        })
+    }
+
 	return(
         <Flex
             direction="column"
@@ -22,6 +30,7 @@ function SedesTable(props){
                         image={contasedes}
                         padding={"0%"}
                         style={{ width: "100%" }}
+                        onClick={()=>listener}
                     >
                         <Flex
                             style={{width: "100%",position: "relative",padding:"5%",height:"90%"}}
@@ -52,7 +61,7 @@ function SedesTable(props){
                                     avatar={sede.image}
                                     containerImage={btnsedesmarcomapa}
                                     padding={"15px 6px"}
-                                    listener={() => console.log('Clicked MarkedAvatar')}
+                                    listener={() => listener()}
                                     maskBorder={100}
                                     />
                                 </Flex>
@@ -104,7 +113,7 @@ function SedesTable(props){
                 )
             })
             }
-            <Leaderboard>
+            <Leaderboard leaders = {leaders}>
             </Leaderboard>
         </Flex>
 	)

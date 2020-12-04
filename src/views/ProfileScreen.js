@@ -17,18 +17,51 @@ import inpapiro from "../images/Iconos/inpapiro@2x.png"
 import SedesTable from "./layout/SedesTable"
 import CofradiaTable from "./layout/CofradiaTable"
 import estudiante from '../images/Graficos/estudiante.png'
-import {Players} from  '../shared/Utils/engine'
+import sedeBogota from "../images/Graficos/sedeprincipalbogota.png"
+import sedeMedellin from "../images/Graficos/sedemedellin.png"
+import sedeBucaramanga from "../images/Graficos/sedebucaramanga.png"
+import sedeVillavicencio from "../images/Graficos/sedeprincipalbogota.png"
+import sedeTunja from "../images/Graficos/sedeprincipalbogota.png"
+import sedeDistancia from "../images/Graficos/sededistancia.png"
+import {Players, Teams} from  '../shared/Utils/engine'
+
+const imagesSedes={
+    "Bogota":sedeBogota,
+    'Bucaramanga':sedeBucaramanga,
+    'Tunja':sedeTunja,
+    'Medellin':sedeMedellin,
+    'Villavicencio':sedeVillavicencio,
+    'Distancia':sedeDistancia,
+}
 
 function ProfileScreen(props) {
     const [regional, setRegional] = useState(false)
     const [cofradia, setCofradia] = useState(false)
     const [perfil, setPerfil] = useState(true)
     const [lideres, setLideres] = useState()
+    const [sedesApi, setSedesApi] = useState([props.player])
 
     useEffect(() => {
         // setLideres(Players.getAll(()=>{console.log("=========> JUGADORES")}))
     }, [])
 
+    useEffect(() => {
+        Teams.getAll((r)=>{
+            let sedesAux =[]
+            r.map((e)=>{
+                if(props.sedes){
+                    props.sedes.map((e2)=>{
+                        if(e.basic.name === e2.name){
+                            sedesAux.push(e)
+                        }
+                    })
+                } 
+            })
+            setSedesApi(sedesAux)
+        })
+    }, [])
+
+    console.log("===========PERFIL============",props.player)
     const listenerRegional = () =>{
         setRegional(true)
         setCofradia(false)
@@ -189,10 +222,15 @@ function ProfileScreen(props) {
                     </Flex>
                 </ImagePanel>}
                 {regional &&
-                <SedesTable
-                    sedes={[{name:"Bogota",points:100,image:sedeprincipalbogota}]}
-                    leaders = {lideres}
-                ></SedesTable>
+                <React.Fragment>
+                    {sedesApi.map((e)=>
+                        <SedesTable
+                            sedes={[{name:e.basic.name,points:e.agent.currencies.vp.quantity,image:imagesSedes[e.basic.name]}]}
+                            leaders = {lideres}
+                        ></SedesTable>
+                    )
+                    }
+                </React.Fragment>
                 }
                 {cofradia &&
                 <CofradiaTable

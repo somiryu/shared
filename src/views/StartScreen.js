@@ -77,7 +77,7 @@ function StartScreen(props) {
                 let stringf = data.email.split("@");
                 let sede = stringf[1].split(".");//de aca sacamos la sede
                 sedesAuth.map((e) => {
-                    if (e.extension === sede) {
+                    if (e.extension === sede[0]) {
                         data["team"] = { "id": e.id }
                     }
                     else {
@@ -86,7 +86,6 @@ function StartScreen(props) {
                     return null;
                 })
                 Players.create(data.document, data, (r) => {
-                    console.log("============> nuevo user", r)
                     engine.logIn(data.document)
                     Players.get(data.document, (r) => { props.listenerPlayer(1, r); })
                 })
