@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Flex from "../shared/Containers/Flex"
 import ButtonImage from "../images/buttons/btnprincipal.png"
 import ButtonImageWithLabel from '../shared/Buttons/ButtonImageWithLabel'
@@ -67,10 +67,12 @@ const getTagFeedbackVP = (dif) => {
 
 function QuestionScreen(props) {
     const [trivia, setTrivia] = useState(null)
+    const [options, setOptions] = useState(null)
     const [difficulty, setDifficulty] = useState('low')
     const [screen, setScreen] = useState('Trivia')
     const [result, setResult] = useState(false)
-    let resp = false
+    const resp = useRef(false)
+    const notMore = useRef(false)
     useEffect(() => {
         if (props.immutables) {
             feedbacks.won = Immutables.byName(props.immutables, 'feedback_trivias')['text_1']
@@ -78,21 +80,29 @@ function QuestionScreen(props) {
             keysWin.low = Immutables.byName(props.immutables, 'keys_win_trivias')['text_1']
             keysWin.medium = Immutables.byName(props.immutables, 'keys_win_trivias')['text_1']
             keysWin.hard = Immutables.byName(props.immutables, 'keys_win_trivias')['text_1']
-
         }
     }, [props.immutables])
     useEffect(() => {
         if (props.player && props.character) {
-            const dif = props.player.agent.currencies.trivia_difficulty.quantity;
-            setDifficulty(formatDifficulty(dif))
-            Trivia.get(`${props.character.toLowerCase()}_${dif}`, (trivia) => {
-                setTrivia(formatTrivia(trivia))
-                console.log('TRIVIA ==> ', trivia)
-            })
+            getTrivia()
         }
     }, [props.player, props.character])
+    const getTrivia = () => {
+        const dif = props.player.agent.currencies.trivia_difficulty.quantity;
+        setDifficulty(formatDifficulty(dif))
+        Trivia.get(`${props.character.toLowerCase()}_${dif}`, (trivia) => {
+            const triviaF = formatTrivia(trivia)    
+            setTrivia(triviaF)
+            const optionsX = []
+            triviaF.options.map(
+                (option) => (
+                    optionsX.push({ id: parseInt(option.answer_id), description: <p>{option.answer}</p>, images: { uncheck: btnrespuesta, check: btnrespuestaactivo } }))
+            )
+            setOptions(optionsX)
+        })
+    }
     const pointsBar = (points) => {
-        console.log("puntos", points)
+        // console.log("puntos", points)
         // puntos = points
     }
     const marcado = (e) => {
@@ -100,7 +110,7 @@ function QuestionScreen(props) {
         let ids = Object.keys(e)
         ids.map((id) => {
             if (e[id] === "check") {
-                resp = id
+                resp.current = id
             }
             return null
         })
@@ -138,6 +148,7 @@ function QuestionScreen(props) {
                 }
             }
         }
+        console.log('CURRECNIES ==> ', currencies)
         Agents.update(
             props.player,
             currencies,
@@ -147,12 +158,12 @@ function QuestionScreen(props) {
     const validateTrivias = (result) => {
         incrementCurrencies(
             (player_update) => {
-                const triviaDif = player_update.agent.currencies.trivia_difficulty;
-                validateTrivias(triviaDif)
+                console.log('PLAYER UPDATE ===> ', player_update, props.character)
+                const numTrivia = player_update.agent.currencies[`trivias_${props.character.toLowerCase()}`].quantity;
+                console.log('NUM TRIVIA ===> ', numTrivia)
                 if (result === 'won') {
                     setResult(true)
                     setScreen('feedback')
-                    window.getPlayerAgain()
                 }
                 if (result === 'lost') {
                     Agents.feedback(props.player, 'reset_trivia_difficulty', (feedback_result) => {
@@ -160,15 +171,18 @@ function QuestionScreen(props) {
                         setScreen('feedback')
                     })
                 }
+                if (numTrivia === 3) {
+                    notMore.current = true
+                }
             },
             result
         )
     }
     const verifyTrivia = () => {
-        if (resp === false) {
+        if (resp.current === false) {
             window.flash("No has elegido aun una respuesta", "error")
         } else {
-            Trivia.answer(trivia.id, resp, (answer) => {
+            Trivia.answer(trivia.id, resp.current, (answer) => {
                 console.log('ANSWER TRIVIA ===> ', answer)
                 if (answer.correct) {
                     validateTrivias('won')
@@ -179,9 +193,22 @@ function QuestionScreen(props) {
         }
     }
     const listenerFeedback = () => {
-        console.log('FEEDBACK')
+        resp.current = false
+        console.log('NOT MORE ===> ', notMore)
+        if (notMore.current === false) {
+            Agents.send_trigger(props.player, `${props.character.toLowerCase()}_cooldown`, (mission_complete) => {
+                console.log('MISSION_TAG ===> ', mission_complete)
+                window.getPlayerAgain()
+                getTrivia()
+                setScreen('Trivia')
+            })
+
+        } else {
+            window.getPlayerAgain()
+            props.changeLayout(5)
+        }
     }
-    if (!trivia) return <div></div>
+    if (!trivia || !options) return <div></div>
     return screen === 'Trivia' ? (
         <Flex id="QuestionScreen" align="center" direction="column" style={{ marginTop: "0%", marginLeft: "5%", marginRight: "5%", height: '80vh' }}>
             <Flex style={{ height: '10%' }} align="center">
@@ -219,7 +246,7 @@ function QuestionScreen(props) {
             <Flex style={{ width: '100%', height: 'auto' }}>
                 <CheckBoxesController
                     options={[
-                        ...Array(trivia.options.length).fill().map((_, index) => ({ id: parseInt(trivia.options[index].answer_id), description: <p>{trivia.options[index].answer}</p>, images: { uncheck: btnrespuesta, check: btnrespuestaactivo } }))
+                        ...options
                     ]}
                     listener={marcado}
                 >
@@ -251,7 +278,7 @@ function QuestionScreen(props) {
             }
         </Flex>
     ) : <FeedbackScreen
-            listener={listenerFeedback}
+            listener={() => listenerFeedback()}
             pointsBar={pointsBar}
             legend={result ? feedbacks.won : feedbacks.lost}
             keysWon={result ? keysWin[difficulty] : 0}
@@ -281,7 +308,7 @@ function Tubo(props) {
     )
 }
 
-function FeedbackScreen({ title,keysWon, respuesta, legend, pointsBar, listener }) {
+function FeedbackScreen({ title, keysWon, respuesta, legend, pointsBar, listener }) {
     return (
         <Flex id='FeedbackScreen' align="center" direction="column" style={{ marginTop: "0%", marginLeft: "10%", marginRight: "10%", height: '80vh' }}>
             <Flex id='FeedbackScreenContainer' style={{ width: "80%", height: '100%' }} align={"center"} direction={"column"}>
