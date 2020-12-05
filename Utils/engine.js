@@ -353,7 +353,7 @@ export const Teams = {
 	create: () => { },
 	update: () => { },
 	getAll: (listener, data) => {
-		setCall(data || {});
+		setCall(data = data ||{})
 		call("GET", "teams/", setParams(data, true), listener)
 	},
 	getTeam: () => { },

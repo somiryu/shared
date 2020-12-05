@@ -21,6 +21,7 @@ class TimerGameboard extends Component{
         this.pauseTimer = this.pauseTimer.bind(this);
         this.resetTimer = this.resetTimer.bind(this);
         this.countDown = this.countDown.bind(this);
+        
       }
       
       secondsToTime(secs){
@@ -43,6 +44,7 @@ class TimerGameboard extends Component{
       componentDidMount() {
         let timeLeftVar = this.secondsToTime(this.state.seconds);
         this.setState({ time: timeLeftVar });
+        
       }
       
       componentDidUpdate(prevProps){
@@ -88,8 +90,8 @@ class TimerGameboard extends Component{
           if(this.props.finish) this.props.finish()
           clearInterval(this.timer);
         }
+        console.log('this.state ==> ', this.state)
       }
-
       render() {
         return(
           <div id={`Timer${this.props.id}`} style={this.props.style}>
