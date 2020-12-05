@@ -8,9 +8,9 @@
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 	display: flex; 
-	position: absolute;
-	top:75%;
-	width: 100%;
+	position: fixed;
+	bottom:0;
+	width: 80%;
 	z-index:3;
 	min-height: 5%;
 }
@@ -47,6 +47,7 @@
 	align-items: center;
 	justify-content: center;
 	height:100%;
+
 }
 .tutorialText span{
 	font-size: .9rem;
@@ -83,11 +84,12 @@
 	}
 	.tutorialContent {
 		margin: 0 auto;
-		top: 90% !important;
+		bottom: 0 !important;
 		width: 75%;
 		padding: 5px 10px;
 		height: 10%;
 	}
+	.tutorialText{line-height: 0.8;}
 	.tutorialText span{
 		font-size: .6rem;
 	}
@@ -97,17 +99,19 @@
 	#imgArrow{
 		transform: scale(1);
 	}
+	.tutorial .cta {min-width: 13%}
 }
 @media only screen and (max-width: 700px) {
 	.tutorial{
 		width:80%
 	}
 	.tutorialContent {
-		top: 60%;
+		bottom: 0;
 		width: 90%;
 		padding: 5px 10px;
-		height: 10%;
+		height: 12%;
 	}
+	.tutorialText{line-height: 0.8;}
 	.tutorialText span{
 		font-size: .6rem;
 	}
@@ -117,4 +121,5 @@
 	#imgArrow{
 		transform: scale(1)
 	}
+	.tutorial .cta {min-width: 13%}
 }
