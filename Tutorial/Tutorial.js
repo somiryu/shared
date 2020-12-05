@@ -24,6 +24,7 @@ export default (props) => {
 	const [index, setIndex] = useState(0)
 	const [tutorial, setTutorial] = useState(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
 	const [keyActive, setkeyActive] = useState(true)
+	let contStyle = { zIndex: props.zIndexContent || 0 }
 	useEffect(() => {
 		if(firstTime){
 			setkeyActive(true)
@@ -143,7 +144,7 @@ export default (props) => {
 					</Levitation>
 				</div>
 			}
-			<div className="tutorialContent" style={{ top: props.top || '75%', zIndex: props.zIndexContent || 0 }}>
+			<div className="tutorialContent" style={contStyle}>
 				<div className="tutorialContentText" style={{ width: (tutorial.texts[index + 1]) || (!tutorial.texts[index + 1] && tutorial.button) ? '75%' : '100%' }}>
 					{(props.image || tutorial.image) &&
 						<div className="character">
