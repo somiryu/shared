@@ -16,8 +16,7 @@ import {Players} from  '../shared/Utils/engine'
 export default props => {
 	const [leaderboard,setLeaderboard] = useState([])
 	useEffect(() => {
-		console.log("entre al use efffect")
-        Players.getAll((r)=>{console.log("Players ================>", r)})
+        Players.getAll((r)=>{})
 	}, [])
 	return(
 		<Flex className="LeaderBoard" style={{width:"100%"}}>

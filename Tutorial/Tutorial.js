@@ -19,10 +19,20 @@ import Levitation from "../Animations/Levitation";
 import Flecha from "../../images/Buttons/flechaUp.png";
 import { getCookie, Players } from "../Utils/engine";
 // import {TutorialModel} from "../../models/TutorialModel";
+let firstTime = true;
 export default (props) => {
 	const [index, setIndex] = useState(0)
 	const [tutorial, setTutorial] = useState(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
+	const [keyActive, setkeyActive] = useState(true)
+	useEffect(() => {
+		if(firstTime){
+			setkeyActive(true)
+		}
+	}, [])
+	useEffect(() => {
+		console.log('KEY ACTIVE ===> ', keyActive)
 
+	}, [keyActive])
 	useEffect(() => {
 		if (tutorial && tutorial.next && tutorial.next !== 'null' && props.scope) {
 			if (tutorial.next !== 'end') {
@@ -36,7 +46,6 @@ export default (props) => {
 		if (props.current !== 'end') {
 			setIndex(0)
 			setTimeout(() => {
-				console.log('TUTORIAL =======> TUTORIAL; SCOPE; CURRENT', props.tutorial, props.scope, props.current)
 				setTutorial(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
 			}, 200);
 		} else {
@@ -44,9 +53,6 @@ export default (props) => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.current]);
-	useEffect(() => {
-		console.log('TUTORIAL ====> ', tutorial)
-	}, [tutorial])
 	useEffect(() => {
 		let animation;
 		window.anime({
@@ -92,8 +98,16 @@ export default (props) => {
 	}, [props.animateTop])
 	const updateKeyTutorial = (current) => {
 		// if (!window.test) {
-		let id = getCookie("temp_engine_id");
+		const id = window.id_in_app;
+		console.log('CURRENT TUTORIAL UPDATE T', current, id)
 		Players.update_tutorial(id, current, {}, (res) => {
+			console.log('TUTORIAL UPDATE BEFORE T ===> ', res)
+			if (res && res.response) {
+				console.log('TUTORIAL UPDATE ===> ', res)
+				firstTime = false;
+				setkeyActive(true)
+				window.setTutorial(res.response)
+			}
 		})
 		// }
 	}
@@ -153,9 +167,9 @@ export default (props) => {
 						<ButtonImageWithLabel image={props.imageButton || ImageTest} id="saltar" state="off" label={<label id="labelBtn">Siguiente</label>} listener={() => { setIndex(index + 1); }} />
 					</div>
 				}
-				{!tutorial.texts[index + 1] && tutorial.button &&
+				{!tutorial.texts[index + 1] && tutorial.button && keyActive &&
 					<div className="cta">
-						<ButtonImageWithLabel image={props.imageButton || ImageTest} id="continuar" state="off" label={<label id="labelBtn">Continuar</label>} listener={() => { setIndex(0); props.nextTutorial(tutorial.next, tutorial.screen); updateKeyTutorial(props.current) }} />
+						<ButtonImageWithLabel image={props.imageButton || ImageTest} id="continuar" state="off" label={<label id="labelBtn">Continuar</label>} listener={() => { setkeyActive(false); setIndex(0); props.nextTutorial(tutorial.next, tutorial.screen); updateKeyTutorial(props.current) }} />
 					</div>
 				}
 			</div>

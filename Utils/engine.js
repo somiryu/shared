@@ -165,7 +165,6 @@ const setParams = function (data, get) {
 		var key = obj;
 		checkNested(formData, key, data[obj])
 	};
-	console.log('FORMDATA => ', formData)
 	return formData;
 }
 const setCall = function (data, defaults) {
