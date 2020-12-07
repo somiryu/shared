@@ -106,7 +106,6 @@ function QuestionScreen(props) {
         // puntos = points
     }
     const marcado = (e) => {
-        console.log('RESPUESTA ====> ', e)
         let ids = Object.keys(e)
         ids.map((id) => {
             if (e[id] === "check") {
@@ -138,17 +137,9 @@ function QuestionScreen(props) {
                 }
             }
         } else if (result === 'lost') {
-            currencies = {
-                currencies: {
-                    [`trivias_${props.character.toLowerCase()}`]: {
-                        add: {
-                            value: 1
-                        }
-                    }
-                }
-            }
+            currencies = { currencies: { [`trivias_${props.character.toLowerCase()}`]: { add: { value: 1 } } } }
         }
-        console.log('CURRECNIES ==> ', currencies)
+        console.log('CURRENCIES ===> ', currencies)
         Agents.update(
             props.player,
             currencies,
@@ -158,9 +149,7 @@ function QuestionScreen(props) {
     const validateTrivias = (result) => {
         incrementCurrencies(
             (player_update) => {
-                console.log('PLAYER UPDATE ===> ', player_update, props.character)
                 const numTrivia = player_update.agent.currencies[`trivias_${props.character.toLowerCase()}`].quantity;
-                console.log('NUM TRIVIA ===> ', numTrivia)
                 if (result === 'won') {
                     setResult(true)
                     setScreen('feedback')
@@ -171,6 +160,8 @@ function QuestionScreen(props) {
                         setScreen('feedback')
                     })
                 }
+                
+                console.log('PLAYER_UPDATE ===> ', player_update, numTrivia)
                 if (numTrivia === 3) {
                     notMore.current = true
                 }
@@ -183,7 +174,6 @@ function QuestionScreen(props) {
             window.flash("No has elegido aun una respuesta", "error")
         } else {
             Trivia.answer(trivia.id, resp.current, (answer) => {
-                console.log('ANSWER TRIVIA ===> ', answer)
                 if (answer.correct) {
                     validateTrivias('won')
                 } else {
@@ -197,7 +187,6 @@ function QuestionScreen(props) {
         console.log('NOT MORE ===> ', notMore)
         if (notMore.current === false) {
             Agents.send_trigger(props.player, `${props.character.toLowerCase()}_cooldown`, (mission_complete) => {
-                console.log('MISSION_TAG ===> ', mission_complete)
                 window.getPlayerAgain()
                 getTrivia()
                 setScreen('Trivia')
