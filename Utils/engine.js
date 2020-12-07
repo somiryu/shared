@@ -356,7 +356,11 @@ export const Teams = {
 		setCall(data = data ||{})
 		call("GET", "teams/", setParams(data, true), listener)
 	},
-	getTeam: () => { },
+	getTeam: (data, id_or_tag,listener) => {
+		setCall(data = data ||{})
+		let id_in_app = engine.getUser();
+		call("GET", "teams/" + id_or_tag + "/players/" + id_in_app, setParams(data, true), listener)
+	},
 	delete: () => { },
 	managePlayer: (agent, id_team, data, listener) => {
 		setCall(data = data || { id_in_app: engine.getUser() });
