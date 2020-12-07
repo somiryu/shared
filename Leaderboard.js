@@ -14,35 +14,31 @@ import gear from "../images/Graficos/engranajejugadores.png"
 import {Players} from  '../shared/Utils/engine'
 
 export default props => {
-	const [leaderboard,setLeaderboard] = useState([])
-	useEffect(() => {
-		console.log("entre al use efffect")
-        Players.getAll((r)=>{console.log("Players ================>", r)})
-	}, [])
+	const [leaderboard] = useState(props.leaders || [])
 	return(
-		<Flex className="LeaderBoard" style={{width:"100%"}}>
-			{leaderboard && leaderboard.map((e,i) =>
-				<div key={i} className="lbItem" style={{width:"100%",height:"27%", margin:"0 3%",textAlign: "center",paddingRight:"5%",paddingLeft:"5%", background: "linear-gradient(to left, rgba(25,15,11,1) 0%, rgba(66,33,11,1) 25%, rgba(96,56,19,1) 51%, rgba(66,33,11,1) 80%, rgba(25,15,11,1) 100%)", borderTop:"3px var(--yellow) solid", borderBottom:"3px var(--yellow) solid" }}>
+		<Flex className="LeaderBoard" style={{width:"100%"}} direction="column">
+			{leaderboard.map((e,i) =>
+				<div key={i} className="lbItem" style={{width:"100%",height:"27%", margin:"2% 0",textAlign: "center",paddingRight:"5%",paddingLeft:"5%", background: "linear-gradient(to left, rgba(25,15,11,1) 0%, rgba(66,33,11,1) 25%, rgba(96,56,19,1) 51%, rgba(66,33,11,1) 80%, rgba(25,15,11,1) 100%)", borderTop:"3px var(--yellow) solid", borderBottom:"3px var(--yellow) solid" }}>
 					<div style={{width:"10%"}}>
 						<img src={gear} alt={`gear${(i+1)}`}>
 						</img>
 					</div>
 					<div className="" style={{width:"5%"}}>
-						<h1>{i+1}</h1>
+						<h1>{e.position}</h1>
 					</div>
 					<Flex style={{width:"20%"}}>
 						<MaskedAvatar
 							id="colaborador1"
-							avatar={e.avatar || avatar}
+							avatar={e.agent.agent.avatars.selected.image.thumb || avatar}
 							containerImage={contaavatar}
-							padding={11}
+							padding={"18% 17%"}
 							listener={() => console.log('Clicked MarkedAvatar')}
 							maskBorder={100}
 						>
 						</MaskedAvatar>
 					</Flex>
 					<Flex style={{width:"auto"}}>
-						<h2>{e.name}</h2>
+						<h2>{e.agent.basic.name}</h2>
 					</Flex>
 					
 				</div>
