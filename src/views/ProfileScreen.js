@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import circ20 from "../shared/ExampleImages/Circ-20.png"
+import estrella from "../images/Graficos/estrella.png"
 import Flex from "../shared/Containers/Flex"
 import Absolute from "../shared/Containers/Absolute"
 import MaskedAvatar from "../shared/Hubs/MaskedAvatar"
@@ -24,6 +24,16 @@ import sedeVillavicencio from "../images/Graficos/sedeprincipalbogota.png"
 import sedeTunja from "../images/Graficos/sedeprincipalbogota.png"
 import sedeDistancia from "../images/Graficos/sededistancia.png"
 import {Players, Teams} from  '../shared/Utils/engine'
+import angronomia from "../images/Iconos/insedeagronomia@2x.png"
+import arquitectura from "../images/Iconos/insedearquitectura@2x.png"
+import artes from "../images/Iconos/insedeartes@2x.png"
+import cienciasbasicas from "../images/Iconos/insedecienciasbasicas@2x.png"
+import cienciassalud from "../images/Iconos/insedecienciassalud@2x.png"
+import cienciassociales from "../images/Iconos/insedecienciassociales@2x.png"
+import contabilidad from "../images/Iconos/insedecontabilidad@2x.png"
+import derecho from "../images/Iconos/insedederecho@2x.png"
+import educacion from "../images/Iconos/insedeeducacion@2x.png"
+import filosofia from "../images/Iconos/insedefilosofia@2x.png"
 
 const imagesSedes={
     "Bogota":sedeBogota,
@@ -33,6 +43,50 @@ const imagesSedes={
     'Villavicencio':sedeVillavicencio,
     'Distancia':sedeDistancia,
 }
+
+const cofradias =  [
+    {
+        name:"Agronomia",
+        image:angronomia,
+    },
+    {
+        name:"Arquitectura",
+        image:arquitectura,
+    },
+    {
+        name:"Artes",
+        image:artes,
+    },
+    {
+        name:"Ciencias Basicas",
+        image:cienciasbasicas,
+    },
+    {
+        name:"Ciencias de la salud",
+        image:cienciassalud,
+    },
+    {
+        name:"Ciencias Sociales",
+        image:cienciassociales,
+    },
+    {
+        name:"Contabilidad",
+        image:contabilidad,
+    },
+    {
+        name:"Derecho",
+        image:derecho,
+    },
+    {
+        name:"Educación",
+        image:educacion,
+    },
+    {
+        name:"Filosofia",
+        image:filosofia,
+    },
+
+]
 
 function ProfileScreen(props) {
     const [regional, setRegional] = useState(false)
@@ -112,7 +166,7 @@ function ProfileScreen(props) {
                             <Flex align="center" style={{width:"100%",height:"100%"}}>   
                                 <MaskedAvatar
                                     id="colaborador1"
-                                    avatar={estudiante}
+                                    avatar={props.player.agent.avatars.selected.image.thumb || estudiante}
                                     containerImage={contaavatar}
                                     padding={11}
                                     listener={() => console.log('Clicked MarkedAvatar')}
@@ -127,7 +181,7 @@ function ProfileScreen(props) {
                                     <CurrencyHorizontal
                                         className="sourceSerif"
                                         quantity={props.player.agent.levels.xp.quantity}
-                                        image={circ20}
+                                        image={estrella}
                                         // displayX={true}
                                         styleBox={{fontSize:"20px"}}
                                         id="counterbar1"
@@ -234,7 +288,7 @@ function ProfileScreen(props) {
                 }
                 {cofradia &&
                 <CofradiaTable
-                    cofradias={[{sede:"Bogota",points:100,image:sedeprincipalbogota,name:"Lorem ipsum"}]}>
+                    cofradias={cofradias}>
                 </CofradiaTable>
                 }
             </Flex>

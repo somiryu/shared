@@ -9,6 +9,7 @@ function CofradiaTable(props){
 	return(
         <Flex
             style={{width: "100%"}}
+            direction="column"
         >
             {props.cofradias.map((cofradia, index) => {
                 return (
@@ -43,9 +44,6 @@ function CofradiaTable(props){
                             <Flex style={{width: "70%",heigth: "70%"}} direction="column">
                                 <Flex style={{width: "100%"}}>
                                     <h2>{"Cofradia " + (cofradia.name ? cofradia.name:"Lorem ipsum")}</h2>
-                                </Flex>
-                                <Flex style={{width: "100%"}}>
-                                    <h2>{"Sede " + cofradia.sede}</h2>
                                 </Flex>
                             </Flex>   
                         </Flex>

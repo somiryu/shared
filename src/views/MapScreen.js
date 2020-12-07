@@ -178,7 +178,7 @@ function MapScreen(props) {
             </div>
             { (screen < 800 && portalInferior === true && tableGame) &&
                 <Absolute style={{ top: "30%", left: "0%" }}>
-                    <TableGame  {...props} schedules={props.schedules} listener={props.listener} data={tableGame}  sedes={imagesSedes} escudos={escudos} portales={portales}></TableGame>
+                    <TableGame  {...props} schedules={props.schedules} listener={props.listener} data={tableGame}  sedes={imagesSedes} escudos={escudos} portales={portales} ></TableGame>
                 </Absolute>
             }
         </div>

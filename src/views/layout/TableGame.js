@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import circ20 from "../../shared/ExampleImages/Circ-20.png"
 import Flex from "../../shared/Containers/Flex"
+import Absolute from "../../shared/Containers/Absolute"
 import CurrencyHorizontal from "../../shared/Indicators/CurrencyHorizontal"
 import ButtonMultiState from '../../shared/Buttons/ButtonMultiState'
 //import ImagePanel from "../../shared/Panels/ImagedPanel"
@@ -14,6 +14,9 @@ import timer from "../../images/Iconos/inretry.png"
 import door from "../../images/Iconos/inpuerta.png"
 import containformacion from "../../images/general/containformacion.png"
 import ImagedPanel from "../../shared/Panels/ImagedPanel";
+import contasedeheader from "../../images/buttons/contasedeheader.png"
+import MaskedAvatar from "../../shared/Hubs/MaskedAvatar"
+
 function TableGame(props) {
     const [startTimer, setstartTimer] = useState(false)
     const [reiniciar, setReiniciar] = useState(false)
@@ -96,8 +99,19 @@ function TableGame(props) {
                 </Flex>
                 <Flex style={{ justifyContent: "space-around", width: "100%", height: '27%' }} align="center">
                     <Flex direction={"column"} align={"center"} style={{ width: '100%', height: '100%' }}>
-                        <Flex align='center' style={{ width: "100%", height: '70%' }}>
-                            <img alt="placelogo" src={circ20} ></img>
+                        <Flex align='center' style={{ width: "30%", height: '70%' }}>
+                            <Flex id={props.id} style={{ width: "40px", height: "40px", borderRadius: "50%", backgroundColor: "black", top: "10px"}} >
+                                <MaskedAvatar
+                                    id="sedeHeader"
+                                    paddingTop={"25%"}
+                                    avatar={props.sedes[props.data.basic.name]}
+                                    styleImage={{ borderRadius: "50%" }}
+                                    containerImage={contasedeheader}
+                                    padding={"15px 5px"}
+                                    listener={() => console.log('Clicked MarkedAvatar')}
+                                    maskBorder={50}
+                                />
+                            </Flex>
                         </Flex>
                         <Flex align='center' style={{ width: "100%", height: '30%' }}>
                             <h5 style={{ fontFamily: 'Source Serif Pro' }}>X 2.0</h5>

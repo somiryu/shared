@@ -72,16 +72,16 @@ function Header(props) {
                         style={{ width: "30%", height: '100%' }}
                     >
                         <Flex>
-                            <MaskedAvatar
-                                id="sedeHeader"
-                                paddingTop={"25%"}
-                                avatar={sedeprincipalbogota}
-                                styleImage={{ borderRadius: "50%" }}
-                                containerImage={contasedeheader}
-                                padding={"15px 5px"}
-                                listener={() => console.log('Clicked MarkedAvatar')}
-                                maskBorder={50}
-                            />
+                                <MaskedAvatar
+                                    id="sedeHeader"
+                                    paddingTop={"25%"}
+                                    avatar={sedeprincipalbogota}
+                                    styleImage={{ borderRadius: "50%" }}
+                                    containerImage={contasedeheader}
+                                    padding={"15px 5px"}
+                                    listener={() => console.log('Clicked MarkedAvatar')}
+                                    maskBorder={50}
+                                />
                         </Flex>
                         <Flex
                             className="source"
