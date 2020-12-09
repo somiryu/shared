@@ -165,7 +165,6 @@ const setParams = function (data, get) {
 		var key = obj;
 		checkNested(formData, key, data[obj])
 	};
-	console.log('FORMDATA => ', formData)
 	return formData;
 }
 const setCall = function (data, defaults) {
@@ -357,7 +356,11 @@ export const Teams = {
 		setCall(data = data ||{})
 		call("GET", "teams/", setParams(data, true), listener)
 	},
-	getTeam: () => { },
+	getTeam: (data, id_or_tag, listener) => {
+		setCall(data = data ||{})
+		let id_in_app = engine.getUser();
+		call("GET", "teams/" + id_or_tag, setParams(data, true), listener)
+	},
 	delete: () => { },
 	managePlayer: (agent, id_team, data, listener) => {
 		setCall(data = data || { id_in_app: engine.getUser() });
