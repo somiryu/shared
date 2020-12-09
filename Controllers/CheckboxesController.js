@@ -9,15 +9,24 @@ export default function CheckboxesController(props) {
     const [stateCheckBoxes, setStateCheckboxes] = useState(null);
     const [options, setOptions] = useState([])
     
+    // useEffect(() => {
+    //     let opt = props.shuffle ? shuffle(props.options) : props.options;
+    //     let controlCheck = {}
+    //     opt.map((e) => controlCheck[e.id] = e.state || "uncheck")
+    //     setOptions(opt)
+    //     setStateCheckboxes(controlCheck)
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
     useEffect(() => {
-        let opt = props.shuffle ? shuffle(props.options) : props.options;
-        let controlCheck = {}
-        opt.map((e) => controlCheck[e.id] = e.state || "uncheck")
-        setOptions(opt)
-        setStateCheckboxes(controlCheck)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-    
+        if(props.options){
+            let opt = props.shuffle ? shuffle(props.options) : props.options;
+            let controlCheck = {}
+            opt.map((e) => controlCheck[e.id] = e.state || "uncheck")
+            setOptions(opt)
+            setStateCheckboxes(controlCheck)
+        }
+        
+    }, [props.options])
     const setCheckbox = (id, nextState) => {
         let controlCheckAux = {...stateCheckBoxes};
         // eslint-disable-next-line eqeqeq

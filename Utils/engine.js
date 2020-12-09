@@ -210,7 +210,7 @@ const call = function (method, service, formData, listener, url = config.test ? 
 export const Players = {
 	getAll: function (data,listener) { setCall(data = data || {}, { include: "basic,agent,items" }); call("GET", "players", setParams(data, true), listener)},
 	create: function (id_in_app, data, listener) { setCall(data = data || {}, { id_in_app: id_in_app }); call("POST", "players/v2", setParams(data), listener) },
-	get: function (id_in_app, listener, data) { setCall(data = data || {}, { include: "basic,agent,items,quests" }); call("GET", "players/" + id_in_app, setParams(data, true), listener) },
+	get: function (id_in_app, listener, data) { setCall(data = data || {}, { include: "basic,agent,items,quests,teams" }); call("GET", "players/" + id_in_app, setParams(data, true), listener) },
 	get_or_create: function (id_in_app, listener, data) {
 		this.get(id_in_app, (d) => {
 			if (d.status && d.status === "Invalid player: check id_in_app") { this.create(id_in_app, data, (cd) => { if (cd.player) this.get(id_in_app, (r) => listener(r = { ...r, d })) }) } else { listener(d) }

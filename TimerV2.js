@@ -90,7 +90,6 @@ class TimerGameboard extends Component{
           if(this.props.finish) this.props.finish()
           clearInterval(this.timer);
         }
-        console.log('this.state ==> ', this.state)
       }
       render() {
         return(
