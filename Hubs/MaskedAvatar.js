@@ -4,8 +4,8 @@ import React from "react";
 
 export default (props) =>{
 	return(
-		<div id={props.id} className="MaskedAvatar" style={{display:"inline-block", position:"relative", maxWidth:"100%",...props.style}}  onClick={props.listener}>
-			<img src={props.containerImage} style={{width:"100%",zIndex:"2"}} alt=""/>
+		<div id={props.id} className="MaskedAvatar" style={{display:"inline-block", position:"relative", maxWidth:"100%", ...props.styleContainer}}  onClick={props.listener}>
+			<img src={props.containerImage} style={{...props.styleImageContainer, width:"100%"}} alt=""/>
 			<div style={{position:"absolute", width:"100%", height:"100%", top:0, left:0, display:"flex", justifyContent:"center"}}>
 				<div style={{
 					display:'inline-block',
@@ -15,7 +15,7 @@ export default (props) =>{
 					WebkitBorderRadius:props.maskBorder+"%",
 					msBorderRadius:props.maskBorder+"%",
 				}}>
-					<img id={props.id+"_avatar"} src={props.avatar} alt="" style={{width:"100%",zIndex:"1"}}/>
+					<img id={props.id+"_avatar"} src={props.avatar} alt="" style={{width:"100%", ...props.styleImage}}/>
 				</div>
 			</div>
 			{props.children}

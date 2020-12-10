@@ -1,39 +1,34 @@
-import React, {useState, useEffect} from 'react'
-import Chip from "../Buttons/Chip"
-
-let aux={};
-
-function ChipController(props){
-    const [estado, setEstado] = useState({})
+import React, { useState, useEffect } from 'react'
+import ButtonMultiStateWithText from '../Buttons/ButtonMultiStateWithText';
+function ChipController(props) {
+    const [estado, setEstado] = useState({
+        perfil: 'on',
+        regional: 'off',
+        cofradia: 'off'
+    })
     useEffect(() => {
-        props.chips.map(e=>{
-            return aux[e.id]=false
-        })
-        setEstado(aux)
-    }, [props.chips])
-
-	const listener = (state) => {
-        props.chips.map(e=>{
-            return aux[e.id]=false
-        })
-        aux[state[0].target.id]=state[1]
-        setEstado(aux)
-    }
- 	return( 
-    	<div style={{display:"flex",justifyContent:"space-around",margin:"2%",...props.chipControllerStyle}}>
-            {props.chips.map(e=>
-                <Chip
-                    id={e.id}
-                    label={e.label}
-                    listener={listener}
-                    handle = {e.listener}
-                    active={estado[e.id]?estado[e.id]:false}
-                    imageselect={props.imageChip}
-                    imagenoselect={props.imageChipDeactivate}
-                    style ={{width: "33%",height: "78px",color: "black",fontSize: "28px",fontFamily: 'Squada One', paddingBottom:"10px"}}
-                ></Chip>
+        if (props.statesChips) setEstado(props.statesChips)
+    }, [props.statesChips])
+    console.log('ESTADO ===>,', estado)
+    console.log(estado)
+    return (
+        <div style={{ display: "flex", justifyContent: "space-around", margin: "2%", ...props.chipControllerStyle }}>
+            {props.chips.map(e =>
+                <ButtonMultiStateWithText
+                    id={`btn${e.id}`}
+                    state={estado[e.id]}
+                    scale={1.2} //1.1
+                    images={{ off: props.imageChipDeactivate, on: props.imageChip }}
+                    listeners={{
+                        off: () => { e.listener()  },
+                        on: () => {  },
+                    }}
+                    stylesText={{ on: { fontFamily: 'Squada One, serif', color: 'var(--yellow-ligth)', marginBottom: '8.5%' }, off: { fontFamily: 'Squada One, serif', color: 'black', marginBottom: '5%' } }}
+                    styles={e.style}
+                    text={e.label}
+                />
             )}
-		</div>
+        </div>
     )
 }
 

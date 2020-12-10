@@ -18,7 +18,6 @@ class AnimatedScore extends Component {
 	}
 
 	animate(_from, _to) {
-		console.log('HELLO ====> ', document.getElementById(this.props.id))
 		if (this.props.id) {
 			let doc = document.getElementById(this.props.id)
 			if (doc) {

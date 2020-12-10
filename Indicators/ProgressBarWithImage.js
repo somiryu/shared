@@ -9,9 +9,9 @@ import React, {useState, useEffect} from 'react'
 import ProgressBar from './ProgressBar'
 import Flex from '../Containers/Flex'
 let flagFun = 'add'
+let firstTime = true;
 export default function ProgressBarWithImage(props) {
     const [percentage, setPercentage] = useState(0)
-    
     useEffect(() => {
         setTimeout(() => {
             if (flagFun === 'add') {
@@ -25,11 +25,18 @@ export default function ProgressBarWithImage(props) {
                     flagFun = 'add'
                 }
             }
-            if(props.listener){
-                props.listener(percentage)
-            }
         }, 10);
+        // return () => {
+        //     firstTime = true
+        // }
     }, [percentage])
+    useEffect(() => {
+        console.log('PERCENTAGE ====> ', percentage)
+        if(firstTime && props.respuesta && props.listener){
+            props.listener(percentage)
+            firstTime = false;
+        }
+    }, [props.respuesta])
     return (
         <Flex>
             <div style={{position:"relative",height:"100%",left:percentage+"%",zIndex:"2"}}>
