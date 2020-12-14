@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from "react"
+import React,{useState} from "react"
 // import Loading from "./Loading"
 // import medalGold from "../../images/ICONS/medalGold.png"
 // import medalSilver from "../../images/ICONS/medalSilver.png"
@@ -11,7 +11,7 @@ import avatar from "../images/Graficos/estudiante.png"
 import contaavatar from "../images/general/contaavatar.png"
 //const medals = [medalGold, medalSilver, medalBronze]
 import gear from "../images/Graficos/engranajejugadores.png"
-import {Players} from  '../shared/Utils/engine'
+// import {Players} from  '../shared/Utils/engine'
 
 export default props => {
 	const [leaderboard] = useState(props.leaders || [])
