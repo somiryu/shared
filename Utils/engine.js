@@ -358,7 +358,6 @@ export const Teams = {
 	},
 	getTeam: (data, id_or_tag, listener) => {
 		setCall(data = data ||{})
-		let id_in_app = engine.getUser();
 		call("GET", "teams/" + id_or_tag, setParams(data, true), listener)
 	},
 	delete: () => { },
