@@ -36,7 +36,7 @@ export default (props) => {
 	}, [keyActive])
 	useEffect(() => {
 		if (tutorial && tutorial.next && tutorial.next !== 'null' && props.scope) {
-			if (tutorial.next !== 'end') {
+			if (tutorial.next !== 'end2') {
 				if (props.tutorial[props.scope] && props.tutorial[props.scope][tutorial.next] && props.tutorial[props.scope][tutorial.next].screen)
 					props.saveNextTutorial(tutorial.next, props.tutorial[props.scope][tutorial.next].screen || tutorial.screen)
 			}
@@ -44,7 +44,7 @@ export default (props) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [tutorial])
 	useEffect(() => {
-		if (props.current !== 'end') {
+		if (props.current !== 'end2') {
 			setIndex(0)
 			setTimeout(() => {
 				setTutorial(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
