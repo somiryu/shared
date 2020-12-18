@@ -15,7 +15,7 @@ class AnimatedText extends Component{
 	}
 
 	animate(){
-		console.log('MSG ====> ', this.props.value)
+		//console.log('MSG ====> ', this.props.value)
 		let msg = this.props.value
 		let e = document.getElementById("animatedText"+this.props.id).firstChild
 		let v = {init: 0}
