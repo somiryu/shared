@@ -284,7 +284,7 @@ export const Agents = {
 		},
 		topLeaderboard: function (currency_tag, listener, data) {
 			setCall(data = data || {});
-			call("GET", "agents/leaderboard/top/" + currency_tag, setParams(data), listener)
+			call("GET", "agents/leaderboard/top/" + currency_tag, setParams(data, true), listener)
 		},
 		table_properties: function (agent, tag, data, listener) {
 			setCall(data = data || {});
@@ -363,7 +363,7 @@ export const Teams = {
 	delete: () => { },
 	managePlayer: (agent, id_team, data, listener) => {
 		setCall(data = data || { id_in_app: engine.getUser() });
-		call("PUT", "teams/" + id_team + "/players/:" + agent.id_in_app, setParams(data), listener)
+		call("PUT", "teams/" + id_team + "/players/" + agent.id_in_app, setParams(data), listener)
 	}
 }
 export const Trivia = {
@@ -384,6 +384,9 @@ export const Trivia = {
 			let data = null;
 			setCall(data = {}, { open_answer: answer });
 			call("POST", "questions/" + q_id + "/players/" + engine.getUser(), setParams(data), listener)
+		},
+		getAnswers: function (trivia_id,id_in_app,listener) {
+			call("GET", "trivia/"+trivia_id+"/players/"+id_in_app+"/answers",{}, listener)
 		},
 	}
 
