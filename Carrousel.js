@@ -57,13 +57,13 @@ function Carrousel(props) {
 		}}>
 
 			<div className="arrowleft" style={{ display: 'flex', alignItems:'center',justifyContent:'100%', height: '100%',width:'10%',zIndex:'3', cursor:'pointer' }} onClick={() => {if(props.leftIcon) {if(props.clickL) props.clickL(); else next(0)}}}>
-				<img src={props.leftIcon} alt='' style={{ display: props.leftIcon && 'hidden',  width: '100%' }} />
+				<img src={props.leftIcon ? props.leftIcon : undefined} alt='' style={{ display: props.leftIcon && 'hidden',  width: '100%' }} />
 			</div>
 			<div style={{ display: 'flex', height: '100%',width:'80%', zIndex:'1', justifyContent:'center' }}>
 				{props.children}
 			</div>
 			<div className="arrowrigth" style={{ display: 'flex',alignItems:'center', justifyContent:'100%',width:'10%', height:'100%',zIndex:'3', cursor:'pointer' }} onClick={() => { if(props.rightIcon) {if(props.clickR) props.clickR(); else next(1)}}}>
-				<img src={props.rightIcon} alt='' style={{ width: '100%' }} />
+				<img src={props.rightIcon ? props.rightIcon : undefined} alt='' style={{ width: '100%' }} />
 			</div>
 
 		</div>
