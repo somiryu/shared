@@ -17,7 +17,7 @@ import "./Tutorial.css"
 import ButtonImageWithLabel from "../Buttons/ButtonImageWithLabel";
 import Levitation from "../Animations/Levitation";
 import Flecha from "../../images/Buttons/flechaUp.png";
-import { getCookie, Players } from "../Utils/engine";
+import { Players } from "../Utils/engine";
 // import {TutorialModel} from "../../models/TutorialModel";
 let firstTime = true;
 export default (props) => {
