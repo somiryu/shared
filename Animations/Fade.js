@@ -4,7 +4,6 @@ import anime from "./anime"
 window.anime = anime
 export default (props)=>{
 	useEffect(()=>{
-		console.log("MOUNTINg", props.id)
 		let elem = document.getElementById(props.id || "Fade")
 		anime({
 			targets: elem,
@@ -27,7 +26,6 @@ export default (props)=>{
 				opacity: [1, props.from || 0]
 			})
 			setTimeout(()=>{
-				console.log("DURATION", props.duration, props.id)
 				if(props.outListener){props.outListener(props.id || "slideDown")}
 			}, props.duration + 100)
 		}
