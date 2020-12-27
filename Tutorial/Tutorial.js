@@ -1,4 +1,14 @@
 /*
+Setup
+Add to App.js
+import EventEmitter from "events"
+window.EM = new EventEmitter();
+window.updateKeyTutorial = (key) => window.EM.emit('tutorial', key);
+
+//Then set from App.js tutorial variables using Players.getTutorials from engine
+//Create a listener to here answers from updateKeyTutorial in App.js to reset tutorial state variables
+
+
 scope
 current
 animate
@@ -8,6 +18,7 @@ current
 next
 arrowUp
 arroDown
+listener => use to reset tutorial state variables in App.js
 */
 
 import React, { useState, useEffect } from "react";
@@ -19,21 +30,64 @@ import Levitation from "../Animations/Levitation";
 import Flecha from "../../images/Buttons/flechaUp.png";
 import { Players } from "../Utils/engine";
 // import {TutorialModel} from "../../models/TutorialModel";
+
+const organizePages = (pages, description) => {
+	let arr = []
+	if (pages.length === 0) {
+		arr.push(description)
+	} else {
+		arr.push(description)
+		Object.entries(pages[0]).map(
+			// eslint-disable-next-line array-callback-return
+			element => {
+				if (element[0].match(/text/g))
+					arr.push(element[1])
+			}
+		)
+	}
+	return arr
+}
+
+const getTutorial = (e) => {
+	let nameTutorial = [];
+	// eslint-disable-next-line array-callback-return
+	if (e['tutorials']) {
+		// eslint-disable-next-line array-callback-return
+		Object.entries(e['tutorials']).map(ex => {
+			nameTutorial[ex[0]] = {};
+			ex[1].map(
+				// eslint-disable-next-line array-callback-return
+				subkey => {
+					nameTutorial[ex[0]][subkey.tag] = {}
+					nameTutorial[ex[0]][subkey.tag] = {
+						texts: organizePages(subkey.pages, subkey.description),
+						screen: subkey.screen,
+						next: subkey.next_tag,
+						arrow: subkey.arrow,
+						button: subkey.meta === 'true' ? true : false
+					}
+				}
+			)
+		})
+	}
+	return nameTutorial
+}
+
 let firstTime = true;
 export default (props) => {
 	const [index, setIndex] = useState(0)
-	const [tutorial, setTutorial] = useState(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
+	const [organized, setOrganized] = useState(getTutorial(props.tutorial)) 
+	const [tutorial, setTutorial] = useState(organized[props.scope] && organized[props.scope][props.current])
 	const [keyActive, setkeyActive] = useState(true)
-	let contStyle = { zIndex: props.zIndexContent || 0 }
-	useEffect(() => {
-		if (firstTime) {
-			setkeyActive(true)
-		}
-	}, [])
-	useEffect(() => {
-		console.log('KEY ACTIVE ===> ', keyActive)
+	const [loading, setLoading] = useState(false)
 
-	}, [keyActive])
+	let contStyle = { zIndex: props.zIndexContent || 0 }
+	
+	useEffect(() => {
+		if (firstTime) {setkeyActive(true)}
+	}, [])
+
+	
 	useEffect(() => {
 		if (tutorial && tutorial.next && tutorial.next !== 'null' && props.scope) {
 			if (tutorial.next !== 'end2') {
@@ -43,75 +97,75 @@ export default (props) => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [tutorial])
+	
 	useEffect(() => {
-		if (props.current !== 'end2') {
-			setIndex(0)
-			setTimeout(() => {
-				setTutorial(props.tutorial[props.scope] && props.tutorial[props.scope][props.current] ? props.tutorial[props.scope][props.current] : null)
-			}, 200);
-		} else {
-			setTutorial(null)
-		}
+		setIndex(0)
+		setTutorial(organized[props.scope] && organized[props.scope][props.current])
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.current]);
+
 	useEffect(() => {
 		let animation;
 		window.anime({
-			targets: "#continueTut",
-			scale: [1, 1.1],
-			direction: "alternate",
-			loop: true,
-			duration: 300,
-			easing: "linear",
+			targets: "#continueTut",scale: [1, 1.1],
+			direction: "alternate",loop: true,duration: 300,easing: "linear",
 		})
 
 		if (props.animate) {
 			const opts = {
-				targets: props.animate,
-				scale: [1, 1.1],
-				direction: "alternate",
-				loop: true,
-				duration: 300,
-				easing: "linear",
+				targets: props.animate,scale: [1, 1.1],direction: "alternate",
+				loop: true,duration: 300,easing: "linear",
 			}
 			if (props.translate) opts.translateX = ["-50%", "-50%"];
 			animation = window.anime(opts)
 		}
-		return () => {
-			if (animation) animation.pause();
-		}
+		return () => {if (animation) animation.pause();}
 	}, [props.animate, props.translate])
+	
 	useEffect(() => {
 		let animation;
 		if (props.animateTop) {
 			animation = window.anime({
-				targets: props.animateTop,
-				top: -20,
-				direction: "alternate",
-				loop: true,
-				duration: 300,
+				targets: props.animateTop,top: -20,
+				direction: "alternate",loop: true,duration: 300,
 				easing: "linear",
 			})
 		}
-		return () => {
-			if (animation) animation.pause();
-		}
+		return () => {if (animation) animation.pause();}
 	}, [props.animateTop])
+
+	useEffect(() => {
+		if(window.EM){
+			window.EM.addListener('tutorial', (key) => {
+				console.log("ªªªRECEIVED KEY", key)
+				updateKeyTutorial(key)
+			});
+		}
+	}, []);
+	
 	const updateKeyTutorial = (current) => {
 		if (!window.testTutorial) {
 			const id = window.id_in_app;
-			console.log('CURRENT TUTORIAL UPDATE T', current, id)
+			setLoading(true)
 			Players.update_tutorial(id, current, {}, (res) => {
-				console.log('TUTORIAL UPDATE BEFORE T ===> ', res)
 				if (res && res.response) {
 					console.log('TUTORIAL UPDATE ===> ', res)
+					setIndex(0);
 					firstTime = false;
+					setLoading(false)
 					setkeyActive(true)
-					window.setTutorial(res.response)
+					if(props.listener){ //To do it externally
+						console.log("listening tut")
+						props.listener(res.response)
+					} else {
+						//TODO, do it internally... need to move the tutorial Model inside
+					}
 				}
 			})
 		}
 	}
+
+
 	const calculatePositionArrow = (direction) => {
 		let rotate = 0
 		if (direction === 'top') {
@@ -125,7 +179,9 @@ export default (props) => {
 		}
 		return rotate + 'deg'
 	}
-	if (!tutorial) { return (<div></div>) }
+
+	if (!tutorial || loading || props.dontRender || !props.current) { return (<div></div>) }
+
 	return (
 		<div className="tutorial" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: `100%`, height: '100%' }}>
 			{tutorial.arrow &&
@@ -170,7 +226,13 @@ export default (props) => {
 				}
 				{!tutorial.texts[index + 1] && tutorial.button && keyActive &&
 					<div className="cta">
-						<ButtonImageWithLabel image={props.imageButton || ImageTest} id="continuar" state="off" label={<label id="labelBtn">Continuar</label>} listener={() => { setkeyActive(window.testTutorial ? true : false); setIndex(0); props.nextTutorial(tutorial.next, tutorial.screen); updateKeyTutorial(props.current) }} />
+						<ButtonImageWithLabel image={props.imageButton || ImageTest} id="continuar" state="off" label={<label id="labelBtn">Continuar</label>} 
+							listener={() => { 
+								setkeyActive(window.testTutorial ? true : false); 
+								props.nextTutorial(tutorial.next, tutorial.screen); 
+								updateKeyTutorial(props.current)
+							}} 
+						/>
 					</div>
 				}
 			</div>
