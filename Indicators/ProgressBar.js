@@ -6,11 +6,25 @@
 // styleContainer = {}
 
 import React, { useState, useEffect } from 'react'
+import anime from "../Animations/anime"
+
 export default function ProgressBar(props) {
-    const [percentage, setPercentage] = useState(100)
+    const [percentage, setPercentage] = useState(0)
+    const id = props.id || "bar"
     useEffect(() => {
-        setPercentage(props.percentage);
+        setPercentage(props.percentage);   
     }, [props.percentage])
+    useEffect(()=>{
+        console.log("Animating", id, percentage)
+        anime({
+            targets: "#progress_"+id,
+            width: (percentage || 0) + "%",
+            duration: 300,
+            easing: "easeOutSine",
+            delay:500
+        })   
+    }, [percentage])
+
     const styleBar = {
         position: 'absolute',
         top: '0',
@@ -24,7 +38,7 @@ export default function ProgressBar(props) {
     }
     const styleProgress = {
         height: '100%',
-        width: `${percentage}%`,
+        width: "0%",
         backgroundColor: props.barColor || '#327B79',
         borderRadius: props.borderRadius || '5px',
         ...props.styleProgress
@@ -36,7 +50,7 @@ export default function ProgressBar(props) {
             </div>
             <div className={props.debug ? 'testBox' : ''} style={styleBar}>
                 <div className={props.debug ? 'testBox' : ''} style={{ width: '100%', height: '100%', background: props.background || '',backgroundColor: props.backgroundColor || '', borderRadius: props.borderRadius || '5px',...props.border }}>
-                    <div className={props.debug ? 'testBox' : ''} style={styleProgress}>
+                    <div id={"progress_"+id} className={props.debug ? 'testBox' : ''} style={styleProgress}>
                     </div>
                 </div>
             </div>

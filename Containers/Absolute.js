@@ -7,10 +7,10 @@ import React from 'react'
 export default function Absolute(props) {
     let styleAbs = {
         position: 'absolute',
-        top: props.top || 0,
-        left: props.left || 0,
-        right: props.right || 0,
-        bottom: props.bottom || 0,
+        top: props.top,
+        left: props.left,
+        right: props.right,
+        bottom: props.bottom,
     }
     return (
         <div id={props.id} className={window.DEBUG ? `testBox ${props.className ? props.className : ''}` : `${props.className ? props.className : ''}`} style={{...styleAbs, ...props.style}} onClick={props.listener ? () => props.listener(props.id) : () => {} }>
