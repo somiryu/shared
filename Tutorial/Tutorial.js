@@ -21,7 +21,7 @@ arroDown
 listener => use to reset tutorial state variables in App.js
 */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import AnimatedText from "../Animations/AnimatedText"
 import ImageTest from "../../images/Buttons/boton.png";
 import "./Tutorial.css"
@@ -80,6 +80,7 @@ export default (props) => {
 	const [tutorial, setTutorial] = useState(organized[props.scope] && organized[props.scope][props.current])
 	const [keyActive, setkeyActive] = useState(true)
 	const [loading, setLoading] = useState(false)
+	const [updating, setUpdating] = useState(false)
 
 	let contStyle = { zIndex: props.zIndexContent || 0 }
 	
@@ -134,13 +135,20 @@ export default (props) => {
 		return () => {if (animation) animation.pause();}
 	}, [props.animateTop])
 
+	const eventListener = useCallback((key) => {
+		if(updating !== key) { //Avoid repeated firing
+			console.log("ªªªRECEIVED KEY", key)
+			setUpdating(key)
+			updateKeyTutorial(key)
+		}
+	}, [])
+
 	useEffect(() => {
 		if(window.EM){
-			window.EM.addListener('tutorial', (key) => {
-				console.log("ªªªRECEIVED KEY", key)
-				updateKeyTutorial(key)
-			});
+			window.EM.addListener('tutorial', eventListener);
+			console.log("event listener EM?", window.EM)
 		}
+		return ()=>window.EM.removeListener("tutorial", eventListener)
 	}, []);
 	
 	const updateKeyTutorial = (current) => {
@@ -180,8 +188,9 @@ export default (props) => {
 		return rotate + 'deg'
 	}
 
-	if (!tutorial || loading || props.dontRender || !props.current) { return (<div></div>) }
-
+	console.log(tutorial, loading, props.dontRender, props.current)
+	if (!tutorial || loading || props.dontRender || !props.current) { return (<div className="NoTutorial"></div>) }
+	console.log("rendering tutorial")
 	return (
 		<div className="tutorial" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: `100%`, height: '100%' }}>
 			{tutorial.arrow &&
