@@ -15,7 +15,6 @@ export default function ProgressBar(props) {
         setPercentage(props.percentage);   
     }, [props.percentage])
     useEffect(()=>{
-        console.log("Animating", id, percentage)
         anime({
             targets: "#progress_"+id,
             width: (percentage || 0) + "%",
