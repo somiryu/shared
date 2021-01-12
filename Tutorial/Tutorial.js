@@ -187,8 +187,6 @@ export default (props) => {
 		}
 		return rotate + 'deg'
 	}
-
-	console.log(tutorial, loading, props.dontRender, props.current)
 	if (!tutorial || loading || props.dontRender || !props.current) { return (<div className="NoTutorial"></div>) }
 	console.log("rendering tutorial")
 	return (

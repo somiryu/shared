@@ -12,7 +12,7 @@ export default function ProgressBar(props) {
     const [percentage, setPercentage] = useState(0)
     const id = props.id || "bar"
     useEffect(() => {
-        setPercentage(props.percentage);   
+        setPercentage(props.percentage); 
     }, [props.percentage])
     useEffect(()=>{
         anime({

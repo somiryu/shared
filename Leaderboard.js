@@ -15,7 +15,6 @@ import gear from "../images/Graficos/engranajejugadores.png"
 
 export default props => {
 	const [leaderboard] = useState(props.leaders || [])
-	console.log("LEADERSTABLE", props.leaders)
 	return(
 		<Flex className="LeaderBoard" style={{width:"100%"}} direction="column">
 			{leaderboard.map((e,i) =>
