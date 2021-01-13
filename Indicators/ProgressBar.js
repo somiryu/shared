@@ -12,16 +12,19 @@ export default function ProgressBar(props) {
     const [percentage, setPercentage] = useState(0)
     const id = props.id || "bar"
     useEffect(() => {
+        if(id==='volNemesisGameboard15') console.log('id--->',id,'percentage-->',props.percentage)
         setPercentage(props.percentage); 
     }, [props.percentage])
     useEffect(()=>{
-        anime({
+        if(id==='volNemesisGameboard15')console.log(id,'% ANIME-->', percentage)
+        document.getElementById("progress_"+id).style.width=(percentage || 0) + "%"
+        /* anime({
             targets: "#progress_"+id,
             width: (percentage || 0) + "%",
-            duration: 300,
+            duration: 3000,
             easing: "easeOutSine",
             delay:500
-        })   
+        })    */
     }, [percentage])
 
     const styleBar = {
