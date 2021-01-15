@@ -188,7 +188,7 @@ export default (props) => {
 		return rotate + 'deg'
 	}
 	if (!tutorial || loading || props.dontRender || !props.current) { return (<div className="NoTutorial"></div>) }
-	console.log("rendering tutorial")
+	//console.log("rendering tutorial")
 	return (
 		<div className="tutorial" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: `100%`, height: '100%' }}>
 			{tutorial.arrow &&
