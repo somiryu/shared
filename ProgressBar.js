@@ -29,7 +29,10 @@ class ProgressBar extends Component{
 						position:"relative",
 						height: this.props.height || 10,
 						backgroundColor: this.props.bgColor || "grey",
-						borderRadius: this.props.borderRadius || 0
+						borderRadius: this.props.borderRadius || 0,
+						borderColor:this.props.borderColor || 0,
+						padding: this.props.padding || 0 + "%",
+						borderStyle: this.props.borderStyle || 0
 					}}
 				>
 					<div id={"bar_" + this.props.id} className="progressBar"
@@ -48,3 +51,4 @@ class ProgressBar extends Component{
 }
 
 export default ProgressBar;
+
