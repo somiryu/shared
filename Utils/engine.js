@@ -252,6 +252,12 @@ export const Items = {
 			call("POST", "items/players/" + id_in_app + "/multiple", setParams(data), listener)
 		},
 	}
+
+export const Markets = {
+	getMarketId: function (id_market, listener) {
+		call("GET", "virtualmarkets/" + id_market ,{}, listener)	
+	}
+}
 export const hora_server = {
 		get: function () {
 			let fecha = fetch('https://engine2.playngage.io/api/server_time', {
