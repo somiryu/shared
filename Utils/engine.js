@@ -261,7 +261,7 @@ export const Markets = {
 		call("GET", "virtualmarkets/" + id_market+'?id_in_app='+id_in_app ,{}, listener)
 	},
 	purcharsePackage:function (payment_id,id_in_app,listener) {
-		call("POST", "payments/" + payment_id +'?id_in_app='+id_in_app,{}, listener)
+		call("POST", "payments/" + payment_id +'?id_in_app='+id_in_app,setParams({}), listener)
 	}
 }
 export const hora_server = {
