@@ -15,8 +15,12 @@ class Loading extends Component{
 		})
 	}
 	render(){
+		console.log(this.props)
 		return( 
 			<div className="Loading" style={{height:"85px",position:"relative"}}>
+				{this.props.counter  !== undefined &&
+					<div class="centered">Cargando {this.props.counter}/{this.props.max}</div>
+				}
 				<div id={this.props.id} 
 					className="loadingDot"
 					style={{
