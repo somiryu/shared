@@ -252,6 +252,18 @@ export const Items = {
 			call("POST", "items/players/" + id_in_app + "/multiple", setParams(data), listener)
 		},
 	}
+
+export const Markets = {
+	getMarketId: function (id_market, listener) {
+		call("GET", "virtualmarkets/" + id_market ,{}, listener)	
+	},
+	getMarketAgentId: function (id_market,id_in_app,listener) {
+		call("GET", "virtualmarkets/" + id_market+'?id_in_app='+id_in_app ,{}, listener)
+	},
+	purcharsePackage:function (payment_id,id_in_app,listener) {
+		call("POST", "payments/" + payment_id +'?id_in_app='+id_in_app,setParams({}), listener)
+	}
+}
 export const hora_server = {
 		get: function () {
 			let fecha = fetch('https://engine2.playngage.io/api/server_time', {
@@ -402,5 +414,5 @@ export const Immutables = {
 }
 
 export const Load = Loading;
-	export default engine;
+export default engine;
 

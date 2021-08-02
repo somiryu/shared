@@ -14,7 +14,7 @@ export default (props) =>{
 		padding: (props.padding || 0) + "%",
 		maxWidth: "100%", 
 		minHeight: "110vh",
-		zIndex: 1
+		zIndex:1
 	}
 		
 
