@@ -15,8 +15,11 @@ export default (props) =>{
 					WebkitBorderRadius:props.maskBorder+"%",
 					msBorderRadius:props.maskBorder+"%",
 				}}>
-					<img id={props.id+"_avatar"} src={props.avatar} alt="" style={{width:"100%", ...props.styleImage}}/>
+					<img id={props.id+"_avatar"} src={props.avatar} alt="" style={{width:"100%", ...props.styleImage}}/>				
 				</div>
+			</div>
+			<div style={{zIndex:6, position:'absolute', top:'72%', left:'32%'}}>
+				<h3>{props.cod}</h3>	
 			</div>
 			{props.children}
 		</div>
